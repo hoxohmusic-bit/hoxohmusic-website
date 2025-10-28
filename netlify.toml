@@ -1,105 +1,13 @@
 [build]
-  publish = "OFFICIL-HOXOH-HOMEPAGE"
-  functions = "netlify/functions"
+  # kein Build nötig, es ist eine statische Seite
   command = ""
-
-[build.environment]
-  NODE_VERSION = "20"
+  publish = "site"
+  functions = "netlify/functions"
 
 [functions]
   included_files = ["netlify/functions/assets/**"]
 
-# ----------------------------------------------------------------------
-# HEADERS
-# ----------------------------------------------------------------------
-
 [[headers]]
   for = "/*.html"
   [headers.values]
-    Content-Type = "text/html; charset=utf-8"
-
-[[headers]]
-  for = "/.netlify/functions/contact"
-  [headers.values]
-    Access-Control-Allow-Origin = "*"
-    Access-Control-Allow-Methods = "POST, OPTIONS"
-    Access-Control-Allow-Headers = "Content-Type"
-
-# ----------------------------------------------------------------------
-# REDIRECTS
-# ----------------------------------------------------------------------
-
-[[redirects]]
-  from = "/en"
-  to = "/index-en.html"
-  status = 301
-
-[[redirects]]
-  from = "/en/"
-  to = "/index-en.html"
-  status = 301
-
-[[redirects]]
-  from = "/de"
-  to = "/index-de.html"
-  status = 301
-
-[[redirects]]
-  from = "/de/"
-  to = "/index-de.html"
-  status = 301
-
-[[redirects]]
-  from = "/en/index-en.html"
-  to = "/index-en.html"
-  status = 301
-
-[[redirects]]
-  from = "/de/index-de.html"
-  to = "/index-de.html"
-  status = 301
-
-[[redirects]]
-  from = "/en/albums"
-  to = "/albums-en.html"
-  status = 301
-
-[[redirects]]
-  from = "/de/albums"
-  to = "/albums-de.html"
-  status = 301
-
-[[redirects]]
-  from = "/en/album-el-laberinto-de-los-suenos"
-  to = "/album-el-laberinto-de-los-suenos-en.html"
-  status = 301
-
-[[redirects]]
-  from = "/de/album-el-laberinto-de-los-suenos"
-  to = "/album-el-laberinto-de-los-suenos-de.html"
-  status = 301
-
-[[redirects]]
-  from = "/en/contact"
-  to = "/kontakt-en.html"
-  status = 301
-
-[[redirects]]
-  from = "/de/contact"
-  to = "/kontakt-de.html"
-  status = 301
-
-[[redirects]]
-  from = "/en/kontakt"
-  to = "/kontakt-en.html"
-  status = 301
-
-[[redirects]]
-  from = "/de/kontakt"
-  to = "/kontakt-de.html"
-  status = 301
-
-[[redirects]]
-  from = "/"
-  to = "/index.html"
-  status = 200
+  Cache-Control = "no-store, must-revalidate"
