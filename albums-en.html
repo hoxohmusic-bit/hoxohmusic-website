@@ -1,0 +1,599 @@
+<script type="text/javascript">
+        var gk_isXlsx = false;
+        var gk_xlsxFileLookup = {};
+        var gk_fileData = {};
+        function filledCell(cell) {
+          return cell !== '' && cell != null;
+        }
+        function loadFileData(filename) {
+        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
+            try {
+                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
+                var firstSheetName = workbook.SheetNames[0];
+                var worksheet = workbook.Sheets[firstSheetName];
+
+                // Convert sheet to JSON to filter blank rows
+                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
+                // Filter out blank rows (rows where all cells are empty, null, or undefined)
+                var filteredData = jsonData.filter(row => row.some(filledCell));
+
+                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
+                var headerRowIndex = filteredData.findIndex((row, index) =>
+                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
+                );
+                // Fallback
+                if (headerRowIndex === -1 || headerRowIndex > 25) {
+                  headerRowIndex = 0;
+                }
+
+                // Convert filtered JSON back to CSV
+                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
+                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
+                return csv;
+            } catch (e) {
+                console.error(e);
+                return "";
+            }
+        }
+        return gk_fileData[filename] || "";
+        }
+        </script><script type="text/javascript">
+        var gk_isXlsx = false;
+        var gk_xlsxFileLookup = {};
+        var gk_fileData = {};
+        function filledCell(cell) {
+          return cell !== '' && cell != null;
+        }
+        function loadFileData(filename) {
+        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
+            try {
+                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
+                var firstSheetName = workbook.SheetNames[0];
+                var worksheet = workbook.Sheets[firstSheetName];
+
+                // Convert sheet to JSON to filter blank rows
+                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
+                // Filter out blank rows (rows where all cells are empty, null, or undefined)
+                var filteredData = jsonData.filter(row => row.some(filledCell));
+
+                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
+                var headerRowIndex = filteredData.findIndex((row, index) =>
+                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
+                );
+                // Fallback
+                if (headerRowIndex === -1 || headerRowIndex > 25) {
+                  headerRowIndex = 0;
+                }
+
+                // Convert filtered JSON back to CSV
+                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
+                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
+                return csv;
+            } catch (e) {
+                console.error(e);
+                return "";
+            }
+        }
+        return gk_fileData[filename] || "";
+        }
+        </script><!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>HOXOH MUSIC — Albums (EN)</title>
+  <meta name="description" content="All albums by HOXOH MUSIC — English">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Favicons -->
+  <link rel="icon" href="assets/favicon/favicon.ico?v=3" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon/favicon-32x32.png?v=3">
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon/favicon-16x16.png?v=3">
+  <link rel="apple-touch-icon" href="assets/favicon/apple-touch-icon.png?v=3">
+  <link rel="manifest" href="assets/favicon/site.webmanifest">
+  <meta name="theme-color" content="#0b0f12">
+  <link rel="shortcut icon" href="assets/favicon/favicon.ico?v=3">
+
+  <style>
+    /* Quick Search Styles */
+    .quick-search {
+      position: relative;
+      display: flex;
+      align-items: center;
+      margin-left: auto;
+      margin-right: 16px;
+    }
+    .quick-search input {
+      width: 200px;
+      height: 36px;
+      padding: 0 12px;
+      background: #1a1e23;
+      border: 1px solid #262c34;
+      border-radius: 8px;
+      color: #e6edf3;
+      font-size: 14px;
+      transition: all 0.2s;
+    }
+    .quick-search input:focus {
+      outline: none;
+      border-color: #19c37d;
+      background: #20242a;
+    }
+    .quick-search input::placeholder {
+      color: #6b7280;
+    }
+    @media (max-width: 768px) {
+      .quick-search {
+        display: none;
+      }
+    }
+
+    /* Album Card Styles */
+    .meta-row{display:flex;justify-content:space-between;align-items:center;gap:12px}
+    .explicit-pill{
+      min-width:120px;height:32px;border-radius:999px;
+      background:#20242a;color:#a6b0b8;display:flex;align-items:center;justify-content:center;font-size:14px
+    }
+    .album-meta .year-pill{margin:0}
+    .album-card .platforms{
+      display:grid;grid-template-columns:repeat(3,100px);gap:8px;width:max-content;max-width:320px
+    }
+    .album-card .platforms a{width:100px;height:100px;border-radius:18px;display:grid;place-items:center}
+    .album-card .platforms img{width:50px;height:50px}
+    
+    /* Button Styles */
+    .btn-primary.wide {
+      display: inline-block;
+      padding: 12px 24px;
+      width: 100%;
+      max-width: 340px;
+      height: 50px;
+      background: #19c37d;
+      color: #fff;
+      text-align: center;
+      text-decoration: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 600;
+      transition: background 0.2s;
+    }
+    .btn-primary.wide:hover {
+      background: #16a865;
+    }
+    
+    /* Hide albums that don't match search */
+    .album-card.hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <!-- =================== HEADER =================== -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="index-en.html" aria-label="HOXOH MUSIC">
+        <img src="assets/logo/hoxoh-music-header-239x62.png" alt="HOXOH MUSIC" width="239" height="62">
+      </a>
+
+      <nav class="main-nav" aria-label="Main navigation">
+        <a class="nav-link" href="index-en.html">Home</a>
+        <a class="nav-link" href="musikproduktion-service-en.html">🎵 Make Your Sound Real</a>
+        <a class="nav-link active" href="albums-en.html" aria-current="page">Albums</a>
+        <a class="nav-link" href="kontakt-en.html">Contact</a>
+      </nav>
+
+      <!-- Quick Search -->
+      <div class="quick-search">
+        <input type="search" id="albumSearch" placeholder="Search album..." aria-label="Search albums">
+      </div>
+
+      <!-- Language selector -->
+      <div class="lang" role="navigation" aria-label="Language selection">
+        <button class="lang-btn" aria-haspopup="true" aria-expanded="false" aria-controls="lang-menu">EN ▾</button>
+        <ul id="lang-menu" class="lang-menu" role="menu">
+          <li role="none"><a role="menuitem" class="active-lang" href="albums-en.html">EN</a></li>
+          <li role="none"><a role="menuitem" href="albums-de.html">DE</a></li>
+          <li role="none"><a role="menuitem" href="albums.html">ES</a></li>
+        </ul>
+      </div>
+    </div>
+  </header>
+
+  <!-- =================== MAIN =================== -->
+  <main class="container">
+    <section class="hero">
+      <h1>Albums</h1>
+    </section>
+
+    <section>
+      <div class="albums-grid" id="albumsGrid">
+        <!-- 1 -->
+        <article class="album-card" data-title="LOS DIEZ MANDAMIENTOS" data-release="2025-09-26">
+          <figure class="album-media">
+            <img src="assets/covers/album-los-diez-mandamientos-cover.jpg" alt="LOS DIEZ MANDAMIENTOS">
+          </figure>
+          <div class="album-meta">
+            <div class="year-pill">26.09.2025</div>
+            <h3 class="album-title">LOS DIEZ MANDAMIENTOS</h3>
+            <a class="btn-primary wide" href="album-los-diez-mandamientos-en.html">View Album</a>
+            <div class="platforms">
+              <a href="https://open.spotify.com/album/2ftccnf1AtVeMySw4tJsjr" target="_blank" rel="noopener"><img src="assets/provider_icons/spotify-icon.png" alt="Spotify"></a>
+              <a href="https://music.apple.com/de/album/los-d%C3%ADez-mandamientos/1839297468" target="_blank" rel="noopener"><img src="assets/provider_icons/apple-music-icon.png" alt="Apple Music"></a>
+              <a href="https://music.youtube.com/playlist?list=OLAK5uy_kDAc8M_9sjO2aBdctzeQ2Gzye6f9ZGvnI" target="_blank" rel="noopener"><img src="assets/provider_icons/youtube-music-icon.png" alt="YouTube Music"></a>
+            </div>
+            <a class="btn-primary wide download-btn" href="https://payhip.com/hoxohmusic" target="_blank" rel="noopener">HIGH-QUALITY DOWNLOAD</a>
+          </div>
+        </article>
+
+        <!-- 2 -->
+        <article class="album-card" data-title="DRAMA DE AMOR" data-release="2025-10-03">
+          <figure class="album-media">
+            <img src="assets/covers/album-drama-de-amor-cover.jpg" alt="DRAMA DE AMOR">
+          </figure>
+          <div class="album-meta">
+            <div class="year-pill">03.10.2025</div>
+            <h3 class="album-title">DRAMA DE AMOR</h3>
+            <a class="btn-primary wide" href="album-drama-de-amor-en.html">View Album</a>
+            <div class="platforms">
+              <a href="https://open.spotify.com/intl-de/album/6useF1vQDiOIoe60IwfjXc" target="_blank" rel="noopener"><img src="assets/provider_icons/spotify-icon.png" alt="Spotify"></a>
+              <a href="https://music.apple.com/us/album/drama-de-amor/1842094074" target="_blank" rel="noopener"><img src="assets/provider_icons/apple-music-icon.png" alt="Apple Music"></a>
+              <a href="https://music.youtube.com/playlist?list=OLAK5uy_nET0Pk_Wgk9ID3n3ZkCxrGQFZ_j2ZuPLo" target="_blank" rel="noopener"><img src="assets/provider_icons/youtube-music-icon.png" alt="YouTube Music"></a>
+            </div>
+            <a class="btn-primary wide download-btn" href="https://payhip.com/hoxohmusic" target="_blank" rel="noopener">HIGH-QUALITY DOWNLOAD</a>
+          </div>
+        </article>
+
+        <!-- 3 -->
+        <article class="album-card" data-title="ANIMAL" data-release="2025-10-10">
+          <figure class="album-media">
+            <img src="assets/covers/album-animal-cover.jpg" alt="ANIMAL">
+          </figure>
+          <div class="album-meta">
+            <div class="year-pill">10.10.2025</div>
+            <h3 class="album-title">ANIMAL</h3>
+            <a class="btn-primary wide" href="album-animal-en.html">View Album</a>
+            <div class="platforms">
+              <a href="https://open.spotify.com/intl-de/album/1DhI1DpXzqGNV7dIUbSPYz" target="_blank" rel="noopener"><img src="assets/provider_icons/spotify-icon.png" alt="Spotify"></a>
+              <a href="https://music.apple.com/us/album/animal/1842359652" target="_blank" rel="noopener"><img src="assets/provider_icons/apple-music-icon.png" alt="Apple Music"></a>
+              <a href="https://music.youtube.com/playlist?list=OLAK5uy_m0oY4sY4hKLxG0mWu9lwmMlFENVgw92wc" target="_blank" rel="noopener"><img src="assets/provider_icons/youtube-music-icon.png" alt="YouTube Music"></a>
+            </div>
+            <a class="btn-primary wide download-btn" href="https://payhip.com/hoxohmusic" target="_blank" rel="noopener">HIGH-QUALITY DOWNLOAD</a>
+          </div>
+        </article>
+
+        <!-- 4 -->
+        <article class="album-card" data-title="LOS DIEZ DEMONIOS" data-release="2025-10-17">
+          <figure class="album-media">
+            <img src="assets/covers/album-los-diez-demonios-cover.jpg" alt="LOS DIEZ DEMONIOS">
+          </figure>
+          <div class="album-meta">
+            <div class="year-pill">17.10.2025</div>
+            <h3 class="album-title">LOS DIEZ DEMONIOS</h3>
+            <a class="btn-primary wide" href="album-los-diez-demonios-en.html">View Album</a>
+            <div class="platforms">
+              <a href="https://open.spotify.com/intl-de/album/5Ezp449AHQmnOtQgpvp9cO" target="_blank" rel="noopener"><img src="assets/provider_icons/spotify-icon.png" alt="Spotify"></a>
+              <a href="https://music.apple.com/us/album/los-d%C3%ADez-dem%C3%B3nios/1842044347" target="_blank" rel="noopener"><img src="assets/provider_icons/apple-music-icon.png" alt="Apple Music"></a>
+              <a href="https://music.youtube.com/playlist?list=OLAK5uy_kyqu75-9CJ3OIwq-wB38SwZjSUdyXETz8" target="_blank" rel="noopener"><img src="assets/provider_icons/youtube-music-icon.png" alt="YouTube Music"></a>
+            </div>
+            <a class="btn-primary wide download-btn" href="https://payhip.com/hoxohmusic" target="_blank" rel="noopener">HIGH-QUALITY DOWNLOAD</a>
+          </div>
+        </article>
+
+        <!-- 5 -->
+        <article class="album-card" data-title="PÚCHICA" data-release="2025-10-24">
+          <figure class="album-media">
+            <img src="assets/covers/album-puchica-cover.jpg" alt="PÚCHICA">
+          </figure>
+          <div class="album-meta">
+            <div class="year-pill">24.10.2025</div>
+            <h3 class="album-title">PÚCHICA</h3>
+            <a class="btn-primary wide" href="album-puchica-en.html">View Album</a>
+            <div class="platforms">
+              <a href="https://open.spotify.com/intl-de/album/3aRgl5IN9Tup4SR1r1A1JB" target="_blank" rel="noopener noreferrer"><img src="assets/provider_icons/spotify-icon.png" alt="Spotify"></a>
+              <a href="https://music.apple.com/us/album/p%C3%BAchica/1841953654?i=1841953655" target="_blank" rel="noopener noreferrer"><img src="assets/provider_icons/apple-music-icon.png" alt="Apple Music"></a>
+              <a href="https://music.youtube.com/playlist?list=OLAK5uy_mR6Yzcl-ZVa14nOXkgarhWJ1ZAEyGEWsI" target="_blank" rel="noopener noreferrer"><img src="assets/provider_icons/youtube-music-icon.png" alt="YouTube Music"></a>
+            </div>
+            <a class="btn-primary wide download-btn" href="https://payhip.com/hoxohmusic" target="_blank" rel="noopener">HIGH-QUALITY DOWNLOAD</a>
+          </div>
+        </article>
+
+        <!-- 6 -->
+        <article class="album-card" data-title="RITUAL - EL RITMO ES SAGRADO" data-release="2025-10-31">
+          <figure class="album-media">
+            <img src="assets/covers/album-ritual-el-ritmo-es-sagrado-cover.jpg" alt="RITUAL — EL RITMO ES SAGRADO">
+          </figure>
+          <div class="album-meta">
+            <div class="year-pill">31.10.2025</div>
+            <h3 class="album-title">RITUAL — EL RITMO ES SAGRADO</h3>
+            <a class="btn-primary wide" href="album-ritual-el-ritmo-es-sagrado-en.html">View Album</a>
+            <div class="platforms">
+              <a href="#" target="_blank" rel="noopener"><img src="assets/provider_icons/spotify-icon.png" alt="Spotify"></a>
+              <a href="#" target="_blank" rel="noopener"><img src="assets/provider_icons/apple-music-icon.png" alt="Apple Music"></a>
+              <a href="#" target="_blank" rel="noopener"><img src="assets/provider_icons/youtube-music-icon.png" alt="YouTube Music"></a>
+            </div>
+            <a class="btn-primary wide download-btn" href="https://payhip.com/hoxohmusic" target="_blank" rel="noopener">OFFICIAL PRE-ORDER</a>
+          </div>
+        </article>
+
+        <!-- 7 -->
+        <article class="album-card" data-title="TIEMPO TROPICAL" data-release="2025-11-07">
+          <figure class="album-media">
+            <img src="assets/covers/album-tiempo-tropical-ritmo-inmortal-cover.jpg" alt="TIEMPO TROPICAL — RITMO INMORTAL">
+          </figure>
+          <div class="album-meta">
+            <div class="year-pill">07.11.2025</div>
+            <h3 class="album-title">TIEMPO TROPICAL</h3>
+            <a class="btn-primary wide" href="album-tiempo-tropical-ritmo-inmortal-en.html">View Album</a>
+            <div class="platforms">
+              <a href="#" target="_blank" rel="noopener"><img src="assets/provider_icons/spotify-icon.png" alt="Spotify"></a>
+              <a href="#" target="_blank" rel="noopener"><img src="assets/provider_icons/apple-music-icon.png" alt="Apple Music"></a>
+              <a href="#" target="_blank" rel="noopener"><img src="assets/provider_icons/youtube-music-icon.png" alt="YouTube Music"></a>
+            </div>
+            <a class="btn-primary wide download-btn" href="https://payhip.com/hoxohmusic" target="_blank" rel="noopener">OFFICIAL PRE-ORDER</a>
+          </div>
+        </article>
+
+        <!-- 8 -->
+        <article class="album-card" data-title="EL LABERINTO DE LOS SUEÑOS" data-release="2025-11-14">
+          <figure class="album-media">
+            <img src="assets/covers/album-el-laberinto-de-los-sueños-cover.jpg" alt="EL LABERINTO DE LOS SUEÑOS">
+          </figure>
+          <div class="album-meta">
+            <div class="year-pill">14.11.2025</div>
+            <h3 class="album-title">EL LABERINTO DE LOS SUEÑOS</h3>
+            <a class="btn-primary wide" href="album-el-laberinto-de-los-suenos-en.html">View Album</a>
+            <div class="platforms">
+              <a href="#" target="_blank" rel="noopener"><img src="assets/provider_icons/spotify-icon.png" alt="Spotify"></a>
+              <a href="#" target="_blank" rel="noopener"><img src="assets/provider_icons/apple-music-icon.png" alt="Apple Music"></a>
+              <a href="#" target="_blank" rel="noopener"><img src="assets/provider_icons/youtube-music-icon.png" alt="YouTube Music"></a>
+            </div>
+            <a class="btn-primary wide download-btn" href="https://payhip.com/hoxohmusic" target="_blank" rel="noopener">OFFICIAL PRE-ORDER</a>
+          </div>
+        </article>
+
+        <!-- 9 -->
+        <article class="album-card" data-title="CAÍDA DEL CIELO" data-release="2025-11-21">
+          <figure class="album-media">
+            <img src="assets/covers/album-caída-del-cielo.jpg" alt="CAÍDA DEL CIELO">
+          </figure>
+          <div class="album-meta">
+            <div class="year-pill">21.11.2025</div>
+            <h3 class="album-title">CAÍDA DEL CIELO</h3>
+            <a class="btn-primary wide" href="album-caida-del-cielo-en.html">View Album</a>
+            <div class="platforms">
+              <a href="#" target="_blank" rel="noopener"><img src="assets/provider_icons/spotify-icon.png" alt="Spotify"></a>
+              <a href="#" target="_blank" rel="noopener"><img src="assets/provider_icons/apple-music-icon.png" alt="Apple Music"></a>
+              <a href="#" target="_blank" rel="noopener"><img src="assets/provider_icons/youtube-music-icon.png" alt="YouTube Music"></a>
+            </div>
+            <a class="btn-primary wide download-btn" href="https://payhip.com/hoxohmusic" target="_blank" rel="noopener">OFFICIAL PRE-ORDER</a>
+          </div>
+        </article>
+
+        <!-- 10 -->
+        <article class="album-card" data-title="ALIENTO DE VÍBORA" data-release="2025-11-28">
+          <figure class="album-media">
+            <img src="assets/covers/album-aliento-de-víbora-cover.jpg" alt="ALIENTO DE VÍBORA">
+          </figure>
+          <div class="album-meta">
+            <div class="year-pill">28.11.2025</div>
+            <h3 class="album-title">ALIENTO DE VÍBORA</h3>
+            <a class="btn-primary wide" href="album-aliento-de-vibora-en.html">View Album</a>
+            <div class="platforms">
+              <a href="#" target="_blank" rel="noopener"><img src="assets/provider_icons/spotify-icon.png" alt="Spotify"></a>
+              <a href="#" target="_blank" rel="noopener"><img src="assets/provider_icons/apple-music-icon.png" alt="Apple Music"></a>
+              <a href="#" target="_blank" rel="noopener"><img src="assets/provider_icons/youtube-music-icon.png" alt="YouTube Music"></a>
+            </div>
+            <a class="btn-primary wide download-btn" href="https://payhip.com/hoxohmusic" target="_blank" rel="noopener">OFFICIAL PRE-ORDER</a>
+          </div>
+        </article>
+
+        <!-- 11 -->
+        <article class="album-card" data-title="CAOS CÓSMICO" data-release="2025-12-05">
+          <figure class="album-media">
+            <img src="assets/covers/album-caos-cosmico-cover.jpg" alt="CAOS CÓSMICO">
+          </figure>
+          <div class="album-meta">
+            <div class="year-pill">05.12.2025</div>
+            <h3 class="album-title">CAOS CÓSMICO</h3>
+            <a class="btn-primary wide" href="album-caos-cosmico-en.html">View Album</a>
+            <div class="platforms">
+              <a href="#" target="_blank" rel="noopener"><img src="assets/provider_icons/spotify-icon.png" alt="Spotify"></a>
+              <a href="#" target="_blank" rel="noopener"><img src="assets/provider_icons/apple-music-icon.png" alt="Apple Music"></a>
+              <a href="#" target="_blank" rel="noopener"><img src="assets/provider_icons/youtube-music-icon.png" alt="YouTube Music"></a>
+            </div>
+            <a class="btn-primary wide download-btn" href="https://payhip.com/hoxohmusic" target="_blank" rel="noopener">OFFICIAL PRE-ORDER</a>
+          </div>
+        </article>
+
+        <!-- 12 - PULSO NEBULAR -->
+        <article class="album-card" data-title="PULSO NEBULAR" data-release="2025-12-12">
+          <figure class="album-media">
+            <img src="assets/covers/album-pulso-nebular-cover.jpg" alt="PULSO NEBULAR">
+          </figure>
+          <div class="album-meta">
+            <div class="year-pill">12.12.2025</div>
+            <h3 class="album-title">PULSO NEBULAR</h3>
+            <a class="btn-primary wide" href="album-pulso-nebular-en.html">View Album</a>
+            <div class="platforms">
+              <a href="#" target="_blank" rel="noopener"><img src="assets/provider_icons/spotify-icon.png" alt="Spotify"></a>
+              <a href="#" target="_blank" rel="noopener"><img src="assets/provider_icons/apple-music-icon.png" alt="Apple Music"></a>
+              <a href="#" target="_blank" rel="noopener"><img src="assets/provider_icons/youtube-music-icon.png" alt="YouTube Music"></a>
+            </div>
+            <a class="btn-primary wide download-btn" href="https://payhip.com/hoxohmusic" target="_blank" rel="noopener">OFFICIAL PRE-ORDER</a>
+          </div>
+        </article>
+
+        <!-- 13 - FUEGO FRACTAL -->
+        <article class="album-card" data-title="FUEGO FRACTAL" data-release="2025-12-19">
+          <figure class="album-media">
+            <img src="assets/covers/album-fuego_fractal-cover.jpg" alt="FUEGO FRACTAL">
+          </figure>
+          <div class="album-meta">
+            <div class="year-pill">19.12.2025</div>
+            <h3 class="album-title">FUEGO FRACTAL</h3>
+            <a class="btn-primary wide" href="album-fuego-fractal-en.html">View Album</a>
+            <div class="platforms">
+              <a href="#" target="_blank" rel="noopener"><img src="assets/provider_icons/spotify-icon.png" alt="Spotify"></a>
+              <a href="#" target="_blank" rel="noopener"><img src="assets/provider_icons/apple-music-icon.png" alt="Apple Music"></a>
+              <a href="#" target="_blank" rel="noopener"><img src="assets/provider_icons/youtube-music-icon.png" alt="YouTube Music"></a>
+            </div>
+            <a class="btn-primary wide download-btn" href="https://payhip.com/hoxohmusic" target="_blank" rel="noopener">OFFICIAL PRE-ORDER</a>
+          </div>
+        </article>
+
+        <!-- 14 - SILENCIO ARMADO -->
+        <article class="album-card" data-title="SILENCIO ARMADO" data-release="2025-12-26">
+          <figure class="album-media">
+            <img src="assets/covers/album-silencio-armado-cover.jpg" alt="SILENCIO ARMADO">
+          </figure>
+          <div class="album-meta">
+            <div class="year-pill">26.12.2025</div>
+            <h3 class="album-title">SILENCIO ARMADO</h3>
+            <a class="btn-primary wide" href="album-silencio-armado-en.html">View Album</a>
+            <div class="platforms">
+              <a href="#" target="_blank" rel="noopener"><img src="assets/provider_icons/spotify-icon.png" alt="Spotify"></a>
+              <a href="#" target="_blank" rel="noopener"><img src="assets/provider_icons/apple-music-icon.png" alt="Apple Music"></a>
+              <a href="#" target="_blank" rel="noopener"><img src="assets/provider_icons/youtube-music-icon.png" alt="YouTube Music"></a>
+            </div>
+            <a class="btn-primary wide download-btn" href="https://payhip.com/hoxohmusic" target="_blank" rel="noopener">OFFICIAL PRE-ORDER</a>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <!-- =================== FOOTER =================== -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>© HOXOH MUSIC 2025</p>
+      <nav class="legal">
+        <a class="chip" href="impressum-en.html">Imprint</a>
+        <a class="chip" href="datenschutz-en.html">Privacy</a>
+        <a class="chip" href="cookies-en.html">Cookies</a>
+        <a class="chip" href="explizit-en.html">Explicit Content</a>
+        <a class="chip" href="agb-en.html">Terms</a>
+      </nav>
+    </div>
+  </footer>
+
+  <!-- ===== EXPLICIT only if identical file exists in assets/explicit/ ===== -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('.album-card').forEach(async card => {
+        const img  = card.querySelector('.album-media img');
+        const meta = card.querySelector('.album-meta');
+        const year = meta && meta.querySelector('.year-pill');
+        if (!img || !meta || !year) return;
+
+        const row = document.createElement('div');
+        row.className = 'meta-row';
+        meta.insertBefore(row, meta.firstChild);
+        row.appendChild(year);
+
+        const filename = (img.getAttribute('src')||'').split('/').pop();
+        const probe = new Image();
+        probe.onload = () => {
+          const pill = document.createElement('div');
+          pill.className = 'explicit-pill';
+          pill.textContent = 'EXPLICIT';
+          row.appendChild(pill);
+        };
+        probe.src = 'assets/explizit/' + filename;
+      });
+    });
+  </script>
+
+  <!-- Language menu open/close -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const box = document.querySelector('.lang');
+      const btn = document.querySelector('.lang-btn');
+      if (!box || !btn) return;
+
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const open = box.classList.toggle('open');
+        btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      });
+
+      document.addEventListener('click', () => {
+        box.classList.remove('open');
+        btn.setAttribute('aria-expanded', 'false');
+      });
+    });
+  </script>
+
+  <!-- Quick Search Functionality -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const searchInput = document.getElementById('albumSearch');
+      const albumCards = document.querySelectorAll('.album-card');
+
+      if (!searchInput) return;
+
+      searchInput.addEventListener('input', (e) => {
+        const searchTerm = e.target.value.toLowerCase().trim();
+
+        albumCards.forEach(card => {
+          const title = card.getAttribute('data-title').toLowerCase();
+          if (title.includes(searchTerm)) {
+            card.classList.remove('hidden');
+          } else {
+            card.classList.add('hidden');
+          }
+        });
+      });
+    });
+  </script>
+
+  <!-- Dynamic Download Button Text -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Aktuelles Datum (24.10.2025)
+      const currentDate = new Date('2025-10-24T00:00:00');
+
+      // Funktion zum Vergleich von Datumswerten (nur Jahr, Monat, Tag)
+      function isSameOrBeforeDate(date1, date2) {
+        const d1 = new Date(date1.getFullYear(), date1.getMonth(), date1.getDate());
+        const d2 = new Date(date2.getFullYear(), date2.getMonth(), date2.getDate());
+        return d1 <= d2;
+      }
+
+      document.querySelectorAll('.album-card').forEach(card => {
+        const downloadBtn = card.querySelector('.download-btn');
+        if (!downloadBtn) return;
+
+        // Priorität für data-release Attribut
+        let releaseDate;
+        const releaseDateStr = card.getAttribute('data-release');
+        const title = card.getAttribute('data-title');
+
+        if (releaseDateStr) {
+          // Erwartetes Format: YYYY-MM-DD
+          const [year, month, day] = releaseDateStr.split('-').map(Number);
+          releaseDate = new Date(year, month - 1, day);
+        } else {
+          // Fallback: year-pill parsen
+          const yearPill = card.querySelector('.year-pill');
+          if (!yearPill) return;
+          const dateStr = yearPill.textContent.trim();
+          const [day, month, year] = dateStr.split('.').map(Number);
+          releaseDate = new Date(year, month - 1, day);
+        }
+
+        console.log(`Album: ${title}, Release Date: ${releaseDate.toISOString().split('T')[0]}, Current Date: ${currentDate.toISOString().split('T')[0]}, Released: ${isSameOrBeforeDate(releaseDate, currentDate)}`);
+
+        if (isSameOrBeforeDate(releaseDate, currentDate)) {
+          downloadBtn.textContent = 'HIGH-QUALITY DOWNLOAD';
+        } else {
+          downloadBtn.textContent = 'OFFICIAL PRE-ORDER';
+        }
+      });
+    });
+  </script>
+</body>
+</html>
+
+</parameter

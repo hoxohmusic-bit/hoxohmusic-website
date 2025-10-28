@@ -1,0 +1,237 @@
+<script type="text/javascript">
+        var gk_isXlsx = false;
+        var gk_xlsxFileLookup = {};
+        var gk_fileData = {};
+        function filledCell(cell) {
+          return cell !== '' && cell != null;
+        }
+        function loadFileData(filename) {
+        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
+            try {
+                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
+                var firstSheetName = workbook.SheetNames[0];
+                var worksheet = workbook.Sheets[firstSheetName];
+
+                // Convert sheet to JSON to filter blank rows
+                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
+                // Filter out blank rows (rows where all cells are empty, null, or undefined)
+                var filteredData = jsonData.filter(row => row.some(filledCell));
+
+                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
+                var headerRowIndex = filteredData.findIndex((row, index) =>
+                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
+                );
+                // Fallback
+                if (headerRowIndex === -1 || headerRowIndex > 25) {
+                  headerRowIndex = 0;
+                }
+
+                // Convert filtered JSON back to CSV
+                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
+                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
+                return csv;
+            } catch (e) {
+                console.error(e);
+                return "";
+            }
+        }
+        return gk_fileData[filename] || "";
+        }
+        </script><!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Allgemeine Geschäftsbedingungen — HOXOH MUSIC</title>
+  <meta name="description" content="Allgemeine Geschäftsbedingungen von HOXOH MUSIC." />
+  <meta name="theme-color" content="#0b0b0b" />
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon/favicon-32x32.png">
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .site-header .brand img{height:42px;width:auto;display:block}
+    /* Blocksatz für den Hauptinhalt angewendet */
+    main .card{background:#13171c;border:1px solid #232a33;border-radius:18px;box-shadow:var(--shadow,0 6px 24px rgba(0,0,0,.35));padding:22px; text-align: justify;}
+    .h1{font-size:40px;font-weight:900;margin:8px 0 18px}
+    .muted{color:#9aa6b2}
+    table {width:100%; border-collapse:collapse; margin:10px 0; font-size:14px; text-align: left;}
+    th, td {border:1px solid #232a33; padding:8px; text-align:left;}
+    th {background:#232a33;}
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index-de.html" class="brand" aria-label="HOXOH MUSIC">
+        <img src="assets/logo/hoxoh-music-header-239x62.png"
+             srcset="assets/logo/hoxoh-music-header-239x62.png 1x, assets/logo/hoxoh-music-header-478x124.png 2x"
+             alt="HOXOH MUSIC" width="239" height="62">
+      </a>
+
+      <nav class="main-nav" aria-label="Hauptnavigation">
+        <a class="nav-link" href="index.html">Startseite</a>
+        <a class="nav-link" href="albums.html">Alben</a>
+        <a class="nav-link" href="kontakt.html">Kontakt</a>
+      </nav>
+
+      <div class="lang" id="lang">
+        <button class="lang-btn" type="button" aria-haspopup="listbox" aria-expanded="false">DE ▾</button>
+        <ul class="lang-menu" role="listbox" aria-label="Sprachen">
+          <li><a class="active-lang" href="agb-updete-de.html" hreflang="de">DE</a></li>
+          <li><a href="agb-en.html" hreflang="en">EN</a></li>
+          <li><a href="agb-es.html" hreflang="es">ES</a></li>
+        </ul>
+      </div>
+    </div>
+  </header>
+
+  <main class="container" style="padding:28px 22px 40px">
+    <div class="card">
+      <h1 class="h1">Allgemeine Geschäftsbedingungen</h1>
+      <p class="muted">Gültig: 2025</p>
+
+      <h2>1. Anwendungsbereich</h2>
+      <p>
+        Diese Website dient der Präsentation musikalischer Veröffentlichungen und Informationen über
+        <strong>HOXOH MUSIC</strong>. Derzeit werden hier keine Kaufverträge abgeschlossen oder Zahlungen verarbeitet.
+      </p>
+
+      <h2>2. Inhalte und Links</h2>
+      <p>
+        Die Inhalte werden mit größter Sorgfalt erstellt. Wir übernehmen keine Verantwortung für externe Links zu Angeboten Dritter; die Bedingungen der jeweiligen Anbieter gelten
+        (z.&nbsp;B. Streaming-/Download-Plattformen).
+      </p>
+
+      <h2>3. Kontakt und Anfragen</h2>
+      <p>
+        Anfragen über das Kontaktformular oder per E-Mail werden ausschließlich zur Bearbeitung Ihrer Anfrage genutzt. Daraus entstehen keine vertraglichen Verpflichtungen. Weitere Details finden Sie in der <a href="datenschutz-de.html">Datenschutzerklärung</a>.
+      </p>
+
+      <h2>4. Urheberrechte</h2>
+      <p>
+        Alle auf dieser Website präsentierten Werke (einschließlich Musik, Texte, Grafiken, Cover) sind – sofern nicht anders angegeben – urheberrechtlich geschützt. Jegliche Nutzung über die gesetzlich erlaubten Fälle hinaus erfordert eine vorherige schriftliche Zustimmung.
+      </p>
+
+      <h2>5. Haftung</h2>
+      <p>
+        Wir haften nur für Schäden, die aus der Nutzung der Website in Fällen von Vorsatz oder grober Fahrlässigkeit resultieren. Dies gilt nicht für Schäden an Leben, Körper oder Gesundheit.
+      </p>
+
+      <h2>6. Ghost-Produktion und vollständiger Kauf (Buyout)</h2>
+      <p>
+        Bei HOXOH MUSIC wird jede Komposition mit höchstem Engagement und Präzision gestaltet – sowohl Musik als auch Texte entstehen auf höchstem Niveau, unterstützt durch die modernsten technologischen Innovationen und integrierte KI, die unsere Kreativität auf ein neues Level hebt. Unsere Ghost-Produktionsdienste bieten Ihnen vollständige Rechteübertragung (Buyout) mit folgenden Bedingungen:
+      </p>
+      <ul>
+        <li><strong>Rechteübertragung:</strong> Mit vollständiger Zahlung des vereinbarten Honorars überträgt HOXOH MUSIC dem Kunden alle Urheberrechte, Nutzungsrechte und Veröffentlichungsrechte (einschließlich Master- und Kompositionsrechte) exklusiv und unwiderruflich. Vor vollständiger Bezahlung verbleiben sämtliche Rechte bei HOXOH MUSIC.</li>
+        <li><strong>Ausschluss von Credits und Vertraulichkeit:</strong> HOXOH MUSIC wird nicht als Komponist, Produzent oder Mitwirkender auf Vertriebsplattformen (z. B. DistroKid, Spotify) oder in Werbematerialien genannt. Der Kunde übernimmt ausschließlich die Credits unter seinem echten Namen oder Künstlernamen. Beide Parteien verpflichten sich zur strikten Vertraulichkeit über die Existenz und die Bedingungen des Ghost-Produktionsvertrags. Bei Verletzung der Vertraulichkeit ist der Verursacher zu einer Vertragsstrafe von 500 USD pro Vorfall verpflichtet, zuzüglich eventueller Schadensersatzansprüche.</li>
+        <li><strong>Arbeitsablauf und Abnahme (Revisionen):</strong> Die Produktion erfolgt ausschließlich auf Basis der schriftlichen Spezifikationen und des Briefings des Kunden. Kostenlose Revisionsrunden werden nicht gewährt; die Revision ist ausgeschlossen, wenn sie nicht im Voraus erworben wurde. Änderungen oder Revisionen, die über die ursprünglichen Spezifikationen hinausgehen oder eine Abweichung vom genehmigten Entwurf darstellen (z. B. Änderung von Tempo, Genre oder Struktur), müssen vorab mit 25 USD pro Track und Revisionsrunde bezahlt und dazugebucht werden. Zwei Revisionen kosten 40 USD pro Track. Die Preise können sich ändern. Maximal zwei (2) Revisionsrunden sind nach Vorauszahlung möglich. Anfragen zu Revisionen müssen innerhalb von fünf (5) Tagen nach Übermittlung der jeweiligen Fassung erfolgen. Das Werk gilt spätestens sieben (7) Tage nach Übermittlung der finalen Fassung als abgenommen, sofern keine schriftliche Mängelrüge mit Begründung eingegangen ist.</li>
+        <li><strong>Verpflichtungen des Kunden:</strong> Der Kunde muss seinen echten Namen als Komponist und/oder Produzent in den Vertriebsformularen (z. B. DistroKid) angeben. Der Kunde ist allein verantwortlich für die Auswahl seines Vertriebsdienstleisters und die Einhaltung der jeweiligen Plattformrichtlinien, insbesondere im Hinblick auf Einschränkungen, die sich aus der Verwendung von KI oder spezifischen Inhaltsbegrenzungen ergeben. Der Kunde verpflichtet sich, HOXOH MUSIC unverzüglich über Ablehnungen oder Probleme durch Plattformen zu informieren, um mögliche Lösungen zu prüfen. HOXOH MUSIC übernimmt keine Haftung für Ablehnungen aufgrund von Einschränkungen des vom Kunden gewählten Dienstleisters.</li>
+        <li><strong>Zahlungs- und Bedingungen:</strong> Das Honorar wird vom Kunden vollständig im Voraus vor Beginn der Produktion an HOXOH MUSIC gezahlt. Diese Vorauszahlung ist eine nicht erstattungsfähige Gebühr für den Beginn der Arbeit. Ohne vorherige Zahlung beginnt keine Arbeit. Zahlungen werden ausschließlich über unsere angebotenen Zahlungsdienstleister akzeptiert. Bei technischen Problemen mit der Zahlung (z. B. fehlerhafte Überweisung) ist der Kunde verpflichtet, dies innerhalb von 48 Stunden zu melden. Eine Rechnung wird nach Zahlungseingang per E-Mail bereitgestellt.</li>
+        <li><strong>Zahlungsverzug und Stornierung:</strong> Erfolgt die Zahlung nicht fristgerecht, ist HOXOH MUSIC berechtigt, Verzugszinsen in Höhe des gesetzlichen Zinssatzes des anwendbaren Rechts (Honduras) geltend zu machen und die Arbeit bis zum Zahlungseingang einzustellen. Bei Stornierung durch den Kunden vor Beginn der Arbeit wird die Vorauszahlung zurückerstattet, abzüglich einer Bearbeitungsgebühr von 10%. Nach Arbeitsbeginn behält HOXOH MUSIC die Vorauszahlung als Aufwandsentschädigung.</li>
+        <li><strong>Haftungsausschluss:</strong> HOXOH MUSIC haftet nicht für Ablehnungen oder rechtliche Probleme, die aus der Nutzung der Dateien durch den Kunden resultieren, einschließlich Verstößen gegen Plattformrichtlinien. HOXOH MUSIC haftet nicht für technische Fehler oder Dateikorruption nach Lieferung, sofern diese nicht auf Vorsatz oder grobe Fahrlässigkeit zurückzuführen sind.</li>
+      </ul>
+      <p>
+        Dieser Abschnitt gilt nur für separat außerhalb dieser Website vereinbarte Ghost-Produktionsverträge.
+      </p>
+
+      <h3>6.1 Explizite Inhaltsrichtlinien für Streaming-Plattformen (Spotify, Apple Music, etc.)</h3>
+      <p>
+        Um Ablehnungen, Entfernungen oder Sperrungen auf Plattformen wie Spotify, Apple Music, TIDAL und anderen zu vermeiden, erstellt HOXOH MUSIC Musik, die strikt den Richtlinien entspricht. Explizite Inhalte (z. B. mit E-Tag) sind erlaubt, wenn sie korrekt gekennzeichnet werden, aber bestimmte Themen und Wörter werden abgelehnt, da sie Hass, Gewalt oder illegalen Missbrauch fördern. Der Kunde ist vollständig für die endgültige Inhaltsprüfung und Kennzeichnung verantwortlich. Eine Übersicht finden Sie in der folgenden Tabelle:
+      </p>
+      <table>
+        <thead>
+          <tr>
+            <th>Kategorie</th>
+            <th>Beispiele für abgelehnte Wörter/Inhalte</th>
+            <th>Was unbedingt vermieden werden muss</th>
+            <th>Was HOXOH MUSIC nicht produziert</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>**Explizite Sexualität (Explizite Sprache)**</td>
+            <td>Vulgäre Wörter wie "ficken", "Scheiße", "Fotze", "Schwanz" (in explizitem Kontext); detaillierte Beschreibungen von Sexakten, Inzest, Bestialität oder nicht-einvernehmlichen Handlungen.</td>
+            <td>Grafische sexuelle Beschreibungen, die Minderjährige einbeziehen oder Gewalt implizieren; unmarkierte Explizitheit (muss als "Explizit" gekennzeichnet werden).</td>
+            <td>Inhalte, die sexuelle Ausbeutung, Pädophilie oder nicht-einvernehmlichen Sex verherrlichen – diese werden abgelehnt und nicht erstellt.</td>
+          </tr>
+          <tr>
+            <td>**Gewalt und Hassrede**</td>
+            <td>Beleidigungen wie "Neger", "Schwuchtel", "Idiot", "Jude" (in abwertendem Kontext); Aufrufe zu Gewalt ("tötet alle [Gruppe]"), Rassismus, Antisemitismus, Homophobie, Transphobie; glorifizierte Mord- oder Folterszenen.</td>
+            <td>Inhalte, die Hass gegen Gruppen aufgrund von Rasse, Religion, Geschlecht, Orientierung oder Behinderung schüren; implizite Drohungen oder Supremacismus.</td>
+            <td>Texte, die Hass oder Gewalt gegen geschützte Gruppen fördern – wir lehnen solche Aufträge ab und produzieren sie nicht.</td>
+          </tr>
+          <tr>
+            <td>**Drogenmissbrauch**</td>
+            <td>Direkte Anleitungen zum Drogenkonsum ("wie man Kokain schnieft"), Verherrlichung von Heroin, Methamphetamin oder anderen illegalen Substanzen als "cool"; Begriffe wie "Heroinrausch" in positiver Weise.</td>
+            <td>Promotion von Drogen als Lebensstil oder Anleitungen zum Missbrauch; Kontexte, die Minderjährige ansprechen.</td>
+            <td>Inhalte, die Drogenmissbrauch lehren oder verherrlichen, insbesondere für vulnerable Zielgruppen – nicht produziert.</td>
+          </tr>
+          <tr>
+            <td>**Selbstverletzung und Suizid**</td>
+            <td>Aufrufe zum Suizid ("bring dich um"), detaillierte Beschreibungen von Suizidmethoden oder Selbstverletzung.</td>
+            <td>Glückliche Darstellung von Suizid oder Selbstschädigung; fehlende Warnhinweise bei sensiblen Themen.</td>
+            <td>Irresponsable Inhalte, die Suizid romantisieren – wir priorisieren sichere Themen und lehnen ab.</td>
+          </tr>
+          <tr>
+            <td>**Sonstiges (Desinformation, Urheberrechtsverletzungen)**</td>
+            <td>Falsche medizinische Behauptungen (z. B. COVID-Desinformation), geklonte Inhalte; Begriffe wie "Fake News" in manipulativem Kontext.</td>
+            <td>KI-generierte Inhalte, die als echt dargestellt werden (z. B. Deepfakes von Gewalt); Plagiate oder urheberrechtswidrige Samples.</td>
+            <td>Desinformatives oder plagiiertes Material – wir gewährleisten Originalität und lehnen riskanten KI-Einsatz ab.</td>
+          </tr>
+        </tbody>
+      </table>
+      <p>
+        **Hinweis:** Diese Beispiele sind nicht abschließend; Plattformen wie Spotify können Inhalte je nach Kontext und Häufigkeit ablehnen. Explizite Tracks müssen als "Explizit" gekennzeichnet werden (E-Tag), sonst werden sie gefiltert. Der Kunde verpflichtet sich, vor dem Upload zu prüfen und HOXOH MUSIC sofort über Ablehnungen zu informieren. Bei Verstößen haftet der Kunde allein. Der Kunde ist verpflichtet, sich regelmäßig über Änderungen der Plattformrichtlinien zu informieren. HOXOH MUSIC übernimmt keine Haftung für Ablehnungen aufgrund veralteter Informationen.
+      </p>
+
+      <h2>7. Änderungen</h2>
+      <p>
+        Wir behalten uns das Recht vor, den Inhalt dieser Website sowie diese Geschäftsbedingungen jederzeit zu ändern oder zu ergänzen.
+      </p>
+
+      <h2>8. Streitbeilegung</h2>
+      <p>
+        HOXOH MUSIC, Honduras (Adresse gemäß Impressum), ist nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschutzstelle teilzunehmen.
+      </p>
+
+      <h2>9. Anwendbares Recht und Gerichtsstand</h2>
+      <p>
+        Soweit zwingende Vorschriften nicht entgegenstehen, gilt das Recht von Honduras. **Ausschließlicher Gerichtsstand für alle Streitigkeiten, die sich aus oder im Zusammenhang mit diesen AGB oder dem Ghost-Produktionsvertrag ergeben, ist San Pedro Sula, Honduras.**
+      </p>
+
+      <h2>10. Salvatorische Klausel</h2>
+      <p>
+        Sollten einzelne Bestimmungen dieser AGB ganz oder teilweise unwirksam sein oder werden, so wird hierdurch die Gültigkeit der übrigen Bestimmungen nicht berührt. Die ganz oder teilweise unwirksame Regelung soll durch eine Regelung ersetzt werden, deren wirtschaftlicher Erfolg der unwirksamen Bestimmung am nächsten kommt.
+      </p>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div>© HOXOH MUSIC 2025</div>
+      <div class="legal">
+        <a class="chip" href="impressum.html">Impressum</a>
+        <a class="chip" href="datenschutz.html">Datenschutz</a>
+        <a class="chip" href="cookies.html">Cookies</a>
+        <a class="chip" href="explizit.html">Expliziter Inhalt</a>
+        <a class="chip" href="agb-updete-de.html">AGB</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (function(){
+      const lang=document.getElementById('lang'); if(!lang) return;
+      const btn=lang.querySelector('.lang-btn');
+      btn.addEventListener('click', ()=>{ lang.classList.toggle('open'); btn.setAttribute('aria-expanded', lang.classList.contains('open'));});
+      document.addEventListener('click', e=>{ if(!lang.contains(e.target)){ lang.classList.remove('open'); btn.setAttribute('aria-expanded','false'); }});
+    })();
+  </script>
+</body>
+</html>
+
+
+
+
+
+
+

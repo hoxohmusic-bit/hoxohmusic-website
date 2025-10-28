@@ -1,0 +1,695 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>LOS DIEZ MANDAMIENTOS — HOXOH MUSIC</title>
+  <meta name="description" content="Álbum LOS DIEZ MANDAMIENTOS de HOXOH." />
+  <meta property="og:title" content="LOS DIEZ MANDAMIENTOS — HOXOH MUSIC" />
+  <meta property="og:description" content="Álbum LOS DIEZ MANDAMIENTOS de HOXOH." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="assets/covers/album-los-diez-mandamientos-cover.jpg" />
+  <meta name="theme-color" content="#0b0b0b" />
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon/favicon-16x16.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon/favicon-32x32.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon/apple-touch-icon.png">
+  <link rel="manifest" href="assets/favicon/site.webmanifest">
+  <link rel="icon" type="image/x-icon" href="assets/favicon/favicon.ico">
+
+  <!-- Estilos Globales -->
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- Estilos específicos de la página -->
+  <style>
+
+    .album-detail{
+      display:grid;
+      grid-template-columns: 520px 1fr;
+      gap:36px;
+      align-items:start;
+      margin:28px auto 34px;
+      max-width:1200px;
+      padding:0 22px;
+    }
+    .album-detail .left-col .cover{
+      width:100%; height:auto; display:block;
+      border-radius:14px; box-shadow:var(--shadow);
+    }
+
+    /* Mosaicos de proveedores: 5 uno al lado del otro en una fila, iconos grandes */
+    .album-detail .left-col .streaming-grid{
+      width:100%; margin-top:18px;
+      display:grid; grid-template-columns:repeat(5, 1fr); gap:12px;
+    }
+    .album-detail .provider-tile{
+      background:#1c2026; border:1px solid rgba(255,255,255,.08);
+      border-radius:12px; aspect-ratio:1/1;
+      display:grid; place-items:center; text-decoration:none;
+      box-shadow:inset 0 0 0 1px rgba(255,255,255,.03);
+    }
+    .album-detail .provider-tile img{ 
+      width:95% !important; 
+      height:auto !important; 
+      display:block !important; 
+      max-width:95% !important;
+    }
+
+    .album-detail .left-col .intro{
+      margin-top:16px; color:#cdd6dd; line-height:1.55;
+    }
+
+    .album-detail h1{
+      margin:0 0 12px; font-size:32px; font-weight:900; letter-spacing:.02em;
+    }
+    .album-detail .meta-row{
+      display:flex; align-items:center; gap:10px; margin:0 0 12px;
+    }
+    .album-detail .pill{
+      background:#20242a; color:#a6b0b8;
+      height:32px; padding:0 14px; border-radius:999px;
+      display:inline-flex; align-items:center; font-size:14px; white-space:nowrap;
+    }
+    .album-detail .pill.explicit{ font-weight:800; letter-spacing:.06em; }
+
+    .album-detail .tracklist{ list-style:none; margin:0; padding:0; display:grid; gap:12px; }
+    .album-detail .track{
+      background:#1a1e23; border:1px solid #262c34; color:#e6edf3;
+      border-radius:14px; padding:12px 12px 12px 16px;
+      display:grid; grid-template-columns: 2fr 1fr; gap:12px; align-items:center;
+    }
+    .album-detail .t-left{ display:flex; align-items:center; gap:10px; min-width:0; }
+    .album-detail .t-left .no{
+      flex:0 0 auto; font-weight:800; color:#dce6ee; width:40px; text-align:left;
+    }
+    .album-detail .t-left .name{
+      min-width:0; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+      letter-spacing:.01em;
+    }
+    .album-detail .t-left .explicit-chip{
+      margin-left:8px;
+      height:22px; padding:0 9px;
+      display:inline-flex; align-items:center;
+      border-radius:999px; font-size:12px;
+      background:#20242a; color:#cfd7df;
+      border:1px solid rgba(255,255,255,.1);
+      white-space:nowrap;
+    }
+
+    .album-detail .back{
+      display:inline-block; margin-top:18px;
+      background:#19c37d; color:#05261b; font-weight:800;
+      padding:10px 16px; border-radius:12px; text-decoration:none;
+    }
+
+    .site-header .brand img{ height:42px; width:auto; display:block; }
+
+    @media (max-width: 900px){
+      .album-detail{ grid-template-columns:1fr; }
+    }
+    @media (max-width: 760px){
+      .album-detail .track{ grid-template-columns:1fr; }
+      .album-detail .t-left .no{ width:auto; }
+    }
+    @media (max-width: 620px){
+      .album-detail .left-col .streaming-grid{ grid-template-columns:repeat(3,1fr); }
+    }
+  
+</style>
+
+<style>
+
+/* Layout: place our custom elapsed label next to the audio */
+/* Make native labels vanish across browsers */
+{display:none!important;}
+{display:none!important;} /* we render our own */
+
+/* Keep player compact */
+/* Our custom elapsed label */
+
+</style>
+<style>
+.album-detail .t-audio audio{ width:100%; display:block; }
+</style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="brand" aria-label="HOXOH MUSIC">
+        <img
+          src="assets/logo/hoxoh-music-header-239x62.png"
+          srcset="assets/logo/hoxoh-music-header-239x62.png 1x,
+                  assets/logo/hoxoh-music-header-478x124.png 2x"
+          alt="HOXOH MUSIC" width="239" height="62">
+      </a>
+
+      <nav class="main-nav" aria-label="Navegación principal">
+        <a class="nav-link" href="index.html">Inicio</a>
+        <a class="nav-link active" href="albums.html">Álbumes</a>
+        <a class="nav-link" href="kontakt.html">Contacto</a>
+      </nav>
+
+      <div class="lang" id="lang">
+        <button class="lang-btn" type="button" aria-haspopup="listbox" aria-expanded="false">ES ▾</button>
+        <ul class="lang-menu" role="listbox" aria-label="Idiomas">
+          <li><a class="active-lang" href="album-los-diez-mandamientos.html" hreflang="es">ES</a></li>
+          <li><a href="album-los-diez-mandamientos-en.html" hreflang="en">EN</a></li>
+          <li><a href="album-los-diez-mandamientos-de.html" hreflang="de">DE</a></li>
+        </ul>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <article class="album-detail">
+      <div class="left-col">
+        <img class="cover" src="assets/covers/album-los-diez-mandamientos-cover.jpg" alt="Portada de LOS DIEZ MANDAMIENTOS" loading="lazy" />
+
+        <div class="streaming-grid" aria-label="Plataformas de streaming">
+          <a class="provider-tile" href="https://open.spotify.com/album/2ftccnf1AtVeMySw4tJsjr" aria-label="Spotify" target="_blank">
+            <img src="assets/provider_icons/spotify-icon.png" alt="">
+          </a>
+          <a class="provider-tile" href="https://music.apple.com/de/album/los-d%C3%ADez-mandamientos/1839297468" aria-label="Apple Music" target="_blank">
+            <img src="assets/provider_icons/apple-music-icon.png" alt="">
+          </a>
+          <a class="provider-tile" href="https://music.youtube.com/playlist?list=OLAK5uy_kDAc8M_9sjO2aBdctzeQ2Gzye6f9ZGvnI" aria-label="YouTube Music" target="_blank">
+            <img src="assets/provider_icons/youtube-music-icon.png" alt="">
+          </a>
+         <a class="provider-tile" href="https://tidal.com/album/460044510" aria-label="TIDAL" target="_blank">
+            <img src="assets/provider_icons/tidal-icon.png" alt="">
+          </a>
+          <a class="provider-tile" href="https://music.amazon.com/tracks/B0FQQ9G63G" aria-label="Amazon Music" target="_blank">
+  <img src="assets/provider_icons/amazon-music-icon1.png" alt="">
+</a>
+        </div>
+
+        <p class="intro">
+          LOS DIEZ MANDAMIENTOS: Un viaje épico a través de la fe y la traición
+
+<p style="text-align:justify;">
+<b>LOS DIEZ MANDAMIENTOS</b> es un épico álbum conceptual de diez partes que aborda los mandamientos bíblicos y sus interpretaciones universales y humanas. El viaje musical comienza con un dramático crescendo de campanas de iglesia, coros y tambores, creando una atmósfera solemne. Las letras profundizan en los abismos humanos y cuestionan la relevancia universal de estas antiguas reglas.
+</p>
+<p style="text-align:justify;">
+El álbum se mueve desde la adoración inicial a dioses falsos hasta una emotiva canción sobre el desafío de honrar a los padres y encontrar el amor verdadero. Los temas describen cómo el protagonista lucha con la mentira, el robo, las falsas promesas y los pecados sexuales. Cada canción es un diálogo interno y una confesión que revela los errores y las consecuencias de romper un mandamiento. Cada tema es un reflejo de la debilidad humana, una mirada implacable a los fracasos y anhelos que pesan sobre el corazón.
+</p>
+<p style="text-align:justify;">
+La instrumentación es una apasionada mezcla de géneros latinoamericanos como el Mariachi y la Punta con elementos orquestales y sagrados. El clímax del álbum es un himno triunfal y extático que celebra la unidad de los pueblos desde México hasta Brasil y confiesa que el único camino hacia la redención es el amor universal.
+</p>
+<p style="text-align:justify;">
+El álbum termina como empezó: con los sonidos de un violín solitario y campanas que ahora irradian paz y redención. La melodía calma el corazón agitado e invita a un momento de introspección y paz interior. Es un poderoso viaje espiritual que nos recuerda la humanidad de los mandamientos.
+</p>
+        </p>
+      </div>
+
+      <div class="right-col">
+        <h1>LOS DIEZ MANDAMIENTOS</h1>
+
+        <div class="meta-row" id="meta-row">
+          <span class="pill" id="year-pill">26.09.2025</span>
+          <span class="pill" id="genre-pill">Género: <strong style="font-weight:700;margin-left:6px;">Electrónica Espiritual / Ambient Latino</strong></span>
+        </div>
+
+        <ol class="tracklist" id="tracklist">
+  <li class="track">
+    <div class="t-left"><span class="no">01.</span><span class="name">NO TENDRÁS DIOSES AJENOS</span></div>
+    <div class="t-audio">
+     <audio crossorigin="anonymous" controls preload="none">
+        <source src="https://pub-00345912548b4ae4ac0e4c0047e289f0.r2.dev/previews/los_diez_mandamientos/01_-_no_tendras_dioses_ajenos_preview.mp3" type="audio/mpeg">
+      </audio>
+    </div>
+  </li>
+  <li class="track">
+    <div class="t-left"><span class="no">02.</span><span class="name">ÍDOLOS DE CRISTAL</span></div>
+    <div class="t-audio">
+     <audio crossorigin="anonymous" controls preload="none">
+        <source src="https://pub-00345912548b4ae4ac0e4c0047e289f0.r2.dev/previews/los_diez_mandamientos/02_-_idolos_de_cristal_preview.mp3" type="audio/mpeg">
+      </audio>
+    </div>
+  </li>
+  <li class="track">
+    <div class="t-left"><span class="no">03.</span><span class="name">EL NOMBRE SAGRADO</span></div>
+    <div class="t-audio">
+     <audio crossorigin="anonymous" controls preload="none">
+        <source src="https://pub-00345912548b4ae4ac0e4c0047e289f0.r2.dev/previews/los_diez_mandamientos/03_-_el_nombre_sagrado_preview.mp3" type="audio/mpeg">
+      </audio>
+    </div>
+  </li>
+  <li class="track">
+    <div class="t-left"><span class="no">04.</span><span class="name">PADRE HONRA Y DOLOR</span></div>
+    <div class="t-audio">
+     <audio crossorigin="anonymous" controls preload="none">
+        <source src="https://pub-00345912548b4ae4ac0e4c0047e289f0.r2.dev/previews/los_diez_mandamientos/04_-_padre_honra_y_dolor_preview.mp3" type="audio/mpeg">
+      </audio>
+    </div>
+  </li>
+  <li class="track">
+    <div class="t-left"><span class="no">05.</span><span class="name">NO MATARÁS</span></div>
+    <div class="t-audio">
+     <audio crossorigin="anonymous" controls preload="none">
+        <source src="https://pub-00345912548b4ae4ac0e4c0047e289f0.r2.dev/previews/los_diez_mandamientos/05_-_no_mataras_preview.mp3" type="audio/mpeg">
+      </audio>
+    </div>
+  </li>
+  <li class="track">
+    <div class="t-left"><span class="no">06.</span><span class="name">CARNE Y SANGRE</span></div>
+    <div class="t-audio">
+     <audio crossorigin="anonymous" controls preload="none">
+        <source src="https://pub-00345912548b4ae4ac0e4c0047e289f0.r2.dev/previews/los_diez_mandamientos/06_-_carne_y_sangre_preview.mp3" type="audio/mpeg">
+      </audio>
+    </div>
+  </li>
+  <li class="track">
+    <div class="t-left"><span class="no">07.</span><span class="name">LADRÓN DE MI ALMA</span></div>
+    <div class="t-audio">
+     <audio crossorigin="anonymous" controls preload="none">
+        <source src="https://pub-00345912548b4ae4ac0e4c0047e289f0.r2.dev/previews/los_diez_mandamientos/07_-_ladron_de_mi_alma_preview.mp3" type="audio/mpeg">
+      </audio>
+    </div>
+  </li>
+  <li class="track">
+    <div class="t-left"><span class="no">08.</span><span class="name">EL ECO DE LA MENTIRA</span></div>
+    <div class="t-audio">
+     <audio crossorigin="anonymous" controls preload="none">
+        <source src="https://pub-00345912548b4ae4ac0e4c0047e289f0.r2.dev/previews/los_diez_mandamientos/08_-_el_eco_de_la_mentira_preview.mp3" type="audio/mpeg">
+      </audio>
+    </div>
+  </li>
+  <li class="track">
+    <div class="t-left"><span class="no">09.</span><span class="name">GUERRA DE LA MENTE</span></div>
+    <div class="t-audio">
+     <audio crossorigin="anonymous" controls preload="none">
+        <source src="https://pub-00345912548b4ae4ac0e4c0047e289f0.r2.dev/previews/los_diez_mandamientos/09_-_guerra_de_la_mente_preview.mp3" type="audio/mpeg">
+      </audio>
+    </div>
+  </li>
+  <li class="track">
+    <div class="t-left"><span class="no">10.</span><span class="name">LA CODICIA</span></div>
+    <div class="t-audio">
+     <audio crossorigin="anonymous" controls preload="none">
+        <source src="https://pub-00345912548b4ae4ac0e4c0047e289f0.r2.dev/previews/los_diez_mandamientos/10_-_la_codicia_preview.mp3" type="audio/mpeg">
+      </audio>
+    </div>
+  </li>
+  <li class="track">
+    <div class="t-left"><span class="no">11.</span><span class="name">LOS DÍEZ MANDAMIENTOS</span></div>
+    <div class="t-audio">
+     <audio crossorigin="anonymous" controls preload="none">
+        <source src="https://pub-00345912548b4ae4ac0e4c0047e289f0.r2.dev/previews/los_diez_mandamientos/11_-_los_diez_mandamientos_preview.mp3" type="audio/mpeg">
+      </audio>
+    </div>
+  </li>
+  <li class="track">
+    <div class="t-left"><span class="no">12.</span><span class="name">SAMBA DE LA FE</span></div>
+    <div class="t-audio">
+     <audio crossorigin="anonymous" controls preload="none">
+        <source src="https://pub-00345912548b4ae4ac0e4c0047e289f0.r2.dev/previews/los_diez_mandamientos/12_-_samba_de_la_fe_preview.mp3" type="audio/mpeg">
+      </audio>
+    </div>
+  </li>
+  <li class="track">
+    <div class="t-left"><span class="no">13.</span><span class="name">MEDITACIÓN DEL SILENCIO</span></div>
+    <div class="t-audio">
+     <audio crossorigin="anonymous" controls preload="none">
+        <source src="https://pub-00345912548b4ae4ac0e4c0047e289f0.r2.dev/previews/los_diez_mandamientos/13_-_meditacion_del_silencio_preview.mp3" type="audio/mpeg">
+      </audio>
+    </div>
+  </li>
+  <li class="track">
+    <div class="t-left"><span class="no">14.</span><span class="name">LA MENTE EN TRANCE</span></div>
+    <div class="t-audio">
+     <audio crossorigin="anonymous" controls preload="none">
+        <source src="https://pub-00345912548b4ae4ac0e4c0047e289f0.r2.dev/previews/los_diez_mandamientos/14_-_la_mente_en_trance_preview.mp3" type="audio/mpeg">
+      </audio>
+    </div>
+  </li>
+  <li class="track">
+    <div class="t-left"><span class="no">15.</span><span class="name">SOMOS HIJOS DEL CIELO</span></div>
+    <div class="t-audio">
+     <audio crossorigin="anonymous" controls preload="none">
+        <source src="https://pub-00345912548b4ae4ac0e4c0047e289f0.r2.dev/previews/los_diez_mandamientos/15_-_somos_hijos_del_cielo_preview.mp3" type="audio/mpeg">
+      </audio>
+    </div>
+  </li>
+  <li class="track">
+    <div class="t-left"><span class="no">16.</span><span class="name">LATINOS DEL CIELO — DE MÉXICO A BRASIL</span></div>
+    <div class="t-audio">
+     <audio crossorigin="anonymous" controls preload="none">
+        <source src="https://pub-00345912548b4ae4ac0e4c0047e289f0.r2.dev/previews/los_diez_mandamientos/16_-_latinos_del_cielo_de_mexico_a_brasil_preview.mp3" type="audio/mpeg">
+      </audio>
+    </div>
+  </li>
+</ol>
+
+        <p><a class="back" href="albums.html">← Volver a todos los álbumes</a></p>
+      </div>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div>© HOXOH MUSIC 2025</div>
+      <div class="legal">
+        <a class="chip" href="impressum.html">Aviso Legal</a>
+        <a class="chip" href="datenschutz.html">Privacidad</a>
+        <a class="chip" href="cookies.html">Cookies</a>
+        <a class="chip" href="explizit.html">Contenido Explícito</a>
+        <a class="chip" href="agb.html">Términos</a>
+      </div>
+    </div>
+  </footer>
+
+<!-- Post-footer Spotify Card -->
+<section class="postfooter-embed">
+  <div class="spotify-card">
+    <h2 class="spotify-title">Escucha mi álbum:</h2>
+    <iframe
+      data-testid="embed-iframe"
+      style="border-radius:12px"
+      src="https://open.spotify.com/embed/album/2ftccnf1AtVeMySw4tJsjr?utm_source=generator&theme=0"
+      width="100%"
+      height="380"
+      frameborder="0"
+      allowfullscreen=""
+      allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+      loading="lazy"></iframe>
+  </div>
+</section>
+
+<style>
+.postfooter-embed{
+  padding: 22px 16px 46px;
+  background: transparent;
+}
+.postfooter-embed .spotify-card{
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 26px;
+  border-radius: 18px;
+  background: #0f151a;
+  border: 1px solid #1f2630;
+  box-shadow:
+    0 18px 40px rgba(0,0,0,.45),
+    0 2px 0 rgba(255,255,255,.03) inset,
+    0 0 0 1px rgba(255,255,255,.04) inset;
+}
+.spotify-title{
+  color: #dfe9f3;
+  text-align: center;
+  margin: 0 0 18px 0;
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing:.02em;
+}
+@media (max-width: 620px){
+  .postfooter-embed .spotify-card{ padding: 18px; }
+  .spotify-title{ font-size: 18px; }
+}
+</style>
+
+
+  <script>
+    (function(){
+      const lang = document.getElementById('lang');
+      if(!lang) return;
+      const btn = lang.querySelector('.lang-btn');
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        lang.classList.toggle('open');
+        btn.setAttribute('aria-expanded', lang.classList.contains('open'));
+      });
+      document.addEventListener('click', (e) => {
+        if(!lang.contains(e.target)){
+          lang.classList.remove('open');
+          btn.setAttribute('aria-expanded','false');
+        }
+      });
+    })();
+  </script>
+
+  <script>
+    (function () {
+      const cover   = document.querySelector('.album-detail .left-col .cover');
+      const metaRow = document.getElementById('meta-row');
+      const genreEl = document.getElementById('genre-pill');
+      if (!cover || !metaRow || !genreEl) return;
+
+      const srcAttr = cover.getAttribute('src') || '';
+      const file    = srcAttr.split('/').pop().split('?')[0].split('#')[0];
+      const testURL = 'assets/explizit/' + file + '?v=' + Date.now();
+
+      function insertExplicit() {
+        if (metaRow.querySelector('.pill.explicit')) return;
+        const pill = document.createElement('span');
+        pill.className = 'pill explicit';
+        pill.textContent = 'EXPLÍCITO';
+        metaRow.insertBefore(pill, genreEl);
+      }
+
+      const probe = new Image();
+      probe.onload  = () => (probe.naturalWidth > 0 ? insertExplicit() : 0);
+      probe.onerror = () => {};
+      probe.src = testURL;
+    })();
+  </script>
+
+  <script>
+    (function(){
+      const albumTitle = (document.querySelector('.album-detail h1')?.textContent || '').trim();
+      const list = document.getElementById('tracklist');
+      if(!albumTitle || !list) return;
+
+      const base = 'assets/explizit_tracks/' + albumTitle + '/';
+      const tryExts = ['.png', '.jpg', '.webp'];
+
+      function expectedName(li){
+        const no = li.querySelector('.no')?.textContent.trim() || '';
+        const name = li.querySelector('.name')?.textContent.trim() || '';
+        return (no + ' ' + name).replace(/\s+/g,' ');
+      }
+
+      function insertChip(li){
+        if(li.querySelector('.explicit-chip')) return;
+        const nameNode = li.querySelector('.t-left .name');
+        if(!nameNode) return;
+        const chip = document.createElement('span');
+        chip.className = 'explicit-chip';
+        chip.textContent = 'EXPLÍCITO';
+        nameNode.after(chip);
+      }
+
+      function checkOne(li){
+        const fnameCore = expectedName(li);
+        let idx = 0;
+        const probe = new Image();
+
+        probe.onload = function(){
+          if(probe.naturalWidth > 0) insertChip(li);
+        };
+        probe.onerror = function(){
+          idx++;
+          if(idx < tryExts.length){
+            probe.src = base + fnameCore + tryExts[idx] + '?v=' + Date.now();
+          }
+        };
+
+        probe.src = base + fnameCore + tryExts[idx] + '?v=' + Date.now();
+      }
+
+      Array.from(list.querySelectorAll('li.track')).forEach(checkOne);
+    })();
+  </script>
+<style>
+
+.album-detail .left-col .cover{transition:opacity .25s ease;}
+.album-detail .left-col .cover.is-swapping{opacity:0;}
+
+</style>
+
+<script>window.TRACK_COVER_DIR="https://pub-00345912548b4ae4ac0e4c0047e289f0.r2.dev/covers_tracks/04_los_d%C3%ADez_mandamientos/";</script>
+<script>
+(function(){
+  const coverImg=document.querySelector('.album-detail .left-col .cover');
+  const trackItems=Array.from(document.querySelectorAll('#tracklist li.track, .tracklist li'));
+  if(!coverImg||!trackItems.length)return;
+  const albumCoverSrc=coverImg.getAttribute('src')||'';
+  const baseDir=(window.TRACK_COVER_DIR||'https://pub-00345912548b4ae4ac0e4c0047e289f0.r2.dev/covers_tracks/04_los_d%C3%ADez_mandamientos/');
+  function swapCover(newSrc){
+    if(!newSrc)return;
+    const test=new Image();
+    test.onload=()=>{
+      coverImg.classList.add('is-swapping');
+      setTimeout(()=>{
+        coverImg.src=newSrc+(newSrc.includes('?')?'&':'?')+'v='+Date.now();
+        coverImg.onload=()=>coverImg.classList.remove('is-swapping');
+      },120);
+    };
+    test.onerror=()=>{};
+    test.src=newSrc+(newSrc.includes('?')?'&':'?')+'v='+Date.now();
+  }
+  function candidatesByIndex(idx){
+    const nn=('0'+idx).slice(-2);
+    return [baseDir+nn+'.jpg', baseDir+nn+'.png', baseDir+nn+'.webp'];
+  }
+  const audios=Array.from(document.querySelectorAll('li.track audio, .tracklist li audio'));
+  function restoreIfNonePlaying(){
+    const playing=audios.some(a=>!a.paused&&!a.ended);
+    if(!playing) swapCover(albumCoverSrc);
+  }
+  audios.forEach((audio,i)=>{
+    const idx=i+1;
+    audio.addEventListener('playing', () => {
+      const cands=candidatesByIndex(idx);
+      let j=0;(function next(){
+        if(j>=cands.length) return;
+        const url=cands[j]+'?v='+Date.now();
+        const probe=new Image();
+        probe.onload=()=>swapCover(cands[j]);
+        probe.onerror=()=>{ j++; next(); };
+        probe.src=url;
+      })();
+    });
+    audio.addEventListener('pause',restoreIfNonePlaying);
+    audio.addEventListener('ended',restoreIfNonePlaying);
+  });
+})();
+</script>
+
+<script>
+// Restore album cover on pause/end if no audio is playing
+(function(){
+  const cover = document.querySelector('.album-detail .left-col .cover') 
+             || document.querySelector('.album-detail .left-col img');
+  if(!cover) return;
+  // store original album cover once
+  if(!cover.dataset.albumSrc){ cover.dataset.albumSrc = cover.getAttribute('src') || cover.src || ''; }
+  const albumSrc = cover.dataset.albumSrc;
+
+  const audios = Array.from(document.querySelectorAll('li.track audio, .tracklist li audio, audio'));
+  function anyPlaying(){ return audios.some(a => !a.paused && !a.ended); }
+  function fadeSwap(url){
+    const cb = url + (url.indexOf('?')>-1 ? '&' : '?') + 'v=' + Date.now();
+    const img = new Image();
+    img.onload = () => {
+      cover.classList && cover.classList.add('is-swapping');
+      setTimeout(() => {
+        cover.src = cb;
+        cover.onload = () => cover.classList && cover.classList.remove('is-swapping');
+      }, 80);
+    };
+    img.src = cb;
+  }
+  function restore(){
+    if(!anyPlaying() && albumSrc){
+      fadeSwap(albumSrc);
+    }
+  }
+  audios.forEach(a => {
+    a.addEventListener('pause', () => setTimeout(restore, 30), {passive:true});
+    a.addEventListener('ended', () => setTimeout(restore, 30), {passive:true});
+  });
+})();
+</script>
+
+<script>
+// IMPROVED: Ensure only one audio plays at a time + Stall Protection
+(function(){
+  const audios = Array.from(document.querySelectorAll('audio'));
+  if(!audios.length) return;
+
+  // Encode URLs if needed
+  audios.forEach(a => {
+    const s = a.querySelector('source');
+    if (!s) return;
+    const src = s.getAttribute('src') || '';
+    const enc = encodeURI(src);
+    if (src !== enc) { s.setAttribute('src', enc); try{ a.load(); }catch(e){} }
+  });
+
+  // Performance: initial no preload
+  audios.forEach(a => a.preload = 'none');
+
+  // Activate preload after first user interaction
+  let activated = false;
+  function activatePreloadOnce(){
+    if (activated) return;
+    activated = true;
+    audios.forEach(a => a.preload = 'auto');
+  }
+  document.addEventListener('pointerdown', activatePreloadOnce, { once:true, capture:true });
+  
+  // CHROME FIX: Also activate on direct audio interaction
+  audios.forEach(a => {
+    a.addEventListener('play', activatePreloadOnce, { once:true, capture:true });
+    a.parentElement && a.parentElement.addEventListener('click', activatePreloadOnce, { once:true, capture:true });
+  });
+
+  let current = null;
+  function pauseOthers(except){
+    audios.forEach(a => { 
+      if (a !== except) { 
+        a.pause(); 
+        a.currentTime = 0;
+      } 
+    });
+  }
+
+  // Stall protection (recovers from early playback stalls)
+  function addStallProtection(a){
+    let retried = false;
+    const earlyWindowSec = 5;
+    function tryRecover(){
+      if (retried) return;
+      retried = true;
+      const wasMuted = a.muted;
+      try{ a.load(); }catch(e){}
+      a.muted = wasMuted;
+      a.play().catch(()=>{});
+    }
+    a.addEventListener('stalled', () => { if (a.currentTime < earlyWindowSec) tryRecover(); });
+    a.addEventListener('suspend', () => { if (a.currentTime < earlyWindowSec && a.networkState !== a.NETWORK_IDLE) tryRecover(); });
+    a.addEventListener('error',   () => { if (a.currentTime < earlyWindowSec) tryRecover(); });
+
+    let lastT = 0, stuckCnt = 0;
+    a.addEventListener('timeupdate', () => {
+      if (a.currentTime === lastT) {
+        stuckCnt++;
+        if (stuckCnt >= 3 && a.currentTime < earlyWindowSec) tryRecover();
+      } else {
+        stuckCnt = 0;
+        lastT = a.currentTime;
+      }
+    });
+  }
+
+  audios.forEach(a => {
+    addStallProtection(a);
+    a.addEventListener('play', () => {
+      activatePreloadOnce(); // Ensure preload is activated
+      if (current !== a) {
+        pauseOthers(a);
+        current = a;
+      }
+    }, {passive:true});
+    a.addEventListener('ended', () => { if (current === a) current = null; }, {passive:true});
+    a.addEventListener('pause', () => {
+      // If paused manually and no one else plays, release current
+      const someone = audios.some(x => !x.paused && !x.ended);
+      if (!someone && current === a) current = null;
+    }, {passive:true});
+  });
+})();
+</script>
+
+
+<script>window.TRACK_COVER_DIR = "https://pub-00345912548b4ae4ac0e4c0047e289f0.r2.dev/covers_tracks/04_los_d%C3%ADez_mandamientos/";</script>
+</body>
+</html>
+
+
+
+
+
+
+

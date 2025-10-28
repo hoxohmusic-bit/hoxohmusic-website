@@ -1,0 +1,11 @@
+{
+  "name": "hoxoh-sendgrid-netlify",
+  "private": true,
+  "version": "1.0.0",
+  "license": "MIT",
+  "dependencies": {
+    "@sendgrid/mail": "^7.7.0",
+    "nodemailer": "^7.0.10",
+    "nodemailer-sendgrid-transport": "^0.2.0"
+  }
+}

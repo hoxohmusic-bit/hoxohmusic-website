@@ -1,0 +1,1478 @@
+<script type="text/javascript">
+        var gk_isXlsx = false;
+        var gk_xlsxFileLookup = {};
+        var gk_fileData = {};
+        function filledCell(cell) {
+          return cell !== '' && cell != null;
+        }
+        function loadFileData(filename) {
+        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
+            try {
+                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
+                var firstSheetName = workbook.SheetNames[0];
+                var worksheet = workbook.Sheets[firstSheetName];
+
+                // Convert sheet to JSON to filter blank rows
+                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
+                // Filter out blank rows (rows where all cells are empty, null, or undefined)
+                var filteredData = jsonData.filter(row => row.some(filledCell));
+
+                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
+                var headerRowIndex = filteredData.findIndex((row, index) =>
+                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
+                );
+                // Fallback
+                if (headerRowIndex === -1 || headerRowIndex > 25) {
+                  headerRowIndex = 0;
+                }
+
+                // Convert filtered JSON back to CSV
+                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
+                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
+                return csv;
+            } catch (e) {
+                console.error(e);
+                return "";
+            }
+        }
+        return gk_fileData[filename] || "";
+        }
+        </script><!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Servicio de Producción Musical – HOXOH MUSIC</title>
+  <meta name="description" content="Producción musical profesional por HOXOH. Haz realidad tu sonido a precio imbatible.">
+  
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon/favicon-16x16.png">
+  <link rel="icon" href="assets/favicon/favicon.ico?v=3" sizes="any"> 
+  <link rel="stylesheet" href="style.css" /> 
+  
+  <style>
+    :root {
+      --bg: #0a0d10;
+      --panel: #121416;
+      --panel-2: #181b1f;
+      --line: #232830;
+      --text: #eef3f6;
+      --muted: #a7b0b8;
+      --accent: #19c37d;
+      --shadow: 0 16px 46px rgba(0,0,0,.55);
+      --radius: 20px;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; }
+    body {
+      background: #0a0a0a;
+      color: var(--text);
+      font: 16px/1.6 system-ui, -apple-system, Segoe UI, Inter, Arial, sans-serif;
+      position: relative;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+    body::before {
+      content:'';
+      position: fixed;
+      inset: 0;
+      background-image: url('assets/logo/hoxoh-backround-logo.webp');
+      background-size: cover;
+      background-position: right center;
+      background-repeat: no-repeat;
+      opacity: 1;
+      pointer-events: none;
+      z-index: 0;
+    }
+    #smokeCanvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+      opacity: 0.5;
+    }
+    #musicNotesCanvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 2;
+      opacity: 0.6;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+    .container { max-width: 1000px; margin: 0 auto; padding: 0 22px; position: relative; z-index: 3; }
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(0,0,0,.85);
+      border-bottom: 1px solid rgba(255,255,255,.08);
+      backdrop-filter: blur(12px);
+    }
+    .header-inner {
+      min-height: 70px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+    .brand { display: inline-flex; align-items: center; }
+    .brand img { height: 44px; width: auto; }
+    .main-nav { display: flex; gap: 20px; justify-content: center; flex: 1; }
+    .nav-link {
+      padding: 10px 14px;
+      border-radius: 12px;
+      color: #cfd6dc;
+      transition: all 0.3s;
+    }
+    .nav-link.active, .nav-link:hover { background: var(--panel-2); color: #fff; }
+    .lang { position: relative; display: inline-block; }
+    .lang-btn {
+      background: #0b0b0b;
+      color: #e9eef2;
+      border: 1px solid #2a2f36;
+      padding: 8px 14px;
+      border-radius: 14px;
+      cursor: pointer;
+      min-width: 64px;
+    }
+    .lang-menu {
+      position: absolute;
+      top: calc(100% + 8px);
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 30;
+      list-style: none;
+      margin: 0;
+      padding: 6px;
+      background: #000;
+      border: 1px solid #2a2f36;
+      border-radius: 16px;
+      box-shadow: var(--shadow);
+      display: none;
+      min-width: 100%;
+    }
+    .lang.open .lang-menu { display: block; }
+    .lang-menu a {
+      display: block;
+      text-align: center;
+      padding: 10px 14px;
+      border-radius: 10px;
+      color: #cfd6dc;
+      transition: all 0.3s;
+    }
+    .lang-menu a:hover { background: #0f1216; color: #fff; }
+    .lang-menu a.active-lang { font-weight: 800; color: #fff; }
+    .hero { 
+      padding: 80px 0 40px; 
+      position: relative;
+      z-index: 3;
+    }
+    .hero-content {
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .hero-content h1 {
+      font-size: 48px;
+      font-weight: 900;
+      margin: 0 0 20px;
+      line-height: 1.1;
+      color: #fff;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.3), 0 4px 8px rgba(0,0,0,0.2);
+    }
+    .hero-subtitle {
+      font-size: 20px;
+      color: rgba(255,255,255,0.85);
+      margin: 0 0 30px;
+      line-height: 1.6;
+    }
+    .service-box {
+      background: rgba(18, 20, 22, 1.0);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 24px;
+      padding: 40px;
+      margin: 40px auto;
+      max-width: 900px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    }
+    .service-box h2 {
+      font-size: 32px;
+      font-weight: 900;
+      margin: 0 0 24px;
+      color: var(--accent);
+    }
+    .service-box p {
+      font-size: 18px;
+      line-height: 1.8;
+      color: rgba(255,255,255,0.85);
+      margin-bottom: 20px;
+    }
+    .features-list {
+      list-style: none;
+      padding: 0;
+      margin: 30px 0;
+    }
+    .features-list li {
+      padding: 16px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      font-size: 18px;
+      color: rgba(255,255,255,0.9);
+    }
+    .features-list li:last-child { border-bottom: none; }
+    .features-list strong {
+      color: var(--accent);
+      font-weight: 800;
+    }
+    .form-section {
+      background: rgba(18, 20, 22, 1.0);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 24px;
+      padding: 40px;
+      margin: 40px auto 80px;
+      max-width: 900px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    }
+    .form-section h2 {
+      font-size: 32px;
+      font-weight: 900;
+      margin: 0 0 30px;
+      color: #fff;
+      text-align: center;
+    }
+    .step-indicator {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 40px;
+    }
+    .progress-bar-container {
+      width: 100%;
+      height: 8px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 10px;
+      margin-bottom: 30px;
+      overflow: hidden;
+    }
+    .progress-bar {
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent) 0%, #15a068 100%);
+      width: 33.33%;
+      transition: width 0.4s ease;
+      border-radius: 10px;
+    }
+    .progress-text {
+      text-align: center;
+      margin-top: 10px;
+      font-size: 14px;
+      color: rgba(255,255,255,0.7);
+    }
+    .step {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.1);
+      border: 2px solid rgba(255,255,255,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 20px;
+      color: rgba(255,255,255,0.5);
+      transition: all 0.3s;
+    }
+    .step.active {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #042419;
+      transform: scale(1.1);
+    }
+    .step.completed {
+      background: rgba(25, 195, 125, 0.3);
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+    .form-step { display: none; }
+    .form-step.active { display: block; animation: fadeIn 0.4s; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    .step-title {
+      font-size: 26px;
+      font-weight: 900;
+      margin: 0 0 30px;
+      color: var(--accent);
+      text-align: center;
+    }
+    .form-group { margin-bottom: 24px; }
+    .form-group label { display: block; margin-bottom: 8px; font-weight: 600; color: rgba(255,255,255,0.9); }
+    .form-group label .required { color: #ff6b6b; }
+    .form-group input, .form-group select, .form-group textarea {
+      width: 100%;
+      padding: 14px 16px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 12px;
+      color: #fff;
+      font-size: 16px;
+      font-family: inherit;
+      transition: all 0.3s;
+    }
+    .form-group input[list] {
+      appearance: none;
+      -webkit-appearance: none;
+    }
+    .form-group select { 
+      cursor: pointer; 
+      appearance: none; 
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23fff' d='M6 9L1 4h10z'/%3E%3C/svg%3E"); 
+      background-repeat: no-repeat; 
+      background-position: right 16px center; 
+      padding-right: 40px; 
+    }
+    .form-group select option { background: #1a1d20; color: #fff; padding: 12px; }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus { 
+      outline: none; 
+      border-color: var(--accent); 
+      background: rgba(255,255,255,0.08); 
+    }
+    .form-group textarea { min-height: 120px; resize: vertical; }
+    .form-group small { display: block; margin-top: 6px; color: rgba(255,255,255,0.6); font-size: 14px; }
+    .checkbox-group { display: flex; align-items: flex-start; gap: 12px; }
+    .checkbox-group input[type="checkbox"] { width: auto; margin-top: 4px; cursor: pointer; }
+    .checkbox-group label { margin: 0; cursor: pointer; font-weight: 400; }
+    .two-column { display: grid; gap: 16px; }
+    @media (min-width: 768px) { .two-column { grid-template-columns: 1fr 1fr; } }
+    .choice-grid { display: grid; gap: 16px; margin: 24px 0; }
+    @media (min-width: 768px) { .choice-grid { grid-template-columns: repeat(3, 1fr); } }
+    .choice-card { 
+      background: rgba(255,255,255,0.05); 
+      border: 2px solid rgba(255,255,255,0.1); 
+      border-radius: 16px; 
+      padding: 32px 24px; 
+      text-align: center; 
+      cursor: pointer; 
+      transition: all 0.3s; 
+    }
+    .choice-card:hover { 
+      border-color: var(--accent); 
+      background: rgba(25, 195, 125, 0.1); 
+      transform: translateY(-4px); 
+    }
+    .choice-card.selected { 
+      border-color: var(--accent); 
+      background: rgba(25, 195, 125, 0.15); 
+      box-shadow: 0 0 20px rgba(25, 195, 125, 0.3); 
+    }
+    .choice-card h4 { margin: 0 0 8px; font-size: 24px; color: #fff; }
+    .choice-card .price { font-size: 18px; font-weight: 700; color: var(--accent); margin: 8px 0; }
+    .choice-card p { margin: 0; font-size: 14px; color: rgba(255,255,255,0.6); }
+    .track-field { 
+      background: rgba(25, 195, 125, 0.05); 
+      border: 1px solid rgba(25, 195, 125, 0.2); 
+      border-radius: 16px; 
+      padding: 24px; 
+      margin: 20px 0; 
+    }
+    .track-field h4 { margin: 0 0 20px; color: var(--accent); font-size: 20px; }
+    .radio-group { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 8px; }
+    .radio-option { display: flex; align-items: center; gap: 8px; }
+    .radio-option input[type="radio"] { width: auto; margin-top: 4px; cursor: pointer; }
+    .radio-option label { margin: 0; cursor: pointer; font-weight: 400; }
+    .btn-submit { 
+      width: 100%; 
+      padding: 18px 32px; 
+      background: linear-gradient(135deg, var(--accent) 0%, #15a068 100%); 
+      color: #042419; 
+      border: none; 
+      border-radius: 14px; 
+      font-weight: 800; 
+      font-size: 18px; 
+      cursor: pointer; 
+      transition: all 0.3s; 
+      box-shadow: 0 8px 24px rgba(25, 195, 125, 0.3); 
+    }
+    .btn-submit:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(25, 195, 125, 0.5); }
+    .btn-submit:disabled { opacity: 0.5; cursor: not-allowed; }
+    .btn-group { display: flex; gap: 12px; margin-top: 30px; }
+    .btn-back { 
+      flex: 1; 
+      padding: 18px 32px; 
+      background: rgba(255,255,255,0.1); 
+      color: #fff; 
+      border: 1px solid rgba(255,255,255,0.2); 
+      border-radius: 14px; 
+      font-weight: 800; 
+      font-size: 18px; 
+      cursor: pointer; 
+      transition: all 0.3s; 
+    }
+    .btn-back:hover { background: rgba(255,255,255,0.15); border-color: rgba(255,255,255,0.3); }
+    .btn-next { 
+      flex: 2; 
+      padding: 18px 32px; 
+      background: linear-gradient(135deg, var(--accent) 0%, #15a068 100%); 
+      color: #042419; 
+      border: none; 
+      border-radius: 14px; 
+      font-weight: 800; 
+      font-size: 18px; 
+      cursor: pointer; 
+      transition: all 0.3s; 
+      box-shadow: 0 8px 24px rgba(25, 195, 125, 0.3); 
+    }
+    .btn-next:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(25, 195, 125, 0.5); }
+    .site-footer { 
+      border-top: 1px solid rgba(255,255,255,.08); 
+      padding: 24px 0; 
+      position: relative; 
+      z-index: 3; 
+      background: rgba(0,0,0,0.3); 
+      backdrop-filter: blur(10px); 
+    }
+    .footer-inner { 
+      display: flex; 
+      align-items: center;
+      justify-content: flex-end; 
+      gap: 16px; 
+      flex-wrap: nowrap; 
+    }
+    .legal { display: flex; gap: 10px; flex-wrap: nowrap; }
+    .chip { 
+      background: rgba(17, 21, 24, 0.8); 
+      border: 1px solid rgba(255,255,255,0.1); 
+      color: #cfd6dc; 
+      padding: 8px 12px; 
+      border-radius: 12px; 
+      font-size: 14px; 
+      transition: all 0.3s; 
+    }
+    .chip:hover { color: #fff; border-color: rgba(255,255,255,0.2); }
+    @media (max-width: 768px) {
+      .hero-content h1 { font-size: 32px; }
+      .hero-subtitle { font-size: 18px; }
+      .service-box, .form-section { padding: 24px; }
+      .btn-group { flex-direction: column; }
+      .btn-back, .btn-next { flex: 1; }
+    }
+  </style>
+  <style id="clarity-tweak">
+    .site-header { background: rgba(0,0,0,.80) !important; backdrop-filter: none !important; }
+    .service-box, .form-section { background: rgba(18,20,22,0.85) !important; backdrop-filter: none !important; }
+    .site-footer { background: rgba(0,0,0,.30) !important; backdrop-filter: none !important; }
+    .lang-menu { background: rgba(0,0,0,.90) !important; }
+    .form-group input, .form-group select, .form-group textarea {
+      background: rgba(255,255,255,0.05) !important;
+      border: 1px solid rgba(255,255,255,0.3) !important;
+      box-shadow: 0 1px 0 rgba(0,0,0,0.4) inset !important;
+    }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+      border-color: rgba(25,195,125,1) !important;
+      box-shadow: 0 0 0 2px rgba(25,195,125,0.4) !important;
+    }
+    .track-field {
+      background: rgba(25,195,125,0.08) !important;
+      border: 1px solid rgba(25,195,125,0.3) !important;
+    }
+    #smokeCanvas { opacity: 0.5 !important; }
+    #musicNotesCanvas { opacity: 0.6 !important; }
+  </style>
+</head>
+<body>
+  <canvas id="smokeCanvas"></canvas>
+  <canvas id="musicNotesCanvas"></canvas>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="index.html" aria-label="HOXOH MUSIC">
+        <img src="assets/logo/hoxoh-music-header-239x62.png" alt="HOXOH MUSIC" width="239" height="62">
+      </a>
+      <nav class="main-nav">
+        <a class="nav-link" href="index.html">Inicio</a>
+        <a class="nav-link" href="albums.html">Álbumes</a>
+        <a class="nav-link" href="kontakt.html">Contacto</a>
+      </nav>
+      <div class="lang">
+        <button class="lang-btn" aria-haspopup="true" aria-expanded="false">ES ▾</button>
+        <ul class="lang-menu" role="menu">
+          <li><a class="active-lang" href="musikproduktion-service.html">ES</a></li>
+          <li><a href="musikproduktion-service-de.html">DE</a></li>
+          <li><a href="musikproduktion-service-en.html">EN</a></li>
+        </ul>
+      </div>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <h1>Haz realidad tu sonido.<br>Comienza tu proyecto musical hoy.</h1>
+        <p class="hero-subtitle">
+          Tú tienes la visión; nosotros tenemos el estudio y el saber.<br>
+          Juntos daremos vida a tu pista.
+        </p>
+      </div>
+    </section>
+
+  <div class="container">
+    <div class="service-box">
+      <h2>Nuestro Servicio de Producción Musical</h2>
+      <p>Te guiamos desde el primer boceto hasta la masterización final, lista para Spotify y todas las plataformas de streaming.</p>
+      <p>La canción perfecta para cualquier ocasión: cumpleaños, boda, aniversario o tu gran proyecto. Ya sea un éxito radial, banda sonora o beats profesionales para tu carrera, entregamos calidad que se ve y se escucha.</p>
+      
+      <p style="text-align: center; margin: 30px 0 20px; font-weight: 700; color: #fff; font-size: 20px;">
+        Estamos orgullosos de ofrecer **uno de los precios más bajos del mundo** para producción musical profesional, incluyendo compra total.
+      </p>
+
+      <h3 style="margin: 30px 0 20px; color: var(--accent); font-size: 24px;">Precios de Paquetes a Simple Vista:</h3>
+      <ul style="list-style: none; padding: 0; margin-bottom: 40px;">
+          <li style="padding: 8px 0; font-size: 18px;"><strong>🎵 Sencillo Inicial (1 Canción):</strong> Solo $99</li>
+          <li style="padding: 8px 0; font-size: 18px;"><strong>💿 Paquete EP (5 Canciones):</strong> $396 (equivalente a solo $79.20 por pista)</li>
+          <li style="padding: 8px 0; font-size: 18px;"><strong>📀 Oferta Álbum (10 Canciones):</strong> $750 (equivalente a solo $75 por pista)</li>
+      </ul>
+
+      <h3 style="margin: 30px 0 20px; color: var(--accent); font-size: 24px;">Lo que Ofrecemos:</h3>
+      <ul class="features-list">
+        <li><strong>Producción Completa:</strong> Composición, arreglos y mezcla profesional.</li>
+        <li><strong>Compra Total:</strong> Todos los derechos pasan exclusivamente a ti.</li>
+        <li><strong>Masterización Lista para Spotify:</strong> Cumple con los estándares de plataformas digitales.</li>
+        <li><strong>Diseño de Portada Incluido:</strong> Portada principal para sencillo; para EP/Álbum, portadas por pista.</li>
+        <li><strong>Entrega Rápida:</strong> Gracias a métodos modernos, producimos a alta velocidad sin pérdida de calidad.</li>
+      </ul>
+    </div>
+    <div class="form-section" id="order-form">
+      <h2>📝 Ordena tu Producción Musical</h2>
+      <div class="progress-bar-container">
+        <div class="progress-bar" id="progressBar" style="width: 33.33%;"></div>
+      </div>
+      <p class="progress-text" id="progressText">Paso 1 de 3: Detalles Personales</p>
+      <div class="step-indicator">
+        <div class="step active" id="stepInd1">1</div>
+        <div class="step" id="stepInd2">2</div>
+        <div class="step" id="stepInd3">3</div>
+      </div>
+      <form id="musicForm" novalidate>
+        <div class="form-step active" id="step1">
+          <h3 class="step-title">🙋 Detalles Personales</h3>
+          <div class="two-column">
+            <div class="form-group">
+              <label for="firstName">Nombre <span class="required">*</span></label>
+              <input type="text" name="first_name" id="firstName" required placeholder="Nombre">
+            </div>
+            <div class="form-group">
+              <label for="lastName">Apellido <span class="required">*</span></label>
+              <input type="text" name="last_name" id="lastName" required placeholder="Apellido">
+            </div>
+          </div>
+          <div class="two-column">
+            <div class="form-group">
+              <label for="artistName">Nombre Artístico <span class="required">*</span></label>
+              <input type="text" name="artist_name" id="artistName" required placeholder="p. ej. Tu Nombre Artístico o Nombre Real">
+            </div>
+            <div class="form-group">
+              <label for="labelName">Sello (Opcional)</label>
+              <input type="text" name="label_name" id="labelName" placeholder="p. ej. Tu Sello">
+            </div>
+          </div>
+          <div class="checkbox-group">
+            <input type="checkbox" id="syncWithArtistName" name="sync_with_artist_name">
+            <label for="syncWithArtistName">Nombre y Apellido son idénticos al Nombre Artístico</label>
+          </div>
+          <div class="two-column">
+            <div class="form-group">
+              <label for="country">País <span class="required">*</span></label>
+              <input type="text" name="country" id="country" list="country_list" required placeholder="p. ej. España, México, Colombia...">
+              <datalist id="country_list">
+                <option value="España">
+                <option value="México">
+                <option value="Colombia">
+                <option value="Argentina">
+                <option value="Chile">
+                <option value="Perú">
+                <option value="Venezuela">
+                <option value="Ecuador">
+                <option value="Guatemala">
+                <option value="Cuba">
+                <option value="República Dominicana">
+                <option value="Puerto Rico">
+                <option value="Costa Rica">
+                <option value="Panamá">
+                <option value="Uruguay">
+                <option value="Paraguay">
+                <option value="Bolivia">
+                <option value="El Salvador">
+                <option value="Honduras">
+                <option value="Nicaragua">
+                <option value="Estados Unidos">
+                <option value="Canadá">
+                <option value="Reino Unido">
+                <option value="Francia">
+                <option value="Italia">
+                <option value="Portugal">
+                <option value="Brasil">
+                <option value="China">
+                <option value="Japón">
+                <option value="Corea del Sur">
+                <option value="India">
+                <option value="Australia">
+                <option value="Nigeria">
+                <option value="Sudáfrica">
+                <option value="Marruecos">
+                <option value="Suiza">
+                <option value="Austria">
+                <option value="Bélgica">
+                <option value="Rusia">
+                <option value="Suecia">
+                <option value="Noruega">
+                <option value="Dinamarca">
+              </datalist>
+            </div>
+            <div class="form-group">
+              <label for="birthYear">Año de Nacimiento <span class="required">*</span></label>
+              <input type="number" name="birth_year" id="birthYear" required min="1920" max="2010" placeholder="p. ej. 1990">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="email">Correo Electrónico <span class="required">*</span></label>
+            <input type="email" name="email" id="email" required placeholder="tu@email.com">
+          </div>
+          <div class="checkbox-group">
+            <input type="checkbox" id="terms" required>
+            <label for="terms">He leído y acepto los <a href="agb.html" target="_blank">Términos y Condiciones Generales</a>.</label>
+          </div>
+          <div class="btn-group">
+            <button type="button" class="btn-next" id="nextStep1">Siguiente Paso →</button>
+          </div>
+        </div>
+        <div class="form-step" id="step2">
+          <h3 class="step-title">💿 Elige tu Paquete</h3>
+          <div class="choice-grid">
+            <div class="choice-card" data-package="1" data-price="99">
+              <h4>Sencillo</h4>
+              <div class="price">$99</div>
+              <p>1 pista profesional</p>
+            </div>
+            <div class="choice-card" data-package="5" data-price="396">
+              <h4>EP</h4>
+              <div class="price">$396</div>
+              <p>5 pistas ($79.20 por)</p>
+            </div>
+            <div class="choice-card" data-package="10" data-price="750">
+              <h4>Álbum</h4>
+              <div class="price">$750</div>
+              <p>10 pistas ($75 por)</p>
+            </div>
+          </div>
+          <input type="hidden" name="track_package" id="trackPackage">
+          <input type="hidden" name="base_amount" id="baseAmount">
+          <div class="btn-group">
+            <button type="button" class="btn-back" id="backStep2">← Atrás</button>
+            <button type="button" class="btn-next" id="nextStep2" disabled>Siguiente Paso →</button>
+          </div>
+        </div>
+        <div class="form-step" id="step3">
+          <h3 class="step-title">🎶 Detalles de la Pista</h3>
+          <div id="trackFieldsContainer"></div>
+          <div class="btn-group">
+            <button type="button" class="btn-back" id="backStep3">← Atrás</button>
+            <button type="submit" class="btn-submit">A Pago →</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <span>© 2025 HOXOH MUSIC. Todos los derechos reservados.</span>
+      <div class="legal">
+        <a class="chip" href="impressum.html">Impreso</a>
+        <a class="chip" href="datenschutz.html">Política de Privacidad</a>
+        <a class="chip" href="cookies.html">Cookies</a>
+        <a class="chip" href="explizit.html">Contenido Explícito</a>
+        <a class="chip" href="agb.html">T&C</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // ==========================================================
+    // JS para Efecto de Humo (Fondo)
+    // ==========================================================
+
+    const smokeCanvas = document.getElementById('smokeCanvas');
+    const smokeCtx = smokeCanvas.getContext('2d');
+    let W_s = smokeCanvas.width = window.innerWidth;
+    let H_s = smokeCanvas.height = window.innerHeight;
+
+    class Particle {
+      constructor() {
+        this.x = Math.random() * W_s;
+        this.y = Math.random() * H_s;
+        this.size = Math.random() * 50 + 20;
+        this.speedX = Math.random() * 0.2 - 0.1;
+        this.speedY = Math.random() * 0.2 - 0.1;
+        this.opacity = Math.random() * 0.5 + 0.1;
+        this.hue = Math.random() * 360;
+      }
+      update() {
+        this.x += this.speedX;
+        this.y += this.speedY;
+        if (this.x > W_s || this.x < 0) this.speedX = -this.speedX;
+        if (this.y > H_s || this.y < 0) this.speedY = -this.speedY;
+      }
+      draw() {
+        smokeCtx.beginPath();
+        smokeCtx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        smokeCtx.fillStyle = `hsla(${this.hue}, 70%, 50%, ${this.opacity})`;
+        smokeCtx.fill();
+      }
+    }
+
+    const particles = [];
+    for (let i = 0; i < 80; i++) {
+      particles.push(new Particle());
+    }
+
+    function animateSmoke() {
+      smokeCtx.clearRect(0, 0, W_s, H_s);
+      smokeCtx.globalCompositeOperation = 'lighter';
+      for (const particle of particles) {
+        particle.update();
+        particle.draw();
+      }
+      requestAnimationFrame(animateSmoke);
+    }
+
+    animateSmoke();
+
+    window.addEventListener('resize', () => {
+      W_s = smokeCanvas.width = window.innerWidth;
+      H_s = smokeCanvas.height = window.innerHeight;
+    });
+
+    // ==========================================================
+    // JS para Animación de Notas Musicales
+    // ==========================================================
+
+    const notesCanvas = document.getElementById('musicNotesCanvas');
+    const notesCtx = notesCanvas.getContext('2d');
+    let W_n = notesCanvas.width = window.innerWidth;
+    let H_n = notesCanvas.height = window.innerHeight;
+
+    const symbols = ['♩', '♪', '♫', '♬'];
+
+    class MusicNote {
+      constructor() {
+        this.reset();
+      }
+      reset() {
+        this.x = Math.random() * W_n;
+        this.y = H_n + 50;
+        this.size = Math.random() * 30 + 20; // Increased size range
+        this.targetSize = Math.random() * 40 + 20; // Increased target size
+        this.speed = Math.random() * 1.5 + 0.5;
+        this.opacity = Math.random() * 0.5 + 0.4; // Increased minimum opacity for bolder appearance
+        this.rotation = Math.random() * 360;
+        this.symbol = symbols[Math.floor(Math.random() * symbols.length)];
+        this.hue = Math.random() * 360;
+      }
+      update() {
+        this.y -= this.speed;
+        this.size = Math.min(this.size + 0.1, this.targetSize);
+        this.opacity = Math.max(this.opacity - 0.001, 0.2); // Minimum opacity increased
+        this.rotation += 0.5;
+        if (this.y < -50) this.reset();
+      }
+      draw() {
+        notesCtx.save();
+        notesCtx.translate(this.x, this.y);
+        notesCtx.rotate(this.rotation * Math.PI / 180);
+        notesCtx.font = `bold ${this.size}px Arial`; // Added bold font
+        notesCtx.fillStyle = `hsla(${this.hue}, 80%, 50%, ${this.opacity})`; // Increased saturation
+        notesCtx.textAlign = 'center';
+        notesCtx.textBaseline = 'middle';
+        notesCtx.fillText(this.symbol, 0, 0);
+        notesCtx.restore();
+      }
+    }
+
+    const musicNotes = [];
+    for (let i = 0; i < 200; i++) { // Increased from 100 to 200
+      musicNotes.push(new MusicNote());
+    }
+
+    function animateNotes() {
+      notesCtx.clearRect(0, 0, W_n, H_n);
+      for (const note of musicNotes) {
+        note.update();
+        note.draw();
+      }
+      requestAnimationFrame(animateNotes);
+    }
+
+    animateNotes();
+
+    window.addEventListener('resize', () => {
+      W_n = notesCanvas.width = window.innerWidth;
+      H_n = notesCanvas.height = window.innerHeight;
+      musicNotes.forEach(note => note.reset());
+    });
+
+    // ==========================================================
+    // JS para Formularios y Redirección (Lógica de Formulario)
+    // ==========================================================
+
+    const form = document.getElementById('musicForm');
+    const steps = document.querySelectorAll('.form-step');
+    const stepIndicators = document.querySelectorAll('.step');
+    const progressBar = document.getElementById('progressBar');
+    const progressText = document.getElementById('progressText');
+    const nextStep1Btn = document.getElementById('nextStep1');
+    const nextStep2Btn = document.getElementById('nextStep2');
+    const backStep2Btn = document.getElementById('backStep2');
+    const backStep3Btn = document.getElementById('backStep3');
+    const choiceCards = document.querySelectorAll('.choice-card');
+    const trackFieldsContainer = document.getElementById('trackFieldsContainer');
+    const trackPackageInput = document.getElementById('trackPackage');
+    const baseAmountInput = document.getElementById('baseAmount');
+    const syncCheckbox = document.getElementById('syncWithArtistName');
+    const firstNameInput = document.getElementById('firstName');
+    const lastNameInput = document.getElementById('lastName');
+    const artistNameInput = document.getElementById('artistName');
+
+    let currentStep = 1;
+    let selectedPackage = null;
+    let trackCount = 0;
+    const TRACK_PACKAGES = {
+      '1': 1,
+      '5': 5,
+      '10': 10
+    };
+    
+    function displayValidationError(input, message) {
+        alert(`❌ Error en el campo: ${input.name || input.id || input.tagName}\n\n${message}`);
+        
+        input.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        
+        if (input.tagName === 'INPUT' || input.tagName === 'SELECT' || input.tagName === 'TEXTAREA') {
+            input.style.borderColor = '#ff6b6b';
+            input.style.borderWidth = '2px';
+            setTimeout(() => {
+                input.style.borderColor = '';
+                input.style.borderWidth = '';
+            }, 3000);
+            input.focus();
+        } 
+        else if (input.classList && input.classList.contains('radio-group')) {
+            input.style.outline = '2px solid #ff6b6b';
+            input.style.borderRadius = '8px';
+            setTimeout(() => {
+                input.style.outline = '';
+                input.style.borderRadius = '';
+            }, 3000);
+            const firstRadio = input.querySelector('input[type="radio"]');
+            if (firstRadio) firstRadio.focus();
+        }
+    }
+
+    function updateStepUI() {
+      steps.forEach((step, index) => {
+        step.classList.toggle('active', index === currentStep - 1);
+      });
+
+      stepIndicators.forEach((indicator, index) => {
+        if (index < currentStep) {
+          indicator.classList.add('completed');
+        } else {
+          indicator.classList.remove('completed');
+        }
+        indicator.classList.toggle('active', index === currentStep - 1);
+      });
+
+      const progress = (currentStep - 1) / (steps.length - 1) * 100;
+      progressBar.style.width = `${progress}%`;
+
+      const stepNames = ["Detalles Personales", "Elige tu Paquete", "Detalles de la Pista"];
+      progressText.textContent = `Paso ${currentStep} de ${steps.length}: ${stepNames[currentStep - 1]}`;
+
+      document.getElementById('order-form').scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+      if (currentStep === 2) {
+        checkStep2Validity();
+      }
+    }
+
+    function checkStep2Validity() {
+      nextStep2Btn.disabled = !selectedPackage;
+    }
+
+    function validateStep3() {
+        const trackFields = trackFieldsContainer.querySelectorAll('.track-field');
+        let isValid = true;
+        
+        if (trackCount > 1) {
+            const albumNameInput = document.getElementById('albumName');
+            if (!albumNameInput || !albumNameInput.value.trim()) {
+                displayValidationError(albumNameInput, 'El nombre del EP/Álbum es obligatorio.');
+                isValid = false;
+                return isValid;
+            }
+        }
+        
+        trackFields.forEach((field, index) => {
+            if (!isValid) return;
+
+            const requiredInputs = field.querySelectorAll('input[required]:not([type="radio"]), textarea[required], select[required]');
+            requiredInputs.forEach(input => {
+                if (!isValid) return;
+
+                if (!input.value.trim() || input.value === "") {
+                    displayValidationError(input, 'Este campo es obligatorio.');
+                    isValid = false;
+                    return;
+                }
+
+                if (input.tagName === 'TEXTAREA' && input.getAttribute('minlength')) {
+                    const minLength = parseInt(input.getAttribute('minlength'));
+                    if (input.value.length < minLength) {
+                        displayValidationError(input, `La descripción debe tener al menos ${minLength} caracteres. Actualmente tiene ${input.value.length}.`);
+                        isValid = false;
+                        return;
+                    }
+                }
+            });
+
+            if (!isValid) return; 
+
+            const vocalsSelected = field.querySelector(`input[name="track_vocals_${index + 1}"]:checked`);
+            if (!vocalsSelected) {
+                const radioGroups = field.querySelectorAll('.radio-group');
+                const vocalsRadioGroup = radioGroups[0];
+                displayValidationError(vocalsRadioGroup, 'Debes seleccionar el tipo de voces.');
+                isValid = false;
+                return;
+            }
+            
+            const explicitSelected = field.querySelector(`input[name="track_explicit_${index + 1}"]:checked`);
+            if (!explicitSelected) {
+                const radioGroups = field.querySelectorAll('.radio-group');
+                const explicitRadioGroup = radioGroups[1];
+                displayValidationError(explicitRadioGroup, 'Debes indicar si el contenido es explícito.');
+                isValid = false;
+                return;
+            }
+        });
+        
+        return isValid;
+    }
+
+    function goToNextStep() {
+      if (currentStep === 1) {
+        const requiredInputs = document.querySelectorAll('#step1 input[required]:not(#terms):not(#syncWithArtistName), #step1 input[type="email"], #step1 input[type="number"]');
+        let allFieldsValid = true;
+        let firstInvalidInput = null;
+
+        requiredInputs.forEach(input => {
+          if (!input.value.trim() || !input.checkValidity()) {
+            allFieldsValid = false;
+            if (!firstInvalidInput) {
+                firstInvalidInput = input;
+            }
+          }
+        });
+        const termsAccepted = document.getElementById('terms').checked;
+
+        if (!allFieldsValid) {
+          displayValidationError(firstInvalidInput, 'Por favor, asegúrate de que todos los campos requeridos estén llenos y el formato sea correcto (Correo, Año de nacimiento, etc.).');
+          return;
+        }
+        if (!termsAccepted) {
+          alert('Debes leer y aceptar los Términos y Condiciones Generales para continuar.');
+          return;
+        }
+      }
+
+      if (currentStep === 2 && !selectedPackage) {
+        alert('Selecciona un paquete de producción musical para continuar.');
+        return;
+      }
+      
+      if (currentStep < steps.length) {
+        currentStep++;
+        updateStepUI();
+      }
+    }
+
+    function goToPreviousStep() {
+      if (currentStep > 1) {
+        currentStep--;
+        updateStepUI();
+      }
+    }
+
+    nextStep1Btn.addEventListener('click', goToNextStep);
+
+    choiceCards.forEach(card => {
+      card.addEventListener('click', function() {
+        choiceCards.forEach(c => c.classList.remove('selected'));
+        this.classList.add('selected');
+
+        selectedPackage = this.dataset.package;
+        trackCount = TRACK_PACKAGES[selectedPackage];
+        const basePrice = this.dataset.price;
+
+        trackPackageInput.value = selectedPackage;
+        baseAmountInput.value = basePrice;
+        
+        checkStep2Validity();
+      });
+    });
+
+    backStep2Btn.addEventListener('click', goToPreviousStep);
+
+    nextStep2Btn.addEventListener('click', () => {
+      if (selectedPackage) {
+        generateTrackFields(trackCount);
+        goToNextStep();
+      }
+    });
+    
+    const genreDatalist = `
+        <datalist id="genre_list">
+          <option value="Pop">
+          <option value="Rock">
+          <option value="Hip-Hop / Rap">
+          <option value="R&B">
+          <option value="EDM">
+          <option value="Techno">
+          <option value="House">
+          <option value="Trance">
+          <option value="Jazz">
+          <option value="Clásica">
+          <option value="Reggaeton">
+          <option value="Pop Latino">
+          <option value="Trap Latino">
+          <option value="Salsa">
+          <option value="Cumbia">
+          <option value="Tango">
+          <option value="Samba">
+          <option value="Bachata">
+          <option value="Merengue">
+          <option value="Mariachi / Ranchera">
+          <option value="Bossa Nova">
+          <option value="Música Mundial">
+          <option value="Country">
+          <option value="Balada">
+          <option value="Techno Latino">
+          <option value="Schlager">
+          <option value="Rock Alternativo">
+          <option value="Heavy Metal">
+          <option value="Afrobeat">
+          <option value="Drill">
+        </datalist>
+    `;
+
+    const vibeDatalist = `
+        <datalist id="vibe_list">
+          <option value="Feliz / Energético">
+          <option value="Melancólico / Triste">
+          <option value="Romántico / Amoroso">
+          <option value="Agresivo / Poderoso">
+          <option value="Relajado / Chill">
+          <option value="Motivacional / Inspirador">
+          <option value="Oscuro / Misterioso">
+          <option value="Fiesta / Festivo">
+          <option value="Nostálgico / Sentimental">
+          <option value="Épico / Dramático">
+        </datalist>
+    `;
+
+    const tempoDatalist = `
+        <datalist id="tempo_list">
+          <option value="Muy lento (40-60 BPM)">
+          <option value="Lento (60-90 BPM)">
+          <option value="Medio (90-120 BPM)">
+          <option value="Rápido (120-140 BPM)">
+          <option value="Muy rápido (140-180 BPM)">
+          <option value="Extremo (180+ BPM)">
+        </datalist>
+    `;
+
+    const languageDatalist = `
+        <datalist id="language_list">
+          <option value="Español">
+          <option value="Inglés">
+          <option value="Alemán">
+          <option value="Francés">
+          <option value="Italiano">
+          <option value="Portugués">
+          <option value="Turco">
+          <option value="Árabe">
+          <option value="Ruso">
+          <option value="Polaco">
+          <option value="Instrumental (sin idioma)">
+          <option value="Chino">
+          <option value="Japonés">
+          <option value="Hindi">
+        </datalist>
+    `;
+
+    function generateTrackFields(count) {
+      trackFieldsContainer.innerHTML = '';
+      
+      if (count > 1) {
+        const albumField = document.createElement('div');
+        albumField.classList.add('form-group');
+        albumField.innerHTML = `
+          <label for="albumName">Nombre del EP/Álbum <span class="required">*</span></label>
+          <input type="text" name="album_name" id="albumName" required placeholder="p. ej. Mi Primer Álbum">
+        `;
+        trackFieldsContainer.appendChild(albumField);
+      }
+      
+      trackFieldsContainer.innerHTML += genreDatalist;
+      trackFieldsContainer.innerHTML += vibeDatalist;
+      trackFieldsContainer.innerHTML += tempoDatalist;
+      trackFieldsContainer.innerHTML += languageDatalist;
+
+      for (let i = 1; i <= count; i++) {
+        const field = document.createElement('div');
+        field.classList.add('track-field');
+        field.innerHTML = `
+          <h4>Pista ${i}</h4>
+          
+          <div class="form-group">
+            <label for="trackTitle${i}">Título Preliminar de la Pista <span class="required">*</span></label>
+            <input type="text" name="track_title_${i}" id="trackTitle${i}" required placeholder="Mi Canción Genial">
+          </div>
+
+          <div class="two-column">
+            <div class="form-group">
+              <label for="trackGenre1${i}">Género Principal <span class="required">*</span></label>
+              <input type="text" name="track_genre1_${i}" id="trackGenre1${i}" list="genre_list" required placeholder="p. ej. Hip Hop, EDM, Pop">
+              <small>Escribe para autocompletar o introduce cualquier género.</small>
+            </div>
+            <div class="form-group">
+              <label for="trackGenre2${i}">Género Secundario (Opcional)</label>
+              <input type="text" name="track_genre2_${i}" id="trackGenre2${i}" list="genre_list" placeholder="p. ej. Trap, Synthwave">
+              <small>Género adicional o subgénero.</small>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="trackVibe${i}">Ambiente / Estado de Ánimo de la Pista <span class="required">*</span></label>
+             <input type="text" name="track_vibe_${i}" id="trackVibe${i}" list="vibe_list" required placeholder="p. ej. Melancólico, Energético, Épico">
+            <small>Escribe para autocompletar o introduce cualquier estado de ánimo.</small>
+          </div>
+          
+          <div class="two-column">
+             <div class="form-group">
+              <label for="trackTempo${i}">Tempo (BPM) <span class="required">*</span></label>
+              <input type="text" name="track_tempo_${i}" id="trackTempo${i}" list="tempo_list" required placeholder="p. ej. Medio (90-120 BPM) o un número exacto">
+              <small>Elige o introduce un número exacto.</small>
+            </div>
+            <div class="form-group">
+              <label for="trackDuration${i}">Duración Aproximada</label>
+              <input type="text" name="track_duration_${i}" id="trackDuration${i}" placeholder="p. ej. 3:30">
+              <small>Opcional.</small>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Tipo de Voces <span class="required">*</span></label>
+            <div class="radio-group">
+              <div class="radio-option">
+                <input type="radio" id="vocalsMale${i}" name="track_vocals_${i}" value="Masculino" required>
+                <label for="vocalsMale${i}">Masculino</label>
+              </div>
+              <div class="radio-option">
+                <input type="radio" id="vocalsFemale${i}" name="track_vocals_${i}" value="Femenino" required>
+                <label for="vocalsFemale${i}">Femenino</label>
+              </div>
+              <div class="radio-option">
+                <input type="radio" id="vocalsBoth${i}" name="track_vocals_${i}" value="Ambos" required>
+                <label for="vocalsBoth${i}">Ambos</label>
+              </div>
+              <div class="radio-option">
+                <input type="radio" id="vocalsNone${i}" name="track_vocals_${i}" value="Instrumental" required>
+                <label for="vocalsNone${i}">Instrumental</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="two-column">
+            <div class="form-group">
+              <label for="languageMain${i}">Idioma Principal de las Voces <span class="required">*</span></label>
+              <input type="text" name="track_language_main_${i}" id="languageMain${i}" list="language_list" required placeholder="p. ej. Español">
+            </div>
+            <div class="form-group">
+              <label for="languageSecond${i}">Idioma Secundario (Opcional)</label>
+              <input type="text" name="track_language_second_${i}" id="languageSecond${i}" list="language_list" placeholder="p. ej. Inglés">
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label>Contenido Explícito <span class="required">*</span></label>
+            <div class="radio-group">
+              <div class="radio-option">
+                <input type="radio" id="explicitYes${i}" name="track_explicit_${i}" value="Sí" required>
+                <label for="explicitYes${i}">Sí (Aviso Parental)</label>
+              </div>
+              <div class="radio-option">
+                <input type="radio" id="explicitNo${i}" name="track_explicit_${i}" value="No" required>
+                <label for="explicitNo${i}">No</label>
+              </div>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label for="trackOccasion${i}">Ocasión / Propósito de la Pista <span class="required">*</span></label>
+            <select name="track_occasion_${i}" id="trackOccasion${i}" required>
+              <option value="">-- Seleccionar --</option>
+              <option value="Cumpleaños">Cumpleaños</option>
+              <option value="Boda">Boda</option>
+              <option value="Aniversario">Aniversario</option>
+              <option value="Propio Proyecto">Propio Proyecto</option>
+              <option value="Comercial">Comercial</option>
+              <option value="Carrera Musical">Carrera Musical</option>
+              <option value="Regalo">Regalo</option>
+              <option value="Otro">Otro</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="trackInstrumentsWanted${i}">Instrumentos o Sonidos Deseados (Opcional)</label>
+            <input type="text" name="track_instruments_wanted_${i}" id="trackInstrumentsWanted${i}" placeholder="p. ej., Saxofón, Cuerdas épicas, Bajo profundo">
+          </div>
+          
+          <div class="form-group">
+            <label for="trackInstrumentsUnwanted${i}">Instrumentos o sonidos a evitar (Opcional)</label>
+            <input type="text" name="track_instruments_unwanted_${i}" id="trackInstrumentsUnwanted${i}" placeholder="p. ej., Guitarra eléctrica, Sonidos de campana">
+          </div>
+          
+          <div class="form-group">
+            <label for="trackDescription${i}">Descripción de la Idea / Historia (Mín. 250 caracteres) <span class="required">*</span></label>
+            <textarea name="track_description_${i}" id="trackDescription${i}" required minlength="250" placeholder="Describe tu visión, la historia detrás de la canción o cualquier detalle crucial. Una descripción detallada (mínimo 250 caracteres) ayuda a HOXOH a capturar perfectamente tu visión."></textarea>
+          </div>
+          
+          <div class="form-group">
+            <label for="trackReference${i}">Enlace de referencia musical (Opcional)</label>
+            <input type="url" name="track_reference_${i}" id="trackReference${i}" placeholder="p. ej., Enlace de YouTube o Spotify a una canción con un sonido similar.">
+            <small>Esto ayuda a HOXOH a entender tu estilo deseado.</small>
+          </div>
+        `;
+        trackFieldsContainer.appendChild(field);
+      }
+    }
+
+    backStep3Btn.addEventListener('click', goToPreviousStep);
+
+    syncCheckbox.addEventListener('change', function() {
+      if (this.checked) {
+        const firstName = firstNameInput.value.trim();
+        const lastName = lastNameInput.value.trim();
+        if (firstName && lastName) {
+          artistNameInput.value = `${firstName} ${lastName}`;
+        } else {
+          alert('Por favor, introduce primero el Nombre y Apellido para crear el Nombre Artístico.');
+          this.checked = false;
+        }
+      }
+    });
+
+    firstNameInput.addEventListener('input', updateArtistName);
+    lastNameInput.addEventListener('input', updateArtistName);
+
+    function updateArtistName() {
+      if (syncCheckbox.checked) {
+        const firstName = firstNameInput.value.trim();
+        const lastName = lastNameInput.value.trim();
+        if (firstName && lastName) {
+          artistNameInput.value = `${firstName} ${lastName}`;
+        } else if (!firstName && !lastName) {
+          artistNameInput.value = '';
+        }
+      }
+    }
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      if (!validateStep3()) {
+        return;
+      }
+
+      const currentYear = new Date().getFullYear();
+      const randomID = Math.floor(1000 + Math.random() * 9000); 
+      const orderNumber = `HOXOH-${currentYear}-${randomID}`;
+      
+      const formData = new FormData(form);
+      const data = {};
+      
+      data.personal = {
+        firstName: formData.get('first_name'),
+        lastName: formData.get('last_name'),
+        country: formData.get('country'),
+        birthYear: formData.get('birth_year'),
+        email: formData.get('email'),
+        artistName: formData.get('artist_name'),
+        labelName: formData.get('label_name')
+      };
+
+      data.package = {
+        id: formData.get('track_package'),
+        amount: formData.get('base_amount'),
+        trackCount: trackCount,
+      };
+
+      if (trackCount > 1) {
+        data.album_name = formData.get('album_name');
+      }
+
+      data.tracks = [];
+      for (let i = 1; i <= trackCount; i++) {
+        data.tracks.push({
+          title: formData.get(`track_title_${i}`),
+          genre1: formData.get(`track_genre1_${i}`),
+          genre2: formData.get(`track_genre2_${i}`),
+          vibe: formData.get(`track_vibe_${i}`),
+          tempo: formData.get(`track_tempo_${i}`),
+          duration: formData.get(`track_duration_${i}`),
+          vocals: formData.get(`track_vocals_${i}`), 
+          languageMain: formData.get(`track_language_main_${i}`),
+          languageSecond: formData.get(`track_language_second_${i}`),
+          explicit: formData.get(`track_explicit_${i}`), 
+          occasion: formData.get(`track_occasion_${i}`),
+          instrumentsWanted: formData.get(`track_instruments_wanted_${i}`),
+          instrumentsUnwanted: formData.get(`track_instruments_unwanted_${i}`),
+          description: formData.get(`track_description_${i}`),
+          reference: formData.get(`track_reference_${i}`),
+        });
+      }
+
+      const encodedData = encodeURIComponent(JSON.stringify(data));
+      
+      const redirectUrl = `payip.html?amount=${data.package.amount}&package=${data.package.id}&order=${orderNumber}&data=${encodedData}`;
+      
+      console.log('Redirigiendo a:', redirectUrl);
+      window.location.href = redirectUrl;
+    });
+    
+    const langBtn = document.querySelector('.lang-btn');
+    const langContainer = document.querySelector('.lang');
+
+    langBtn.addEventListener('click', function(e) {
+      langContainer.classList.toggle('open');
+      
+      const isExpanded = langContainer.classList.contains('open');
+      this.setAttribute('aria-expanded', isExpanded);
+    });
+
+    document.addEventListener('click', function(e) {
+      if (!langContainer.contains(e.target) && langContainer.classList.contains('open')) {
+        langContainer.classList.remove('open');
+        langBtn.setAttribute('aria-expanded', 'false');
+      }
+    });
+
+    updateStepUI();
+  </script>
+
+<script>
+(function(){ "use strict";
+  // Find a likely first-name input (robust across languages)
+  function findFirstNameInput(){
+    var candidates = [
+      '#firstName','#firstname','#first_name','#given-name','#nombre','#name_first',
+      'input[name="firstName"]','input[name="firstname"]','input[name="first_name"]',
+      'input[name="given-name"]','input[name="nombre"]','input[name="name_first"]'
+    ];
+    for (var i=0;i<candidates.length;i++){
+      var el = document.querySelector(candidates[i]);
+      if (el) return el;
+    }
+    // heuristic: first text input under a "Vorname/First name/Nombre" label
+    var labels = Array.from(document.querySelectorAll('label'));
+    var hit = labels.find(l => /vorname|first\s*name|nombre/i.test(l.textContent||""));
+    if (hit){
+      var forId = hit.getAttribute('for');
+      if (forId){
+        var el2 = document.getElementById(forId);
+        if (el2) return el2;
+      }
+      var next = hit.parentElement && hit.parentElement.querySelector('input[type="text"],input[type="search"],input[type="email"],input[type="tel"]');
+      if (next) return next;
+    }
+    return null;
+  }
+
+  function firstToken(v){
+    v = String(v||"").trim();
+    if(!v) return "";
+    v = v.split(/\s+/)[0];
+    // letters + apostrophe + hyphen (unicode safe)
+    v = v.replace(/[^\p{L}'\-]/gu, "");
+    // TitleCase
+    return v ? v[0].toUpperCase() + v.slice(1) : "";
+  }
+
+  function setHiddenFirstname(form, value){
+    if(!form) return;
+    var hidden = form.querySelector('input[name="firstname"]');
+    if(!hidden){
+      hidden = document.createElement('input');
+      hidden.type = 'hidden';
+      hidden.name = 'firstname';
+      form.appendChild(hidden);
+    }
+    hidden.value = value || "";
+  }
+
+  function enhanceForm(form){
+    var fn = findFirstNameInput();
+    if(!form) return;
+    // Live store to localStorage
+    function persist(v){
+      try { localStorage.setItem('firstName', firstToken(v)); } catch(e){}
+    }
+    if(fn){
+      fn.addEventListener('input', function(){ persist(fn.value); });
+      // initialize if already filled (autofill)
+      if(fn.value) persist(fn.value);
+    }
+    // On submit: add ?firstname=... to action and set hidden field
+    form.addEventListener('submit', function(){
+      var name = "";
+      try {
+        name = fn ? firstToken(fn.value) : (localStorage.getItem('firstName')||"");
+      } catch(e){}
+      if(name){
+        setHiddenFirstname(form, name);
+        try{
+          var a = form.getAttribute('action') || "";
+          if(a){
+            var base = a.split('?')[0];
+            var qs = 'firstname=' + encodeURIComponent(name);
+            form.setAttribute('action', base + '?' + qs);
+          }
+        }catch(e){}
+      }
+    }, true);
+  }
+
+  // Attach to the first <form> on the page
+  document.addEventListener('DOMContentLoaded', function(){
+    var form = document.querySelector('form');
+    if(form) enhanceForm(form);
+  });
+})();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <title>Thank you! — HOXOH MUSIC</title>
+
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#0b0b0b" />
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon/favicon-16x16.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon/favicon-32x32.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon/apple-touch-icon.png">
+  <link rel="manifest" href="assets/favicon/site.webmanifest">
+  <link rel="icon" type="image/x-icon" href="assets/favicon/favicon.ico">
+  <!-- Global Styles -->
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* Background scene (smoke + floating letters/notes) */
+    .bg-scene::before{
+      content:"";position:fixed;inset:0;z-index:-2;
+      background:
+        radial-gradient(1200px 600px at 20% 80%, rgba(25,195,125,.12), transparent 60%),
+        radial-gradient(900px 500px at 80% 20%, rgba(0,0,0,.35), transparent 70%),
+        linear-gradient(#080b0f, #0a0d12);
+      filter: blur(2px) contrast(105%);
+    }
+    .bg-scene::after{
+      content:"";position:fixed;inset:-10%;z-index:-1;
+      background: repeating-radial-gradient(closest-side, rgba(255,255,255,.04), rgba(255,255,255,.04) 2px, transparent 3px, transparent 8px);
+      mix-blend-mode: screen; opacity: .35; animation: drift 28s linear infinite;
+    }
+    @keyframes drift { 0%{transform:translate3d(0,0,0) scale(1);} 50%{transform:translate3d(-2%,-3%,0) scale(1.03);} 100%{transform:translate3d(0,0,0) scale(1);}}
+    .bg-scene{position:fixed; inset:0; overflow:hidden; z-index:-1; pointer-events:none;}
+    .bg-scene span{position:absolute; top:110%; left:50%; font-size:28px; line-height:1; opacity:0; color:rgba(255,255,255,.25);
+      animation: floatUp 14s linear infinite; text-shadow: 0 6px 18px rgba(0,0,0,.35); filter: blur(.2px);}
+    @keyframes floatUp{0%{transform:translate(-50%,0) rotate(0deg) scale(1); opacity:0;} 8%{opacity:.5;} 100%{transform:translate(-50%,-140vh) rotate(360deg) scale(1.15); opacity:0;}}
+    .bg-scene span:nth-child(1){left:12%;animation-delay:0s;animation-duration:18s;font-size:34px;}
+    .bg-scene span:nth-child(2){left:26%;animation-delay:2s;animation-duration:16s;}
+    .bg-scene span:nth-child(3){left:39%;animation-delay:4s;animation-duration:17s;font-size:30px;}
+    .bg-scene span:nth-child(4){left:53%;animation-delay:1s;animation-duration:15s;font-size:36px;}
+    .bg-scene span:nth-child(5){left:67%;animation-delay:3s;animation-duration:19s;}
+    .bg-scene span:nth-child(6){left:81%;animation-delay:5s;animation-duration:16s;font-size:32px;}
+    .bg-scene span:nth-child(7){left:18%;animation-delay:7s;animation-duration:17s;}
+    .bg-scene span:nth-child(8){left:32%;animation-delay:9s;animation-duration:18s;}
+    .bg-scene span:nth-child(9){left:46%;animation-delay:11s;animation-duration:16s;}
+    .bg-scene span:nth-child(10){left:60%;animation-delay:13s;animation-duration:19s;}
+    .bg-scene span:nth-child(11){left:74%;animation-delay:15s;animation-duration:17s;}
+    .bg-scene span:nth-child(12){left:88%;animation-delay:17s;animation-duration:18s;}
+
+    /* Card styling for thank you message */
+    .thanks-wrap{min-height:70vh; display:grid; place-items:center; padding:40px 22px;}
+    .thanks-card{max-width:760px; width:100%; background:#11161b; border:1px solid #262c34; border-radius:18px; box-shadow: 0 16px 46px rgba(0,0,0,.55); padding:28px;}
+    .thanks-card h1{margin:0 0 6px; font-size:36px; font-weight:900; letter-spacing:.02em;}
+    .thanks-card p{margin:6px 0; color:#cdd6dd;}
+    .btn-row{display:flex; gap:12px; flex-wrap:wrap; margin-top:18px;}
+    .btn{appearance:none; border:0; cursor:pointer; background:#19c37d; color:#05261b; font-weight:800; padding:11px 16px; border-radius:12px; text-decoration:none; display:inline-flex; align-items:center; justify-content:center;}
+    .chip{background:#111518;border:1px solid #2b3139;color:#cfd6dc;padding:8px 12px;border-radius:12px;font-size:14px; text-decoration:none;}
+  </style>
+
+</head>
+<body>
+
+  <!-- Decorative background -->
+  <div class="bg-scene" aria-hidden="true">
+    <span>✉</span><span>♪</span><span>♫</span><span>✉</span><span>♪</span><span>♫</span>
+    <span>✉</span><span>♪</span><span>♫</span><span>✉</span><span>♪</span><span>♫</span>
+  </div>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index-en.html" class="brand" aria-label="HOXOH MUSIC">
+        <img src="assets/logo/hoxoh-music-header-239x62.png"
+             srcset="assets/logo/hoxoh-music-header-239x62.png 1x, assets/logo/hoxoh-music-header-478x124.png 2x"
+             alt="HOXOH MUSIC" width="239" height="62">
+      </a>
+    </div>
+  </header>
+
+  <main class="thanks-wrap">
+    <section class="thanks-card">
+      <h1>Thanks for your message!</h1>
+      <p>We received it and will reply within 24–48 hours.</p>
+      <div class="btn-row">
+        <a class="btn" href="index-en.html">Back to home</a>
+        <a class="chip" href="albums-en.html">Albums</a>
+        <a class="chip" href="kontakt-en.html">Contact</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div>© HOXOH MUSIC 2025</div>
+      <div class="legal">
+        <a class="chip" href="imprint-en.html">Imprint</a>
+        <a class="chip" href="privacy-en.html">Privacy</a>
+        <a class="chip" href="cookies-en.html">Cookies</a>
+        <a class="chip" href="explicit-en.html">Explicit Content</a>
+        <a class="chip" href="terms-en.html">Terms</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

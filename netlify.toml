@@ -1,0 +1,115 @@
+[build]
+  # Definiert den Ordner, in dem die Serverless Functions liegen
+  functions = "netlify/functions"
+  # Optional: Wenn Ihr Hauptordner der Veröffentlichungs-Ordner ist, können Sie dies weglassen.
+  # publish = "/" 
+
+[build.environment]
+  # Stellt sicher, dass die korrekte Node-Version für die Funktionen verwendet wird
+  NODE_VERSION = "20"
+
+# 🛠️ WICHTIGE LÖSUNG: Bündelt das Logo-Asset mit der Funktion
+# Die Funktion music_order.js kann nun das Logo aus dem assets-Ordner lesen.
+[functions]
+  included_files = ["netlify/functions/assets/**"]
+
+# ----------------------------------------------------------------------
+# HEADERS (Übernommen aus Ihrer vorherigen Konfiguration)
+# ----------------------------------------------------------------------
+
+# Standard-Header für HTML-Dateien
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    Content-Type = "text/html; charset=utf-8"
+
+# CORS-Header für die Contact-Funktion
+[[headers]]
+  for = "/.netlify/functions/contact"
+  [headers.values]
+    Access-Control-Allow-Origin = "*"
+    Access-Control-Allow-Methods = "POST, OPTIONS"
+    Access-Control-Allow-Headers = "Content-Type"
+
+# ----------------------------------------------------------------------
+# REDIRECTS (Übernommen aus Ihrer vorherigen Konfiguration)
+# ----------------------------------------------------------------------
+
+# Hauptseiten-Umleitungen
+[[redirects]]
+  from = "/en"
+  to = "/index-en.html"
+  status = 301
+
+[[redirects]]
+  from = "/en/"
+  to = "/index-en.html"
+  status = 301
+
+[[redirects]]
+  from = "/de"
+  to = "/index-de.html"
+  status = 301
+
+[[redirects]]
+  from = "/de/"
+  to = "/index-de.html"
+  status = 301
+
+[[redirects]]
+  from = "/en/index-en.html"
+  to = "/index-en.html"
+  status = 301
+
+[[redirects]]
+  from = "/de/index-de.html"
+  to = "/index-de.html"
+  status = 301
+
+# Album-Umleitungen
+[[redirects]]
+  from = "/en/albums"
+  to = "/albums-en.html"
+  status = 301
+
+[[redirects]]
+  from = "/de/albums"
+  to = "/albums-de.html"
+  status = 301
+
+[[redirects]]
+  from = "/en/album-el-laberinto-de-los-suenos"
+  to = "/album-el-laberinto-de-los-suenos-en.html"
+  status = 301
+
+[[redirects]]
+  from = "/de/album-el-laberinto-de-los-suenos"
+  to = "/album-el-laberinto-de-los-suenos-de.html"
+  status = 301
+
+# Kontakt-Umleitungen
+[[redirects]]
+  from = "/en/contact"
+  to = "/kontakt-en.html"
+  status = 301
+
+[[redirects]]
+  from = "/de/contact"
+  to = "/kontakt-de.html"
+  status = 301
+
+[[redirects]]
+  from = "/en/kontakt"
+  to = "/kontakt-en.html"
+  status = 301
+
+[[redirects]]
+  from = "/de/kontakt"
+  to = "/kontakt-de.html"
+  status = 301
+
+# Standard-Fallback für die Hauptseite
+[[redirects]]
+  from = "/"
+  to = "/index.html"
+  status = 200

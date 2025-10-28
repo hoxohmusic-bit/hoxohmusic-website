@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Contenido Explícito — HOXOH MUSIC</title>
+  <link rel="stylesheet" href="style.css" />
+  <meta name="theme-color" content="#0b0b0b" />
+  <style>
+    .container-narrow{max-width:980px;margin:0 auto;padding:28px 22px 44px}
+    .card{background:#13171c;border:1px solid #232a33;border-radius:18px;padding:22px}
+    .prose h1{font-size:40px;font-weight:900;margin:8px 0 18px}
+    .prose h2{font-size:22px;margin:22px 0 10px}
+    .notice{background:#101418;border:1px solid #283241;border-radius:14px;padding:14px 16px;color:#b7c3cf}
+  </style>
+</head>
+<body>
+  <!-- Header como en las otras páginas -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index-es.html" class="brand" aria-label="HOXOH MUSIC">
+        <img src="assets/logo/hoxoh-music-header-239x62.png"
+             srcset="assets/logo/hoxoh-music-header-239x62.png 1x, assets/logo/hoxoh-music-header-478x124.png 2x"
+             alt="HOXOH MUSIC" width="239" height="62">
+      </a>
+      <nav class="main-nav" aria-label="Navegación principal">
+        <a class="nav-link" href="index.html">Inicio</a>
+        <a class="nav-link" href="albums.html">Álbumes</a>
+        <a class="nav-link" href="kontakt.html">Contacto</a>
+      </nav>
+      <div class="lang" id="lang">
+        <button class="lang-btn" type="button" aria-haspopup="listbox" aria-expanded="false">ES ▾</button>
+        <ul class="lang-menu" role="listbox" aria-label="Idiomas">
+          <li><a class="active-lang" href="explizit.html" hreflang="es">ES</a></li>
+          <li><a href="explizit-en.html" hreflang="en">EN</a></li>
+          <li><a href="explizit-de.html" hreflang="de">DE</a></li>
+        </ul>
+      </div>
+    </div>
+  </header>
+
+  <main class="container-narrow">
+    <article class="card prose">
+      <h1>Contenido Explícito</h1>
+
+      <div class="notice">
+        "Explícito" identifica títulos que pueden contener, entre otros, <strong>lenguaje fuerte</strong>,
+        alusiones a la <strong>violencia</strong> o la <strong>sexualidad</strong>.
+        Esta etiqueta es una advertencia para los oyentes y no reemplaza una clasificación oficial por edad.
+      </div>
+
+      <h2>Para Padres y Tutores</h2>
+      <p>
+        Por favor, supervisa el consumo de medios de los menores. Muchos servicios de streaming ofrecen
+        configuraciones propias de control parental/protección juvenil. En plataformas externas se aplican sus normas.
+      </p>
+
+      <h2>Para Oyentes</h2>
+      <p>
+        Al utilizar nuestros servicios, confirmas haber leído las advertencias sobre contenido explícito
+        y cumplir con las <em>normativas de protección juvenil vigentes en tu lugar de residencia</em>.
+      </p>
+
+      <p style="margin-top:18px;color:#9aa6b2">Actualizado: 2025</p>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div>© HOXOH MUSIC 2025</div>
+      <div class="legal">
+        <a class="chip" href="impressum.html">Aviso Legal</a>
+        <a class="chip" href="datenschutz.html">Privacidad</a>
+        <a class="chip" href="cookies.html">Cookies</a>
+        <a class="chip" href="explizit.html">Contenido Explícito</a>
+        <a class="chip" href="agb.html">Términos</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (function(){
+      const lang=document.getElementById('lang'); if(!lang) return;
+      const btn=lang.querySelector('.lang-btn');
+      btn.addEventListener('click', ()=>{ lang.classList.toggle('open'); btn.setAttribute('aria-expanded', lang.classList.contains('open'));});
+      document.addEventListener('click', e=>{ if(!lang.contains(e.target)){ lang.classList.remove('open'); btn.setAttribute('aria-expanded','false'); }});
+    })();
+  </script>
+</body>
+</html>
+
+
+
+
+
+
+

@@ -1,0 +1,781 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>LOS DÍEZ DEMONIOS — HOXOH MUSIC</title>
+  <meta name="description" content="Álbum LOS DÍEZ DEMONIOS de HOXOH." />
+  <meta property="og:title" content="LOS DÍEZ DEMONIOS — HOXOH MUSIC" />
+  <meta property="og:description" content="Álbum LOS DÍEZ DEMONIOS de HOXOH." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="assets/covers/album-los-diez-demonios-cover.jpg" />
+  <meta name="theme-color" content="#0b0b0b" />
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon/favicon-16x16.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon/favicon-32x32.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon/apple-touch-icon.png">
+  <link rel="manifest" href="assets/favicon/site.webmanifest">
+  <link rel="icon" type="image/x-icon" href="assets/favicon/favicon.ico">
+
+  <!-- Estilos Globales -->
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- Estilos específicos de la página -->
+  <style>
+    .album-detail{
+      display:grid;
+      grid-template-columns: 520px 1fr;
+      gap:36px;
+      align-items:start;
+      margin:28px auto 34px;
+      max-width:1200px;
+      padding:0 22px;
+    }
+    .album-detail .left-col .cover{
+      width:100%; height:auto; display:block;
+      border-radius:14px; box-shadow:var(--shadow);
+    }
+
+    .album-detail .left-col .intro{
+      margin-top:16px; color:#cdd6dd; line-height:1.55;
+    }
+
+    .album-detail h1{
+      margin:0 0 12px; font-size:32px; font-weight:900; letter-spacing:.02em;
+    }
+    .album-detail .meta-row{
+      display:flex; align-items:center; gap:10px; margin:0 0 12px;
+    }
+    .album-detail .pill{
+      background:#20242a; color:#a6b0b8;
+      height:32px; padding:0 14px; border-radius:999px;
+      display:inline-flex; align-items:center; font-size:14px; white-space:nowrap;
+    }
+    .album-detail .pill.explicit{ font-weight:800; letter-spacing:.06em; }
+
+    .album-detail .tracklist{ list-style:none; margin:0; padding:0; display:grid; gap:12px; }
+    .album-detail .track{
+      background:#1a1e23; border:1px solid #262c34; color:#e6edf3;
+      border-radius:14px; padding:12px 12px 12px 16px;
+      display:grid; grid-template-columns: 2fr 1fr; gap:12px; align-items:center;
+    }
+    .album-detail .t-left{ display:flex; align-items:center; gap:10px; min-width:0; }
+    .album-detail .t-left .no{
+      flex:0 0 auto; font-weight:800; color:#dce6ee; width:40px; text-align:left;
+    }
+    .album-detail .t-left .name{
+      min-width:0; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+      letter-spacing:.01em;
+    }
+    .album-detail .t-left .explicit-chip{
+      margin-left:8px;
+      height:22px; padding:0 9px;
+      display:inline-flex; align-items:center;
+      border-radius:999px; font-size:12px;
+      background:#20242a; color:#cfd7df;
+      border:1px solid rgba(255,255,255,.1);
+      white-space:nowrap;
+    }
+
+    .album-detail .t-audio audio{ width:100%; display:block; }
+    .album-detail .back{
+      display:inline-block; margin-top:18px;
+      background:#19c37d; color:#05261b; font-weight:800;
+      padding:10px 16px; border-radius:12px; text-decoration:none;
+    }
+
+    .site-header .brand img{ height:42px; width:auto; display:block; }
+
+    /* Mosaicos de proveedores: 5 uno al lado del otro en una fila, iconos grandes */
+    .album-detail .left-col .streaming-grid{
+      width:100%; margin-top:18px;
+      display:grid; grid-template-columns:repeat(5, 1fr); gap:12px;
+    }
+    .album-detail .provider-tile{
+      background:#1c2026; border:1px solid rgba(255,255,255,.08);
+      border-radius:12px; aspect-ratio:1/1;
+      display:grid; place-items:center; text-decoration:none;
+      box-shadow:inset 0 0 0 1px rgba(255,255,255,.03);
+    }
+    .album-detail .provider-tile img{ 
+      width:95% !important; 
+      height:auto !important; 
+      display:block !important; 
+      max-width:95% !important;
+    }
+
+    @media (max-width: 900px){
+      .album-detail{ grid-template-columns:1fr; }
+    }
+    @media (max-width: 760px){
+      .album-detail .track{ grid-template-columns:1fr; }
+      .album-detail .t-left .no{ width:auto; }
+    }
+    @media (max-width: 620px){
+      .album-detail .left-col .streaming-grid{ grid-template-columns:repeat(3,1fr); }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="brand" aria-label="HOXOH MUSIC">
+        <img
+          src="assets/logo/hoxoh-music-header-239x62.png"
+          srcset="assets/logo/hoxoh-music-header-239x62.png 1x,
+                  assets/logo/hoxoh-music-header-478x124.png 2x"
+          alt="HOXOH MUSIC" width="239" height="62">
+      </a>
+
+      <nav class="main-nav" aria-label="Navegación principal">
+        <a class="nav-link" href="index.html">Inicio</a>
+        <a class="nav-link active" href="albums.html">Álbumes</a>
+        <a class="nav-link" href="kontakt.html">Contacto</a>
+      </nav>
+
+      <div class="lang" id="lang">
+        <button class="lang-btn" type="button" aria-haspopup="listbox" aria-expanded="false">ES ▾</button>
+        <ul class="lang-menu" role="listbox" aria-label="Idiomas">
+          <li><a class="active-lang" href="album-los-diez-demonios.html" hreflang="es">ES</a></li>
+          <li><a href="album-los-diez-demonios-en.html" hreflang="en">EN</a></li>
+          <li><a href="album-los-diez-demonios-de.html" hreflang="de">DE</a></li>
+        </ul>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <article class="album-detail">
+      <div class="left-col">
+        <img class="cover" src="assets/covers/album-los-diez-demonios-cover.jpg" alt="Portada de LOS DÍEZ DEMONIOS" loading="lazy" />
+
+        <div class="streaming-grid" aria-label="Streaming platforms">
+  <a class="provider-tile" href="https://open.spotify.com/intl-de/album/5Ezp449AHQmnOtQgpvp9cO" aria-label="Spotify" target="_blank" rel="noopener">
+    <img src="assets/provider_icons/spotify-icon.png" alt="">
+  </a>
+  <a class="provider-tile" href="https://music.apple.com/us/album/los-d%C3%ADez-dem%C3%B3nios/1842044347" aria-label="Apple Music" target="_blank" rel="noopener">
+    <img src="assets/provider_icons/apple-music-icon.png" alt="">
+  </a>
+  <a class="provider-tile" href="https://music.youtube.com/playlist?list=OLAK5uy_kyqu75-9CJ3OIwq-wB38SwZjSUdyXETz8" aria-label="YouTube Music" target="_blank" rel="noopener">
+    <img src="assets/provider_icons/youtube-music-icon.png" alt="">
+  </a>
+  <a class="provider-tile" href="https://tidal.com/album/462611175" aria-label="TIDAL" target="_blank" rel="noopener">
+    <img src="assets/provider_icons/tidal-icon.png" alt="">
+  </a>
+  <a class="provider-tile" href="https://amazon.com/music/player/albums/B0FSCRNVVT?marketplaceId=ATVPDKIKX0DER&musicTerritory=US&ref=dm_sh_V0plpdZ2yDrsfMosC3Y1cTga5" aria-label="Amazon Music" target="_blank" rel="noopener">
+    <img src="assets/provider_icons/amazon-music-icon1.png" alt="">
+  </a>
+</div>
+
+        <p class="intro">
+          <p style="text-align:justify;">
+Once piezas contundentes abordan las "adicciones" modernas como diez demonios que las personas enfrentan en su día a día. Este trabajo musical educativo utiliza kicks potentes, bajos distorsionados y sintetizadores fríos para abordar las adicciones desde una perspectiva preventiva y de concienciación. Cada una de las diez canciones tiene como objetivo sensibilizar y educar sobre una dependencia específica, que es representada como un demonio. La undécima y última pista es un grito de advertencia final para la prevención, enviando un mensaje de esperanza y sanación.
+</p>
+<p style="text-align:justify;">
+Oscuro, propulsor y catártico, pero siempre con un mensaje claro de esperanza y prevención: no estás solo, la ayuda profesional está disponible y la curación es posible. Estas canciones están diseñadas como una herramienta de prevención para crear conciencia y alentar a los afectados y a sus familias a buscar apoyo.
+</p>
+      </div>
+
+      <div class="right-col">
+        <h1>LOS DÍEZ DEMONIOS</h1>
+
+        <div class="meta-row" id="meta-row">
+          <span class="pill" id="year-pill">17.10.2025</span>
+          <span class="pill" id="genre-pill">Género: <strong style="font-weight:700;margin-left:6px;">Industrial Metal / Dark Electronic</strong></span>
+        </div>
+
+        <ol class="tracklist" id="tracklist">
+  <li class="track">
+    <div class="t-left"><span class="no">01.</span><span class="name">ANOREXIA — EL CUERPO VACÍO</span></div>
+    <div class="t-audio">
+     <audio crossorigin="anonymous" controls preload="none">
+        <source src="https://pub-00345912548b4ae4ac0e4c0047e289f0.r2.dev/previews/los_diez_demonios/01._anorexia_el_cuerpo_vacio_preview.mp3" type="audio/mpeg">
+      </audio>
+    </div>
+  </li>
+  <li class="track">
+    <div class="t-left"><span class="no">02.</span><span class="name">CLEPTOMANÍA — MANOS DE SOMBRA</span></div>
+    <div class="t-audio">
+     <audio crossorigin="anonymous" controls preload="none">
+        <source src="https://pub-00345912548b4ae4ac0e4c0047e289f0.r2.dev/previews/los_diez_demonios/02._cleptomania_manos_de_sombra_preview.mp3" type="audio/mpeg">
+      </audio>
+    </div>
+  </li>
+  <li class="track">
+    <div class="t-left"><span class="no">03.</span><span class="name">MITOMANÍA — LABERINTO DE MENTIRAS</span></div>
+    <div class="t-audio">
+     <audio crossorigin="anonymous" controls preload="none">
+        <source src="https://pub-00345912548b4ae4ac0e4c0047e289f0.r2.dev/previews/los_diez_demonios/03._mitomania_laberinto_de_mentiras_preview.mp3" type="audio/mpeg">
+      </audio>
+    </div>
+  </li>
+  <li class="track">
+    <div class="t-left"><span class="no">04.</span><span class="name">LUDOPATÍA — EL JUEGO ETERNO</span></div>
+    <div class="t-audio">
+     <audio crossorigin="anonymous" controls preload="none">
+        <source src="https://pub-00345912548b4ae4ac0e4c0047e289f0.r2.dev/previews/los_diez_demonios/04._ludopatia_el_juego_eterno_preview.mp3" type="audio/mpeg">
+      </audio>
+    </div>
+  </li>
+  <li class="track">
+    <div class="t-left"><span class="no">05.</span><span class="name">PIROMANÍA — EL FUEGO INTERIOR</span></div>
+    <div class="t-audio">
+     <audio crossorigin="anonymous" controls preload="none">
+        <source src="https://pub-00345912548b4ae4ac0e4c0047e289f0.r2.dev/previews/los_diez_demonios/05._piromania_el_fuego_interior_preview.mp3" type="audio/mpeg">
+      </audio>
+    </div>
+  </li>
+  <li class="track">
+    <div class="t-left"><span class="no">06.</span><span class="name">NINFOMANÍA — EL DESEO SIN FIN</span></div>
+    <div class="t-audio">
+     <audio crossorigin="anonymous" controls preload="none">
+        <source src="https://pub-00345912548b4ae4ac0e4c0047e289f0.r2.dev/previews/los_diez_demonios/06._ninfomania_el_deseo_sin_fin_preview.mp3" type="audio/mpeg">
+      </audio>
+    </div>
+  </li>
+  <li class="track">
+    <div class="t-left"><span class="no">07.</span><span class="name">WORKAHOLICOS — ESCLAVO DEL RITMO</span></div>
+    <div class="t-audio">
+     <audio crossorigin="anonymous" controls preload="none">
+        <source src="https://pub-00345912548b4ae4ac0e4c0047e289f0.r2.dev/previews/los_diez_demonios/07._workaholicos_-_esclavo_del_ritmo_preview.mp3" type="audio/mpeg">
+      </audio>
+    </div>
+  </li>
+  <li class="track">
+    <div class="t-left"><span class="no">08.</span><span class="name">TOXICOMANÍA — VENENO EN LAS VENAS</span></div>
+    <div class="t-audio">
+     <audio crossorigin="anonymous" controls preload="none">
+        <source src="https://pub-00345912548b4ae4ac0e4c0047e289f0.r2.dev/previews/los_diez_demonios/08._toxicomania_veneno_en_las_venas_preview.mp3" type="audio/mpeg">
+      </audio>
+    </div>
+  </li>
+  <li class="track">
+    <div class="t-left"><span class="no">09.</span><span class="name">ALCOHOLISMO — EL VASO INFINITO</span></div>
+    <div class="t-audio">
+     <audio crossorigin="anonymous" controls preload="none">
+        <source src="https://pub-00345912548b4ae4ac0e4c0047e289f0.r2.dev/previews/los_diez_demonios/09._alcoholismo_el_vaso_infinito_preview.mp3" type="audio/mpeg">
+      </audio>
+    </div>
+  </li>
+  <li class="track">
+    <div class="t-left"><span class="no">10.</span><span class="name">ONIOMANÍA — COMPRAR EL VACÍO</span></div>
+    <div class="t-audio">
+     <audio crossorigin="anonymous" controls preload="none">
+        <source src="https://pub-00345912548b4ae4ac0e4c0047e289f0.r2.dev/previews/los_diez_demonios/10._oniomania_comprar_el_vacio_preview.mp3" type="audio/mpeg">
+      </audio>
+    </div>
+  </li>
+  <li class="track">
+    <div class="t-left"><span class="no">11.</span><span class="name">EL GRITO DE HOXOH — ADVERTENCIA BRUTAL</span></div>
+    <div class="t-audio">
+     <audio crossorigin="anonymous" controls preload="none">
+        <source src="https://pub-00345912548b4ae4ac0e4c0047e289f0.r2.dev/previews/los_diez_demonios/11._el_grito_de_hoxoh_advertencia_brutal_preview.mp3" type="audio/mpeg">
+      </audio>
+    </div>
+  </li>
+</ol>
+
+        <p><a class="back" href="albums.html">← Volver a todos los álbumes</a></p>
+      </div>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div>© HOXOH MUSIC 2025</div>
+      <div class="legal">
+         <a class="chip" href="impressum.html">Aviso Legal</a>
+         <a class="chip" href="datenschutz.html">Privacidad</a>
+         <a class="chip" href="cookies.html">Cookies</a>
+         <a class="chip" href="explizit.html">Contenido Explícito</a>
+         <a class="chip" href="agb.html">Términos</a>
+
+      </div>
+    </div>
+  </footer>
+
+<!-- Post-footer Spotify Card -->
+<section class="postfooter-embed">
+  <div class="spotify-card">
+    <h2 class="spotify-title">Escucha mi álbum:</h2>
+    <iframe
+      data-testid="embed-iframe"
+      style="border-radius:12px"
+      src="https://open.spotify.com/embed/album/5Ezp449AHQmnOtQgpvp9cO?utm_source=generator&theme=0"
+      width="100%"
+      height="380"
+      frameborder="0"
+      allowfullscreen=""
+      allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+      loading="lazy"></iframe>
+  </div>
+</section>
+
+<style>
+.postfooter-embed{
+  padding: 22px 16px 46px;
+  background: transparent;
+}
+.postfooter-embed .spotify-card{
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 26px;
+  border-radius: 18px;
+  background: #0f151a;
+  border: 1px solid #1f2630;
+  box-shadow:
+    0 18px 40px rgba(0,0,0,.45),
+    0 2px 0 rgba(255,255,255,.03) inset,
+    0 0 0 1px rgba(255,255,255,.04) inset;
+}
+.spotify-title{
+  color: #dfe9f3;
+  text-align: center;
+  margin: 0 0 18px 0;
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing:.02em;
+}
+@media (max-width: 620px){
+  .postfooter-embed .spotify-card{ padding: 18px; }
+  .spotify-title{ font-size: 18px; }
+}
+</style>
+
+
+  <script>
+    (function(){
+      const lang = document.getElementById('lang');
+      if(!lang) return;
+      const btn = lang.querySelector('.lang-btn');
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        lang.classList.toggle('open');
+        btn.setAttribute('aria-expanded', lang.classList.contains('open'));
+      });
+      document.addEventListener('click', (e) => {
+        if(!lang.contains(e.target)){
+          lang.classList.remove('open');
+          btn.setAttribute('aria-expanded','false');
+        }
+      });
+    })();
+  </script>
+
+  <!-- Album-level explicit detection -->
+  <script>
+    (function () {
+      const cover   = document.querySelector('.album-detail .left-col .cover');
+      const metaRow = document.getElementById('meta-row');
+      const genreEl = document.getElementById('genre-pill');
+      if (!cover || !metaRow || !genreEl) return;
+
+      const srcAttr = cover.getAttribute('src') || '';
+      const file    = srcAttr.split('/').pop().split('?')[0].split('#')[0];
+      const testURL = 'assets/explizit/' + file + '?v=' + Date.now();
+
+      function insertExplicit() {
+        if (metaRow.querySelector('.pill.explicit')) return;
+        const pill = document.createElement('span');
+        pill.className = 'pill explicit';
+        pill.textContent = 'EXPLÍCITO';
+        metaRow.insertBefore(pill, genreEl);
+      }
+
+      const probe = new Image();
+      probe.onload  = () => (probe.naturalWidth > 0 ? insertExplicit() : 0);
+      probe.onerror = () => {};
+      probe.src = testURL;
+    })();
+  </script>
+
+  <!-- Track-level explicit detection -->
+  <script>
+    (function(){
+      const albumTitle = (document.querySelector('.album-detail h1')?.textContent || '').trim();
+      const list = document.getElementById('tracklist');
+      if(!albumTitle || !list) return;
+      const base = 'assets/explizit_tracks/' + albumTitle.replace(/\u2014/g,'\u2013') + '/';
+      const tryExts = ['.png', '.jpg', '.webp'];
+      const dashes  = [' - ', ' — ', ' – '];
+      function toTitleCase(s){
+        return s.toLowerCase().replace(/\p{L}+/gu, w => w[0].toUpperCase() + w.slice(1));
+      }
+      function expectedBase(li){
+        const no   = (li.querySelector('.no')?.textContent || '').trim();
+        const name = (li.querySelector('.name')?.textContent || '').trim();
+        return (no + ' ' + name).replace(/\s+/g,' ');
+      }
+      function insertChip(li){
+        if(li.querySelector('.explicit-chip')) return;
+        const nameNode = li.querySelector('.t-left .name');
+        if(!nameNode) return;
+        const chip = document.createElement('span');
+        chip.className = 'explicit-chip';
+        chip.textContent = 'EXPLÍCITO';
+        nameNode.after(chip);
+      }
+      function tryOne(li){
+        const core = expectedBase(li);
+        const titleCaseCore = toTitleCase(core);
+        const candidates = [core, titleCaseCore];
+        const extras = [
+          'El Despertar',
+          'Sin Retorno',
+          'Fuego Eterno',
+          'Alma Perdida'
+        ];
+        for (const baseName of [core, titleCaseCore]) {
+          for (const extra of extras) {
+            for (const dash of dashes) {
+              candidates.push(baseName + dash + extra);
+            }
+          }
+        }
+        const probe = new Image();
+        let i = 0, j = 0;
+        function next(){
+          if(i >= candidates.length) return;
+          const url = encodeURI(base + candidates[i] + tryExts[j]) + '?v=' + Date.now();
+          probe.onerror = () => { j++; if(j < tryExts.length){ next(); } else { j=0; i++; next(); } };
+          probe.onload  = () => { if(probe.naturalWidth > 0) insertChip(li); };
+          probe.src = url;
+        }
+        next();
+      }
+      Array.from(list.querySelectorAll('li.track')).forEach(tryOne);
+    })();
+  </script>
+
+  <!-- Unified audio footer: path-encoding + single-player + stall-protection -->
+  <script>
+  (function(){
+    if (window.__hoxohAudioPatched) return;
+    window.__hoxohAudioPatched = true;
+    // Pfade mit Sonderzeichen encodieren (TIEMPO TROPICAL – RITMO INMORTAL)
+    document.querySelectorAll('.t-audio audio').forEach(a => {
+      const s = a.querySelector('source');
+      if (!s) return;
+      const src = s.getAttribute('src') || '';
+      const enc = encodeURI(src);
+      if (src !== enc) { s.setAttribute('src', enc); a.load(); }
+    });
+    const audios = Array.from(document.querySelectorAll('audio'));
+    let current = null;
+    // 1) Kein Preload am Anfang
+    audios.forEach(a => a.preload = 'none');
+    // 2) Preload erst nach erster User-Interaktion
+    let activated = false;
+    function activatePreloadOnce(){
+      if (activated) return;
+      activated = true;
+      audios.forEach(a => a.preload = 'auto');
+    }
+    document.addEventListener('pointerdown', activatePreloadOnce, { once:true, capture:true });
+    // 3) Andere Player stoppen
+    function pauseOthers(except){
+      for (const a of audios){
+        if (a !== except){
+          a.pause();
+          a.currentTime = 0;
+        }
+      }
+    }
+    // 4) Früh-Stall-Schutz
+    function addStallProtection(a){
+      let retried = false;
+      const earlyWindowSec = 5;
+      function tryRecover(){
+        if (retried) return;
+        retried = true;
+        const wasMuted = a.muted;
+        a.load();
+        a.muted = wasMuted;
+        a.play().catch(()=>{});
+      }
+      a.addEventListener('stalled', () => { if (a.currentTime < earlyWindowSec) tryRecover(); });
+      a.addEventListener('suspend', () => { if (a.currentTime < earlyWindowSec && a.networkState !== a.NETWORK_IDLE) tryRecover(); });
+      a.addEventListener('error',   () => { if (a.currentTime < earlyWindowSec) tryRecover(); });
+      let lastT = 0, stuckCnt = 0;
+      a.addEventListener('timeupdate', () => {
+        if (a.currentTime === lastT) {
+          stuckCnt++;
+          if (stuckCnt >= 3 && a.currentTime < earlyWindowSec) tryRecover();
+        } else {
+          stuckCnt = 0;
+          lastT = a.currentTime;
+        }
+      });
+    }
+    audios.forEach(a => {
+      addStallProtection(a);
+      a.addEventListener('play', () => {
+        if (current !== a) { pauseOthers(a); current = a; }
+      });
+      a.addEventListener('ended', () => { if (current === a) current = null; });
+    });
+  })();
+  </script>
+
+<script>
+  (function(){
+    const lang = document.getElementById('lang');
+    if(!lang) return;
+    const btn = lang.querySelector('.lang-btn');
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      lang.classList.toggle('open');
+      btn.setAttribute('aria-expanded', lang.classList.contains('open'));
+    });
+    document.addEventListener('click', (e) => {
+      if(!lang.contains(e.target)){
+        lang.classList.remove('open');
+        btn.setAttribute('aria-expanded','false');
+      }
+    });
+  })();
+</script>
+
+<script>
+  (function () {
+    const cover   = document.querySelector('.album-detail .left-col .cover');
+    const metaRow = document.getElementById('meta-row');
+    const genreEl = document.getElementById('genre-pill');
+    if (!cover || !metaRow || !genreEl) return;
+
+    const srcAttr = cover.getAttribute('src') || '';
+    const file    = srcAttr.split('/').pop().split('?')[0].split('#')[0];
+    const testURL = 'assets/explizit/' + file + '?v=' + Date.now();
+
+    function insertExplicit() {
+      if (metaRow.querySelector('.pill.explicit')) return;
+      const pill = document.createElement('span');
+      pill.className = 'pill explicit';
+      pill.textContent = 'EXPLICIT';
+      metaRow.insertBefore(pill, genreEl);
+    }
+
+    const probe = new Image();
+    probe.onload  = () => (probe.naturalWidth > 0 ? insertExplicit() : 0);
+    probe.onerror = () => {};
+    probe.src = testURL;
+  })();
+</script>
+
+<script>
+  (function(){
+    const albumTitle = (document.querySelector('.album-detail h1')?.textContent || '').trim();
+    const list = document.getElementById('tracklist');
+    if(!albumTitle || !list) return;
+
+    const base = 'assets/explizit_tracks/' + albumTitle + '/';
+    const tryExts = ['.png', '.jpg', '.webp'];
+
+    function expectedName(li){
+      const no = li.querySelector('.no')?.textContent.trim() || '';
+      const name = li.querySelector('.name')?.textContent.trim() || '';
+      return (no + ' ' + name).replace(/\s+/g,' ');
+    }
+
+    function insertChip(li){
+      if(li.querySelector('.explicit-chip')) return;
+      const nameNode = li.querySelector('.t-left .name');
+      if(!nameNode) return;
+      const chip = document.createElement('span');
+      chip.className = 'explicit-chip';
+      chip.textContent = 'EXPLICIT';
+      nameNode.after(chip);
+    }
+
+    function checkOne(li){
+      const fnameCore = expectedName(li);
+      let idx = 0;
+      const probe = new Image();
+
+      probe.onload = function(){
+        if(probe.naturalWidth > 0) insertChip(li);
+      };
+      probe.onerror = function(){
+        idx++;
+        if(idx < tryExts.length){
+          probe.src = base + fnameCore + tryExts[idx] + '?v=' + Date.now();
+        }
+      };
+
+      probe.src = base + fnameCore + tryExts[idx] + '?v=' + Date.now();
+    }
+
+    Array.from(list.querySelectorAll('li.track')).forEach(checkOne);
+  })();
+</script>
+
+<!-- Unified audio footer: path-encoding + single-player + stall-protection -->
+<script>window.TRACK_COVER_DIR = "https://pub-00345912548b4ae4ac0e4c0047e289f0.r2.dev/covers_tracks/07_los_d%C3%ADez_dem%C3%B3nios/";</script>
+<script>
+(function(){
+  const coverImg = document.querySelector('.album-detail .left-col .cover');
+  const trackItems = Array.from(document.querySelectorAll('#tracklist li.track'));
+  if (!coverImg || !trackItems.length) return;
+
+  const albumCoverSrc = coverImg.getAttribute('src') || '';
+  const baseDir = (window.TRACK_COVER_DIR || '');
+  let manifest = null;
+
+  function loadManifest(){
+    if (!baseDir) return Promise.resolve(null);
+    const url = baseDir.replace(/\/+$/, '') + '/covers.json?v=' + Date.now();
+    return fetch(url, {cache:'no-store'}).then(r => r.ok ? r.json() : null).catch(() => null);
+  }
+
+  function swapCover(newSrc){
+    if (!newSrc) return;
+    const test = new Image();
+    test.onload = () => {
+      coverImg.classList.add('is-swapping');
+      setTimeout(() => {
+        coverImg.src = newSrc + (newSrc.includes('?') ? '&' : '?') + 'v=' + Date.now();
+        coverImg.onload = () => coverImg.classList.remove('is-swapping');
+      }, 120);
+    };
+    test.onerror = () => {};
+    /* FIXED LINE BELOW */
+    test.src = newSrc + (newSrc.includes('?') ? '&' : '?') + 'v=' + Date.now();
+  }
+
+  function joinPath(dir, f){
+    if (!f) return '';
+    if (/^https?:\/\//i.test(f) || f.startsWith('/')) return f;
+    return (dir.replace(/\/+$/, '') + '/' + f.replace(/^\/+/, ''));
+  }
+
+  function manifestCandidates(idx){
+    if (!manifest) return [];
+    const key = String(idx);
+    const val = manifest[key];
+    if (!val) return [];
+    const abs = joinPath(baseDir, val);
+    return [abs];
+  }
+
+  function dataCoverCandidate(li){
+    const v = li.getAttribute('data-cover');
+    return v ? [joinPath(baseDir, v)] : [];
+  }
+
+  function numberCandidates(noTxt){
+    const m = (noTxt || '').match(/\d+/);
+    if (!m) return [];
+    const nn = ('0' + m[0]).slice(-2);
+    return [baseDir + nn + '.jpg', baseDir + nn + '.png', baseDir + nn + '.webp'];
+  }
+
+  function filenameCandidates(srcUrl){
+    if(!srcUrl) return [];
+    const file = (srcUrl.split('/').pop() || '').replace(/\.(mp3|wav|ogg|m4a)$/i, '');
+    if(!file) return [];
+    return [baseDir + file + '.jpg', baseDir + file + '.png', baseDir + file + '.webp'];
+  }
+
+  function trySwap(li, idx){
+    const noTxt = (li.querySelector('.no')?.textContent || '').trim();
+    const srcEl = li.querySelector('source');
+    const srcUrl = srcEl?.getAttribute('src') || '';
+
+    const cands = []
+      .concat(manifestCandidates(idx))
+      .concat(dataCoverCandidate(li))
+      .concat(numberCandidates(noTxt))
+      .concat(filenameCandidates(srcUrl));
+
+    let i = 0;
+    (function next(){
+      if (i >= cands.length) return;
+      const url = cands[i] + '?v=' + Date.now();
+      const probe = new Image();
+      probe.onload = () => swapCover(cands[i]);
+      probe.onerror = () => { i++; next(); };
+      probe.src = url;
+    })();
+  }
+
+  const audios = Array.from(document.querySelectorAll('#tracklist li.track audio'));
+  let current = null;
+
+  function pauseOthers(except){
+    for (const a of audios){
+      if (a !== except){
+        a.pause();
+        a.currentTime = 0;
+      }
+    }
+  }
+  function restoreIfNonePlaying(){
+    const playing = audios.some(a => !a.paused && !a.ended);
+    if (!playing) swapCover(albumCoverSrc);
+  }
+
+  loadManifest().then(m => { manifest = m || null; }).finally(() => {
+    audios.forEach((audio, i) => {
+      const idx = i + 1;
+      const li  = trackItems[i];
+     audio.addEventListener('playing', () => {
+        if (current !== audio){ pauseOthers(audio); current = audio; }
+        trySwap(li, idx);
+      });
+      audio.addEventListener('pause', restoreIfNonePlaying);
+      audio.addEventListener('ended', () => { if (current === audio) current = null; restoreIfNonePlaying(); });
+    });
+  });
+})();
+</script>
+<script>
+// Fallback: force inline style toggle for language menu
+(function(){
+  const lang = document.getElementById('lang');
+  if(!lang) return;
+  const btn  = lang.querySelector('.lang-btn');
+  const menu = lang.querySelector('.lang-menu');
+  if(!btn || !menu) return;
+
+  function openMenu(){
+    lang.classList.add('open');
+    menu.style.display = 'block';
+    btn.setAttribute('aria-expanded','true');
+  }
+  function closeMenu(){
+    lang.classList.remove('open');
+    menu.style.display = 'none';
+    btn.setAttribute('aria-expanded','false');
+  }
+  function toggleMenu(e){
+    e.preventDefault();
+    e.stopPropagation();
+    const isOpen = lang.classList.contains('open') || menu.style.display === 'block';
+    if(isOpen){ closeMenu(); } else { openMenu(); }
+  }
+  btn.addEventListener('click', toggleMenu);
+  // Close on outside click
+  document.addEventListener('click', function(e){
+    if(!lang.contains(e.target)){ closeMenu(); }
+  });
+  // Basic keyboard support
+  btn.addEventListener('keydown', function(e){
+    if(e.key === 'Enter' || e.key === ' '){
+      toggleMenu(e);
+    } else if(e.key === 'Escape'){
+      closeMenu();
+      btn.focus();
+    }
+  });
+})();
+</script>
+
+</body>
+</html>
+
+
+
+
+

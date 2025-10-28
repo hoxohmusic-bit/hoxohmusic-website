@@ -1,0 +1,534 @@
+/* ===== Variablen ===== */
+:root{
+  --bg:#0a0d10;
+  --panel:#121416;
+  --panel-2:#181b1f;
+  --line:#232830;
+  --text:#eef3f6;
+  --muted:#a7b0b8;
+  --accent:#19c37d;
+  --shadow:0 16px 46px rgba(0,0,0,.55);
+  --radius:20px;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--text);font:16px/1.6 system-ui,-apple-system,Segoe UI,Inter,Arial,sans-serif}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+.container{max-width:1200px;margin:0 auto;padding:0 22px}
+
+/* ===== Header ===== */
+.site-header{position:sticky;top:0;z-index:20;background:rgba(0,0,0,.9);border-bottom:1px solid rgba(255,255,255,.06);backdrop-filter:blur(8px)}
+.header-inner{min-height:70px;display:flex;align-items:center;justify-content:space-between;gap:18px}
+.brand{display:inline-flex;align-items:center}
+.brand img{height:42px;width:auto;display:block}
+.main-nav{display:flex;gap:20px;justify-content:center;flex:1}
+.nav-link{padding:10px 14px;border-radius:12px;color:#cfd6dc}
+.nav-link.active,.nav-link:hover{background:var(--panel-2);color:#fff}
+
+/* ===== Sprachmenü ===== */
+.lang{position:relative;display:inline-block}
+.lang-btn{
+  background:#0b0b0b;color:#e9eef2;border:1px solid #2a2f36;
+  padding:8px 14px;border-radius:14px;cursor:pointer;min-width:64px;line-height:1;
+}
+.lang-menu{
+  position:absolute;top:calc(100% + 8px);left:50%;transform:translateX(-50%);z-index:30;
+  list-style:none;margin:0;padding:6px;background:#000;border:1px solid #2a2f36;border-radius:16px;
+  box-shadow:var(--shadow);display:none;min-width:100%;width:max-content
+}
+.lang.open .lang-menu{display:block}
+.lang-menu li{margin:0}
+.lang-menu a{display:block;text-align:center;padding:10px 14px;border-radius:10px;color:#cfd6dc;font-weight:500;letter-spacing:.02em}
+.lang-menu a:hover{background:#0f1216;color:#fff}
+.lang-menu a.active-lang{font-weight:800;color:#fff}
+
+/* ===== Hero ===== */
+.hero{padding:26px 0 8px}
+.hero-row{display:grid;grid-template-columns:1.1fr .9fr;gap:24px;align-items:center}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}
+.welcome-card{padding:26px}
+.welcome-card h1{margin:0 0 10px;font-size:30px}
+.welcome-card p{margin:0 0 16px;color:var(--muted)}
+.cta{display:flex;gap:12px}
+.btn-primary,.btn-ghost{display:inline-block;padding:10px 16px;border-radius:12px;font-weight:800}
+.btn-primary{background:var(--accent);color:#062a1e}
+.btn-ghost{background:#232931;color:#e7edf2;border:1px solid #2e353e}
+.btn-ghost:hover{filter:brightness(1.06)}
+.cover-card{padding:18px}
+.cover-card img{border-radius:14px;box-shadow:var(--shadow);width:100%;height:auto}
+
+/* ===== Alben-Grid ===== */
+.albums{padding:34px 0 60px}
+.albums h2{margin:0 0 16px}
+.albums-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+@media (max-width:1100px){.albums-grid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:680px){.albums-grid{grid-template-columns:1fr}}
+
+.album-card{background:var(--panel);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow);overflow:hidden;transition:transform .15s,box-shadow .15s}
+.album-card:hover{transform:translateY(-4px);box-shadow:0 18px 50px rgba(0,0,0,.55)}
+.album-media{margin:0;width:100%;aspect-ratio:1/1;background:#0d0f12;overflow:hidden}
+.album-media img{width:100%;height:100%;object-fit:cover}
+.album-meta{padding:16px;display:grid;gap:12px}
+.year-pill{width:120px;height:32px;border-radius:999px;background:#20242a;color:#a6b0b8;display:flex;align-items:center;justify-content:center;font-size:14px}
+.album-title{margin:0;font-size:20px;font-weight:900}
+.btn-primary.wide{display:block;text-align:center;margin-top:6px}
+
+/* große Streaming-Icons in Karten */
+.platforms{margin-top:6px;display:grid;grid-template-columns:repeat(5,56px);gap:14px;width:max-content}
+.platforms a{width:56px;height:56px;display:grid;place-items:center;border-radius:14px;background:#111518;border:1px solid #2b3139;box-shadow:inset 0 0 0 1px rgba(255,255,255,.03)}
+.platforms img{width:28px;height:28px;border-radius:8px}
+
+/* Footer */
+.site-footer{border-top:1px solid rgba(255,255,255,.06);padding:18px 0}
+.footer-inner{display:flex;align-items:center;justify-content:space-between;gap:16px}
+.legal{display:flex;gap:10px;flex-wrap:wrap}
+.chip{background:#111518;border:1px solid #2b3139;color:#cfd6dc;padding:8px 12px;border-radius:12px;font-size:14px}
+.chip:hover{color:#fff;border-color:#3a4048}
+
+/* Jahr/EXPLIZIT in einer Zeile */
+.meta-row{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.explicit-pill{
+  min-width:120px;height:32px;border-radius:999px;
+  background:#20242a;color:#a6b0b8;display:flex;align-items:center;justify-content:center;
+  font-size:14px
+}
+.year-pill{margin:0}
+
+/* ===================================================================== */
+/*          ALBUM-DETAILSEITE: Provider-Icons exakt unter dem Cover      */
+/* ===================================================================== */
+
+/* Referenzbreite des Covers (falls fix anders, hier anpassen) */
+.album-detail .left-col{ --cover-w:480px; --gap:16px; max-width:var(--cover-w); }
+.album-detail .left-col .cover{ width:100%; height:auto; display:block; }
+
+/* 5 dunkle Platzhalter in einer Reihe, bündig an Coverkanten */
+.album-detail .left-col .streaming{
+  width: var(--cover-w);
+  max-width: 100%;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  column-gap: var(--gap);
+  margin-top: 18px;
+}
+
+/* Platzhalter-Kachel */
+.album-detail .left-col .streaming .provider-tile{
+  background:#1c2026;
+  border:1px solid rgba(255,255,255,.06);
+  border-radius:18px;
+  aspect-ratio:1/1;
+  display:grid;
+  place-items:center;
+  text-decoration:none;
+  margin:0;            /* wichtig: nicht zentrieren */
+  width:100%;          /* füllt die ganze Spalte → 1. Kachel bündig links */
+}
+
+/* Icon in der Kachel */
+.album-detail .left-col .streaming .provider-tile img{
+  width:56%;
+  height:auto;
+}
+
+/* Mobil: 3 + 2, mittig */
+@media (max-width:620px){
+  .album-detail .left-col .streaming{
+    grid-template-columns: repeat(3, 1fr);
+    row-gap: var(--gap);
+    justify-items: center;
+  }
+}
+/* ===================================================================== */
+/*   ALBUM-DETAIL: Cover = Breite der 5 Icons, rechte Spalte weiter rechts */
+/*   + Icons sicher in Kacheln, auch wenn eine Klasse mal fehlt           */
+/* ===================================================================== */
+
+.album-detail{
+  /* rechte Spalte weiter nach rechts */
+  display: grid;
+  grid-template-columns: auto 1fr;
+  column-gap: 32px;          /* Abstand zwischen Cover+Icons und Trackliste */
+  align-items: start;
+}
+
+/* Eine Quelle der Wahrheit für Größen */
+.album-detail .left-col{
+  /* Kachel- und Lückenmaß – hier änderst du künftig alles zentral */
+  --tile: 120px;              /* Größe je Icon-Kachel (Quadrat) */
+  --gap: 16px;                /* Abstand zwischen den Kacheln */
+  /* Coverbreite = 5 Kacheln + 4 Lücken */
+  --cover-w: calc(5 * var(--tile) + 4 * var(--gap));
+
+  max-width: var(--cover-w);
+}
+
+.album-detail .left-col .cover{
+  width: var(--cover-w);      /* Cover exakt so breit wie die Icons-Reihe */
+  height: auto;
+  display: block;
+}
+
+/* 5 Kacheln in einer Zeile – exakt unter dem Cover */
+.album-detail .left-col .streaming{
+  width: var(--cover-w);
+  display: grid;
+  grid-template-columns: repeat(5, var(--tile));
+  column-gap: var(--gap);
+  margin-top: 18px;
+}
+
+/* Kachel-Container – wirkt auf ALLE <a> in der Leiste,
+   damit auch ein „vergessenes" class-Attribut kein Riesen-Icon erzeugt */
+.album-detail .left-col .streaming a{
+  width: var(--tile);
+  height: var(--tile);
+  border-radius: 18px;
+  background: #1c2026;
+  border: 1px solid rgba(255,255,255,.06);
+  display: grid;
+  place-items: center;
+  text-decoration: none;
+  margin: 0;                 /* niemals zentrieren */
+}
+
+/* Icon im Quadrat begrenzen */
+.album-detail .left-col .streaming a img{
+  width: 56%;
+  height: auto;
+  max-width: 56%;            /* Sicherheitsnetz gegen Ausreißer */
+}
+
+/* Mobil: 3 + 2, mittig und etwas kleinere Kacheln */
+@media (max-width: 620px){
+  .album-detail{
+    column-gap: 18px;
+  }
+  .album-detail .left-col{
+    --tile: 96px;
+    --gap: 14px;
+    --cover-w: calc(3 * var(--tile) + 2 * var(--gap));
+  }
+  .album-detail .left-col .streaming{
+    grid-template-columns: repeat(3, var(--tile));
+    row-gap: var(--gap);
+    justify-content: center;
+  }
+}
+/* ===================================================================== */
+/* ALBUM-DETAIL: 4 Kacheln oben + 4 Kacheln unten (erste 5 belegt)      */
+/* Coverbreite = Breite der 4 Kacheln                                    */
+/* ===================================================================== */
+
+.album-detail{
+  display: grid;
+  grid-template-columns: auto 1fr;  /* links Cover+Icons, rechts Trackliste */
+  column-gap: 36px;                 /* Trackliste weiter nach rechts */
+  align-items: start;
+}
+
+/* Eine Quelle der Wahrheit für Größen */
+.album-detail .left-col{
+  --tile: 120px;                    /* Kachelgröße (Quadrat) */
+  --gap: 16px;                      /* Abstand zwischen Kacheln */
+  --cover-w: calc(4 * var(--tile) + 3 * var(--gap)); /* 4 Kacheln + 3 Lücken */
+
+  max-width: var(--cover-w);
+}
+
+.album-detail .left-col .cover{
+  width: var(--cover-w);            /* Cover = exakt Breite der 4 Kacheln */
+  height: auto;
+  display: block;
+}
+
+/* 4 Spalten, 2 Zeilen */
+.album-detail .left-col .streaming{
+  width: var(--cover-w);
+  display: grid;
+  grid-template-columns: repeat(4, var(--tile));
+  column-gap: var(--gap);
+  row-gap: var(--gap);
+  margin-top: 18px;
+}
+
+/* Kachel-Grundstil (gilt für <a> und leere <span>) */
+.album-detail .left-col .provider-tile{
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: 18px;
+  background:#1c2026;
+  border:1px solid rgba(255,255,255,.06);
+  display: grid;
+  place-items: center;
+  text-decoration: none;
+  margin: 0;                        /* niemals zentrieren */
+}
+
+/* Icon im Quadrat begrenzen (verhindert „Riesen-Icon") */
+.album-detail .left-col .provider-tile img{
+  width: 56%;
+  height: auto;
+  max-width: 56%;
+}
+
+/* Responsive (optional) – auf sehr schmalen Screens kleinere Kacheln */
+@media (max-width: 620px){
+  .album-detail{ column-gap: 18px; }
+  .album-detail .left-col{
+    --tile: 96px;
+    --gap: 14px;
+    --cover-w: calc(4 * var(--tile) + 3 * var(--gap));
+  }
+}
+/* ====== Album-Detail-Layout: 2 Spalten (Cover+Provider | Text+Tracks) ====== */
+.album{
+  --cover-max: 480px;  /* max. Coverbreite links */
+  --pf-scale: 1.6;     /* Skalierungsfaktor: 1.0 = Startseite, 1.6 = 60% größer */
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 36px;
+  align-items: start;
+}
+
+/* Linke Spalte */
+.album .cover{
+  width: min(100%, var(--cover-max));
+  height: auto;
+  display: block;
+  grid-column: 1;
+}
+
+/* Rechte Spalte (Titel + Jahr + Tracklist) */
+.album .meta,
+.album .tracks{ grid-column: 2; }
+
+/* ====== Provider-Kacheln (proportional größer, Startseiten-Look) ====== */
+.album .providers{
+  grid-column: 1;
+  display: grid;
+  grid-template-columns: repeat(5, calc(56px * var(--pf-scale))); /* 5 Kacheln in einer Reihe */
+  gap: calc(14px * var(--pf-scale));
+  width: max-content;        /* bündig unter dem Cover */
+  margin-top: calc(14px * var(--pf-scale));
+}
+
+.album .providers .badge{
+  width:  calc(56px * var(--pf-scale));
+  height: calc(56px * var(--pf-scale));
+  display: grid; place-items: center;
+  border-radius: calc(14px * var(--pf-scale));
+  background: #111518; border: 1px solid #2b3139;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.03);
+}
+
+.album .providers .badge img{
+  width:  calc(28px * var(--pf-scale));
+  height: calc(28px * var(--pf-scale));
+  border-radius: calc(8px * var(--pf-scale));
+}
+
+/* Mobile: etwas kompakter & 3+2 mittig */
+@media (max-width: 680px){
+  .album{ --pf-scale: 1.3; }  /* sanfter skalieren */
+  .album .providers{
+    grid-template-columns: repeat(3, calc(56px * var(--pf-scale)));
+    justify-content: center;
+  }
+}
+/* HOXOH Pill-Logo im Header */
+.brand{display:inline-flex;align-items:center}
+.brand img{height:44px;width:auto;display:block}
+@media (max-width:480px){.brand img{height:40px}}
+/* Blocks atz + Silbentrennung für die Kurzbeschreibung */
+.album-detail .left-col .intro{
+  text-align: justify;
+  text-justify: inter-word;        /* bessere Wortabstände (unterstützte Browser) */
+  hyphens: auto;                   /* Silbentrennung */
+  -webkit-hyphens: auto;           /* Safari/iOS */
+  -ms-hyphens: auto;               /* älteres Edge */
+}
+
+/* Optional: auf sehr schmalen Displays wieder Flattersatz,
+   um „Flüsse" zu vermeiden */
+@media (max-width: 420px){
+  .album-detail .left-col .intro{ text-align: left; }
+}
+/* === Bunter HOXOH-Dot neben dem Logo === */
+.header-inner{ display:flex; align-items:center; gap:14px; }
+.brand-dot{
+  position:relative;
+  width:14px; height:14px; flex:0 0 auto; border-radius:999px;
+  background:conic-gradient(from 0deg,
+    #ff5b5b, #ff905b, #ffd45b, #71ff6d, #5ef0ff, #7aa7ff, #b085ff, #ff6ed6, #ff5b5b);
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,.08),
+    0 0 10px rgba(255,255,255,.18),
+    inset 0 1px 2px rgba(255,255,255,.35);
+}
+.brand-dot::after{
+  content:"";
+  position:absolute; inset:0; border-radius:inherit; pointer-events:none;
+  background:radial-gradient(circle at 30% 30%, rgba(255,255,255,.45), transparent 40%);
+}
+@media (max-width:560px){
+  .brand-dot{ width:12px; height:12px; }
+}
+
+/* === Hover-Effekte für das Logo === */
+.brand img {
+  transition: all 0.2s ease;
+  transform: scale(1);
+}
+
+.brand:hover img {
+  transform: scale(1.05);
+  opacity: 0.9;
+}
+/* === Hover-Effekte für "Back to all albums" Button === */
+.back {
+  transition: all 0.2s ease;
+  transform: scale(1);
+}
+
+.back:hover {
+  transform: scale(1.03);
+  box-shadow: 0 4px 12px rgba(25, 195, 125, 0.3);
+  filter: brightness(1.1);
+}
+
+.back:active {
+  transform: scale(0.95);
+  transition: all 0.1s ease;
+}
+.brand:active img {
+  transform: scale(0.95);
+  transition: all 0.1s ease;
+}
+}/* Buchcover-Teaser: fixiertes Seitenverhältnis, kein Strecken */
+.book-cover-float {
+  background-image: url('/assets/covers/paradoxe-book-cover.jpg'); /* ggf. Pfad anpassen */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  width: 100%;
+  aspect-ratio: 2 / 3;      /* NEU: verhindert Verzerrung */
+  border-radius: 14px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+}
+/* diese Zusatzzeile kannst du direkt danach einfügen */
+.book-cover-float { display: block; }
+.book-cover-float { max-width: 340px; margin: 0 auto; }
+
+/* Anghami vorerst ausblenden (global) */
+.provider-btn.anghami,
+.provider-tile.anghami,
+.anghami-link { display: none !important; }
+
+.status-badge {
+  background: #1a1e23;
+  border: 1px solid #2a323c;
+  color: #e6edf3;  /* Heller Text statt grün */
+  border-radius: 12px;
+  padding: 8px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;  /* Zentriert den Inhalt */
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.status-icon {
+  font-size: 16px;
+  color: #19c37d;  /* Nur das Icon ist grün */
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+/* Hover- und Click-Effekte für Streaming-Icons */
+.album-detail .provider-tile {
+  transition: all 0.2s ease;
+  transform: scale(1);
+}
+
+.album-detail .provider-tile:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+.album-detail .provider-tile:active {
+  transform: scale(0.95);
+  transition: all 0.1s ease;
+}
+
+.album-detail .provider-tile:focus {
+  outline: 2px solid #19c37d;
+  outline-offset: 2px;
+}
+
+/* Hover-Effekte für alle grünen Buttons */
+.btn,
+.btn-primary, 
+.btn-primary.wide,
+.nav-link {
+  transition: all 0.2s ease;
+  transform: scale(1);
+}
+
+.btn:hover,
+.btn-primary:hover, 
+.btn-primary.wide:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(25, 195, 125, 0.3);
+  filter: brightness(1.1);
+}
+
+.btn:active,
+.btn-primary:active, 
+.btn-primary.wide:active {
+  transform: scale(0.95);
+  transition: all 0.1s ease;
+}
+.nav-link:hover {
+  transform: scale(1.03);
+  box-shadow: 0 2px 8px rgba(255, 255, 255, 0.1);
+}
+
+.nav-link:active {
+  transform: scale(0.97);
+  transition: all 0.1s ease;
+}
+
+/* Größere Icons nur für Home/Albums-Seiten */
+.platforms a {
+  width: 72px;
+  height: 72px;
+  transition: all 0.2s ease;
+}
+
+.platforms img {
+  width: 36px;
+  height: 36px;
+}
+
+.platforms a:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+.platforms a:active {
+  transform: scale(0.95);
+  transition: all 0.1s ease;
+}

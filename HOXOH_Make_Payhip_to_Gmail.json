@@ -1,0 +1,51 @@
+{
+  "name": "HOXOH: Payhip → Gmail (Order Mail with #HOXOH-ID)",
+  "metadata": {
+    "designer": "ChatGPT",
+    "created": "2025-10-20T18:18:00.550988Z",
+    "notes": "Import in Make (Scenarios → Create new → Import blueprint). Then configure webhook + Gmail."
+  },
+  "modules": [
+    {
+      "id": 1,
+      "name": "Payhip Webhook",
+      "type": "hook",
+      "parameters": {
+        "hookName": "netlify_payhip_hoxoh",
+        "showRequestHeaders": false
+      }
+    },
+    {
+      "id": 2,
+      "name": "Normalize + Order ID",
+      "type": "function",
+      "parameters": {
+        "language": "javascript",
+        "code": "function pad(n){return String(n).padStart(2,'0');}\nconst now=new Date();\nconst order_id=`#HOXOH-${now.getFullYear()}-${pad(now.getMonth()+1)}${pad(now.getDate())}-${Math.floor(Math.random()*90+10)}`;\nconst body=(bundle.input&&bundle.input.body)?bundle.input.body:bundle;\nconst get=(o,p,d)=>{try{return p.split('.').reduce((x,k)=>(x&&x[k]!=null)?x[k]:null,o)??d;}catch(e){return d;}};\nconst out={\n order_id,\n customer_name:get(body,'customer.name','')||get(body,'customer_name','')||get(body,'buyer.name',''),\n customer_email:get(body,'customer.email','')||get(body,'customer_email','')||get(body,'buyer.email',''),\n product_title:get(body,'product.name','')||get(body,'product_title','')||get(body,'product',''),\n price:get(body,'price','')||get(body,'payment.amount',''),\n currency:get(body,'currency','USD')||get(body,'payment.currency','USD'),\n payment_method:get(body,'payment.method','PayPal')||get(body,'payment_method','PayPal'),\n transaction_id:get(body,'payment.transaction_id','')||get(body,'transaction_id','')||get(body,'payment.id',''),\n note:get(body,'note','')||get(body,'message','')||get(body,'project_brief',''),\n created_at:new Date().toISOString().replace('T',' ').replace('Z',' UTC')\n};\noutput=out;"
+      }
+    },
+    {
+      "id": 3,
+      "name": "Send Gmail: Order Mail",
+      "type": "gmail:sendEmail",
+      "parameters": {
+        "connection": "ADD_YOUR_GMAIL_CONNECTION_IN_MAKE",
+        "to": "hoxohmusic@gmail.com",
+        "subject": "🎵 Neue Bestellung {{2.output.order_id}} – {{2.output.product_title}}",
+        "contentType": "textHtml",
+        "content": "<div style=\"font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;line-height:1.45\"><h2>🎯 Auftrag {{2.output.order_id}}</h2><p><b>Kunde:</b> {{2.output.customer_name}}<br><b>E‑Mail:</b> {{2.output.customer_email}}<br><b>Produkt:</b> {{2.output.product_title}}<br><b>Betrag:</b> ${{2.output.price}} {{2.output.currency}} ({{2.output.payment_method}})<br><b>Zahlungs‑ID:</b> {{2.output.transaction_id}}<br><b>Datum:</b> {{2.output.created_at}}</p><p><b>Briefing:</b><br><pre style=\"white-space:pre-wrap;background:#f6f6f6;padding:10px;border-radius:8px\">{{2.output.note}}</pre></p><p style=\"margin-top:18px\"><b>Status:</b> Bestellung eingegangen – Produktion starten.</p></div>",
+        "attachments": []
+      }
+    }
+  ],
+  "links": [
+    {
+      "from_module": 1,
+      "to_module": 2
+    },
+    {
+      "from_module": 2,
+      "to_module": 3
+    }
+  ]
+}

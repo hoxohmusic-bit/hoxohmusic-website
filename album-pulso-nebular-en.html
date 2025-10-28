@@ -1,0 +1,510 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>PULSO NEBULAR – HOXOH MUSIC</title>
+  <meta name="description" content="Album PULSO NEBULAR by HOXOH." />
+  <meta property="og:title" content="PULSO NEBULAR – HOXOH MUSIC" />
+  <meta property="og:description" content="Album PULSO NEBULAR by HOXOH." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="assets/covers/album-pulso-nebular-cover.jpg" />
+  <meta name="theme-color" content="#0b0b0b" />
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon/favicon-16x16.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon/favicon-32x32.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon/apple-touch-icon.png">
+  <link rel="manifest" href="assets/favicon/site.webmanifest">
+  <link rel="icon" type="image/x-icon" href="assets/favicon/favicon.ico">
+
+  <!-- Global Styles -->
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- Page-specific Styles -->
+  <style>
+    .album-detail{
+      display:grid;
+      grid-template-columns: 520px 1fr;
+      gap:36px;
+      align-items:start;
+      margin:28px auto 34px;
+      max-width:1200px;
+      padding:0 22px;
+    }
+    .album-detail .left-col .cover{
+      width:100%; height:auto; display:block;
+      border-radius:14px; box-shadow:var(--shadow);
+    }
+
+    .album-detail .left-col .streaming-grid{
+      width:100%; margin-top:18px;
+      display:grid; grid-template-columns:repeat(5, 1fr); gap:12px;
+    }
+    .album-detail .provider-tile{
+      background:#1c2026; border:1px solid rgba(255,255,255,.08);
+      border-radius:12px; aspect-ratio:1/1;
+      display:grid; place-items:center; text-decoration:none;
+      box-shadow:inset 0 0 0 1px rgba(255,255,255,.03);
+    }
+    .album-detail .provider-tile img{ 
+      width:95% !important; 
+      height:auto !important; 
+      display:block !important; 
+      max-width:95% !important;
+    }
+
+    .album-detail .left-col .intro{
+      margin-top:16px; color:#cdd6dd; line-height:1.55;
+    }
+
+    .album-detail h1{
+      margin:0 0 12px; font-size:32px; font-weight:900; letter-spacing:.02em;
+    }
+    .album-detail .meta-row{
+      display:flex; align-items:center; gap:10px; margin:0 0 12px;
+    }
+    .album-detail .pill{
+      background:#20242a; color:#a6b0b8;
+      height:32px; padding:0 14px; border-radius:999px;
+      display:inline-flex; align-items:center; font-size:14px; white-space:nowrap;
+    }
+    .album-detail .pill.explicit{ font-weight:800; letter-spacing:.06em; }
+
+    .album-detail .tracklist{ list-style:none; margin:0; padding:0; display:grid; gap:12px; }
+    .album-detail .track{
+      background:#1a1e23; border:1px solid #262c34; color:#e6edf3;
+      border-radius:14px; padding:12px 12px 12px 16px;
+      display:grid; grid-template-columns: 2fr 1fr; gap:12px; align-items:center;
+    }
+    .album-detail .t-left{ display:flex; align-items:center; gap:10px; min-width:0; }
+    .album-detail .t-left .no{
+      flex:0 0 auto; font-weight:800; color:#dce6ee; width:40px; text-align:left;
+    }
+    .album-detail .t-left .name{
+      min-width:0; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+      letter-spacing:.01em;
+    }
+    .album-detail .t-left .explicit-chip{
+      margin-left:8px;
+      height:22px; padding:0 9px;
+      display:inline-flex; align-items:center;
+      border-radius:999px; font-size:12px;
+      background:#20242a; color:#cfd7df;
+      border:1px solid rgba(255,255,255,.1);
+      white-space:nowrap;
+    }
+
+    .album-detail .t-audio audio{ width:100%; display:block; }
+    .album-detail .back{
+      display:inline-block; margin-top:18px;
+      background:#19c37d; color:#05261b; font-weight:800;
+      padding:10px 16px; border-radius:12px; text-decoration:none;
+    }
+
+    .site-header .brand img{ height:42px; width:auto; display:block; }
+
+    @media (max-width: 900px){
+      .album-detail{ grid-template-columns:1fr; }
+    }
+    @media (max-width: 760px){
+      .album-detail .track{ grid-template-columns:1fr; }
+      .album-detail .t-left .no{ width:auto; }
+    }
+    @media (max-width: 620px){
+      .album-detail .left-col .streaming-grid{ grid-template-columns:repeat(3,1fr); }
+    }
+
+.lang { position: relative; }
+.lang-menu { display: none; position: absolute; right: 0; top: 100%; z-index: 1000; }
+.lang.open > .lang-menu { display: block; }
+.site-header, .site-header .header-inner { overflow: visible; }
+</style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index-en.html" class="brand" aria-label="HOXOH MUSIC">
+        <img
+          src="assets/logo/hoxoh-music-header-239x62.png"
+          srcset="assets/logo/hoxoh-music-header-239x62.png 1x,
+                  assets/logo/hoxoh-music-header-478x124.png 2x"
+          alt="HOXOH MUSIC" width="239" height="62">
+      </a>
+
+      <nav class="main-nav" aria-label="Main navigation">
+        <a class="nav-link" href="index-en.html">Home</a>
+        <a class="nav-link active" href="albums-en.html">Albums</a>
+        <a class="nav-link" href="kontakt-en.html">Contact</a>
+      </nav>
+
+      <div class="lang" id="lang">
+        <button class="lang-btn" type="button" aria-haspopup="listbox" aria-expanded="false">EN ▾</button>
+        <ul class="lang-menu" role="listbox" aria-label="Languages">
+          <li><a href="album-pulso-nebular.html" hreflang="es">ES</a></li>
+          <li><a class="active-lang" href="album-pulso-nebular-en.html" hreflang="en">EN</a></li>
+          <li><a href="album-pulso-nebular-de.html" hreflang="de">DE</a></li>
+        </ul>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <article class="album-detail">
+      <div class="left-col">
+        <img class="cover" src="assets/covers/album-pulso-nebular-cover.jpg" alt="PULSO NEBULAR cover" loading="lazy" />
+
+        <div class="streaming-grid" aria-label="Streaming platforms">
+          <a class="provider-tile" href="#" aria-label="Spotify" target="_blank" rel="noopener">
+            <img src="assets/provider_icons/spotify-icon.png" alt="">
+          </a>
+          <a class="provider-tile" href="#" aria-label="Apple Music" target="_blank" rel="noopener">
+            <img src="assets/provider_icons/apple-music-icon.png" alt="">
+          </a>
+          <a class="provider-tile" href="#" aria-label="YouTube Music" target="_blank" rel="noopener">
+            <img src="assets/provider_icons/youtube-music-icon.png" alt="">
+          </a>
+          <a class="provider-tile" href="#" aria-label="TIDAL" target="_blank" rel="noopener">
+            <img src="assets/provider_icons/tidal-icon.png" alt="">
+          </a>
+          <a class="provider-tile" href="#" aria-label="Amazon Music" target="_blank">
+           <img src="assets/provider_icons/amazon-music-icon1.png" alt=""></a>
+        </div>
+
+        <p class="intro">
+          <p style="text-align:justify;">
+<b>HOXOH – PULSO NEBULAR</b> is a revolutionary album that celebrates heart rhythm as a metaphor for love. This 10-track record fuses Latin Reggaeton and Puerto Rican Dembow with romantic elements, ASMR effects, and cosmic atmospheres, exploring from the accelerated pulse of the first encounter to the broken heart that finds power in pain. Each track is an emotional state of the heart in love personified with seductive female voices, bilingual flows, and beats that connect the intimacy of perreo with the transcendence of cosmic love.
+</p>
+<p style="text-align:justify;">
+This danced electrocardiogram celebrates the pulsations of love: the heart that accelerates when seeing someone special, the uncontrollable burning passion, the heavy breathing of intimacy, the wild heartbeat of the party, love floating in nebulas, the synchronized pulses of two hearts dancing together, the intimate whispered rhythm, the eternal beat of endless love, the obsession of infinite dance, and the broken heart transformed into power. PULSO NEBULAR is seduction, feminine power, and heart rhythm in every beat. Are you ready to feel your pulse accelerate?
+</p>
+      </div>
+
+      <div class="right-col">
+        <h1>PULSO NEBULAR</h1>
+
+        <div class="meta-row" id="meta-row">
+          <span class="pill" id="year-pill">12.12.2025</span>
+          <span class="pill" id="genre-pill">Genre: <strong style="font-weight:700;margin-left:6px;">Latin Reggaeton / Dembow / Romantic Perreo</strong></span>
+        </div>
+
+        <ol class="tracklist" id="tracklist">
+  <li class="track">
+    <div class="t-left"><span class="no">01.</span><span class="name">PULSO ACELERADO</span></div>
+    <div class="t-audio">
+     <audio crossorigin="anonymous" controls preload="none">
+        <source src="https://pub-00345912548b4ae4ac0e4c0047e289f0.r2.dev/previews/pulso_nebular/01_-_pulso_acelerado_preview.mp3" type="audio/mpeg">
+      </audio>
+    </div>
+  </li>
+  <li class="track">
+    <div class="t-left"><span class="no">02.</span><span class="name">CORAZÓN EN LLAMAS</span></div>
+    <div class="t-audio">
+     <audio crossorigin="anonymous" controls preload="none">
+        <source src="https://pub-00345912548b4ae4ac0e4c0047e289f0.r2.dev/previews/pulso_nebular/02_-_corazon_en_llamas_preview.mp3" type="audio/mpeg">
+      </audio>
+    </div>
+  </li>
+  <li class="track">
+    <div class="t-left"><span class="no">03.</span><span class="name">RESPIRACIÓN PESADA</span></div>
+    <div class="t-audio">
+     <audio crossorigin="anonymous" controls preload="none">
+        <source src="https://pub-00345912548b4ae4ac0e4c0047e289f0.r2.dev/previews/pulso_nebular/02_-_corazon_en_llamas_preview.mp3" type="audio/mpeg">
+      </audio>
+    </div>
+  </li>
+  <li class="track">
+    <div class="t-left"><span class="no">04.</span><span class="name">LATIDO SALVAJE</span></div>
+    <div class="t-audio">
+     <audio crossorigin="anonymous" controls preload="none">
+        <source src="https://pub-00345912548b4ae4ac0e4c0047e289f0.r2.dev/previews/pulso_nebular/04_-_latido_salvaje_preview.mp3" type="audio/mpeg">
+      </audio>
+    </div>
+  </li>
+  <li class="track">
+    <div class="t-left"><span class="no">05.</span><span class="name">NEBULOSA DE AMOR</span></div>
+    <div class="t-audio">
+     <audio crossorigin="anonymous" controls preload="none">
+        <source src="https://pub-00345912548b4ae4ac0e4c0047e289f0.r2.dev/previews/pulso_nebular/05_-_nebulosa_de_amor_preview.mp3" type="audio/mpeg">
+      </audio>
+    </div>
+  </li>
+  <li class="track">
+    <div class="t-left"><span class="no">06.</span><span class="name">PULSO SINCRONIZADO</span></div>
+    <div class="t-audio">
+     <audio crossorigin="anonymous" controls preload="none">
+        <source src="https://pub-00345912548b4ae4ac0e4c0047e289f0.r2.dev/previews/pulso_nebular/06_-_pulso_sincronizado_preview.mp3" type="audio/mpeg">
+      </audio>
+    </div>
+  </li>
+  <li class="track">
+    <div class="t-left"><span class="no">07.</span><span class="name">RITMO ÍNTIMO</span></div>
+    <div class="t-audio">
+     <audio crossorigin="anonymous" controls preload="none">
+        <source src="https://pub-00345912548b4ae4ac0e4c0047e289f0.r2.dev/previews/pulso_nebular/07_-_ritmo_intimo_preview.mp3" type="audio/mpeg">
+      </audio>
+    </div>
+  </li>
+  <li class="track">
+    <div class="t-left"><span class="no">08.</span><span class="name">LATIDO ETERNO</span></div>
+    <div class="t-audio">
+     <audio crossorigin="anonymous" controls preload="none">
+        <source src="https://pub-00345912548b4ae4ac0e4c0047e289f0.r2.dev/previews/pulso_nebular/08_-_latido_eterno_preview.mp3" type="audio/mpeg">
+      </audio>
+    </div>
+  </li>
+  <li class="track">
+    <div class="t-left"><span class="no">09.</span><span class="name">PULSO INFINITO</span></div>
+    <div class="t-audio">
+     <audio crossorigin="anonymous" controls preload="none">
+        <source src="https://pub-00345912548b4ae4ac0e4c0047e289f0.r2.dev/previews/pulso_nebular/09_-_pulso_infinito_preview.mp3" type="audio/mpeg">
+      </audio>
+    </div>
+  </li>
+  <li class="track">
+    <div class="t-left"><span class="no">10.</span><span class="name">CORAZÓN ROTO</span></div>
+    <div class="t-audio">
+     <audio crossorigin="anonymous" controls preload="none">
+        <source src="https://pub-00345912548b4ae4ac0e4c0047e289f0.r2.dev/previews/pulso_nebular/10_-_corazon_roto_preview.mp3" type="audio/mpeg">
+      </audio>
+    </div>
+  </li>
+</ol>
+
+        <p><a class="back" href="albums-en.html">← Back to all albums</a></p>
+      </div>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div>© HOXOH MUSIC 2025</div>
+      <div class="legal">
+       <a class="chip" href="impressum-en.html">Legal Notice</a>
+  <a class="chip" href="datenschutz-en.html">Privacy</a>
+  <a class="chip" href="cookies-en.html">Cookies</a>
+  <a class="chip" href="explizit-en.html">Explicit Content</a>
+  <a class="chip" href="agb-en.html">Terms</a>
+      </div>
+    </div>
+  </footer>
+
+<script>
+(function(){
+  if (window.__hoxohAudioPatched) return;
+  window.__hoxohAudioPatched = true;
+
+  // Pfade mit Sonderzeichen encodieren (PÚCHICA, GÜIRRO, CHIGÜÍN, etc.)
+  document.querySelectorAll('.t-audio audio').forEach(a => {
+    const s = a.querySelector('source');
+    if (!s) return;
+    const src = s.getAttribute('src') || '';
+    const enc = encodeURI(src);
+    if (src !== enc) { s.setAttribute('src', enc); a.load(); }
+  });
+
+  const audios = Array.from(document.querySelectorAll('audio'));
+  let current = null;
+
+  // 1) Kein Preload am Anfang
+  audios.forEach(a => a.preload = 'none');
+
+  // 2) Preload erst nach erster User-Interaktion
+  let activated = false;
+  function activatePreloadOnce(){
+    if (activated) return;
+    activated = true;
+    audios.forEach(a => a.preload = 'auto');
+  }
+  document.addEventListener('pointerdown', activatePreloadOnce, { once:true, capture:true });
+
+  // 3) Andere Player stoppen
+  function pauseOthers(except){
+    for (const a of audios){
+      if (a !== except){
+        a.pause();
+        a.currentTime = 0;
+      }
+    }
+  }
+
+  // 4) Früh-Stall-Schutz
+  function addStallProtection(a){
+    let retried = false;
+    const earlyWindowSec = 5;
+    function tryRecover(){
+      if (retried) return;
+      retried = true;
+      const wasMuted = a.muted;
+      a.load();
+      a.muted = wasMuted;
+      a.play().catch(()=>{});
+    }
+    a.addEventListener('stalled', () => { if (a.currentTime < earlyWindowSec) tryRecover(); });
+    a.addEventListener('suspend', () => { if (a.currentTime < earlyWindowSec && a.networkState !== a.NETWORK_IDLE) tryRecover(); });
+    a.addEventListener('error',   () => { if (a.currentTime < earlyWindowSec) tryRecover(); });
+
+    let lastT = 0, stuckCnt = 0;
+    a.addEventListener('timeupdate', () => {
+      if (a.currentTime === lastT) {
+        stuckCnt++;
+        if (stuckCnt >= 3 && a.currentTime < earlyWindowSec) tryRecover();
+      } else {
+        stuckCnt = 0;
+        lastT = a.currentTime;
+      }
+    });
+  }
+
+  audios.forEach(a => {
+    addStallProtection(a);
+    a.addEventListener('play', () => {
+      if (current !== a) { pauseOthers(a); current = a; }
+    });
+    a.addEventListener('ended', () => { if (current === a) current = null; });
+  });
+})();
+</script>
+<script>window.TRACK_COVER_DIR="https://pub-00345912548b4ae4ac0e4c0047e289f0.r2.dev/covers_tracks/12_pulso_nebular/";</script>
+
+<script>
+(function(){
+  const coverImg=document.querySelector('.album-detail .left-col .cover');
+  const trackItems=Array.from(document.querySelectorAll('#tracklist li.track, .tracklist li'));
+  if(!coverImg||!trackItems.length)return;
+  const albumCoverSrc=coverImg.getAttribute('src')||'';
+  const baseDir=(window.TRACK_COVER_DIR||'assets/covers_tracks/12_pulso_nebular/');
+  function swapCover(newSrc){
+    if(!newSrc)return;
+    const test=new Image();
+    test.onload=()=>{
+      coverImg.classList.add('is-swapping');
+      setTimeout(()=>{
+        coverImg.src=newSrc+(newSrc.includes('?')?'&':'?')+'v='+Date.now();
+        coverImg.onload=()=>coverImg.classList.remove('is-swapping');
+      },120);
+    };
+    test.onerror=()=>{};
+    test.src=newSrc+(newSrc.includes('?')?'&':'?')+'v='+Date.now();
+  }
+  function candidatesByIndex(idx){
+    const nn=('0'+idx).slice(-2);
+    return [baseDir+nn+'.jpg', baseDir+nn+'.png', baseDir+nn+'.webp'];
+  }
+  const audios=Array.from(document.querySelectorAll('li.track audio, .tracklist li audio'));
+  function restoreIfNonePlaying(){
+    const playing=audios.some(a=>!a.paused&&!a.ended);
+    if(!playing) swapCover(albumCoverSrc);
+  }
+  audios.forEach((audio,i)=>{
+    const idx=i+1;
+   audio.addEventListener('playing', () => {
+      const cands=candidatesByIndex(idx);
+      let j=0;(function next(){
+        if(j>=cands.length) return;
+        const url=cands[j]+'?v='+Date.now();
+        const probe=new Image();
+        probe.onload=()=>swapCover(cands[j]);
+        probe.onerror=()=>{ j++; next(); };
+        probe.src=url;
+      })();
+    });
+    audio.addEventListener('pause',restoreIfNonePlaying);
+    audio.addEventListener('ended',restoreIfNonePlaying);
+  });
+})();
+</script>
+<style>
+.album-detail .left-col .cover{transition:opacity .25s ease;}
+.album-detail .left-col .cover.is-swapping{opacity:0;}
+</style>
+
+<script>
+(function(){
+  const metaRow = document.getElementById('meta-row');
+  const genreEl = document.getElementById('genre-pill');
+  if(!metaRow || !genreEl) return;
+  const testURL = 'assets/explizit/12 - PULSO NEBULAR/album-pulso-nebular-cover.jpg?v=' + Date.now();
+  const lang = (document.documentElement.getAttribute('lang')||'es').toLowerCase();
+  const LABEL = lang.startsWith('de') ? 'EXPLIZIT' : (lang.startsWith('en') ? 'EXPLICIT' : 'EXPLÍCITO');
+
+  function insert(){
+    if (metaRow.querySelector('.pill.explicit')) return;
+    const pill = document.createElement('span');
+    pill.className = 'pill explicit';
+    pill.textContent = LABEL;
+    metaRow.insertBefore(pill, genreEl);
+  }
+
+  const img = new Image();
+  img.onload = function(){ if (img.naturalWidth > 0) insert(); };
+  img.onerror = function(){};
+  img.src = testURL;
+})();
+</script>
+
+<script>
+(function(){
+  const list = document.getElementById('tracklist');
+  if(!list) return;
+  const base = 'assets/explizit_tracks/PULSO NEBULAR/';
+  const lang = (document.documentElement.getAttribute('lang')||'es').toLowerCase();
+  const LABEL = lang.startsWith('de') ? 'EXPLIZIT' : (lang.startsWith('en') ? 'EXPLICIT' : 'EXPLÍCITO');
+
+  function insertChip(li){
+    if(li.querySelector('.explicit-chip')) return;
+    const nameNode = li.querySelector('.t-left .name');
+    if(!nameNode) return;
+    const chip = document.createElement('span');
+    chip.className = 'explicit-chip';
+    chip.textContent = LABEL;
+    nameNode.after(chip);
+  }
+
+  function test(li){
+    const noTxt = (li.querySelector('.no')?.textContent || '').replace(/\D/g,'');
+    if(!noTxt) return;
+    const n = noTxt.padStart(2,'0');
+    const url = base + n + '.jpg?v=' + Date.now();
+    const img = new Image();
+    img.onload = function(){ if(img.naturalWidth>0) insertChip(li); };
+    img.onerror = function(){};
+    img.src = url;
+  }
+
+  Array.from(list.querySelectorAll('li.track')).forEach(test);
+})();
+</script>
+
+<script>
+(function(){
+  const root = document.getElementById('lang');
+  if(!root || root.__langToggleSetup) return;
+  root.__langToggleSetup = true;
+  const btn  = root.querySelector('.lang-btn');
+  const menu = root.querySelector('.lang-menu');
+  if(!btn || !menu) return;
+  function openM(){ root.classList.add('open'); btn.setAttribute('aria-expanded','true'); }
+  function closeM(){ root.classList.remove('open'); btn.setAttribute('aria-expanded','false'); }
+  btn.addEventListener('click', function(e){ e.preventDefault(); e.stopPropagation();
+    if(root.classList.contains('open')) closeM(); else openM();
+  });
+  document.addEventListener('click', function(e){ if(!root.contains(e.target)) closeM(); });
+  btn.addEventListener('keydown', function(e){
+    if(e.key === 'Enter' || e.key === ' ') { e.preventDefault(); e.stopPropagation(); 
+      if(root.classList.contains('open')) closeM(); else openM(); }
+    if(e.key === 'Escape'){ closeM(); btn.focus(); }
+  });
+})();
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
+

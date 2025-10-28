@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>CAÍDA DEL CIELO — HOXOH MUSIC</title>
+<meta content="Album CAÍDA DEL CIELO by HOXOH." name="description"/>
+<meta content="CAÍDA DEL CIELO — HOXOH MUSIC" property="og:title"/>
+<meta content="Album CAÍDA DEL CIELO by HOXOH." property="og:description"/>
+<meta content="website" property="og:type"/>
+<meta content="assets/covers/album-caída-del-cielo.jpg" property="og:image"/>
+<meta content="#0b0b0b" name="theme-color"/>
+<!-- Favicons -->
+<link href="assets/favicon/favicon-16x16.png" rel="icon" sizes="16x16" type="image/png"/>
+<link href="assets/favicon/favicon-32x32.png" rel="icon" sizes="32x32" type="image/png"/>
+<link href="assets/favicon/apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180"/>
+<link href="assets/favicon/site.webmanifest" rel="manifest"/>
+<link href="assets/favicon/favicon.ico" rel="icon" type="image/x-icon"/>
+<!-- Global Styles -->
+<link href="style.css" rel="stylesheet">
+<!-- Page-specific styles -->
+<style>
+    .album-detail{
+      display:grid;
+      grid-template-columns: 520px 1fr;
+      gap:36px;
+      align-items:start;
+      margin:28px auto 34px;
+      max-width:1200px;
+      padding:0 22px;
+    }
+    .album-detail .left-col .cover{
+      width:100%; height:auto; display:block;
+      border-radius:14px; box-shadow:var(--shadow);
+    }
+
+    /* Provider tiles: 5 side by side in one row, large icons */
+    .album-detail .left-col .streaming-grid{
+      width:100%; margin-top:18px;
+      display:grid; grid-template-columns:repeat(5, 1fr); gap:12px;
+    }
+    .album-detail .provider-tile{
+      background:#1c2026; border:1px solid rgba(255,255,255,.08);
+      border-radius:12px; aspect-ratio:1/1;
+      display:grid; place-items:center; text-decoration:none;
+      box-shadow:inset 0 0 0 1px rgba(255,255,255,.03);
+    }
+    .album-detail .provider-tile img{ 
+      width:95% !important; 
+      height:auto !important; 
+      display:block !important; 
+      max-width:95% !important;
+    }
+
+    .album-detail .left-col .intro{
+      margin-top:16px; color:#cdd6dd; line-height:1.55;
+    }
+
+    .album-detail h1{
+      margin:0 0 12px; font-size:32px; font-weight:900; letter-spacing:.02em;
+    }
+    .album-detail .meta-row{
+      display:flex; align-items:center; gap:10px; margin:0 0 12px;
+    }
+    .album-detail .pill{
+      background:#20242a; color:#a6b0b8;
+      height:32px; padding:0 14px; border-radius:999px;
+      display:inline-flex; align-items:center; font-size:14px; white-space:nowrap;
+    }
+    .album-detail .pill.explicit{ font-weight:800; letter-spacing:.06em; }
+
+    .album-detail .tracklist{ list-style:none; margin:0; padding:0; display:grid; gap:12px; }
+    .album-detail .track{
+      background:#1a1e23; border:1px solid #262c34; color:#e6edf3;
+      border-radius:14px; padding:12px 12px 12px 16px;
+      display:grid; grid-template-columns: 2fr 1fr; gap:12px; align-items:center;
+    }
+    .album-detail .t-left{ display:flex; align-items:center; gap:10px; min-width:0; }
+    .album-detail .t-left .no{
+      flex:0 0 auto; font-weight:800; color:#dce6ee; width:40px; text-align:left;
+    }
+    .album-detail .t-left .name{
+      min-width:0; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+      letter-spacing:.01em;
+    }
+    .album-detail .t-left .explicit-chip{
+      margin-left:8px;
+      height:22px; padding:0 9px;
+      display:inline-flex; align-items:center;
+      border-radius:999px; font-size:12px;
+      background:#20242a; color:#cfd7df;
+      border:1px solid rgba(255,255,255,.1);
+      white-space:nowrap;
+    }
+
+    .album-detail .t-audio audio{ width:100%; display:block; }
+    .album-detail .back{
+      display:inline-block; margin-top:18px;
+      background:#19c37d; color:#05261b; font-weight:800;
+      padding:10px 16px; border-radius:12px; text-decoration:none;
+    }
+
+    .site-header .brand img{ height:42px; width:auto; display:block; }
+
+    @media (max-width: 900px){
+      .album-detail{ grid-template-columns:1fr; }
+    }
+    @media (max-width: 760px){
+      .album-detail .track{ grid-template-columns:1fr; }
+      .album-detail .t-left .no{ width:auto; }
+    }
+    @media (max-width: 620px){
+      .album-detail .left-col .streaming-grid{ grid-template-columns:repeat(3,1fr); }
+    }
+  </style>
+</link><style>
+.album-detail .left-col .cover{transition:opacity .25s ease}
+.album-detail .left-col .cover.is-swapping{opacity:0}
+</style></head>
+<body>
+<header class="site-header">
+<div class="container header-inner">
+<a aria-label="HOXOH MUSIC" class="brand" href="index-en.html">
+<img alt="HOXOH MUSIC" height="62" src="assets/logo/hoxoh-music-header-239x62.png" srcset="assets/logo/hoxoh-music-header-239x62.png 1x,
+                  assets/logo/hoxoh-music-header-478x124.png 2x" width="239"/>
+</a>
+<nav aria-label="Main navigation" class="main-nav">
+<a class="nav-link" href="index-en.html">Home</a>
+<a class="nav-link active" href="albums-en.html">Albums</a>
+<a class="nav-link" href="kontakt-en.html">kontakt</a>
+</nav>
+<div class="lang" id="lang">
+<button aria-expanded="false" aria-haspopup="listbox" class="lang-btn" type="button">EN ▾</button>
+<ul aria-label="Languages" class="lang-menu" role="listbox">
+<li><a href="album-caida-del-cielo.html" hreflang="es">ES</a></li>
+<li><a class="active-lang" href="album-caida-del-cielo-en.html" hreflang="en">EN</a></li>
+<li><a href="album-caida-del-cielo-de.html" hreflang="de">DE</a></li>
+</ul>
+</div>
+</div>
+</header>
+<main>
+<article class="album-detail">
+<div class="left-col">
+<img alt="CAÍDA DEL CIELO cover" class="cover" loading="lazy" src="assets/covers/album-caída-del-cielo.jpg">
+<div aria-label="Streaming platforms" class="streaming-grid">
+<a aria-label="Spotify" class="provider-tile" href="#" target="_blank">
+<img alt="" src="assets/provider_icons/spotify-icon.png"/>
+</a>
+<a aria-label="Apple Music" class="provider-tile" href="#" target="_blank">
+<img alt="" src="assets/provider_icons/apple-music-icon.png"/>
+</a>
+<a aria-label="YouTube Music" class="provider-tile" href="#" target="_blank">
+<img alt="" src="assets/provider_icons/youtube-music-icon.png"/>
+</a>
+<a aria-label="TIDAL" class="provider-tile" href="#" target="_blank">
+<img alt="" src="assets/provider_icons/tidal-icon.png"/>
+</a>
+<a aria-label="Amazon Music" class="provider-tile" href="#" target="_blank">
+<img alt="" src="assets/provider_icons/amazon-music-icon1.png"/>
+</a>
+</div>
+<p class="intro">
+<p class="intro">
+<p style="text-align:justify;">
+<b>CAÍDA DEL CIELO</b> is a ten-part conceptual album that narrates the fall of angels from paradise into eternal exile. Fusing ceremonial elements with dark techno and industrial, the journey begins with <i>Invocatio Angelorum</i>, a sacred opening with deep drums, followed by <i>Caída del Cielo</i> dramatizing the expulsion with pulsating bass. <i>Fuego Divino</i> burns with ritual arpeggios, while <i>Alas Rotas</i> captures the pain in melancholic textures.
+</p>
+<p style="text-align:justify;">
+<i>Exilium Eterno</i> explores banishment with metallic rhythms, <i>Lux Destruida</i> presents dark sequences and dissonant drones, and <i>Dolor de los Serafines</i> offers an ethereal respite with celestial choirs. <i>Guerra Celestial</i> unleashes an epic march of industrial techno, <i>Sombra del Paraíso</i> evokes memories in hypnotic downtempo, and the album closes with <i>Amén Infernal</i>, a final prayer in flames that completes the circle of the fall.
+</p>
+</p>
+</p>
+</img></div>
+<div class="right-col">
+<h1>CAÍDA DEL CIELO</h1>
+<div class="meta-row" id="meta-row">
+<span class="pill" id="year-pill">21.11.2025</span>
+<span class="pill" id="genre-pill">Genre: <strong style="font-weight:700;margin-left:6px;">Electronic / Dark Techno / Industrial</strong></span>
+</div>
+<ol class="tracklist" id="tracklist">
+<li class="track">
+<div class="t-left"><span class="no">01.</span><span class="name">INVOCATIO ANGELORUM</span></div>
+    <div class="t-audio">
+     <audio crossorigin="anonymous" controls preload="none">
+        <source src="https://pub-00345912548b4ae4ac0e4c0047e289f0.r2.dev/previews/caida_del_cielo/01_-_invocatio_angelorum_preview.mp3" type="audio/mpeg">
+      </audio>
+    </div>
+  </li>
+  <li class="track">
+    <div class="t-left"><span class="no">02.</span><span class="name">CAIDA DEL CIELO</span></div>
+    <div class="t-audio">
+     <audio crossorigin="anonymous" controls preload="none">
+        <source src="https://pub-00345912548b4ae4ac0e4c0047e289f0.r2.dev/previews/caida_del_cielo/02_-_caida_del_cielo_preview.mp3" type="audio/mpeg">
+      </audio>
+    </div>
+  </li>
+  <li class="track">
+    <div class="t-left"><span class="no">03.</span><span class="name">FUEGO DIVINO</span></div>
+    <div class="t-audio">
+     <audio crossorigin="anonymous" controls preload="none">
+        <source src="https://pub-00345912548b4ae4ac0e4c0047e289f0.r2.dev/previews/caida_del_cielo/03_-_fuego_divino_preview.mp3" type="audio/mpeg">
+      </audio>
+    </div>
+  </li>
+  <li class="track">
+    <div class="t-left"><span class="no">04.</span><span class="name">ALAS ROTAS</span></div>
+    <div class="t-audio">
+     <audio crossorigin="anonymous" controls preload="none">
+        <source src="https://pub-00345912548b4ae4ac0e4c0047e289f0.r2.dev/previews/caida_del_cielo/04_-_alas_rotas_preview.mp3" type="audio/mpeg">
+      </audio>
+    </div>
+  </li>
+  <li class="track">
+    <div class="t-left"><span class="no">05.</span><span class="name">EXILIUM ETERNO</span></div>
+    <div class="t-audio">
+     <audio crossorigin="anonymous" controls preload="none">
+        <source src="https://pub-00345912548b4ae4ac0e4c0047e289f0.r2.dev/previews/caida_del_cielo/05_-_exilium_eterno_preview.mp3" type="audio/mpeg">
+      </audio>
+    </div>
+  </li>
+  <li class="track">
+    <div class="t-left"><span class="no">06.</span><span class="name">LUX DESTRUIDA</span></div>
+    <div class="t-audio">
+     <audio crossorigin="anonymous" controls preload="none">
+        <source src="https://pub-00345912548b4ae4ac0e4c0047e289f0.r2.dev/previews/caida_del_cielo/06_-_lux_destruida_preview.mp3" type="audio/mpeg">
+      </audio>
+    </div>
+  </li>
+  <li class="track">
+    <div class="t-left"><span class="no">07.</span><span class="name">DOLOR DE LOS SERAFINES</span></div>
+    <div class="t-audio">
+     <audio crossorigin="anonymous" controls preload="none">
+        <source src="https://pub-00345912548b4ae4ac0e4c0047e289f0.r2.dev/previews/caida_del_cielo/07_-_dolor_de_los_serafines_preview.mp3" type="audio/mpeg">
+      </audio>
+    </div>
+  </li>
+  <li class="track">
+    <div class="t-left"><span class="no">08.</span><span class="name">GUERRA CELESTIAL</span></div>
+    <div class="t-audio">
+     <audio crossorigin="anonymous" controls preload="none">
+        <source src="https://pub-00345912548b4ae4ac0e4c0047e289f0.r2.dev/previews/caida_del_cielo/08_-_guerra_celestial_preview.mp3" type="audio/mpeg">
+      </audio>
+    </div>
+  </li>
+  <li class="track">
+    <div class="t-left"><span class="no">09.</span><span class="name">SOMBRA DEL PARAISO</span></div>
+    <div class="t-audio">
+     <audio crossorigin="anonymous" controls preload="none">
+        <source src="https://pub-00345912548b4ae4ac0e4c0047e289f0.r2.dev/previews/caida_del_cielo/09_-_sombra_del_paraiso_preview.mp3" type="audio/mpeg">
+      </audio>
+    </div>
+  </li>
+  <li class="track">
+    <div class="t-left"><span class="no">10.</span><span class="name">AMEN INFERNAL</span></div>
+    <div class="t-audio">
+     <audio crossorigin="anonymous" controls preload="none">
+        <source src="https://pub-00345912548b4ae4ac0e4c0047e289f0.r2.dev/previews/caida_del_cielo/10_-_amen_infernal_preview.mp3" type="audio/mpeg">
+      </audio>
+</div>
+</li>
+</ol>
+<p><a class="back" href="albums-en.html">← Back to all albums</a></p>
+</div>
+</article>
+</main>
+<footer class="site-footer">
+<div class="container footer-inner">
+<div>© HOXOH MUSIC 2025</div>
+<div class="legal">
+<a class="chip" href="imprint-en.html">Imprint</a>
+<a class="chip" href="privacy-en.html">Privacy</a>
+<a class="chip" href="cookies-en.html">Cookies</a>
+<a class="chip" href="explicit-en.html">Explicit Content</a>
+<a class="chip" href="terms-en.html">Terms</a>
+</div>
+</div>
+</footer>
+<script>
+    (function(){
+      const lang = document.getElementById('lang');
+      if(!lang) return;
+      const btn = lang.querySelector('.lang-btn');
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        lang.classList.toggle('open');
+        btn.setAttribute('aria-expanded', lang.classList.contains('open'));
+      });
+      document.addEventListener('click', (e) => {
+        if(!lang.contains(e.target)){
+          lang.classList.remove('open');
+          btn.setAttribute('aria-expanded','false');
+        }
+      });
+    })();
+  </script>
+<script>
+    (function () {
+      const cover   = document.querySelector('.album-detail .left-col .cover');
+      const metaRow = document.getElementById('meta-row');
+      const genreEl = document.getElementById('genre-pill');
+      if (!cover || !metaRow || !genreEl) return;
+
+      const srcAttr = cover.getAttribute('src') || '';
+      const file    = srcAttr.split('/').pop().split('?')[0].split('#')[0];
+      const testURL = 'assets/explizit/' + file + '?v=' + Date.now();
+
+      function insertExplicit() {
+        if (metaRow.querySelector('.pill.explicit')) return;
+        const pill = document.createElement('span');
+        pill.className = 'pill explicit';
+        pill.textContent = 'EXPLICIT';
+        metaRow.insertBefore(pill, genreEl);
+      }
+
+      const probe = new Image();
+      probe.onload  = () => (probe.naturalWidth > 0 ? insertExplicit() : 0);
+      probe.onerror = () => {};
+      probe.src = testURL;
+    })();
+  </script>
+<script>
+    (function(){
+      const albumTitle = (document.querySelector('.album-detail h1')?.textContent || '').trim();
+      const list = document.getElementById('tracklist');
+      if(!albumTitle || !list) return;
+
+      const base = 'assets/explizit_tracks/' + albumTitle + '/';
+      const tryExts = ['.png', '.jpg', '.webp'];
+
+      function expectedName(li){
+        const no = li.querySelector('.no')?.textContent.trim() || '';
+        const name = li.querySelector('.name')?.textContent.trim() || '';
+        return (no + ' ' + name).replace(/\s+/g,' ');
+      }
+
+      function insertChip(li){
+        if(li.querySelector('.explicit-chip')) return;
+        const nameNode = li.querySelector('.t-left .name');
+        if(!nameNode) return;
+        const chip = document.createElement('span');
+        chip.className = 'explicit-chip';
+        chip.textContent = 'EXPLICIT';
+        nameNode.after(chip);
+      }
+
+      function checkOne(li){
+        const fnameCore = expectedName(li);
+        let idx = 0;
+        const probe = new Image();
+
+        probe.onload = function(){
+          if(probe.naturalWidth > 0) insertChip(li);
+        };
+        probe.onerror = function(){
+          idx++;
+          if(idx < tryExts.length){
+            probe.src = base + fnameCore + tryExts[idx] + '?v=' + Date.now();
+          }
+        };
+
+        probe.src = base + fnameCore + tryExts[idx] + '?v=' + Date.now();
+      }
+
+      Array.from(list.querySelectorAll('li.track')).forEach(checkOne);
+    })();
+  </script>
+<script>
+  (function(){
+    const audios = Array.from(document.querySelectorAll('audio'));
+    let current = null;
+
+    // 1) Performance: no preload initially
+    audios.forEach(a => a.preload = 'none');
+
+    // 2) Activate preload after first user interaction
+    let activated = false;
+    function activatePreloadOnce(){
+      if (activated) return;
+      activated = true;
+      audios.forEach(a => a.preload = 'auto');
+    }
+    document.addEventListener('pointerdown', activatePreloadOnce, { once:true, capture:true });
+
+    // 3) Pause others (gently)
+    function pauseOthers(except){
+      for (const a of audios){
+        if (a !== except){
+          a.pause();
+          a.currentTime = 0;
+        }
+      }
+    }
+
+    // 4) Early stall protection
+    function addStallProtection(a){
+      let retried = false;
+      const earlyWindowSec = 5;
+
+      function tryRecover(){
+        if (retried) return;
+        retried = true;
+        const wasMuted = a.muted;
+        a.load();
+        a.muted = wasMuted;
+        a.play().catch(()=>{ /* Interaction might be needed */ });
+      }
+
+      a.addEventListener('stalled', () => { if (a.currentTime < earlyWindowSec) tryRecover(); });
+      a.addEventListener('suspend', () => { if (a.currentTime < earlyWindowSec && a.networkState !== a.NETWORK_IDLE) tryRecover(); });
+      a.addEventListener('error',   () => { if (a.currentTime < earlyWindowSec) tryRecover(); });
+
+      let lastT = 0, stuckCnt = 0;
+      a.addEventListener('timeupdate', () => {
+        if (a.currentTime === lastT) {
+          stuckCnt++;
+          if (stuckCnt >= 3 && a.currentTime < earlyWindowSec) tryRecover();
+        } else {
+          stuckCnt = 0;
+          lastT = a.currentTime;
+        }
+      });
+    }
+
+    // 5) Events
+    audios.forEach(a => {
+      addStallProtection(a);
+
+     a.addEventListener('playing', function(){
+        if (current !== a) {
+          pauseOthers(a);
+          current = a;
+        }
+      });
+
+      a.addEventListener('ended', () => {
+        if (current === a) current = null;
+      });
+    });
+  })();
+  </script>
+
+<script>
+(function(){ 
+  var container = document.querySelector('.album-detail'); 
+  if(!container) return;
+  var cover = container.querySelector('.left-col .cover');
+  if(!cover) return;
+  var originalSrc = cover.getAttribute('src');
+
+  function tryLoad(srcs, done){
+    if(!srcs.length) return done(null);
+    var src = srcs[0];
+    var img = new Image();
+    img.onload = function(){ done(src); };
+    img.onerror = function(){ tryLoad(srcs.slice(1), done); };
+    img.src = src;
+  }
+
+  function setCoverFor(num){
+    var nn = ('0' + num).slice(-2) + '.jpg';
+    var candidates = (window.TRACK_COVER_DIR ? [window.TRACK_COVER_DIR.replace(/\/$/, '')] : ['assets/covers_tracks/09_ca%C3%ADda_del_cielo','assets/covers_tracks/09_caida_del_cielo','assets/covers_tracks/09_caída_del_cielo']).map(function(dir){ return dir + '/' + nn; });
+    cover.classList.add('is-swapping');
+    tryLoad(candidates, function(successSrc){
+      cover.src = successSrc || originalSrc;
+      requestAnimationFrame(function(){ cover.classList.remove('is-swapping'); });
+    });
+  }
+
+  var audios = Array.from(container.querySelectorAll('audio'));
+  audios.forEach(function(a){
+    a.addEventListener('play', function(){
+      audios.forEach(function(b){ if(b!==a) b.pause(); });
+      var li = a.closest('li.track');
+      if(!li) return;
+      var noEl = li.querySelector('.no');
+      if(!noEl) return;
+      var num = (noEl.textContent || '').replace(/\D/g, '');
+      if(!num) return;
+      setCoverFor(num);
+    }, {passive:true});
+    a.addEventListener('pause', function(){ if(!a.ended) cover.src = originalSrc; }, {passive:true});
+    a.addEventListener('ended', function(){ cover.src = originalSrc; }, {passive:true});
+  });
+})();
+</script>
+
+<script>window.TRACK_COVER_DIR = "https://pub-00345912548b4ae4ac0e4c0047e289f0.r2.dev/covers_tracks/09_ca%C3%ADda_del_cielo/";</script>
+</body>
+</html>
+
+
+
+
+
+
+

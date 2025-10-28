@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Cookies — HOXOH MUSIC</title>
+  <meta name="description" content="Cookie-Hinweise von HOXOH MUSIC." />
+  <meta name="theme-color" content="#0b0b0b" />
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon/favicon-32x32.png">
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .site-header .brand img{height:42px;width:auto;display:block}
+    main .card{background:#13171c;border:1px solid #232a33;border-radius:18px;box-shadow:var(--shadow,0 6px 24px rgba(0,0,0,.35));padding:22px}
+    .h1{font-size:40px;font-weight:900;margin:8px 0 18px}
+    .btn-outline{display:inline-flex;gap:10px;align-items:center;border:1px solid #39424c;border-radius:12px;padding:12px 18px;text-decoration:none}
+    /* Modal Styles wiederverwenden */
+    .consent-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.6);display:none;z-index:1000}
+    .consent-modal{position:fixed;inset:0;display:none;place-items:center;z-index:1001}
+    .consent-box{width:min(720px,92vw);background:#0f1318;border:1px solid #26303a;border-radius:18px;padding:22px 22px 18px}
+    .consent-row{display:flex;align-items:center;gap:14px;padding:14px 8px;border-bottom:1px solid #1e252d}
+    .consent-row:last-child{border-bottom:0}
+    .switch{position:relative;width:56px;height:32px;background:#2a323d;border-radius:999px;cursor:pointer;flex:0 0 56px}
+    .switch::after{content:"";position:absolute;top:4px;left:4px;width:24px;height:24px;background:#fff;border-radius:50%;transition:transform .22s ease}
+    .switch.on{background:#19c37d}
+    .switch.on::after{transform:translateX(24px)}
+    .switch[aria-disabled="true"]{opacity:.6;cursor:not-allowed}
+    .consent-actions{display:flex;gap:12px;justify-content:flex-end;margin-top:18px}
+    .btn-primary{background:#19c37d;color:#05261b;font-weight:800;border:none;border-radius:12px;padding:12px 16px}
+    .btn-ghost{background:transparent;border:1px solid #36404a;color:#cbd5df;border-radius:12px;padding:12px 16px}
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index-de.html" class="brand" aria-label="HOXOH MUSIC">
+        <img src="assets/logo/hoxoh-music-header-239x62.png"
+             srcset="assets/logo/hoxoh-music-header-239x62.png 1x, assets/logo/hoxoh-music-header-478x124.png 2x"
+             alt="HOXOH MUSIC" width="239" height="62">
+      </a>
+
+      <nav class="main-nav" aria-label="Hauptnavigation">
+        <a class="nav-link" href="index-de.html">Startseite</a>
+        <a class="nav-link" href="albums-de.html">Alben</a>
+        <a class="nav-link" href="kontakt-de.html">Kontakt</a>
+      </nav>
+
+      <div class="lang" id="lang">
+        <button class="lang-btn" type="button" aria-haspopup="listbox" aria-expanded="false">DE ▾</button>
+        <ul class="lang-menu" role="listbox" aria-label="Sprachen">
+          <li><a href="cookies.html" hreflang="es">ES</a></li>
+          <li><a href="cookies-en.html" hreflang="en">EN</a></li>
+          <li><a class="active-lang" href="cookies-de.html" hreflang="de">DE</a></li>
+        </ul>
+      </div>
+    </div>
+  </header>
+
+  <main class="container" style="padding:28px 22px 40px">
+    <div class="card">
+      <h1 class="h1">Cookies</h1>
+      <p>
+        Wir verwenden hauptsächlich <strong>erforderliche</strong> Cookies, die für Grundfunktionen der Website
+        nötig sind (z.&nbsp;B. Sprache, Einwilligungs-Speicherung). Tracking-/Marketing-Cookies werden aktuell
+        nicht eingesetzt.
+      </p>
+
+      <h2>Cookie-Kategorien</h2>
+      <ul>
+        <li><strong>Wesentlich:</strong> notwendig für die Basisfunktionen der Website; nicht deaktivierbar.</li>
+        <li><strong>Funktionell (optional):</strong> Komfortfunktionen (z.&nbsp;B. Erinnern von Einstellungen).</li>
+        <li><strong>Marketing (optional):</strong> Werbe-/Tracking-Cookies (derzeit nicht im Einsatz).</li>
+      </ul>
+
+      <p style="margin-top:16px">
+        <a class="btn-outline" href="#" id="open-consent"><span aria-hidden="true">⚙️</span> Einstellungen öffnen</a>
+      </p>
+      <p style="color:#9aa6b2">Deine Auswahl wird lokal im Browser gespeichert und kann jederzeit geändert werden.</p>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div>© HOXOH MUSIC 2025</div>
+      <div class="legal">
+        <a class="chip" href="impressum-de.html">Impressum</a>
+        <a class="chip" href="datenschutz-de.html">Datenschutz</a>
+        <a class="chip" href="cookies-de.html">Cookies</a>
+        <a class="chip" href="explizit-de.html">Explizite Inhalte</a>
+        <a class="chip" href="agb-de.html">AGB</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (function(){
+      const lang=document.getElementById('lang'); if(!lang) return;
+      const btn=lang.querySelector('.lang-btn');
+      btn.addEventListener('click', ()=>{ lang.classList.toggle('open'); btn.setAttribute('aria-expanded', lang.classList.contains('open'));});
+      document.addEventListener('click', e=>{ if(!lang.contains(e.target)){ lang.classList.remove('open'); btn.setAttribute('aria-expanded','false'); }});
+    })();
+  </script>
+
+  <!-- Wieder dieselbe Consent-Box wie auf Datenschutz -->
+  <div class="consent-backdrop" id="consent-backdrop"></div>
+  <div class="consent-modal" id="consent-modal" role="dialog" aria-modal="true" aria-labelledby="consent-title">
+    <div class="consent-box">
+      <h3 id="consent-title" style="margin:0 0 6px;font-size:20px;font-weight:800">Privatsphäre-Einstellungen</h3>
+      <p class="lead" style="margin:0 0 8px">Wähle, welche Kategorien erlaubt sind. „Wesentlich" ist für Grundfunktionen erforderlich.</p>
+
+      <div class="consent-row">
+        <div class="switch on" aria-disabled="true" data-key="necessary"></div>
+        <div>
+          <strong>Wesentlich</strong><br>
+          <span style="color:#9aa6b2">Grundfunktionen. Deaktivierung nicht möglich.</span>
+        </div>
+      </div>
+
+      <div class="consent-row">
+        <div class="switch" data-key="functional"></div>
+        <div>
+          <strong>Funktionell</strong><br>
+          <span style="color:#9aa6b2">Optionale Komfort-Features.</span>
+        </div>
+      </div>
+
+      <div class="consent-row">
+        <div class="switch" data-key="marketing"></div>
+        <div>
+          <strong>Marketing</strong><br>
+          <span style="color:#9aa6b2">Werbe/Tracking — derzeit nicht im Einsatz.</span>
+        </div>
+      </div>
+
+      <div class="consent-actions">
+        <button class="btn-ghost" type="button" id="consent-cancel">Abbrechen</button>
+        <button class="btn-primary" type="button" id="consent-save">Einstellungen speichern</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function(){
+      const LS_KEY='hoxoh_cookie_prefs';
+      const openBtn=document.getElementById('open-consent');
+      const modal=document.getElementById('consent-modal');
+      const backdrop=document.getElementById('consent-backdrop');
+      const saveBtn=document.getElementById('consent-save');
+      const cancelBtn=document.getElementById('consent-cancel');
+      const switches=[...modal.querySelectorAll('.switch')];
+
+      function open(){ modal.style.display='grid'; backdrop.style.display='block'; load(); }
+      function close(){ modal.style.display='none'; backdrop.style.display='none'; }
+      function load(){
+        const prefs=JSON.parse(localStorage.getItem(LS_KEY)||'{}');
+        switches.forEach(sw=>{
+          const key=sw.dataset.key;
+          if(sw.getAttribute('aria-disabled')==='true'){ sw.classList.add('on'); return; }
+          if(prefs[key]===true) sw.classList.add('on'); else sw.classList.remove('on');
+        });
+      }
+      function save(){
+        const prefs={};
+        switches.forEach(sw=>{
+          const key=sw.dataset.key;
+          if(sw.getAttribute('aria-disabled')==='true') return;
+          prefs[key]=sw.classList.contains('on');
+        });
+        localStorage.setItem(LS_KEY, JSON.stringify(prefs));
+        close();
+      }
+      switches.forEach(sw=>{
+        if(sw.getAttribute('aria-disabled')==='true') return;
+        sw.addEventListener('click', ()=> sw.classList.toggle('on'));
+      });
+      openBtn.addEventListener('click', e=>{ e.preventDefault(); open(); });
+      saveBtn.addEventListener('click', save);
+      cancelBtn.addEventListener('click', close);
+      backdrop.addEventListener('click', close);
+    })();
+  </script>
+</body>
+</html>
+
+
+
+
+
+
+

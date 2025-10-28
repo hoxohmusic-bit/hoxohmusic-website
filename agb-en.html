@@ -1,0 +1,237 @@
+<script type="text/javascript">
+        var gk_isXlsx = false;
+        var gk_xlsxFileLookup = {};
+        var gk_fileData = {};
+        function filledCell(cell) {
+          return cell !== '' && cell != null;
+        }
+        function loadFileData(filename) {
+        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
+            try {
+                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
+                var firstSheetName = workbook.SheetNames[0];
+                var worksheet = workbook.Sheets[firstSheetName];
+
+                // Convert sheet to JSON to filter blank rows
+                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
+                // Filter out blank rows (rows where all cells are empty, null, or undefined)
+                var filteredData = jsonData.filter(row => row.some(filledCell));
+
+                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
+                var headerRowIndex = filteredData.findIndex((row, index) =>
+                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
+                );
+                // Fallback
+                if (headerRowIndex === -1 || headerRowIndex > 25) {
+                  headerRowIndex = 0;
+                }
+
+                // Convert filtered JSON back to CSV
+                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
+                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
+                return csv;
+            } catch (e) {
+                console.error(e);
+                return "";
+            }
+        }
+        return gk_fileData[filename] || "";
+        }
+        </script><!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>General Terms and Conditions — HOXOH MUSIC</title>
+  <meta name="description" content="General Terms and Conditions of HOXOH MUSIC." />
+  <meta name="theme-color" content="#0b0b0b" />
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon/favicon-32x32.png">
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .site-header .brand img{height:42px;width:auto;display:block}
+    /* Justified text applied to the main content */
+    main .card{background:#13171c;border:1px solid #232a33;border-radius:18px;box-shadow:var(--shadow,0 6px 24px rgba(0,0,0,.35));padding:22px; text-align: justify;}
+    .h1{font-size:40px;font-weight:900;margin:8px 0 18px}
+    .muted{color:#9aa6b2}
+    table {width:100%; border-collapse:collapse; margin:10px 0; font-size:14px; text-align: left;}
+    th, td {border:1px solid #232a33; padding:8px; text-align:left;}
+    th {background:#232a33;}
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index-en.html" class="brand" aria-label="HOXOH MUSIC">
+        <img src="assets/logo/hoxoh-music-header-239x62.png"
+             srcset="assets/logo/hoxoh-music-header-239x62.png 1x, assets/logo/hoxoh-music-header-478x124.png 2x"
+             alt="HOXOH MUSIC" width="239" height="62">
+      </a>
+
+      <nav class="main-nav" aria-label="Main navigation">
+        <a class="nav-link" href="index.html">Home</a>
+        <a class="nav-link" href="albums.html">Albums</a>
+        <a class="nav-link" href="contact.html">Contact</a>
+      </nav>
+
+      <div class="lang" id="lang">
+        <button class="lang-btn" type="button" aria-haspopup="listbox" aria-expanded="false">EN ▾</button>
+        <ul class="lang-menu" role="listbox" aria-label="Languages">
+          <li><a href="agb-de.html" hreflang="de">DE</a></li>
+          <li><a href="agb-es.html" hreflang="es">ES</a></li>
+          <li><a class="active-lang" href="agb-en.html" hreflang="en">EN</a></li>
+        </ul>
+      </div>
+    </div>
+  </header>
+
+  <main class="container" style="padding:28px 22px 40px">
+    <div class="card">
+      <h1 class="h1">General Terms and Conditions</h1>
+      <p class="muted">Valid: 2025</p>
+
+      <h2>1. Scope of Application</h2>
+      <p>
+        This website serves the presentation of music releases and information about
+        <strong>HOXOH MUSIC</strong>. Currently, no purchase contracts are concluded or payments processed here.
+      </p>
+
+      <h2>2. Content and Links</h2>
+      <p>
+        The content is created with the utmost care. We assume no responsibility for external links to third-party offers; the terms of the respective providers apply
+        (e.g., streaming/download platforms).
+      </p>
+
+      <h2>3. Contact and Inquiries</h2>
+      <p>
+        Inquiries via the contact form or email are used exclusively to process your request. No contractual obligations arise from this. Further details can be found in the <a href="datenschutz-en.html">Privacy Policy</a>.
+      </p>
+
+      <h2>4. Copyrights</h2>
+      <p>
+        All works presented on this website (including music, texts, graphics, covers) are protected by copyright, unless otherwise stated. Any use beyond the legally permitted cases requires prior written consent.
+      </p>
+
+      <h2>5. Liability</h2>
+      <p>
+        We are only liable for damages resulting from the use of the website in cases of intent or gross negligence. This does not apply to damages to life, body, or health.
+      </p>
+
+      <h2>6. Ghost Production and Full Purchase (Buyout)</h2>
+      <p>
+        At HOXOH MUSIC, every composition is created with the highest commitment and precision – both music and lyrics are developed at the highest level, supported by the most modern technological innovations and integrated AI that elevates our creativity. Our ghost production services offer you a full transfer of rights (Buyout) with the following conditions:
+      </p>
+      <ul>
+        <li><strong>Transfer of Rights:</strong> With full payment of the agreed fee, HOXOH MUSIC transfers all copyrights, usage rights, and publishing rights (including master and composition rights) exclusively and irrevocably to the client. Prior to full payment, all rights remain with HOXOH MUSIC.</li>
+        <li><strong>Exclusion of Credits and Confidentiality:</strong> HOXOH MUSIC will not be named as a composer, producer, or contributor on distribution platforms (e.g., DistroKid, Spotify) or in promotional materials. The client exclusively assumes the credits under their real or artist name. Both parties commit to strict confidentiality regarding the existence and terms of the ghost production contract. In case of a breach of confidentiality, the responsible party is obligated to pay a contractual penalty of 500 USD per incident, in addition to possible claims for damages.</li>
+        <li><strong>Workflow and Acceptance (Revisions):</strong> Production is carried out exclusively on the basis of the client's written specifications and briefing. Free revision rounds are not granted; revision is excluded if not purchased in advance. Changes or revisions that go beyond the original specifications or represent a deviation from the approved draft (e.g., change of tempo, genre, or structure) must be paid for and booked in advance at 25 USD per track and revision round. Two revisions cost 40 USD per track. Prices are subject to change. A maximum of two (2) revision rounds are possible after advance payment. Requests for revisions must be made within five (5) days after the submission of the respective version. The work is considered accepted no later than seven (7) days after the submission of the final version, unless a written notice of defects with justification has been received.</li>
+        <li><strong>Client Obligations:</strong> The client must state their real name as the composer and/or producer in the distribution forms (e.g., DistroKid). The client is **solely responsible** for selecting their distribution service provider and complying with the respective platform policies, **especially regarding restrictions resulting from the use of AI or specific content limitations**. The client commits to immediately inform HOXOH MUSIC about rejections or problems by platforms to evaluate possible solutions. HOXOH MUSIC assumes no liability for rejections due to restrictions imposed by the client's chosen provider.</li>
+        <li><strong>Payment Terms and Conditions:</strong> The fee is paid in full by the client to HOXOH MUSIC in advance before the start of production. This advance payment is a non-refundable fee for the commencement of work. No work begins without prior payment. Payments are exclusively accepted via our offered payment service providers. In case of technical payment problems (e.g., erroneous transfer), the client is obliged to report this within 48 hours. An invoice will be provided by email after payment is received.</li>
+        <li><strong>Default of Payment and Cancellation:</strong> If payment is not made on time, HOXOH MUSIC is entitled to claim default interest at the legal interest rate of the applicable law (Honduras) and to suspend work until payment is received. In case of cancellation by the client before the start of work, the advance payment will be refunded, minus a 10% processing fee. After work has begun, HOXOH MUSIC retains the advance payment as compensation for expenses.</li>
+        <li><strong>Disclaimer:</strong> HOXOH MUSIC is not liable for rejections or legal issues resulting from the client's use of the files, including violations of platform policies. HOXOH MUSIC is not liable for technical errors or file corruption after delivery, unless this is due to intent or gross negligence.</li>
+      </ul>
+      <p>
+        This section applies only to ghost production contracts agreed upon separately outside of this website.
+      </p>
+
+      <h3>6.1 Explicit Content Guidelines for Streaming Platforms (Spotify, Apple Music, etc.)</h3>
+      <p>
+        To avoid rejections, removals, or suspensions on platforms like Spotify, Apple Music, TIDAL, and others, HOXOH MUSIC creates music that strictly complies with the guidelines. Explicit content (e.g., with E-tag) is allowed if correctly labeled, but certain topics and words are rejected because they promote hate, violence, or illegal abuse. The client is fully responsible for the final content review and labeling. An overview can be found in the following table:
+      </p>
+      <table>
+        <thead>
+          <tr>
+            <th>Category</th>
+            <th>Examples of Rejected Words/Content</th>
+            <th>What must be avoided at all costs</th>
+            <th>What HOXOH MUSIC does not produce</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>**Explicit Sexuality (Explicit Language)**</td>
+            <td>Vulgar words such as "fuck," "shit," "cunt," "dick" (in explicit context); detailed descriptions of sex acts, incest, bestiality, or non-consensual acts.</td>
+            <td>Graphic sexual descriptions involving minors or implying violence; unlabeled explicitness (must be marked as "Explicit").</td>
+            <td>Content that glorifies sexual exploitation, pedophilia, or non-consensual sex – these will be rejected and not created.</td>
+          </tr>
+          <tr>
+            <td>**Violence and Hate Speech**</td>
+            <td>Insults like "n*****," "faggot," "idiot," "Jew" (in derogatory context); calls for violence ("kill all [group]"), racism, anti-Semitism, homophobia, transphobia; glorified murder or torture scenes.</td>
+            <td>Content that incites hatred against groups based on race, religion, gender, orientation, or disability; implied threats or supremacism.</td>
+            <td>Lyrics that promote hatred or violence against protected groups – we reject and do not produce such commissions.</td>
+          </tr>
+          <tr>
+            <td>**Drug Abuse**</td>
+            <td>Direct instructions on drug use ("how to snort cocaine"), glorification of heroin, methamphetamine, or other illegal substances as "cool"; terms like "heroin rush" in a positive way.</td>
+            <td>Promotion of drugs as a lifestyle or instructions for abuse; contexts targeting minors.</td>
+            <td>Content that teaches or glorifies drug abuse, especially for vulnerable target groups – not produced.</td>
+          </tr>
+          <tr>
+            <td>**Self-Harm and Suicide**</td>
+            <td>Calls for suicide ("kill yourself"), detailed descriptions of suicide methods or self-harm.</td>
+            <td>Happy depiction of suicide or self-harm; lack of warnings on sensitive topics.</td>
+            <td>Irresponsible content that romanticizes suicide – we prioritize safe themes and reject.</td>
+          </tr>
+          <tr>
+            <td>**Other (Disinformation, Copyright Infringement)**</td>
+            <td>False medical claims (e.g., COVID disinformation), cloned content; terms like "Fake News" in a manipulative context.</td>
+            <td>AI-generated content presented as real (e.g., deepfakes of violence); plagiarism or copyrighted samples.</td>
+            <td>Disinformative or plagiarized material – we ensure originality and reject high-risk AI use.</td>
+          </tr>
+        </tbody>
+      </table>
+      <p>
+        **Note:** These examples are not exhaustive; platforms like Spotify may reject content depending on context and frequency. Explicit tracks must be marked as "Explicit" (E-tag), otherwise they will be filtered. The client commits to checking before uploading and immediately informing HOXOH MUSIC about rejections. In case of violations, the client is solely responsible. The client is obligated to regularly inform themselves about changes in platform policies. HOXOH MUSIC assumes no liability for rejections due to outdated information.
+      </p>
+
+      <h2>7. Amendments</h2>
+      <p>
+        We reserve the right to modify or supplement the content of this website as well as these General Terms and Conditions at any time.
+      </p>
+
+      <h2>8. Dispute Resolution</h2>
+      <p>
+        HOXOH MUSIC, Honduras (address according to the imprint), is neither willing nor obligated to participate in dispute resolution proceedings before a consumer arbitration board.
+      </p>
+
+      <h2>9. Applicable Law and Jurisdiction</h2>
+      <p>
+        Insofar as mandatory regulations do not preclude it, the law of Honduras applies. **The exclusive place of jurisdiction for all disputes arising from or in connection with these GTC or the ghost production contract is San Pedro Sula, Honduras.**
+      </p>
+
+      <h2>10. Severability Clause</h2>
+      <p>
+        Should individual provisions of these GTC be or become wholly or partially invalid, the validity of the remaining provisions shall not be affected thereby. The wholly or partially invalid provision shall be replaced by a provision whose economic success comes closest to the invalid provision.
+      </p>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div>© HOXOH MUSIC 2025</div>
+      <div class="legal">
+        <a class="chip" href="impressum.html">Imprint</a>
+        <a class="chip" href="datenschutz.html">Privacy Policy</a>
+        <a class="chip" href="cookies.html">Cookies</a>
+        <a class="chip" href="explizit.html">Explicit Content</a>
+        <a class="chip" href="agb-en.html">T&Cs</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (function(){
+      const lang=document.getElementById('lang'); if(!lang) return;
+      const btn=lang.querySelector('.lang-btn');
+      btn.addEventListener('click', ()=>{ lang.classList.toggle('open'); btn.setAttribute('aria-expanded', lang.classList.contains('open'));});
+      document.addEventListener('click', e=>{ if(!lang.contains(e.target)){ lang.classList.remove('open'); btn.setAttribute('aria-expanded','false'); }});
+    })();
+  </script>
+</body>
+</html>
+
+
+
+
+
+
+

@@ -1,0 +1,490 @@
+﻿{
+    "TIEMPO TROPICAL – RITMO INMORTAL":  [
+                                             {
+                                                 "n":  1,
+                                                 "title":  "DAME MÁS LUDWIK",
+                                                 "audio":  "assets/wav_hörprobe/TIEMPO TROPICAL – RITMO INMORTAL/01_-_DAME_MÁS_LUDWIK_Preview.wav",
+                                                 "cover":  "assets/tracks_cover/TIEMPO TROPICAL – RITMO INMORTAL/01. DAME MÁS LUDWIK - (LUDWIG VAN BEETHOVEN).png"
+                                             },
+                                             {
+                                                 "n":  2,
+                                                 "title":  "EL GENIO DEL PIANO",
+                                                 "audio":  "assets/wav_hörprobe/TIEMPO TROPICAL – RITMO INMORTAL/02_-_EL_GENIO_DEL_PIANO_Preview.wav",
+                                                 "cover":  "assets/tracks_cover/TIEMPO TROPICAL – RITMO INMORTAL/02. EL GENIO DEL PIANO - (WOLFGANG AMADEUS MOZART).png"
+                                             },
+                                             {
+                                                 "n":  3,
+                                                 "title":  "DAME MÁS JOHANN",
+                                                 "audio":  "assets/wav_hörprobe/TIEMPO TROPICAL – RITMO INMORTAL/03_-_DAME_MÁS_JOHANN_Preview.wav",
+                                                 "cover":  "assets/tracks_cover/TIEMPO TROPICAL – RITMO INMORTAL/03. DAME MÁS JOHANN - (JOHANN SEBASTIAN BACH).png"
+                                             },
+                                             {
+                                                 "n":  4,
+                                                 "title":  "LAS ABUELAS DEL TIEMPO",
+                                                 "audio":  "assets/wav_hörprobe/TIEMPO TROPICAL – RITMO INMORTAL/04_-_LAS_ABUELAS_DEL_TIEMPO_Preview.wav",
+                                                 "cover":  "assets/tracks_cover/TIEMPO TROPICAL – RITMO INMORTAL/04. HAYDN Y LAS ABUELAS DEL TIEMPO - (JOSEPH HAYDN).png"
+                                             },
+                                             {
+                                                 "n":  5,
+                                                 "title":  "VIVALDI EN LA DISCO",
+                                                 "audio":  "assets/wav_hörprobe/TIEMPO TROPICAL – RITMO INMORTAL/05_-_VIVALDI_EN_LA_DISCO_Preview.wav",
+                                                 "cover":  "assets/tracks_cover/TIEMPO TROPICAL – RITMO INMORTAL/05. VIVALDI EN LA DISCO - (ANTONIO VIVALDI).png"
+                                             },
+                                             {
+                                                 "n":  6,
+                                                 "title":  "EL REY DE LAS BALADAS",
+                                                 "audio":  "assets/wav_hörprobe/TIEMPO TROPICAL – RITMO INMORTAL/06_-_EL_REY_DE_LAS_BALADAS_Preview.wav",
+                                                 "cover":  "assets/tracks_cover/TIEMPO TROPICAL – RITMO INMORTAL/06. EL REY DE LAS BALADAS - (FRÉDÉRIC FRANÇOIS CHOPIN).png"
+                                             },
+                                             {
+                                                 "n":  7,
+                                                 "title":  "EL DIABLO DEL RITMO",
+                                                 "audio":  "assets/wav_hörprobe/TIEMPO TROPICAL – RITMO INMORTAL/07_-_EL_DIABLO_DEL_RITMO_Preview.wav",
+                                                 "cover":  "assets/tracks_cover/TIEMPO TROPICAL – RITMO INMORTAL/07. EL DIABLO DEL RITMO - (NICCOLÒ PAGANINI).png"
+                                             },
+                                             {
+                                                 "n":  8,
+                                                 "title":  "EL SHOWMAN DE LOS AÑOS 1800",
+                                                 "audio":  "assets/wav_hörprobe/TIEMPO TROPICAL – RITMO INMORTAL/08_-_EL_SHOWMAN_DE_LOS_AÑOS_1800_Preview.wav",
+                                                 "cover":  "assets/tracks_cover/TIEMPO TROPICAL – RITMO INMORTAL/08. EL SHOWMAN DE LOS AÑOS 1800 - (FRANZ LISZT).png"
+                                             },
+                                             {
+                                                 "n":  9,
+                                                 "title":  "EL BANQUETE DEL CRESCENDO",
+                                                 "audio":  "assets/wav_hörprobe/TIEMPO TROPICAL – RITMO INMORTAL/09_-_EL_BANQUETE_DEL_CRESCENDO_Preview.wav",
+                                                 "cover":  "assets/tracks_cover/TIEMPO TROPICAL – RITMO INMORTAL/09. EL BANQUETE DEL CRESCENDO - (GIOACHINO ROSSINI).png"
+                                             },
+                                             {
+                                                 "n":  10,
+                                                 "title":  "EL PASAPORTE TROPICAL",
+                                                 "audio":  "assets/wav_hörprobe/TIEMPO TROPICAL – RITMO INMORTAL/10_-_EL_PASAPORTE_TROPICAL_Preview.wav",
+                                                 "cover":  "assets/tracks_cover/TIEMPO TROPICAL – RITMO INMORTAL/10. EL PASAPORTE TROPICAL (HOXOH).png"
+                                             }
+                                         ],
+    "LOS DÍEZ MANDAMIENTOS":  [
+                                  {
+                                      "n":  1,
+                                      "title":  "NO TENDRAS DIOSES AJENOS",
+                                      "audio":  "assets/wav_hörprobe/LOS DÍEZ MANDAMIENTOS/01_-_NO_TENDRAS_DIOSES_AJENOS_Preview.wav",
+                                      "cover":  "assets/tracks_cover/LOS DÍEZ MANDAMIENTOS/01 - NO TENDRÁS DIOSES AJENOS.png"
+                                  },
+                                  {
+                                      "n":  2,
+                                      "title":  "IDOLOS DE CRISTAL",
+                                      "audio":  "assets/wav_hörprobe/LOS DÍEZ MANDAMIENTOS/02_-_IDOLOS_DE_CRISTAL_Preview.wav",
+                                      "cover":  "assets/tracks_cover/LOS DÍEZ MANDAMIENTOS/02 - ÍDOLOS DE CRISTAL.png"
+                                  },
+                                  {
+                                      "n":  3,
+                                      "title":  "EL NOMBRE SAGRADO",
+                                      "audio":  "assets/wav_hörprobe/LOS DÍEZ MANDAMIENTOS/03_-_EL_NOMBRE_SAGRADO_Preview.wav",
+                                      "cover":  "assets/tracks_cover/LOS DÍEZ MANDAMIENTOS/03 - EL NOMBRE SAGRADO.png"
+                                  },
+                                  {
+                                      "n":  4,
+                                      "title":  "PADRE HONRA Y DOLOR",
+                                      "audio":  "assets/wav_hörprobe/LOS DÍEZ MANDAMIENTOS/04_-_PADRE_HONRA_Y_DOLOR_Preview.wav",
+                                      "cover":  "assets/tracks_cover/LOS DÍEZ MANDAMIENTOS/04 - PADRE HONRA Y DOLOR.png"
+                                  },
+                                  {
+                                      "n":  5,
+                                      "title":  "NO MATARAS",
+                                      "audio":  "assets/wav_hörprobe/LOS DÍEZ MANDAMIENTOS/05_-_NO_MATARAS_Preview.wav",
+                                      "cover":  "assets/tracks_cover/LOS DÍEZ MANDAMIENTOS/05 - NO MATARÁS.png"
+                                  },
+                                  {
+                                      "n":  6,
+                                      "title":  "CARNE Y SANGRE",
+                                      "audio":  "assets/wav_hörprobe/LOS DÍEZ MANDAMIENTOS/06_-_CARNE_Y_SANGRE_Preview.wav",
+                                      "cover":  "assets/tracks_cover/LOS DÍEZ MANDAMIENTOS/06 - CARNE Y SANGRE.png"
+                                  },
+                                  {
+                                      "n":  7,
+                                      "title":  "LADRON DE MI ALMA",
+                                      "audio":  "assets/wav_hörprobe/LOS DÍEZ MANDAMIENTOS/07_-_LADRON_DE_MI_ALMA_Preview.wav",
+                                      "cover":  "assets/tracks_cover/LOS DÍEZ MANDAMIENTOS/07 - LADRÓN DE MI ALMA.png"
+                                  },
+                                  {
+                                      "n":  8,
+                                      "title":  "EL ECO DE LA MENTIRA",
+                                      "audio":  "assets/wav_hörprobe/LOS DÍEZ MANDAMIENTOS/08_-_EL_ECO_DE_LA_MENTIRA_Preview.wav",
+                                      "cover":  "assets/tracks_cover/LOS DÍEZ MANDAMIENTOS/08 - EL ECO DE LA MENTIRA.png"
+                                  },
+                                  {
+                                      "n":  9,
+                                      "title":  "GUERRA DE LA MENTE",
+                                      "audio":  "assets/wav_hörprobe/LOS DÍEZ MANDAMIENTOS/09_-_GUERRA_DE_LA_MENTE_Preview.wav",
+                                      "cover":  "assets/tracks_cover/LOS DÍEZ MANDAMIENTOS/09 - GUERRA DE LA MENTE.png"
+                                  },
+                                  {
+                                      "n":  10,
+                                      "title":  "LA CODICIA",
+                                      "audio":  "assets/wav_hörprobe/LOS DÍEZ MANDAMIENTOS/10_-_LA_CODICIA_Preview.wav",
+                                      "cover":  "assets/tracks_cover/LOS DÍEZ MANDAMIENTOS/10 - LA CODICIA.png"
+                                  },
+                                  {
+                                      "n":  11,
+                                      "title":  "LOS DIEZ MANDAMIENTOS",
+                                      "audio":  "assets/wav_hörprobe/LOS DÍEZ MANDAMIENTOS/11_-_LOS_DIEZ_MANDAMIENTOS_Preview.wav",
+                                      "cover":  "assets/tracks_cover/LOS DÍEZ MANDAMIENTOS/11 - LOS DÍEZ MANDAMIENTOS.png"
+                                  },
+                                  {
+                                      "n":  12,
+                                      "title":  "SAMBA DE LA FE",
+                                      "audio":  "assets/wav_hörprobe/LOS DÍEZ MANDAMIENTOS/12_-_SAMBA_DE_LA_FE_Preview.wav",
+                                      "cover":  "assets/tracks_cover/LOS DÍEZ MANDAMIENTOS/12 - SAMBA DE LA FE.png"
+                                  },
+                                  {
+                                      "n":  13,
+                                      "title":  "MEDITACION DEL SILENCIO",
+                                      "audio":  "assets/wav_hörprobe/LOS DÍEZ MANDAMIENTOS/13_-_MEDITACION_DEL_SILENCIO_Preview.wav",
+                                      "cover":  "assets/tracks_cover/LOS DÍEZ MANDAMIENTOS/13 - MEDITACIÓN DEL SILENCIO.png"
+                                  },
+                                  {
+                                      "n":  14,
+                                      "title":  "LA MENTE EN TRANCE",
+                                      "audio":  "assets/wav_hörprobe/LOS DÍEZ MANDAMIENTOS/14_-_LA_MENTE_EN_TRANCE_Preview.wav",
+                                      "cover":  "assets/tracks_cover/LOS DÍEZ MANDAMIENTOS/14 - LA MENTE EN TRANCE.png"
+                                  },
+                                  {
+                                      "n":  15,
+                                      "title":  "SOMOS HIJOS DEL CIELO",
+                                      "audio":  "assets/wav_hörprobe/LOS DÍEZ MANDAMIENTOS/15_-_SOMOS_HIJOS_DEL_CIELO_Preview.wav",
+                                      "cover":  "assets/tracks_cover/LOS DÍEZ MANDAMIENTOS/15 - SOMOS HIJOS DEL CIELO.png"
+                                  },
+                                  {
+                                      "n":  16,
+                                      "title":  "LATINOS DEL CIELO DE MEXICO A BRASIL",
+                                      "audio":  "assets/wav_hörprobe/LOS DÍEZ MANDAMIENTOS/16_-_LATINOS_DEL_CIELO_-_DE_MEXICO_A_BRASIL_Preview.wav",
+                                      "cover":  "assets/tracks_cover/LOS DÍEZ MANDAMIENTOS/16 - LATINOS DEL CIELO – DE MÉXICO A BRASIL.png"
+                                  }
+                              ],
+    "ANIMAL":  [
+                   {
+                       "n":  1,
+                       "title":  "SIN CEREBRO SOLO CARNE",
+                       "audio":  "assets/wav_hörprobe/ANIMAL/01_-_SIN_CEREBRO_-_SOLO_CARNE_Preview.wav",
+                       "cover":  "assets/tracks_cover/ANIMAL/01. SIN CEREBRO - Solo carne.png"
+                   },
+                   {
+                       "n":  2,
+                       "title":  "LOBO AULLA DENTRO DE MI",
+                       "audio":  "assets/wav_hörprobe/ANIMAL/02_-_LOBO_-_AULLA_DENTRO_DE_MI_Preview.wav",
+                       "cover":  "assets/tracks_cover/ANIMAL/02. LOBO - Aúlla dentro de mí.png"
+                   },
+                   {
+                       "n":  3,
+                       "title":  "LA FIESTA SUDOR PIEL Y RITMO BRUTAL",
+                       "audio":  "assets/wav_hörprobe/ANIMAL/03_-_LA_FIESTA_-_SUDOR_PIEL_Y_RITMO_BRUTAL_Preview.wav",
+                       "cover":  "assets/tracks_cover/ANIMAL/03. LA FIESTA - Sudor, piel y ritmo brutal.png"
+                   },
+                   {
+                       "n":  4,
+                       "title":  "ROTA",
+                       "audio":  "assets/wav_hörprobe/ANIMAL/04_-_ROTA_Preview.wav",
+                       "cover":  "assets/tracks_cover/ANIMAL/04. ROTA.png"
+                   },
+                   {
+                       "n":  5,
+                       "title":  "PAPI LO QUIERES TODO NO",
+                       "audio":  "assets/wav_hörprobe/ANIMAL/05_-_PAPI_-_LO_QUIERES_TODO_NO_Preview.wav",
+                       "cover":  "assets/tracks_cover/ANIMAL/05. PAPI - Lo quieres todo, ¿no.png"
+                   },
+                   {
+                       "n":  6,
+                       "title":  "TOXICA PRUEBAME",
+                       "audio":  "assets/wav_hörprobe/ANIMAL/06_-_TOXICA_-_PRUEBAME_Preview.wav",
+                       "cover":  "assets/tracks_cover/ANIMAL/06. TÓXICA - Pruébame.png"
+                   },
+                   {
+                       "n":  7,
+                       "title":  "VENENO SOY TU PAZ Y TU CASTIGO",
+                       "audio":  "assets/wav_hörprobe/ANIMAL/07_-_VENENO_-_SOY_TU_PAZ_Y_TU_CASTIGO_Preview.wav",
+                       "cover":  "assets/tracks_cover/ANIMAL/07. VENENO - Soy tu paz... y tu castigo 1.png"
+                   },
+                   {
+                       "n":  8,
+                       "title":  "EXTASIS BAILA HASTA QUE NO SIENTAS MAS",
+                       "audio":  "assets/wav_hörprobe/ANIMAL/08_-_EXTASIS_-_BAILA_HASTA_QUE_NO_SIENTAS_MAS_Preview.wav",
+                       "cover":  "assets/tracks_cover/ANIMAL/08. ÉXTASIS - Baila hasta que no sientas más.png"
+                   },
+                   {
+                       "n":  9,
+                       "title":  "PECADO TE GUSTA PORQUE ESTA MAL",
+                       "audio":  "assets/wav_hörprobe/ANIMAL/09_-_PECADO_-_TE_GUSTA_PORQUE_ESTA_MAL_Preview.wav",
+                       "cover":  "assets/tracks_cover/ANIMAL/09. PECADO - Te gusta porque está mal.png"
+                   },
+                   {
+                       "n":  10,
+                       "title":  "NINFOMANA UNO NO BASTA TU TAMPOCO",
+                       "audio":  "assets/wav_hörprobe/ANIMAL/10_-_NINFOMANA_-_UNO_NO_BASTA_TU_TAMPOCO_Preview.wav",
+                       "cover":  "assets/tracks_cover/ANIMAL/10. NINFÓMANA - Uno no basta... Tú tampoco.png"
+                   },
+                   {
+                       "n":  11,
+                       "title":  "RITUAL NO BAILAS TE POSEO",
+                       "audio":  "assets/wav_hörprobe/ANIMAL/11_-_RITUAL_-_NO_BAILAS_TE_POSEO_Preview.wav",
+                       "cover":  "assets/tracks_cover/ANIMAL/11. RITUAL - No bailas... te poseo.png"
+                   },
+                   {
+                       "n":  12,
+                       "title":  "MAQUINA DE DESEO",
+                       "audio":  "assets/wav_hörprobe/ANIMAL/12_-_MAQUINA_DE_DESEO_Preview.wav",
+                       "cover":  "assets/tracks_cover/ANIMAL/12. SIN CEREBRO - Solo carne (Pista Adicional - Estilo industrial francés - alemán).png"
+                   }
+               ],
+    "DRAMA DE AMOR":  [
+                          {
+                              "n":  1,
+                              "title":  "BAJO LA SOMBRA DEL SILENCIO",
+                              "audio":  "assets/wav_hörprobe/DRAMA DE AMOR/01_-_BAJO_LA_SOMBRA_DEL_SILENCIO_Preview.wav",
+                              "cover":  "assets/tracks_cover/DRAMA DE AMOR/01. BAJO LA SOMBRA DEL SILENCIO.png"
+                          },
+                          {
+                              "n":  2,
+                              "title":  "SOMBRAS QUE DEVORAN",
+                              "audio":  "assets/wav_hörprobe/DRAMA DE AMOR/02_-_SOMBRAS_QUE_DEVORAN_Preview.wav",
+                              "cover":  "assets/tracks_cover/DRAMA DE AMOR/02. SOMBRAS QUE DEVORAN.png"
+                          },
+                          {
+                              "n":  3,
+                              "title":  "DIME QUE NO",
+                              "audio":  "assets/wav_hörprobe/DRAMA DE AMOR/03_-_DIME_QUE_NO_Preview.wav",
+                              "cover":  "assets/tracks_cover/DRAMA DE AMOR/03. DIME QUE NO.png"
+                          },
+                          {
+                              "n":  4,
+                              "title":  "CULPABLE DE TU PIEL",
+                              "audio":  "assets/wav_hörprobe/DRAMA DE AMOR/04_-_CULPABLE_DE_TU_PIEL_Preview.wav",
+                              "cover":  "assets/tracks_cover/DRAMA DE AMOR/04. CULPABLE DE TU PIEL.png"
+                          },
+                          {
+                              "n":  5,
+                              "title":  "VENENO DULCE",
+                              "audio":  "assets/wav_hörprobe/DRAMA DE AMOR/05_-_VENENO_DULCE_Preview.wav",
+                              "cover":  "assets/tracks_cover/DRAMA DE AMOR/05. VENENO DULCE.png"
+                          },
+                          {
+                              "n":  6,
+                              "title":  "EL ULTIMO DESEO",
+                              "audio":  "assets/wav_hörprobe/DRAMA DE AMOR/06_-_EL_ULTIMO_DESEO_Preview.wav",
+                              "cover":  "assets/tracks_cover/DRAMA DE AMOR/06. EL ÚLTIMO DESEO.png"
+                          },
+                          {
+                              "n":  7,
+                              "title":  "FUEGO EN MIS TACONES",
+                              "audio":  "assets/wav_hörprobe/DRAMA DE AMOR/07_-_FUEGO_EN_MIS_TACONES_Preview.wav",
+                              "cover":  "assets/tracks_cover/DRAMA DE AMOR/07. FUEGO EN MIS TACONES.png"
+                          },
+                          {
+                              "n":  8,
+                              "title":  "LO QUE NO DICES",
+                              "audio":  "assets/wav_hörprobe/DRAMA DE AMOR/08_-_LO_QUE_NO_DICES_Preview.wav",
+                              "cover":  "assets/tracks_cover/DRAMA DE AMOR/08. LO QUE NO DICES.png"
+                          },
+                          {
+                              "n":  9,
+                              "title":  "MARIPOSA DE NOCHE",
+                              "audio":  "assets/wav_hörprobe/DRAMA DE AMOR/09_-_MARIPOSA_DE_NOCHE_Preview.wav",
+                              "cover":  "assets/tracks_cover/DRAMA DE AMOR/09. MARIPOSA DE NOCHE.png"
+                          },
+                          {
+                              "n":  10,
+                              "title":  "TE AMO TE ODIO",
+                              "audio":  "assets/wav_hörprobe/DRAMA DE AMOR/10_-_TE_AMO_-_TE_ODIO_Preview.wav",
+                              "cover":  "assets/tracks_cover/DRAMA DE AMOR/10. TE AMO – TE ODIO.png"
+                          }
+                      ],
+    "LOS DÍEZ DEMONIOS":  [
+                              {
+                                  "n":  1,
+                                  "title":  "ANOREXIA – EL CUERPO VACÍO",
+                                  "audio":  "assets/wav_hörprobe/LOS DÍEZ DEMONIOS/01_-_ANOREXIA_–_EL_CUERPO_VACÍO_Preview.wav",
+                                  "cover":  "assets/tracks_cover/LOS DÍEZ DEMONIOS/01. ANOREXIA – EL CUERPO VACÍO.png"
+                              },
+                              {
+                                  "n":  2,
+                                  "title":  "CLEPTOMANÍA – MANOS DE SOMBRA",
+                                  "audio":  "assets/wav_hörprobe/LOS DÍEZ DEMONIOS/02_-_CLEPTOMANÍA_–_MANOS_DE_SOMBRA_Preview.wav",
+                                  "cover":  "assets/tracks_cover/LOS DÍEZ DEMONIOS/02. CLEPTOMANÍA – MANOS DE SOMBRA.png"
+                              },
+                              {
+                                  "n":  3,
+                                  "title":  "MITOMANÍA – LABERINTO DE MENTIRAS",
+                                  "audio":  "assets/wav_hörprobe/LOS DÍEZ DEMONIOS/03_-_MITOMANÍA_–_LABERINTO_DE_MENTIRAS_Preview.wav",
+                                  "cover":  "assets/tracks_cover/LOS DÍEZ DEMONIOS/03. MITOMANÍA – LABERINTO DE MENTIRAS.png"
+                              },
+                              {
+                                  "n":  4,
+                                  "title":  "LUDOPATÍA – EL JUEGO ETERNO",
+                                  "audio":  "assets/wav_hörprobe/LOS DÍEZ DEMONIOS/04_-_LUDOPATÍA_–_EL_JUEGO_ETERNO_Preview.wav",
+                                  "cover":  "assets/tracks_cover/LOS DÍEZ DEMONIOS/04. LUDOPATÍA – EL JUEGO ETERNO.png"
+                              },
+                              {
+                                  "n":  5,
+                                  "title":  "PIROMANÍA – EL FUEGO INTERIOR",
+                                  "audio":  "assets/wav_hörprobe/LOS DÍEZ DEMONIOS/05_-_PIROMANÍA_–_EL_FUEGO_INTERIOR_Preview.wav",
+                                  "cover":  "assets/tracks_cover/LOS DÍEZ DEMONIOS/05. PIROMANÍA – EL FUEGO INTERIOR.png"
+                              },
+                              {
+                                  "n":  6,
+                                  "title":  "NINFOMANÍA – EL DESEO SIN FIN",
+                                  "audio":  "assets/wav_hörprobe/LOS DÍEZ DEMONIOS/06_-_NINFOMANÍA_–_EL_DESEO_SIN_FIN_Preview.wav",
+                                  "cover":  "assets/tracks_cover/LOS DÍEZ DEMONIOS/06. NINFOMANÍA – EL DESEO SIN FIN.png"
+                              },
+                              {
+                                  "n":  7,
+                                  "title":  "WORKAHÓLICOS ESCLAVO DEL RITMO",
+                                  "audio":  "assets/wav_hörprobe/LOS DÍEZ DEMONIOS/07_-_WORKAHÓLICOS_-_ESCLAVO_DEL_RITMO_Preview.wav",
+                                  "cover":  "assets/tracks_cover/LOS DÍEZ DEMONIOS/07. ADICCIÓN AL TRABAJO – ESCLAVO DEL RITMO.png"
+                              },
+                              {
+                                  "n":  8,
+                                  "title":  "TOXICOMANÍA – VENENO EN LAS VENAS",
+                                  "audio":  "assets/wav_hörprobe/LOS DÍEZ DEMONIOS/08_-_TOXICOMANÍA_–_VENENO_EN_LAS_VENAS_Preview.wav",
+                                  "cover":  "assets/tracks_cover/LOS DÍEZ DEMONIOS/08. TOXICOMANÍA – VENENO EN LAS VENAS.png"
+                              },
+                              {
+                                  "n":  9,
+                                  "title":  "ALCOHOLISMO – EL VASO INFINITO",
+                                  "audio":  "assets/wav_hörprobe/LOS DÍEZ DEMONIOS/09_-_ALCOHOLISMO_–_EL_VASO_INFINITO_Preview.wav",
+                                  "cover":  "assets/tracks_cover/LOS DÍEZ DEMONIOS/09. ALCOHOLISMO – EL VASO INFINITO.png"
+                              },
+                              {
+                                  "n":  10,
+                                  "title":  "ONIOMANÍA – COMPRAR EL VACÍO",
+                                  "audio":  "assets/wav_hörprobe/LOS DÍEZ DEMONIOS/10_-_ONIOMANÍA_–_COMPRAR_EL_VACÍO_Preview.wav",
+                                  "cover":  "assets/tracks_cover/LOS DÍEZ DEMONIOS/10. ONIOMANÍA – COMPRAR EL VACÍO.png"
+                              },
+                              {
+                                  "n":  11,
+                                  "title":  "EL GRITO DE HOXOH – ADVERTENCIA BRUTAL",
+                                  "audio":  "assets/wav_hörprobe/LOS DÍEZ DEMONIOS/11_-_EL_GRITO_DE_HOXOH_–_ADVERTENCIA_BRUTAL_Preview.wav",
+                                  "cover":  "assets/tracks_cover/LOS DÍEZ DEMONIOS/11. EL GRITO DE HOXOH – ADVERTENCIA BRUTAL.png"
+                              }
+                          ],
+    "RITUAL – EL RITMO ES SAGRADO":  [
+                                         {
+                                             "n":  1,
+                                             "title":  "INVOCACIÓN",
+                                             "audio":  "assets/wav_hörprobe/RITUAL – EL RITMO ES SAGRADO/01_-_INVOCACIÓN_Preview.wav",
+                                             "cover":  "assets/tracks_cover/RITUAL – EL RITMO ES SAGRADO/01. INVOCACIÓN – Abre el ritual con susurros oscuros.png"
+                                         },
+                                         {
+                                             "n":  2,
+                                             "title":  "FURIA SANTA",
+                                             "audio":  "assets/wav_hörprobe/RITUAL – EL RITMO ES SAGRADO/02_-_FURIA_SANTA_Preview.wav",
+                                             "cover":  "assets/tracks_cover/RITUAL – EL RITMO ES SAGRADO/02. FURIA SANTA – Cuando el deseo se vuelve fe.png"
+                                         },
+                                         {
+                                             "n":  3,
+                                             "title":  "BOCA DE SANGRE",
+                                             "audio":  "assets/wav_hörprobe/RITUAL – EL RITMO ES SAGRADO/03_-_BOCA_DE_SANGRE_Preview.wav",
+                                             "cover":  "assets/tracks_cover/RITUAL – EL RITMO ES SAGRADO/03. BOCA DE SANGRE.png"
+                                         },
+                                         {
+                                             "n":  4,
+                                             "title":  "NO HAY CIELO",
+                                             "audio":  "assets/wav_hörprobe/RITUAL – EL RITMO ES SAGRADO/04_-_NO_HAY_CIELO_Preview.wav",
+                                             "cover":  "assets/tracks_cover/RITUAL – EL RITMO ES SAGRADO/04. NO HAY CIELO – Él cayó… y no pidió perdón.png"
+                                         },
+                                         {
+                                             "n":  5,
+                                             "title":  "SANGRE Y MIEL",
+                                             "audio":  "assets/wav_hörprobe/RITUAL – EL RITMO ES SAGRADO/05_-_SANGRE_Y_MIEL_Preview.wav",
+                                             "cover":  "assets/tracks_cover/RITUAL – EL RITMO ES SAGRADO/05. SANGRE Y MIEL – Dulce hasta envenenar.png"
+                                         },
+                                         {
+                                             "n":  6,
+                                             "title":  "ÁNGEL SIN NOMBRE",
+                                             "audio":  "assets/wav_hörprobe/RITUAL – EL RITMO ES SAGRADO/06_-_ÁNGEL_SIN_NOMBRE_Preview.wav",
+                                             "cover":  "assets/tracks_cover/RITUAL – EL RITMO ES SAGRADO/06. ÁNGEL SIN NOMBRE – Poseída por su propia luz.png"
+                                         },
+                                         {
+                                             "n":  7,
+                                             "title":  "LENGUAS DE FUEGO",
+                                             "audio":  "assets/wav_hörprobe/RITUAL – EL RITMO ES SAGRADO/07_-_LENGUAS_DE_FUEGO_Preview.wav",
+                                             "cover":  "assets/tracks_cover/RITUAL – EL RITMO ES SAGRADO/07. LENGUAS DE FUEGO – La pista se convierte en altar.png"
+                                         },
+                                         {
+                                             "n":  8,
+                                             "title":  "SILENCIO SAGRADO",
+                                             "audio":  "assets/wav_hörprobe/RITUAL – EL RITMO ES SAGRADO/08_-_SILENCIO_SAGRADO_Preview.wav",
+                                             "cover":  "assets/tracks_cover/RITUAL – EL RITMO ES SAGRADO/08. SILENCIO SAGRADO – Ella no grita… ella vibra.png"
+                                         },
+                                         {
+                                             "n":  9,
+                                             "title":  "BESTIA INTERIOR",
+                                             "audio":  "assets/wav_hörprobe/RITUAL – EL RITMO ES SAGRADO/09_-_BESTIA_INTERIOR_Preview.wav",
+                                             "cover":  "assets/tracks_cover/RITUAL – EL RITMO ES SAGRADO/09. BESTIA INTERIOR – Él baila para no matar.png"
+                                         },
+                                         {
+                                             "n":  10,
+                                             "title":  "DESGARRO FINAL",
+                                             "audio":  "assets/wav_hörprobe/RITUAL – EL RITMO ES SAGRADO/10_-_DESGARRO_FINAL_Preview.wav",
+                                             "cover":  "assets/tracks_cover/RITUAL – EL RITMO ES SAGRADO/10. Desgarro Final.png"
+                                         }
+                                     ],
+    "PÚCHICA":  [
+                    {
+                        "n":  1,
+                        "title":  "PUCHICA",
+                        "audio":  "assets/wav_hörprobe/PÚCHICA/01_-_PUCHICA_Preview.wav",
+                        "cover":  "assets/tracks_cover/PÚCHICA/01 - PÚCHICA.png"
+                    },
+                    {
+                        "n":  2,
+                        "title":  "GÜIRRO LOCO",
+                        "audio":  "assets/wav_hörprobe/PÚCHICA/02_-_GÜIRRO_LOCO_Preview.wav",
+                        "cover":  "assets/tracks_cover/PÚCHICA/02 - GÜIRRO LOCO.png"
+                    },
+                    {
+                        "n":  3,
+                        "title":  "CHIGUÍN DE BARRIO",
+                        "audio":  "assets/wav_hörprobe/PÚCHICA/03_-_CHIGUÍN_DE_BARRIO_Preview.wav",
+                        "cover":  "assets/tracks_cover/PÚCHICA/03 - CHIGUÍN DE BARRIO.png"
+                    },
+                    {
+                        "n":  4,
+                        "title":  "MACHETE EN LA LENGUA",
+                        "audio":  "assets/wav_hörprobe/PÚCHICA/04_-_MACHETE_EN_LA_LENGUA_Preview.wav",
+                        "cover":  "assets/tracks_cover/PÚCHICA/04 - MACHETE EN LA LENGUA.png"
+                    },
+                    {
+                        "n":  5,
+                        "title":  "VISA LOTERÍA GRINGA",
+                        "audio":  "assets/wav_hörprobe/PÚCHICA/05_-_VISA_LOTERÍA_GRINGA_Preview.wav",
+                        "cover":  "assets/tracks_cover/PÚCHICA/05 - VISA LOTERÍA GRINGA.png"
+                    },
+                    {
+                        "n":  6,
+                        "title":  "VISA PA QUE CERVEZA FRIA",
+                        "audio":  "assets/wav_hörprobe/PÚCHICA/06_-_VISA_PA_QUE_CERVEZA_FRIA_Preview.wav",
+                        "cover":  "assets/tracks_cover/PÚCHICA/06 - ¿VISA PA\u0027 QUÉ… – CERVEZA FRÍA.png"
+                    },
+                    {
+                        "n":  7,
+                        "title":  "PULPERÍA 24 7",
+                        "audio":  "assets/wav_hörprobe/PÚCHICA/07_-_PULPERÍA_24-7_Preview.wav",
+                        "cover":  "assets/tracks_cover/PÚCHICA/07 - PULPERÍA 24-7.png"
+                    },
+                    {
+                        "n":  8,
+                        "title":  "AMOR Y ODIO BERLIN MIX",
+                        "audio":  "assets/wav_hörprobe/PÚCHICA/08_-_AMOR_Y_ODIO_BERLIN_MIX_Preview.wav",
+                        "cover":  "assets/tracks_cover/PÚCHICA/08 - AMOR Y ODIO (BERLIN MIX).png"
+                    },
+                    {
+                        "n":  9,
+                        "title":  "SUEÑOS DE MEDIANOCHE",
+                        "audio":  "assets/wav_hörprobe/PÚCHICA/09_-_SUEÑOS_DE_MEDIANOCHE_Preview.wav",
+                        "cover":  "assets/tracks_cover/PÚCHICA/09 - SUEÑOS DE MEDIANOCHE.png"
+                    },
+                    {
+                        "n":  10,
+                        "title":  "HONDURAS 2035 EL PARAÍSO",
+                        "audio":  "assets/wav_hörprobe/PÚCHICA/10_-_HONDURAS_2035_EL_PARAÍSO_Preview.wav",
+                        "cover":  "assets/tracks_cover/PÚCHICA/10 - HONDURAS 2035 – EL PARAÍSO.png"
+                    }
+                ]
+}

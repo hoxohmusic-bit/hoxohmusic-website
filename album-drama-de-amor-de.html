@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>DRAMA DE AMOR – HOXOH MUSIK</title>
+<meta content="Album DRAMA DE AMOR de HOXOH." name="description"/>
+<meta content="DRAMA DE AMOR – HOXOH MUSIK" property="og:title"/>
+<meta content="Album DRAMA DE AMOR de HOXOH." property="og:description"/>
+<meta content="website" property="og:type"/>
+<meta content="assets/covers/album-drama-de-amor-cover.jpg" property="og:image"/>
+<meta content="#0b0b0b" name="theme-color"/>
+<!-- Favicons -->
+<link href="assets/favicon/favicon-16x16.png" rel="icon" sizes="16x16" type="image/png"/>
+<link href="assets/favicon/favicon-32x32.png" rel="icon" sizes="32x32" type="image/png"/>
+<link href="assets/favicon/apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180"/>
+<link href="assets/favicon/site.webmanifest" rel="manifest"/>
+<link href="assets/favicon/favicon.ico" rel="icon" type="image/x-icon"/>
+<!-- Global Styles -->
+<link href="style.css" rel="stylesheet"/>
+<!-- Page-specific Styles -->
+<style>
+  .album-detail{
+    display:grid;
+    grid-template-columns: 520px 1fr;
+    gap:36px;
+    align-items:start;
+    margin:28px auto 34px;
+    max-width:1200px;
+    padding:0 22px;
+  }
+  .album-detail .left-col .cover{
+    width:100%; height:auto; display:block;
+    border-radius:14px; box-shadow:var(--shadow);
+  }
+  .album-detail .left-col .streaming-grid{
+    width:100%; margin-top:18px;
+    display:grid; grid-template-columns:repeat(5, 1fr); gap:12px;
+  }
+  .album-detail .provider-tile{
+    background:#1c2026; border:1px solid rgba(255,255,255,.08);
+    border-radius:12px; aspect-ratio:1/1;
+    display:grid; place-items:center; text-decoration:none;
+    box-shadow:inset 0 0 0 1px rgba(255,255,255,.03);
+  }
+  .album-detail .provider-tile img{ 
+    width:95% !important; 
+    height:auto !important; 
+    display:block !important; 
+    max-width:95% !important;
+  }
+  .album-detail .left-col .intro{
+    margin-top:16px; color:#cdd6dd; line-height:1.55;
+  }
+  .album-detail h1{
+    margin:0 0 12px; font-size:32px; font-weight:900; letter-spacing:.02em;
+  }
+  .album-detail .meta-row{
+    display:flex; align-items:center; gap:10px; margin:0 0 12px;
+  }
+  .album-detail .pill{
+    background:#20242a; color:#a6b0b8;
+    height:32px; padding:0 14px; border-radius:999px;
+    display:inline-flex; align-items:center; font-size:14px; white-space:nowrap;
+  }
+  .album-detail .pill.explicit{ font-weight:800; letter-spacing:.06em; }
+  .album-detail .tracklist{ list-style:none; margin:0; padding:0; display:grid; gap:12px; }
+  .album-detail .track{
+    background:#1a1e23; border:1px solid #262c34; color:#e6edf3;
+    border-radius:14px; padding:12px 12px 12px 16px;
+    display:grid; grid-template-columns: 2fr 1fr; gap:12px; align-items:center;
+  }
+  .album-detail .t-left{ display:flex; align-items:center; gap:10px; min-width:0; }
+  .album-detail .t-left .no{
+    flex:0 0 auto; font-weight:800; color:#dce6ee; width:40px; text-align:left;
+  }
+  .album-detail .t-left .name{
+    min-width:0; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+    letter-spacing:.01em;
+  }
+  .album-detail .t-left .explicit-chip{
+    margin-left:8px;
+    width:20px; height:20px;
+    display:inline-flex; align-items:center; justify-content:center;
+    flex-shrink:0;
+  }
+  .album-detail .t-left .explicit-chip img{
+    width:100%; height:100%; display:block;
+  }
+  .album-detail .t-audio audio{ width:100%; display:block; }
+  .album-detail .back{
+    display:inline-block; margin-top:18px;
+    background:#19c37d; color:#05261b; font-weight:800;
+    padding:10px 16px; border-radius:12px; text-decoration:none;
+  }
+  .site-header .brand img{ height:42px; width:auto; display:block; }
+  @media (max-width: 900px){ .album-detail{ grid-template-columns:1fr; } }
+  @media (max-width: 760px){ .album-detail .track{ grid-template-columns:1fr; } .album-detail .t-left .no{ width:auto; } }
+  @media (max-width: 620px){ .album-detail .left-col .streaming-grid{ grid-template-columns:repeat(3,1fr); } }
+</style>
+<style>
+/* Cover swap transition */
+.album-detail .left-col .cover{transition:opacity .25s ease}
+.album-detail .left-col .cover.is-swapping{opacity:0}
+</style>
+</head>
+<body>
+<header class="site-header">
+  <div class="container header-inner">
+    <!-- Links nur angepasst, sonst unverändert -->
+    <a aria-label="HOXOH MUSIK" class="brand" href="index-de.html">
+      <img alt="HOXOH MUSIK" height="62" src="assets/logo/hoxoh-music-header-239x62.png" srcset="assets/logo/hoxoh-music-header-239x62.png 1x, assets/logo/hoxoh-music-header-478x124.png 2x" width="239"/>
+    </a>
+    <nav aria-label="Navegación principal" class="main-nav">
+      <a class="nav-link" href="index-de.html">Startseite</a>
+      <a class="nav-link active" href="albums-de.html">Alben</a>
+      <a class="nav-link" href="index-de.html#contact">Kontakt</a>
+    </nav>
+    <div class="lang" id="lang">
+      <button aria-expanded="false" aria-haspopup="listbox" class="lang-btn" type="button">DE ▾</button>
+      <ul aria-label="Idiomas" class="lang-menu" role="listbox">
+        <li><a href="album-drama-de-amor.html" hreflang="es">ES</a></li>
+        <li><a href="album-drama-de-amor-en.html" hreflang="en">EN</a></li>
+        <li><a class="active-lang" href="album-drama-de-amor-de.html" hreflang="de">DE</a></li>
+      </ul>
+    </div>
+  </div>
+</header>
+
+<main>
+  <article class="album-detail">
+    <div class="left-col">
+      <img alt="Portada de DRAMA DE AMOR" class="cover" loading="lazy" src="assets/covers/album-drama-de-amor-cover.jpg"/>
+      <div aria-label="Plataformas de streaming" class="streaming-grid">
+<a aria-label="Spotify" class="provider-tile" href="https://open.spotify.com/intl-de/album/6useF1vQDiOIoe60IwfjXc" rel="noopener" target="_blank">
+<img alt="" src="assets/provider_icons/spotify-icon.png"/>
+</a>
+<a aria-label="Apple Music" class="provider-tile" href="https://music.apple.com/us/album/drama-de-amor/1842094074" rel="noopener" target="_blank">
+<img alt="" src="assets/provider_icons/apple-music-icon.png"/>
+</a>
+<a aria-label="YouTube Music" class="provider-tile" href="https://music.youtube.com/playlist?list=OLAK5uy_nET0Pk_Wgk9ID3n3ZkCxrGQFZ_j2ZuPLo" rel="noopener" target="_blank">
+<img alt="" src="assets/provider_icons/youtube-music-icon.png"/>
+</a>
+<a aria-label="TIDAL" class="provider-tile" href="https://tidal.com/album/462579114" rel="noopener" target="_blank">
+<img alt="" src="assets/provider_icons/tidal-icon.png"/>
+</a>
+<a aria-label="Amazon Music" class="provider-tile" href="https://amazon.com/music/player/albums/B0FSC39F32?marketplaceId=ATVPDKIKX0DER&amp;musicTerritory=US&amp;ref=dm_sh_PNBPW1CWludEoMAacZXZ5pO00" rel="noopener" target="_blank">
+<img alt="" src="assets/provider_icons/amazon-music-icon1.png"/></a>
+</div>
+<p class="intro">
+<p style="text-align:justify;">
+Eine <b>düstere Reise</b> durch die <b>dunklen Seiten</b> menschlicher Beziehungen: Zehn cineastische Electro-Pop-Kompositionen erforschen die komplexe Dynamik von Liebe, Verlust und emotionalem Aufruhr. <b>Pulsierende Bässe</b> und reduzierte <b>industrielle Percussion</b> bilden das klangliche Fundament, während atmosphärische Synths und verletzliche Vocals emotionale Tiefe vermitteln.
+</p>
+<p style="text-align:justify;">
+Das Album bewegt sich zwischen intimen Geständnissen und obsessiven Gedankenspiralen, zwischen nächtlicher Melancholie und schonungsloser Ehrlichkeit. Von <b>"Bajo la Sombra del Silencio" (Im Schatten der Stille)</b> bis <b>"Te Amo - Te Odio" (Ich liebe dich – ich hasse dich)</b> entsteht ein facettenreiches Porträt menschlicher Beziehungen in all ihrer Komplexität—eine künstlerische Reflexion über die dunkleren Aspekte von Intimität, ohne sie zu verklären.
+</p>
+</p>
+    </div>
+
+    <div class="right-col">
+      <h1>DRAMA DE AMOR</h1>
+      <div class="meta-row" id="meta-row">
+        <span class="pill" id="year-pill">03.10.2025</span>
+        <span class="pill" id="genre-pill">Genre: <strong style="font-weight:700;margin-left:6px;">Dark Electro / Synthpop</strong></span>
+      </div>
+
+      <ol class="tracklist" id="tracklist">
+  <li class="track">
+    <div class="t-left"><span class="no">01.</span><span class="name">BAJO LA SOMBRA DEL SILENCIO</span></div>
+    <div class="t-audio">
+     <audio crossorigin="anonymous" controls preload="none">
+        <source src="https://pub-00345912548b4ae4ac0e4c0047e289f0.r2.dev/previews/drama_de_amor/01._bajo_la_sombra_del_silencio_preview.mp3" type="audio/mpeg">
+      </audio>
+    </div>
+  </li>
+  <li class="track">
+    <div class="t-left"><span class="no">02.</span><span class="name">SOMBRAS QUE DEVORAN</span></div>
+    <div class="t-audio">
+     <audio crossorigin="anonymous" controls preload="none">
+        <source src="https://pub-00345912548b4ae4ac0e4c0047e289f0.r2.dev/previews/drama_de_amor/02._sombras_que_devoran_preview.mp3" type="audio/mpeg">
+      </audio>
+    </div>
+  </li>
+  <li class="track">
+    <div class="t-left"><span class="no">03.</span><span class="name">DIME QUE NO</span></div>
+    <div class="t-audio">
+     <audio crossorigin="anonymous" controls preload="none">
+        <source src="https://pub-00345912548b4ae4ac0e4c0047e289f0.r2.dev/previews/drama_de_amor/03._dime_que_no_preview.mp3" type="audio/mpeg">
+      </audio>
+    </div>
+  </li>
+  <li class="track">
+    <div class="t-left"><span class="no">04.</span><span class="name">CULPABLE DE TU PIEL</span></div>
+    <div class="t-audio">
+     <audio crossorigin="anonymous" controls preload="none">
+        <source src="https://pub-00345912548b4ae4ac0e4c0047e289f0.r2.dev/previews/drama_de_amor/04._culpable_de_tu_piel_preview.mp3" type="audio/mpeg">
+      </audio>
+    </div>
+  </li>
+  <li class="track">
+    <div class="t-left"><span class="no">05.</span><span class="name">VENENO DULCE</span></div>
+    <div class="t-audio">
+     <audio crossorigin="anonymous" controls preload="none">
+        <source src="https://pub-00345912548b4ae4ac0e4c0047e289f0.r2.dev/previews/drama_de_amor/05._veneno_dulce_preview.mp3" type="audio/mpeg">
+      </audio>
+    </div>
+  </li>
+  <li class="track">
+    <div class="t-left"><span class="no">06.</span><span class="name">EL ULTIMO DESEO</span></div>
+    <div class="t-audio">
+     <audio crossorigin="anonymous" controls preload="none">
+        <source src="https://pub-00345912548b4ae4ac0e4c0047e289f0.r2.dev/previews/drama_de_amor/06._el_ultimo_deseo_preview.mp3" type="audio/mpeg">
+      </audio>
+    </div>
+  </li>
+  <li class="track">
+    <div class="t-left"><span class="no">07.</span><span class="name">FUEGO EN MIS TACONES</span></div>
+    <div class="t-audio">
+     <audio crossorigin="anonymous" controls preload="none">
+        <source src="https://pub-00345912548b4ae4ac0e4c0047e289f0.r2.dev/previews/drama_de_amor/07._fuego_en_mis_tacones_preview.mp3" type="audio/mpeg">
+      </audio>
+    </div>
+  </li>
+  <li class="track">
+    <div class="t-left"><span class="no">08.</span><span class="name">LO QUE NO DICES</span></div>
+    <div class="t-audio">
+     <audio crossorigin="anonymous" controls preload="none">
+        <source src="https://pub-00345912548b4ae4ac0e4c0047e289f0.r2.dev/previews/drama_de_amor/08._lo_que_no_dices_preview.mp3" type="audio/mpeg">
+      </audio>
+    </div>
+  </li>
+  <li class="track">
+    <div class="t-left"><span class="no">09.</span><span class="name">MARIPOSA DE NOCHE</span></div>
+    <div class="t-audio">
+     <audio crossorigin="anonymous" controls preload="none">
+        <source src="https://pub-00345912548b4ae4ac0e4c0047e289f0.r2.dev/previews/drama_de_amor/09._mariposa_de_noche_preview.mp3" type="audio/mpeg">
+      </audio>
+    </div>
+  </li>
+  <li class="track">
+    <div class="t-left"><span class="no">10.</span><span class="name">TE AMO TE ODIO</span></div>
+    <div class="t-audio">
+     <audio crossorigin="anonymous" controls preload="none">
+        <source src="https://pub-00345912548b4ae4ac0e4c0047e289f0.r2.dev/previews/drama_de_amor/10._te_amo_te_odio_preview.mp3" type="audio/mpeg">
+      </audio>
+    </div>
+  </li>
+</ol>
+
+      <p><a class="back" href="albums-de.html">← Zurück zu allen Alben</a></p>
+    </div>
+  </article>
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <div>© HOXOH MUSIK 2025</div>
+    <div class="legal">
+      <a class="chip" href="impressum-de.html">Impressum</a>
+      <a class="chip" href="datenschutz-de.html">Datenschutz</a>
+      <a class="chip" href="cookies-de.html">Cookies</a>
+      <a class="chip" href="explizit-de.html">Explizite Inhalte</a>
+      <a class="chip" href="agb-de.html">AGB</a>
+    </div>
+</div>
+</footer>
+
+<!-- Post-footer Spotify Card -->
+<section class="postfooter-embed">
+  <div class="spotify-card">
+    <h2 class="spotify-title">Hör dir mein Album an:</h2>
+    <iframe
+      data-testid="embed-iframe"
+      style="border-radius:12px"
+      src="https://open.spotify.com/embed/album/6useF1vQDiOIoe60IwfjXc?utm_source=generator&theme=0"
+      width="100%"
+      height="380"
+      frameborder="0"
+      allowfullscreen=""
+      allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+      loading="lazy"></iframe>
+  </div>
+</section>
+
+<style>
+.postfooter-embed{
+  padding: 22px 16px 46px;
+  background: transparent;
+}
+.postfooter-embed .spotify-card{
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 26px;
+  border-radius: 18px;
+  background: #0f151a;
+  border: 1px solid #1f2630;
+  box-shadow:
+    0 18px 40px rgba(0,0,0,.45),
+    0 2px 0 rgba(255,255,255,.03) inset,
+    0 0 0 1px rgba(255,255,255,.04) inset;
+}
+.spotify-title{
+  color: #dfe9f3;
+  text-align: center;
+  margin: 0 0 18px 0;
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing:.02em;
+}
+@media (max-width: 620px){
+  .postfooter-embed .spotify-card{ padding: 18px; }
+  .spotify-title{ font-size: 18px; }
+}
+</style>
+
+
+<script>
+  (function(){
+    const lang = document.getElementById('lang');
+    if(!lang) return;
+    const btn = lang.querySelector('.lang-btn');
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      lang.classList.toggle('open');
+      btn.setAttribute('aria-expanded', lang.classList.contains('open'));
+    });
+    document.addEventListener('click', (e) => {
+      if(!lang.contains(e.target)){
+        lang.classList.remove('open');
+        btn.setAttribute('aria-expanded','false');
+      }
+    });
+  })();
+</script>
+
+<script>
+  (function () {
+    const cover   = document.querySelector('.album-detail .left-col .cover');
+    const metaRow = document.getElementById('meta-row');
+    const genreEl = document.getElementById('genre-pill');
+    if (!cover || !metaRow || !genreEl) return;
+
+    const srcAttr = cover.getAttribute('src') || '';
+    const file    = srcAttr.split('/').pop().split('?')[0].split('#')[0];
+    const testURL = 'assets/explizit/' + file + '?v=' + Date.now();
+
+    function insertExplicit() {
+      if (metaRow.querySelector('.pill.explicit')) return;
+      const pill = document.createElement('span');
+      pill.className = 'pill explicit';
+      pill.textContent = 'EXPLICIT';
+      metaRow.insertBefore(pill, genreEl);
+    }
+
+    const probe = new Image();
+    probe.onload  = () => (probe.naturalWidth > 0 ? insertExplicit() : 0);
+    probe.onerror = () => {};
+    probe.src = testURL;
+  })();
+</script>
+
+<script>
+  (function(){
+    const list = document.getElementById('tracklist');
+    if(!list) return;
+    const base = 'assets/explizit_tracks/DRAMA%20DE%20AMOR/';
+
+    function insertChip(li){
+      if(li.querySelector('.explicit-chip')) return;
+      const nameNode = li.querySelector('.t-left .name');
+      if(!nameNode) return;
+      const chip = document.createElement('span');
+      chip.className = 'explicit-chip';
+      const img = document.createElement('img');
+      img.src = 'assets/logo/explitzit.ico';
+      img.alt = 'Explicit';
+      chip.appendChild(img);
+      nameNode.after(chip);
+    }
+
+    function checkOne(li){
+      const noTxt = (li.querySelector('.no')?.textContent || '').replace(/\D/g,'');
+      if(!noTxt) return;
+      const n = noTxt.padStart(2,'0');
+      const url = base + n + '.jpg?v=' + Date.now();
+      const probe = new Image();
+      probe.onload = function(){ if(probe.naturalWidth > 0) insertChip(li); };
+      probe.onerror = function(){};
+      probe.src = url;
+    }
+
+    Array.from(list.querySelectorAll('li.track')).forEach(checkOne);
+  })();
+</script>
+
+<!-- Unified audio footer: path-encoding + single-player + stall-protection -->
+<script>
+(function(){
+  if (window.__hoxohAudioPatched) return;
+  window.__hoxohAudioPatched = true;
+
+  document.querySelectorAll('.t-audio audio').forEach(a => {
+    const s = a.querySelector('source');
+    if (!s) return;
+    const src = s.getAttribute('src') || '';
+    const enc = encodeURI(src);
+    if (src !== enc) { s.setAttribute('src', enc); a.load(); }
+  });
+
+  const audios = Array.from(document.querySelectorAll('audio'));
+  let current = null;
+  audios.forEach(a => a.preload = 'none');
+
+  let activated = false;
+  function activatePreloadOnce(){
+    if (activated) return;
+    activated = true;
+    audios.forEach(a => a.preload = 'auto');
+  }
+  document.addEventListener('pointerdown', activatePreloadOnce, { once:true, capture:true });
+
+  function pauseOthers(except){
+    for (const a of audios){
+      if (a !== except){
+        a.pause();
+        a.currentTime = 0;
+      }
+    }
+  }
+  function addStallProtection(a){
+    let retried = false;
+    const earlyWindowSec = 5;
+    function tryRecover(){
+      if (retried) return;
+      retried = true;
+      const wasMuted = a.muted;
+      a.load();
+      a.muted = wasMuted;
+      a.play().catch(()=>{});
+    }
+    a.addEventListener('stalled', () => { if (a.currentTime < earlyWindowSec) tryRecover(); });
+    a.addEventListener('suspend', () => { if (a.currentTime < earlyWindowSec && a.networkState !== a.NETWORK_IDLE) tryRecover(); });
+    a.addEventListener('error',   () => { if (a.currentTime < earlyWindowSec) tryRecover(); });
+
+    let lastT = 0, stuckCnt = 0;
+    a.addEventListener('timeupdate', () => {
+      if (a.currentTime === lastT) {
+        stuckCnt++;
+        if (stuckCnt >= 3 && a.currentTime < earlyWindowSec) tryRecover();
+      } else {
+        stuckCnt = 0;
+        lastT = a.currentTime;
+      }
+    });
+  }
+
+  audios.forEach(a => {
+    addStallProtection(a);
+   a.addEventListener('playing', function(){
+      if (current !== a) { pauseOthers(a); current = a; }
+    });
+    a.addEventListener('ended', () => { if (current === a) current = null; });
+  });
+})();
+</script>
+
+<script>window.TRACK_COVER_DIR = "https://pub-00345912548b4ae4ac0e4c0047e289f0.r2.dev/covers_tracks/02_drama_de_amor/";</script>
+<script>
+(function(){
+  const coverImg = document.querySelector('.album-detail .left-col .cover');
+  const trackItems = Array.from(document.querySelectorAll('#tracklist li.track'));
+  if (!coverImg || !trackItems.length) return;
+
+  const albumCoverSrc = coverImg.getAttribute('src') || '';
+  const baseDir = (window.TRACK_COVER_DIR || '');
+  let manifest = null;
+
+  function loadManifest(){
+    if (!baseDir) return Promise.resolve(null);
+    const url = baseDir.replace(/\/+$/, '') + '/covers.json?v=' + Date.now();
+    return fetch(url, {cache:'no-store'}).then(r => r.ok ? r.json() : null).catch(() => null);
+  }
+
+  function swapCover(newSrc){
+    if (!newSrc) return;
+    const test = new Image();
+    test.onload = () => {
+      coverImg.classList.add('is-swapping');
+      setTimeout(() => {
+        coverImg.src = newSrc + (newSrc.includes('?') ? '&' : '?') + 'v=' + Date.now();
+        coverImg.onload = () => coverImg.classList.remove('is-swapping');
+      }, 120);
+    };
+    test.onerror = () => {};
+    /* FIXED LINE BELOW */
+    test.src = newSrc + (newSrc.includes('?') ? '&' : '?') + 'v=' + Date.now();
+  }
+
+  function joinPath(dir, f){
+    if (!f) return '';
+    if (/^https?:\/\//i.test(f) || f.startsWith('/')) return f;
+    return (dir.replace(/\/+$/, '') + '/' + f.replace(/^\/+/, ''));
+  }
+
+  function manifestCandidates(idx){
+    if (!manifest) return [];
+    const key = String(idx);
+    const val = manifest[key];
+    if (!val) return [];
+    const abs = joinPath(baseDir, val);
+    return [abs];
+  }
+
+  function dataCoverCandidate(li){
+    const v = li.getAttribute('data-cover');
+    return v ? [joinPath(baseDir, v)] : [];
+  }
+
+  function numberCandidates(noTxt){
+    const m = (noTxt || '').match(/\d+/);
+    if (!m) return [];
+    const nn = ('0' + m[0]).slice(-2);
+    return [baseDir + nn + '.jpg', baseDir + nn + '.png', baseDir + nn + '.webp'];
+  }
+
+  function filenameCandidates(srcUrl){
+    if(!srcUrl) return [];
+    const file = (srcUrl.split('/').pop() || '').replace(/\.(mp3|wav|ogg|m4a)$/i, '');
+    if(!file) return [];
+    return [baseDir + file + '.jpg', baseDir + file + '.png', baseDir + file + '.webp'];
+  }
+
+  function trySwap(li, idx){
+    const noTxt = (li.querySelector('.no')?.textContent || '').trim();
+    const srcEl = li.querySelector('source');
+    const srcUrl = srcEl?.getAttribute('src') || '';
+
+    const cands = []
+      .concat(manifestCandidates(idx))
+      .concat(dataCoverCandidate(li))
+      .concat(numberCandidates(noTxt))
+      .concat(filenameCandidates(srcUrl));
+
+    let i = 0;
+    (function next(){
+      if (i >= cands.length) return;
+      const url = cands[i] + '?v=' + Date.now();
+      const probe = new Image();
+      probe.onload = () => swapCover(cands[i]);
+      probe.onerror = () => { i++; next(); };
+      probe.src = url;
+    })();
+  }
+
+  const audios = Array.from(document.querySelectorAll('#tracklist li.track audio'));
+  let current = null;
+
+  function pauseOthers(except){
+    for (const a of audios){
+      if (a !== except){
+        a.pause();
+        a.currentTime = 0;
+      }
+    }
+  }
+  function restoreIfNonePlaying(){
+    const playing = audios.some(a => !a.paused && !a.ended);
+    if (!playing) swapCover(albumCoverSrc);
+  }
+
+  loadManifest().then(m => { manifest = m || null; }).finally(() => {
+    audios.forEach((audio, i) => {
+      const idx = i + 1;
+      const li  = trackItems[i];
+      audio.addEventListener('playing', () => {
+        if (current !== audio){ pauseOthers(audio); current = audio; }
+        trySwap(li, idx);
+      });
+      audio.addEventListener('pause', restoreIfNonePlaying);
+      audio.addEventListener('ended', () => { if (current === audio) current = null; restoreIfNonePlaying(); });
+    });
+  });
+})();
+</script>
+</body>
+</html>
+
+
+
+
+
+
+

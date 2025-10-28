@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>EL LABERINTO DE LOS SUEÑOS — HOXOH MUSIC</title>
+<meta name="description" content="Album EL LABERINTO DE LOS SUEÑOS by HOXOH."/>
+<meta property="og:title" content="EL LABERINTO DE LOS SUEÑOS — HOXOH MUSIC"/>
+<meta property="og:description" content="Album EL LABERINTO DE LOS SUEÑOS by HOXOH."/>
+<meta property="og:type" content="website"/>
+<meta property="og:image" content="assets/covers/EL LABERINTO DE LOS SUEÑOS.jpg"/>
+<meta name="theme-color" content="#0b0b0b"/>
+<!-- Favicons -->
+<link rel="icon" type="image/png" sizes="16x16" href="assets/favicon/favicon-16x16.png"/>
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon/favicon-32x32.png"/>
+<link rel="apple-touch-icon" sizes="180x180" href="assets/favicon/apple-touch-icon.png"/>
+<link rel="manifest" href="assets/favicon/site.webmanifest"/>
+<link rel="icon" type="image/x-icon" href="assets/favicon/favicon.ico"/>
+<!-- Global styles -->
+<link rel="stylesheet" href="style.css"/>
+<!-- Page-scoped styles -->
+<style>
+  .album-detail{
+    display:grid;
+    grid-template-columns:520px 1fr;
+    gap:36px;
+    align-items:start;
+    margin:28px auto 34px;
+    max-width:1200px;
+    padding:0 22px;
+  }
+  .album-detail .left-col .cover{
+    width:100%; height:auto; display:block;
+    border-radius:14px; box-shadow:var(--shadow);
+  }
+
+  /* Provider tiles: 5 in a row, large icons */
+  .album-detail .left-col .streaming-grid{
+    width:100%; margin-top:18px;
+    display:grid; grid-template-columns:repeat(5, 1fr); gap:12px;
+  }
+  .album-detail .provider-tile{
+    background:#1c2026; border:1px solid rgba(255,255,255,.08);
+    border-radius:12px; aspect-ratio:1/1;
+    display:grid; place-items:center; text-decoration:none;
+    box-shadow:inset 0 0 0 1px rgba(255,255,255,.03);
+  }
+  .album-detail .provider-tile img{ 
+    width:95% !important; 
+    height:auto !important; 
+    display:block !important; 
+    max-width:95% !important;
+  }
+
+  .album-detail .left-col .intro{ margin-top:16px; color:#cdd6dd; line-height:1.55; }
+
+  .album-detail h1{ margin:0 0 12px; font-size:32px; font-weight:900; letter-spacing:.02em; }
+  .album-detail .meta-row{ display:flex; align-items:center; gap:10px; margin:0 0 12px; }
+  .album-detail .pill{ background:#20242a; color:#a6b0b8; height:32px; padding:0 14px; border-radius:999px; display:inline-flex; align-items:center; font-size:14px; white-space:nowrap; }
+  .album-detail .pill.explicit{ font-weight:800; letter-spacing:.06em; }
+
+  .album-detail .tracklist{ list-style:none; margin:0; padding:0; display:grid; gap:12px; }
+  .album-detail .track{
+    background:#1a1e23; border:1px solid #262c34; color:#e6edf3;
+    border-radius:14px; padding:12px 12px 12px 16px;
+    display:grid; grid-template-columns:2fr 1fr; gap:12px; align-items:center;
+  }
+  .album-detail .t-left{ display:flex; align-items:center; gap:10px; min-width:0; }
+  .album-detail .t-left .no{ flex:0 0 auto; font-weight:800; color:#dce6ee; width:40px; text-align:left; }
+  .album-detail .t-left .name{ min-width:0; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; letter-spacing:.01em; }
+  .album-detail .t-left .explicit-chip{ margin-left:8px; height:22px; padding:0 9px; display:inline-flex; align-items:center; border-radius:999px; font-size:12px; background:#20242a; color:#cfd7df; border:1px solid rgba(255,255,255,.1); white-space:nowrap; }
+
+  .album-detail .t-audio audio{ width:100%; display:block; }
+  .album-detail .back{ display:inline-block; margin-top:18px; background:#19c37d; color:#05261b; font-weight:800; padding:10px 16px; border-radius:12px; text-decoration:none; }
+
+  .site-header .brand img{ height:42px; width:auto; display:block; }
+
+  @media (max-width: 900px){ .album-detail{ grid-template-columns:1fr; } }
+  @media (max-width: 760px){ .album-detail .track{ grid-template-columns:1fr; } .album-detail .t-left .no{ width:auto; } }
+  @media (max-width: 620px){ .album-detail .left-col .streaming-grid{ grid-template-columns:repeat(3,1fr); } }
+
+  /* PARADOX TRACK - Enhanced Book Integration */
+  .paradox-track { position: relative; border: 2px solid transparent; background: linear-gradient(#1a1e23, #1a1e23) padding-box, linear-gradient(45deg, #d4af37, #cd853f, #daa520) border-box; transition: all 0.3s ease; }
+  .paradox-track:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(212, 175, 55, 0.2); }
+  .track-info { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+  .book-reference { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .book-pill { background: #2a2e35; color: #d4af37; padding: 3px 8px; border-radius: 999px; font-size: 11px; border: 1px solid rgba(212, 175, 55, 0.3); white-space: nowrap; }
+  .book-link { color: #d4af37; text-decoration: none; font-weight: 600; font-size: 12px; border-bottom: 1px solid transparent; transition: all 0.3s ease; white-space: nowrap; }
+  .book-link:hover { color: #daa520; border-bottom-color: #d4af37; text-shadow: 0 0 8px rgba(212, 175, 55, 0.5); }
+
+  /* VISUAL PARADOX EFFECTS */
+  .paradox-mode { background: radial-gradient(circle at 20% 80%, rgba(212, 175, 55, 0.1) 0%, transparent 50%), radial-gradient(circle at 80% 20%, rgba(205, 133, 63, 0.1) 0%, transparent 50%) !important; }
+  .paradox-mode .paradox-track { animation: paradoxPulse 4s ease-in-out infinite; }
+  @keyframes paradoxPulse { 0%, 100% { border-color: transparent; } 25% { border-color: rgba(212, 175, 55, 0.5); } 50% { border-color: rgba(205, 133, 63, 0.5); } 75% { border-color: rgba(218, 165, 32, 0.5); } }
+
+  /* HERMANN GRID ILLUSION */
+  .hermann-grid { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; opacity: 0; z-index: 10; background-image: linear-gradient(90deg, transparent 85%, rgba(212, 175, 55, 0.15) 85%, rgba(212, 175, 55, 0.15) 100%), linear-gradient(0deg, transparent 85%, rgba(212, 175, 55, 0.15) 85%, rgba(212, 175, 55, 0.15) 100%); background-size: 40px 40px; transition: opacity 1s ease; }
+  body.paradox-active .hermann-grid { opacity: 1; }
+
+  /* FLOATING BOOK COVER - Local Image */
+  .book-cover-float { position: fixed; top: 50%; right: -200px; width: 120px; height: 160px; background-image: url('assets/covers/paradoxe-book-cover.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat; border: 2px solid #FFD700; border-radius: 8px; box-shadow: 0 15px 35px rgba(0,0,0,0.6); transition: right 0.8s ease; z-index: 1000; cursor: pointer; transform: translateY(-50%); }
+  body.paradox-active .book-cover-float { right: 20px; }
+  .book-cover-float:hover { transform: translateY(-50%) scale(1.05); box-shadow: 0 20px 40px rgba(255, 215, 0, 0.4); border-color: #FFA500; }
+  .book-cover-float::after { content: "Click for Amazon!"; position: absolute; bottom: -25px; left: 50%; transform: translateX(-50%); background: rgba(0,0,0,0.9); color: #FFD700; padding: 4px 8px; border-radius: 4px; font-size: 11px; white-space: nowrap; opacity: 0; transition: opacity 0.3s ease; }
+  .book-cover-float:hover::after { opacity: 1; }
+</style>
+</head>
+<body>
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="index.html" aria-label="HOXOH MUSIC">
+      <img src="assets/logo/hoxoh-music-header-239x62.png" srcset="assets/logo/hoxoh-music-header-239x62.png 1x, assets/logo/hoxoh-music-header-478x124.png 2x" width="239" height="62" alt="HOXOH MUSIC"/>
+    </a>
+    <nav class="main-nav" aria-label="Main navigation">
+      <a class="nav-link" href="index-en.html">Home</a>
+      <a class="nav-link active" href="albums-en.html">Albums</a>
+      <a class="nav-link" href="kontakt-en.html">Contact</a>
+    </nav>
+    <div id="lang" class="lang">
+      <button class="lang-btn" type="button" aria-haspopup="listbox" aria-expanded="false">EN ▾</button>
+      <ul class="lang-menu" role="listbox" aria-label="Languages">
+        <li><a href="album-el-laberinto-de-los-suenos.html" hreflang="es">ES</a></li>
+        <li><a class="active-lang" href="album-el-laberinto-de-los-suenos-en.html" hreflang="en">EN</a></li>
+        <li><a href="album-el-laberinto-de-los-suenos-de.html" hreflang="de">DE</a></li>
+      </ul>
+    </div>
+  </div>
+</header>
+<main>
+  <article class="album-detail">
+    <div class="left-col">
+      <img class="cover" alt="THE LABYRINTH OF DREAMS cover" loading="lazy" src="assets/covers/album-el-%20-laberinto-de-los-sue%C3%B1os-cover.jpg"/>
+
+      <div class="streaming-grid" aria-label="Streaming platforms">
+        <a class="provider-tile" aria-label="Spotify" href="#" target="_blank" rel="noopener">
+          <img src="assets/provider_icons/spotify-icon.png" alt=""/>
+        </a>
+        <a class="provider-tile" aria-label="Apple Music" href="#" target="_blank" rel="noopener">
+          <img src="assets/provider_icons/apple-music-icon.png" alt=""/>
+        </a>
+        <a class="provider-tile" aria-label="YouTube Music" href="#" target="_blank" rel="noopener">
+          <img src="assets/provider_icons/youtube-music-icon.png" alt=""/>
+        </a>
+        <a class="provider-tile" aria-label="TIDAL" href="#" target="_blank" rel="noopener">
+          <img src="assets/provider_icons/tidal-icon.png" alt=""/>
+        </a>
+        <a class="provider-tile" aria-label="Amazon Music" href="#" target="_blank" rel="noopener">
+          <img src="assets/provider_icons/amazon-music-icon1.png" alt=""/>
+        </a>
+      </div>
+
+      <div class="intro">
+        <p style="text-align:justify;">
+          Step into a sonic universe where reality and dreams twist into impossible spirals. <b>HOXOH — THE LABYRINTH OF DREAMS</b> is a 10‑track musical odyssey that challenges the limits of perception and transports the listener through both ancestral and futuristic soundscapes. The album fuses Dark Techno and Trance with archaic instruments such as didgeridoos, bone flutes, and tribal percussion, creating a unique immersive experience with 16D audio techniques.
+        </p>
+        <p style="text-align:justify;">
+          Each track is a carefully crafted acoustic illusion: from the mysterious opening <b>“PUERTA DE SOMBRAS”</b> to the final revelation in <b>“LUZ AL FINAL”</b>. The journey crosses ancestral echoes, rituals of fire, labyrinthine whispers and paradoxes of the mind. Elements are positioned in impossible spaces, voices orbit in circular patterns, and sounds defy the laws of acoustic physics. It is a maze where every corner reveals new sonic dimensions—where the impossible is heard and illusion reigns like a god. Are you ready to get lost in the dreams?
+        </p>
+      </div>
+    </div>
+
+    <div class="right-col">
+      <h1>EL LABERINTO DE LOS SUEÑOS</h1>
+      <div class="meta-row" id="meta-row">
+        <span class="pill" id="year-pill">14.11.2025</span>
+        <span class="pill" id="genre-pill">Genre: <strong style="font-weight:700;margin-left:6px;">Dark Techno / Trance</strong></span>
+      </div>
+
+      <ol class="tracklist" id="tracklist">
+  <li class="track">
+    <div class="t-left"><span class="no">01.</span><span class="name">PUERTA DE SOMBRAS</span></div>
+    <div class="t-audio">
+     <audio crossorigin="anonymous" controls preload="none">
+        <source src="https://pub-00345912548b4ae4ac0e4c0047e289f0.r2.dev/previews/el_laberinto_de_los_suenos/01_-_puerta_de_sombras_preview.mp3" type="audio/mpeg">
+      </audio>
+    </div>
+  </li>
+  <li class="track">
+    <div class="t-left"><span class="no">02.</span><span class="name">ECOS ANCESTRALES</span></div>
+    <div class="t-audio">
+     <audio crossorigin="anonymous" controls preload="none">
+        <source src="https://pub-00345912548b4ae4ac0e4c0047e289f0.r2.dev/previews/el_laberinto_de_los_suenos/02_-_ecos_ancestrales_preview.mp3" type="audio/mpeg">
+      </audio>
+    </div>
+  </li>
+  <li class="track">
+    <div class="t-left"><span class="no">03.</span><span class="name">RITUAL DE LAS LLAMAS</span></div>
+    <div class="t-audio">
+     <audio crossorigin="anonymous" controls preload="none">
+        <source src="https://pub-00345912548b4ae4ac0e4c0047e289f0.r2.dev/previews/el_laberinto_de_los_suenos/03_-_ritual_de_las_llamas_preview.mp3" type="audio/mpeg">
+      </audio>
+    </div>
+  </li>
+  <li class="track">
+    <div class="t-left"><span class="no">04.</span><span class="name">SUSURROS DEL LABERINTO</span></div>
+    <div class="t-audio">
+     <audio crossorigin="anonymous" controls preload="none">
+        <source src="https://pub-00345912548b4ae4ac0e4c0047e289f0.r2.dev/previews/el_laberinto_de_los_suenos/04_-_susurros_del_laberinto_preview.mp3" type="audio/mpeg">
+      </audio>
+    </div>
+  </li>
+        <li class="track paradox-track" id="track-paradox">
+          <div class="t-left">
+            <span class="no">05.</span>
+            <div class="track-info">
+              <span class="name">PARADOXE — LA MENTE ILUSIONADA</span>
+              <div class="book-reference">
+                <span class="book-pill">📖 From the book</span>
+                <a class="book-link" href="https://www.amazon.com/-/es/PARADOXE-ILUSIONADA-ENGA%C3%91OS-DESAF%C3%8DAN-CEREBRO/dp/B0FF4X4KQQ" target="_blank" rel="noopener">
+                  "PARADOXE" by Finn Wolkenbaum
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="t-audio">
+            <audio crossorigin="anonymous" id="paradox-audio" controls preload="none">
+              <source src="https://pub-00345912548b4ae4ac0e4c0047e289f0.r2.dev/previews/el_laberinto_de_los_suenos/05_-_paradoxe_la_mente_ilusionada_preview.mp3" type="audio/mpeg"/>
+            </audio>
+          </div>
+        </li>
+        <li class="track">
+    <div class="t-left"><span class="no">06.</span><span class="name">EL VIENTO DE LOS HUESOS</span></div>
+    <div class="t-audio">
+     <audio crossorigin="anonymous" controls preload="none">
+        <source src="https://pub-00345912548b4ae4ac0e4c0047e289f0.r2.dev/previews/el_laberinto_de_los_suenos/06_-_el_viento_de_los_huesos_preview.mp3" type="audio/mpeg">
+      </audio>
+    </div>
+  </li>
+  <li class="track">
+    <div class="t-left"><span class="no">07.</span><span class="name">DANZA DE LOS ESPIRITUS</span></div>
+    <div class="t-audio">
+     <audio crossorigin="anonymous" controls preload="none">
+        <source src="https://pub-00345912548b4ae4ac0e4c0047e289f0.r2.dev/previews/el_laberinto_de_los_suenos/07_-_danza_de_los_espiritus_preview.mp3" type="audio/mpeg">
+      </audio>
+    </div>
+  </li>
+  <li class="track">
+    <div class="t-left"><span class="no">08.</span><span class="name">ABISMO SAGRADO</span></div>
+    <div class="t-audio">
+     <audio crossorigin="anonymous" controls preload="none">
+        <source src="https://pub-00345912548b4ae4ac0e4c0047e289f0.r2.dev/previews/el_laberinto_de_los_suenos/08_-_abismo_sagrado_preview.mp3" type="audio/mpeg">
+      </audio>
+    </div>
+  </li>
+  <li class="track">
+    <div class="t-left"><span class="no">09.</span><span class="name">GUARDIANES DEL SONIDO</span></div>
+    <div class="t-audio">
+     <audio crossorigin="anonymous" controls preload="none">
+        <source src="https://pub-00345912548b4ae4ac0e4c0047e289f0.r2.dev/previews/el_laberinto_de_los_suenos/09_-_guardianes_del_sonido_preview.mp3" type="audio/mpeg">
+      </audio>
+    </div>
+  </li>
+  <li class="track">
+    <div class="t-left"><span class="no">10.</span><span class="name">LUZ AL FINAL</span></div>
+    <div class="t-audio">
+     <audio crossorigin="anonymous" controls preload="none">
+        <source src="https://pub-00345912548b4ae4ac0e4c0047e289f0.r2.dev/previews/el_laberinto_de_los_suenos/10_-_luz_al_final_preview.mp3" type="audio/mpeg">
+      </audio>
+    </div>
+  </li>
+</ol>
+
+      <p><a class="back" href="albums.html">← Back to all albums</a></p>
+    </div>
+  </article>
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <div>© HOXOH MUSIC 2025</div>
+    <div class="legal">
+      <a class="chip" href="impressum-en.html">Legal Notice</a>
+      <a class="chip" href="datenschutz-en.html">Privacy</a>
+      <a class="chip" href="cookies-en.html">Cookies</a>
+      <a class="chip" href="explizit-en.html">Explicit Content</a>
+      <a class="chip" href="agb-en.html">Terms</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  (function(){
+    const lang = document.getElementById('lang');
+    if(!lang) return;
+    const btn = lang.querySelector('.lang-btn');
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      lang.classList.toggle('open');
+      btn.setAttribute('aria-expanded', lang.classList.contains('open'));
+    });
+    document.addEventListener('click', (e) => {
+      if(!lang.contains(e.target)){
+        lang.classList.remove('open');
+        btn.setAttribute('aria-expanded','false');
+      }
+    });
+  })();
+</script>
+
+<!-- PARADOX INTERACTIVE EFFECTS -->
+<div class="hermann-grid"></div>
+<div class="book-cover-float" id="bookFloat"></div>
+<script>
+  // IMPROVED AUDIO PLAYER MANAGEMENT with Stall Protection
+  (function(){
+    const audios = Array.from(document.querySelectorAll('audio'));
+    if(!audios.length) return;
+
+    // Encode URLs if needed
+    audios.forEach(a => {
+      const s = a.querySelector('source');
+      if (!s) return;
+      const src = s.getAttribute('src') || '';
+      const enc = encodeURI(src);
+      if (src !== enc) { s.setAttribute('src', enc); try{ a.load(); }catch(e){} }
+    });
+
+    // Performance: initial no preload
+    audios.forEach(a => a.preload = 'none');
+
+    // Activate preload after first user interaction
+    let activated = false;
+    function activatePreloadOnce(){
+      if (activated) return;
+      activated = true;
+      audios.forEach(a => a.preload = 'auto');
+    }
+    document.addEventListener('pointerdown', activatePreloadOnce, { once:true, capture:true });
+
+    // Only one audio playing at a time
+    let current = null;
+    function pauseOthers(except){
+      for (const a of audios){
+        if (a !== except){
+          a.pause();
+          a.currentTime = 0;
+        }
+      }
+    }
+
+    // Stall protection (recovers from early playback stalls)
+    function addStallProtection(a){
+      let retried = false;
+      const earlyWindowSec = 5;
+
+      function tryRecover(){
+        if (retried) return;
+        retried = true;
+        const wasMuted = a.muted;
+        try{ a.load(); }catch(e){}
+        a.muted = wasMuted;
+        a.play().catch(()=>{});
+      }
+
+      a.addEventListener('stalled', () => { if (a.currentTime < earlyWindowSec) tryRecover(); });
+      a.addEventListener('suspend', () => { if (a.currentTime < earlyWindowSec && a.networkState !== a.NETWORK_IDLE) tryRecover(); });
+      a.addEventListener('error',   () => { if (a.currentTime < earlyWindowSec) tryRecover(); });
+
+      let lastT = 0, stuckCnt = 0;
+      a.addEventListener('timeupdate', () => {
+        if (a.currentTime === lastT) {
+          stuckCnt++;
+          if (stuckCnt >= 3 && a.currentTime < earlyWindowSec) tryRecover();
+        } else {
+          stuckCnt = 0;
+          lastT = a.currentTime;
+        }
+      });
+    }
+
+    // Apply stall protection and event listeners
+    audios.forEach(a => {
+      addStallProtection(a);
+      
+      a.addEventListener('play', () => { 
+        if (current !== a) { 
+          pauseOthers(a); 
+          current = a; 
+        } 
+      });
+      
+      a.addEventListener('ended', () => { 
+        if (current === a) current = null; 
+      });
+    });
+  })();
+
+  // Paradox Effects
+  (function(){
+    const paradoxTrack = document.getElementById('track-paradox');
+    const paradoxAudio = document.getElementById('paradox-audio');
+    const bookFloat = document.getElementById('bookFloat');
+    const body = document.body;
+    let logoClickCount = 0;
+
+    // Logo click paradox mode
+    const logo = document.querySelector('.brand');
+    if (logo) {
+      logo.addEventListener('click', function() {
+        logoClickCount++;
+        if (logoClickCount >= 5) {
+          body.classList.toggle('paradox-mode');
+          logoClickCount = 0;
+        }
+      });
+    }
+
+    // Track 5 audio effects
+    if (paradoxAudio) {
+      paradoxAudio.addEventListener('playing', function() {
+        body.classList.add('paradox-active');
+        setTimeout(function() {
+          if (paradoxTrack) paradoxTrack.style.transform = 'scale(1.02)';
+        }, 500);
+      });
+      paradoxAudio.addEventListener('pause', function() {
+        body.classList.remove('paradox-active');
+        if (paradoxTrack) paradoxTrack.style.transform = 'scale(1)';
+      });
+      paradoxAudio.addEventListener('ended', function() {
+        body.classList.remove('paradox-active');
+        if (paradoxTrack) paradoxTrack.style.transform = 'scale(1)';
+      });
+    }
+
+    // Book click to Amazon
+    if (bookFloat) {
+      bookFloat.addEventListener('click', function() {
+        window.open('https://www.amazon.com/-/es/PARADOXE-ILUSIONADA-ENGA%C3%91OS-DESAF%C3%8DAN-CEREBRO/dp/B0FF4X4KQQ', '_blank', 'noopener');
+        bookFloat.style.transform = 'translateY(-50%) scale(1.1)';
+        setTimeout(function() { bookFloat.style.transform = 'translateY(-50%) scale(1)'; }, 200);
+      });
+    }
+  })();
+</script>
+
+<script>
+  (function () {
+    const cover   = document.querySelector('.album-detail .left-col .cover');
+    const metaRow = document.getElementById('meta-row');
+    const genreEl = document.getElementById('genre-pill');
+    if (!cover || !metaRow || !genreEl) return;
+
+    const srcAttr = cover.getAttribute('src') || '';
+    const file    = srcAttr.split('/').pop().split('?')[0].split('#')[0];
+    const testURL = 'assets/explizit/' + file + '?v=' + Date.now();
+
+    function insertExplicit() {
+      if (metaRow.querySelector('.pill.explicit')) return;
+      const pill = document.createElement('span');
+      pill.className = 'pill explicit';
+      pill.textContent = 'EXPLICIT';
+      metaRow.insertBefore(pill, genreEl);
+    }
+
+    const probe = new Image();
+    probe.onload  = () => (probe.naturalWidth > 0 ? insertExplicit() : 0);
+    probe.onerror = () => {};
+    probe.src = testURL;
+  })();
+</script>
+
+
+<script>
+document.addEventListener('DOMContentLoaded', function(){
+  var img = document.querySelector('.album-detail .left-col .cover');
+  if(!img) return;
+  if(img.complete && img.naturalWidth>0) return;
+  var cands = ['assets/covers/album-el-%20-laberinto-de-los-sue%C3%B1os-cover.jpg', 'assets/covers/album-el-%20-laberinto-de-los-sue%C3%B1os-cover.jpg', 'assets/covers/album-el-%20-laberinto-de-los-suenos-cover.jpg', 'assets/covers/album-el-laberinto-de-los-sue%C3%B1os-cover.jpg', 'assets/covers/album-el-laberinto-de-los-suenos-cover.jpg'];
+  function tryNext(i){
+    if(i>=cands.length) return;
+    var test = new Image();
+    test.onload = function(){ img.src = cands[i]; };
+    test.onerror = function(){ tryNext(i+1); };
+    test.src = cands[i];
+  }
+  tryNext(0);
+});
+</script>
+
+<script>
+(function(){
+  // Lazy-load audio players
+  const audios = Array.from(document.querySelectorAll('audio'));
+  audios.forEach(a => a.preload = 'none');
+
+  // Only one player at a time
+  let current = null;
+  audios.forEach(a => {
+    a.addEventListener('play', () => {
+      if (current && current !== a) {
+        current.pause();
+        current.currentTime = 0;
+      }
+      current = a;
+    });
+    a.addEventListener('ended', () => {
+      if (current === a) current = null;
+    });
+  });
+})();
+</script>
+
+<script>window.TRACK_COVER_DIR="https://pub-00345912548b4ae4ac0e4c0047e289f0.r2.dev/covers_tracks/08_el%20_laberinto_de_los_sue%C3%B1os/";</script>
+
+<script>
+(function(){
+  const coverImg=document.querySelector('.album-detail .left-col .cover');
+  /* Robust main cover restoration (added) */
+  const MAIN_COVER_CANDIDATES = [
+    "assets/covers/album-el-laberinto-de-los-sueños-cover.jpg",
+    "assets/covers/album-el-laberinto-de-los-sue%C3%B1os-cover.jpg",
+    "assets/covers/album-el-%20-laberinto-de-los-sue%C3%B1os-cover.jpg",
+    "assets/covers/album-el-laberinto-de-los-suenos-cover.jpg"
+  ];
+  let ORIGINAL_MAIN_COVER = coverImg.getAttribute('src') || MAIN_COVER_CANDIDATES[0];
+
+  function preloadOne(src){
+    return new Promise((resolve)=>{
+      const img = new Image();
+      img.onload = ()=>resolve({ok:true,src});
+      img.onerror = ()=>resolve({ok:false,src});
+      img.src = src;
+    });
+  }
+
+  async function restoreMainCover(){
+    const bust = (s)=> s + (s.includes("?") ? "&" : "?") + "v=" + Date.now();
+    const tries = [ORIGINAL_MAIN_COVER, ...MAIN_COVER_CANDIDATES].map(bust);
+    coverImg.classList.add("is-swapping");
+    for(const t of tries){
+      const r = await preloadOne(t);
+      if(r.ok){
+        coverImg.src = r.src;
+        coverImg.classList.remove("is-swapping");
+        return;
+      }
+    }
+    coverImg.src = ORIGINAL_MAIN_COVER;
+    coverImg.classList.remove("is-swapping");
+  }
+
+  const trackItems=Array.from(document.querySelectorAll('#tracklist li.track, .tracklist li'));
+  if(!coverImg||!trackItems.length)return;
+  const baseDir=(window.TRACK_COVER_DIR||'assets/covers_tracks/01_animal/');
+  function swapCover(newSrc){
+    if(!newSrc)return;
+    const test=new Image();
+    test.onload=()=>{
+      coverImg.classList.add('is-swapping');
+      setTimeout(()=>{
+        coverImg.src=newSrc+(newSrc.includes('?')?'&':'?')+'v='+Date.now();
+        coverImg.onload=()=>coverImg.classList.remove('is-swapping');
+      },120);
+    };
+    test.onerror=()=>{};
+    test.src=newSrc+(newSrc.includes('?')?'&':'?')+'v='+Date.now();
+  }
+  function candidatesByIndex(idx){
+    const nn=('0'+idx).slice(-2);
+    return [baseDir+nn+'.jpg', baseDir+nn+'.png', baseDir+nn+'.webp'];
+  }
+  const audios=Array.from(document.querySelectorAll('li.track audio, .tracklist li audio'));
+
+  function restoreIfNonePlaying(){
+    const anyPlaying = Array.from(document.querySelectorAll('.album-detail audio')).some(a=>!a.paused && !a.ended);
+    if(!anyPlaying){ restoreMainCover(); }
+  }
+
+  audios.forEach((audio,i)=>{
+    const idx=i+1;
+    audio.addEventListener('playing', () => {
+      const cands=candidatesByIndex(idx);
+      let j=0;(function next(){
+        if(j>=cands.length) return;
+        const url=cands[j]+'?v='+Date.now();
+        const probe=new Image();
+        probe.onload=()=>swapCover(cands[j]);
+        probe.onerror=()=>{ j++; next(); };
+        probe.src=url;
+      })();
+    });
+    audio.addEventListener('pause',restoreIfNonePlaying);
+    audio.addEventListener('ended',restoreIfNonePlaying);
+  });
+})();
+</script>
+
+<style>
+  .album-detail .left-col .cover{transition:opacity .25s ease;}
+  .album-detail .left-col .cover.is-swapping{opacity:0;}
+</style>
+<style>
+  .album-detail .left-col .cover{transition:opacity .25s ease;}
+  .album-detail .left-col .cover.is-swapping{opacity:0;}
+</style>
+
+</body>
+</html>

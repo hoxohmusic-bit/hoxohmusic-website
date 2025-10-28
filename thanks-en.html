@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Thank you · HOXOH MUSIC</title>
+
+<!-- Favicon -->
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="assets/favicon/favicon-16x16.png">
+<link rel="apple-touch-icon" href="assets/favicon/apple-touch-icon.png">
+<link rel="manifest" href="assets/favicon/site.webmanifest">
+
+<style>
+  :root {
+    --muted: rgba(255,255,255,.80);
+    --outline: rgba(255,255,255,.12);
+  }
+  * { box-sizing: border-box; }
+  html, body { height: 100%; }
+  body {
+    margin:0; background:#0a0f10; color:#f5f5f5;
+    font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    display:grid; place-items:center; padding: 24px;
+  }
+  /* Radial tint behind everything */
+  body::before {
+    content:""; position:fixed; inset:0;
+    background: radial-gradient(1200px 800px at 10% 10%, rgba(16,42,43,.55) 0%, rgba(10,15,16,.75) 55%, rgba(9,9,9,.95) 100%);
+    z-index:-5; pointer-events:none;
+  }
+  /* Visible logo layer (web path + local file fallback) */
+  body::after{
+  content:"";
+  position:fixed; inset:0;
+  background: url('assets/logo/hoxoh-backround-logo.webp') center/cover no-repeat;
+  opacity:.33;
+  mix-blend-mode:lighten;
+  z-index:-3;
+  pointer-events:none;
+}
+  #smokeCanvas,#mailCanvas,#notesCanvas {
+    position: fixed; inset:0; width:100%; height:100%;
+    pointer-events:none; z-index:-2;
+  }
+  .card {
+    width:min(820px, 94vw); border-radius: 28px; padding: clamp(22px, 4vw, 42px);
+    background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.04));
+    border:1px solid var(--outline); box-shadow: 0 20px 60px rgba(0,0,0,.45);
+    backdrop-filter: blur(4px);
+  }
+  h1 { margin: 0 0 .5rem 0; font-size: clamp(1.8rem, 4vw, 2.6rem); letter-spacing:.2px; }
+  p.lead { margin:.25rem 0 1rem 0; color: var(--muted); font-size: clamp(1rem, 2.4vw, 1.05rem); }
+  .ref { opacity:.75; font-size:.95rem; margin-top: .5rem; }
+  .actions { display:flex; flex-wrap:wrap; gap:.8rem; margin-top: 1.6rem; }
+  .btn {
+    appearance:none; border:none; cursor:pointer; text-decoration:none; user-select:none;
+    padding:.9rem 1.2rem; border-radius: 999px; font-weight: 800;
+  }
+  .btn-primary { background:#f5f5f5; color:#0b0b0b; }
+  .btn-ghost { background: transparent; color:#f5f5f5; border:1px solid var(--outline); }
+  .hint { margin-top: .8rem; font-size:.95rem; color: var(--muted); }
+</style>
+</head>
+<body>
+  <canvas id="smokeCanvas"></canvas>
+  <canvas id="mailCanvas"></canvas>
+  <canvas id="notesCanvas"></canvas>
+
+  <main class="card">
+    <h1>Thank you</h1>
+    <p class="lead">Thanks! We’ll get back to you via email.</p>
+    <p class="lead" id="orderNumberRow"><strong>Order number:</strong> <span id="orderNumberDisplay" aria-live="polite">—</span></p>
+    <div class="ref">Reference: 2025-10-20T16:08:19.508208</div>
+    <div class="actions">
+      <button class="btn btn-primary" id="backBtn">Back</button>
+      <a href="index.html" class="btn btn-ghost" id="homeBtn">Home</a>
+    </div>
+    <div class="hint" id="hint"></div>
+  </main>
+
+<script>
+(function(){"use strict";
+  function qs(s){ return document.querySelector(s); }
+  function getParam(name){ try { return new URLSearchParams(location.search).get(name); } catch(e){ return null; } }
+  function goBack(){ if (document.referrer) { history.back(); } else { location.href = 'index.html'; } }
+
+  // Back + Auto
+  var backBtn = qs('#backBtn'), hint = qs('#hint');
+  if (backBtn) backBtn.addEventListener('click', function(e){ e.preventDefault(); goBack(); });
+  if (document.referrer && hint) { hint.textContent = "Automatically returning in 4 seconds…"; setTimeout(goBack, 4000); }
+
+  // Order number
+  var orderEl = qs('#orderNumberDisplay');
+  var orderNum = getParam('order') || getParam('ord') || getParam('o');
+  if (!orderNum) { try { orderNum = new Date().toISOString().replace(/\D/g,"").slice(0,14); } catch(e){ orderNum="00000000000000"; } }
+  if (orderEl) orderEl.textContent = orderNum;
+
+  // HiDPI setup
+  function setupHiDPI(canvas){ if(!canvas) return null; var ctx = canvas.getContext('2d'); function resize(){ var DPR=window.devicePixelRatio||1; var w=innerWidth, h=innerHeight; canvas.width=w*DPR; canvas.height=h*DPR; canvas.style.width=w+'px'; canvas.style.height=h+'px'; ctx.setTransform(DPR,0,0,DPR,0,0); } resize(); addEventListener('resize', resize); return ctx; }
+  var sc = setupHiDPI(qs('#smokeCanvas'));
+  var mc = setupHiDPI(qs('#mailCanvas'));
+  var nc = setupHiDPI(qs('#notesCanvas'));
+
+  // Smoke animation (soft radial puffs)
+  if(sc){ let t=0; (function drawSmoke(){ if(document.hidden) return requestAnimationFrame(drawSmoke); t+=0.003; sc.clearRect(0,0,innerWidth,innerHeight); for(let i=0;i<70;i++){ let x=(Math.sin(t*1.2+i)*.5+.5)*innerWidth; let y=(i/70)*innerHeight; let g=sc.createRadialGradient(x,y,20,x,y,160); g.addColorStop(0,'rgba(255,255,255,0.040)'); g.addColorStop(1,'rgba(255,255,255,0.0)'); sc.fillStyle=g; sc.beginPath(); sc.arc(x,y,160,0,Math.PI*2); sc.fill(); } requestAnimationFrame(drawSmoke); })(); }
+
+  // Floating mail (✉)
+  if(mc){ const sprites=Array.from({length:22}).map((_,i)=>({ch:'✉',x:Math.random()*innerWidth,y:innerHeight+Math.random()*innerHeight*.6,s:18+Math.random()*34,v:.35+Math.random()*.8,a:Math.random()*Math.PI*2})); (function drawMail(){ if(document.hidden) return requestAnimationFrame(drawMail); mc.clearRect(0,0,innerWidth,innerHeight); mc.fillStyle='rgba(255,255,255,0.16)'; sprites.forEach(n=>{ n.y-=n.v*1.4; n.x+=Math.sin(n.a+=.01)*.9; if(n.y<-50){ n.y=innerHeight+Math.random()*200; n.x=Math.random()*innerWidth; } mc.font=n.s+'px ui-serif, serif'; mc.fillText(n.ch,n.x,n.y); }); requestAnimationFrame(drawMail); })(); }
+
+  // Music notes (♪♫♩♬♭♮♯)
+  if(nc){ const glyphs='♪♫♩♬♭♮♯'.split(''); const sprites=Array.from({length:16}).map((_,i)=>({ch:glyphs[i%glyphs.length],x:Math.random()*innerWidth,y:innerHeight+Math.random()*innerHeight*.4,s:22+Math.random()*30,v:.30+Math.random()*.7,a:Math.random()*Math.PI*2,o:.10+Math.random()*.12})); (function drawNotes(){ if(document.hidden) return requestAnimationFrame(drawNotes); nc.clearRect(0,0,innerWidth,innerHeight); sprites.forEach(sp=>{ sp.y-=sp.v*1.2; sp.x+=Math.sin(sp.a+=.012)*.7; if(sp.y<-60){ sp.y=innerHeight+Math.random()*200; sp.x=Math.random()*innerWidth; } nc.fillStyle='rgba(255,255,255,'+sp.o+')'; nc.font=sp.s+'px ui-serif, serif'; nc.fillText(sp.ch,sp.x,sp.y); }); requestAnimationFrame(drawNotes); })(); }
+})();
+</script>
+
+<script>
+(function(){ "use strict";
+  function getParam(name){ try{ return new URLSearchParams(location.search).get(name); }catch(e){ return null; } }
+  function getFirstCandidate(){
+    var c = getParam('firstname') || getParam('first_name') || getParam('first') || getParam('name');
+    if(!c && window.localStorage){
+      try{
+        c = localStorage.getItem('firstName') || localStorage.getItem('first_name') ||
+            localStorage.getItem('firstname') || localStorage.getItem('name');
+      }catch(e){}
+    }
+    return c || "";
+  }
+  function sanitizeFirst(s){
+    s = String(s||"").trim();
+    if(!s) return "";
+    s = s.split(/\s+/)[0];
+    s = s.replace(/[^\p{L}'\-]/gu, "");
+    return s.slice(0,1).toUpperCase() + s.slice(1);
+  }
+  var first = sanitizeFirst(getFirstCandidate());
+  if(!first) return;
+
+  var h1 = document.querySelector('h1');
+  if(!h1) return;
+
+  var lang = (document.documentElement.getAttribute('lang')||'').toLowerCase();
+  var word = 'Thanks';
+  if(lang.startsWith('de')) word = 'Danke';
+  else if(lang.startsWith('es')) word = 'Gracias';
+
+  h1.textContent = word + ' ' + first + '!';
+})();
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+

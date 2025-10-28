@@ -1,0 +1,324 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Contact — HOXOH MUSIC</title>
+  <meta name="description" content="Write us — Inquiries to HOXOH MUSIC." />
+  <meta property="og:title" content="Contact — HOXOH MUSIC" />
+  <meta property="og:description" content="Write us — Inquiries to HOXOH MUSIC." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://hoxohmusic.com/assets/covers/album-ritual-el-ritmo-es-sagrado-cover.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="1200" />
+  <meta property="og:url" content="https://hoxohmusic.com/kontakt-en.html" />
+  <meta name="theme-color" content="#0b0b0b" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
+
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon/favicon-16x16.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon/favicon-32x32.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon/apple-touch-icon.png">
+  <link rel="manifest" href="assets/favicon/site.webmanifest">
+  <link rel="icon" type="image/x-icon" href="assets/favicon/favicon.ico">
+  <link rel="stylesheet" href="style.css" />
+
+  <style>
+    /* ADDED: Global Lato font family */
+    body { font-family: 'Lato', sans-serif; }
+
+    .contact-detail{max-width:1200px;margin:28px auto 40px;padding:0 22px;display:grid;grid-template-columns:520px 1fr;gap:36px;align-items:stretch;}
+    .contact-card{background:#11161b;border:1px solid #262c34;border-radius:16px;box-shadow:var(--shadow);padding:18px;height:100%;display:flex;flex-direction:column;gap:14px;}
+    .contact-title{margin:4px 0 6px;font-size:32px;font-weight:900;letter-spacing:.02em;}
+    .info-list{list-style:none;margin:0;padding:0;display:grid;gap:12px;}
+    .info-item{background:#141a20;border:1px solid #262c34;border-radius:12px;padding:12px 14px;color:#cdd6dd;}
+    .info-item b{color:#dbe6ef;}
+    /* UPDATED: mail-illustration to static image container */
+    .mail-illustration {
+        margin-top: 6px;
+        width: 100%;
+        height: auto;
+        border-radius: 12px;
+        display: block;
+        border: 1px solid #262c34;
+        position: relative;
+        overflow: hidden;
+        background: #0d1217;
+    }
+    .mail-illustration img {
+        display: block;
+        width: 100%;
+        height: auto;
+    }
+
+    /* ADDED: New CSS for the new text content - Finer (300) and Smaller (15px) */
+    .intro-text-content {
+        color: #cdd6dd;
+        line-height: 1.55;
+        font-size: 15px; /* Smaller */
+        font-weight: 300; /* Finer */
+    }
+    .intro-text-content h3 {
+        font-size: 15px; /* Set to 15px */
+        font-weight: 700;
+        margin: 0 0 8px;
+        text-align: justify;
+    }
+    /* ADDED: Justify for paragraphs and spacing */
+    .intro-text-content p {
+        margin: 0 0 8px 0;
+        text-align: justify; /* Justified */
+    }
+    .intro-text-content p:last-child {
+        margin-top: 6px;
+        font-weight: 700; /* Bold for response time */
+        margin-bottom: 0;
+        text-align: left; /* Keep response time left-aligned for clarity */
+    }
+
+    /* ADDED: Background Visuals Container */
+    .background-visuals {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: -1; /* Puts it behind everything */
+        overflow: hidden;
+    }
+    
+    /* ADDED: New rule for HOXOH Background Logo */
+    .background-logo {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 90vh; /* Very large, depending on viewport height */
+        height: auto;
+        opacity: 0.05; /* Very transparent */
+    }
+
+    /* ADDED: CSS Animations (Moved to background) */
+    @keyframes smoke-float {
+        0% { transform: translateY(0) scale(1); opacity: 0.05; }
+        100% { transform: translateY(-200px) scale(1.5); opacity: 0; }
+    }
+    .smoke-effect {
+        position: absolute;
+        bottom: 0; /* Starts from the bottom of the viewport */
+        left: 0;
+        width: 100%;
+        height: 50vh;
+        background: radial-gradient(circle at 50% 100%, rgba(51, 65, 85, 0.2) 0%, rgba(0, 0, 0, 0) 70%);
+        animation: smoke-float 20s infinite ease-out;
+        animation-delay: 2s;
+        opacity: 0;
+    }
+    @keyframes float-and-fade {
+        0% { transform: translateY(0) rotate(0deg); opacity: 0.6; }
+        50% { opacity: 0.3; }
+        100% { transform: translateY(-100vh) rotate(15deg); opacity: 0; }
+    }
+    .note {
+        position: absolute;
+        font-size: 32px;
+        pointer-events: none;
+        animation: float-and-fade 15s infinite ease-in;
+    }
+    .note-1 { top: 90%; left: 5%; color: rgba(25, 195, 125, 0.5); animation-delay: 0s; } /* Greenish Note */
+    .note-2 { top: 80%; left: 90%; color: rgba(255, 255, 255, 0.3); animation-delay: 4s; font-size: 26px; } /* White Note */
+    .note-3 { top: 95%; left: 30%; color: rgba(205, 214, 221, 0.4); animation-delay: 8s; font-size: 28px; content: '✉'; } /* Grey Letter */
+    .note-4 { top: 70%; left: 70%; color: rgba(25, 195, 125, 0.5); animation-delay: 12s; font-size: 22px; } /* Greenish Note */
+    .note-5 { top: 85%; left: 15%; color: rgba(255, 255, 255, 0.3); animation-delay: 16s; font-size: 36px; content: '✉'; } /* White Letter */
+
+
+    .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+    .form-grid .full{grid-column:1 / -1;}
+    .field{display:flex;flex-direction:column;gap:6px;}
+    .label{font-size:14px;color:#9fb0bd;}
+    .req{color:#19c37d;margin-left:4px;}
+    .input,.textarea,.select{background:#1a1e23;border:1px solid #2a323c;color:#e6edf3;border-radius:10px;padding:11px 12px;outline:none;}
+    .textarea{min-height:160px;resize:vertical;}
+    .input:focus,.textarea:focus,.select:focus{border-color:#3c4956;box-shadow:0 0 0 2px #1f2a34 inset;}
+    .actions{display:flex;gap:10px;align-items:center;margin-top:auto;}
+    .btn{appearance:none;border:0;cursor:pointer;background:#19c37d;color:#05261b;font-weight:800;padding:11px 16px;border-radius:12px;}
+    .hp{position:absolute;left:-999em;width:1px;height:1px;overflow:hidden;}
+    @media (max-width:900px){.contact-detail{grid-template-columns:1fr;}.actions{margin-top:8px;}}
+  </style>
+</head>
+<body>
+  <div class="background-visuals">
+    <img src="assets/logo/hoxoh-backround-logo.webp" alt="HOXOH Logo Watermark" class="background-logo">
+    
+    <div class="smoke-effect"></div>
+    <div class="note note-1">♫</div>
+    <div class="note note-2">♬</div>
+    <div class="note note-3">✉</div>
+    <div class="note note-4">♫</div>
+    <div class="note note-5">✉</div>
+  </div>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index-en.html" class="brand" aria-label="HOXOH MUSIC">
+        <img src="assets/logo/hoxoh-music-header-239x62.png"
+             srcset="assets/logo/hoxoh-music-header-239x62.png 1x, assets/logo/hoxoh-music-header-478x124.png 2x"
+             alt="HOXOH MUSIC" width="239" height="62">
+      </a>
+      <nav class="main-nav" aria-label="Main navigation">
+        <a class="nav-link" href="index-en.html">Home</a>
+        <a class="nav-link" href="albums-en.html">Albums</a>
+        <a class="nav-link active" href="kontakt-en.html">Contact</a>
+      </nav>
+      <div class="lang" id="lang">
+        <button class="lang-btn" type="button" aria-haspopup="listbox" aria-expanded="false">EN ▾</button>
+        <ul class="lang-menu" role="listbox" aria-label="Languages">
+          <li><a href="kontakt.html" hreflang="es">ES</a></li>
+          <li><a href="kontakt-de.html" hreflang="de">DE</a></li>
+          <li><a class="active-lang" href="kontakt-en.html" hreflang="en">EN</a></li>
+        </ul>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="contact-detail">
+      <aside class="left-col">
+        <div class="contact-card">
+          <h2 style="margin:0 0 4px;font-size:18px;color:#dbe6ef;">Direct Contact</h2>
+          <ul class="info-list">
+            <li class="info-item"><b>E-mail</b><br><a href="mailto:hoxohmusic@gmail.com">hoxohmusic@gmail.com</a></li>
+          </ul>
+          <div class="mail-illustration">
+            <img src="assets/logo/hoxoh-backround-logo.webp" alt="Mail Illustration" width="100%" height="auto">
+          </div>
+          <div class="intro-text-content" style="margin-top:6px;">
+            <h3>Custom Production: We make your music happen!</h3>
+            
+            <p>The best prices worldwide with an uncompromising level. Full service: individualized music production tailored to your wishes.</p>
+            
+            <p>Contact us for Booking, Collaborations, Press Inquiries, and your music projects.</p>
+            
+            <p>Response time: 24–48 hours.</p>
+          </div>
+        </div>
+      </aside>
+
+      <section class="right-col">
+        <form class="contact-card" id="contactForm">
+          <input type="hidden" name="lang" value="en">
+          <h1 class="contact-title">Contact</h1>
+
+          <div class="hp" aria-hidden="true">
+            <label>If you are human, leave this field empty:
+              <input type="text" name="bot-field" tabindex="-1" autocomplete="off">
+            </label>
+          </div>
+
+          <div class="form-grid">
+            <div class="field">
+              <label class="label" for="given-name-en">First name<span class="req">*</span></label>
+              <input class="input" id="given-name-en" name="given_name" type="text" required autocomplete="given-name" placeholder="Your first name">
+            </div>
+            <div class="field">
+              <label class="label" for="family-name-en">Last name<span class="req">*</span></label>
+              <input class="input" id="family-name-en" name="family_name" type="text" required autocomplete="family-name" placeholder="Your last name">
+            </div>
+            <div class="field">
+              <label class="label" for="country-en">Country<span class="req">*</span></label>
+              <input class="input" id="country-en" name="country" list="country-list-en" required autocomplete="country-name" placeholder="Honduras">
+              <datalist id="country-list-en">
+                <option>Spain</option><option>Mexico</option><option>Argentina</option><option>Colombia</option>
+                <option>Chile</option><option>Peru</option><option>Venezuela</option><option>Ecuador</option>
+                <option>Guatemala</option><option>Cuba</option><option>Bolivia</option><option>Dominican Republic</option>
+                <option>Honduras</option><option>Paraguay</option><option>El Salvador</option><option>Nicaragua</option>
+                <option>Costa Rica</option><option>Panama</option><option>Uruguay</option><option>Puerto Rico</option>
+                <option>Equatorial Guinea</option>
+                <option>Germany</option><option>Austria</option><option>Switzerland</option><option>United States</option>
+                <option>Canada</option><option>United Kingdom</option><option>Ireland</option><option>France</option>
+                <option>Italy</option><option>Portugal</option><option>Netherlands</option><option>Belgium</option>
+                <option>Luxembourg</option><option>Denmark</option><option>Norway</option><option>Sweden</option>
+                <option>Finland</option><option>Poland</option><option>Czech Republic</option><option>Hungary</option>
+                <option>Romania</option><option>Greece</option><option>Turkey</option><option>Ukraine</option>
+                <option>Russia</option><option>Israel</option><option>Morocco</option><option>Egypt</option>
+                <option>South Africa</option><option>Nigeria</option><option>Kenya</option><option>China</option>
+                <option>Japan</option><option>South Korea</option><option>India</option><option>Indonesia</option>
+                <option>Philippines</option><option>Australia</option><option>New Zealand</option><option>Brazil</option>
+              </datalist>
+            </div>
+            <div class="field">
+              <label class="label" for="email-en">E-mail<span class="req">*</span></label>
+              <input class="input" id="email-en" name="email" type="email" required autocomplete="email" placeholder="you@example.com">
+            </div>
+            <div class="field full">
+              <label class="label" for="topic-en">Subject<span class="req">*</span></label>
+              <input class="input" id="topic-en" name="topic" type="text" required placeholder="What is it about?">
+            </div>
+            <div class="field full">
+              <label class="label" for="message-en">Message<span class="req">*</span></label>
+              <textarea class="textarea" id="message-en" name="message" rows="6" required placeholder="Type your message…"></textarea>
+            </div>
+            <div class="field full" style="gap:10px;">
+              <label style="display:flex;gap:10px;align-items:flex-start;">
+                <input id="privacy-en" type="checkbox" required style="margin-top:4px;">
+                <span class="label" style="color:#c7d2dc;">
+                  I accept the <a href="privacy-en.html" class="chip" style="padding:2px 8px;margin-left:4px;">privacy policy</a>.
+                </span>
+              </label>
+            </div>
+          </div>
+
+          <div class="actions">
+            <button class="btn" type="submit">Send message</button>
+          </div>
+        </form>
+      </section>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div>© HOXOH MUSIC 2025</div>
+      <div class="legal">
+        <a class="chip" href="imprint-en.html">Imprint</a>
+        <a class="chip" href="privacy-en.html">Privacy</a>
+        <a class="chip" href="cookies-en.html">Cookies</a>
+        <a class="chip" href="explicit-en.html">Explicit Content</a>
+        <a class="chip" href="terms-en.html">Terms</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (function(){
+      const lang=document.getElementById('lang'); if(!lang) return;
+      const btn=lang.querySelector('.lang-btn');
+      btn.addEventListener('click',(e)=>{e.stopPropagation();lang.classList.toggle('open');btn.setAttribute('aria-expanded',lang.classList.contains('open'));});
+      document.addEventListener('click',(e)=>{if(!lang.contains(e.target)){lang.classList.remove('open');btn.setAttribute('aria-expanded','false');}});
+    })();
+  </script>
+  <script>
+    (function(){
+      const form=document.getElementById('contactForm'); if(!form) return;
+      const submitBtn=form.querySelector('button[type="submit"]');
+      form.addEventListener('submit',async(e)=>{
+        e.preventDefault();
+        const originalText=submitBtn.textContent;
+        submitBtn.disabled=true; submitBtn.textContent='Sending...'; submitBtn.style.opacity='0.6';
+        try{
+          const data=Object.fromEntries(new FormData(form).entries());
+          if('bot-field' in data) delete data['bot-field'];
+          const res=await fetch('/.netlify/functions/contact',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)});
+          const j=await res.json().catch(()=>({}));
+          if(res.ok && (j.ok||j.success)){ window.location.href=j.redirect||'gracias-en.html'; }
+          else{ alert('Error sending message. Please try again or write to hoxohmusic@gmail.com'); submitBtn.disabled=false; submitBtn.textContent=originalText; submitBtn.style.opacity='1'; }
+        }catch(err){
+          alert('Connection error.'); submitBtn.disabled=false; submitBtn.textContent=originalText; submitBtn.style.opacity='1';
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

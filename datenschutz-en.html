@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Privacy Policy — HOXOH MUSIC</title>
+  <meta name="theme-color" content="#0b0b0b" />
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon/favicon-32x32.png">
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* Page */
+    .prose h1{font-size:40px;font-weight:900;margin:8px 0 18px}
+    .prose h2{font-size:22px;margin:24px 0 10px}
+    .prose p,.prose li{color:#cbd5df}
+    .btn-outline{display:inline-flex;gap:10px;align-items:center;border:1px solid #3a4653;background:#0f1318;border-radius:12px;padding:12px 16px;font-weight:700}
+    .card{background:#13171c;border:1px solid #232a33;border-radius:18px;padding:22px}
+    .container-narrow{max-width:980px;margin:0 auto;padding:28px 22px 40px}
+    /* Modal */
+    .modal-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.55);backdrop-filter:blur(2px);display:none}
+    .modal{position:fixed;inset:0;display:none;place-items:center}
+    .modal.open,.modal-backdrop.open{display:grid}
+    .modal-card{width:min(780px,92vw);background:#12161b;border:1px solid #2b3541;border-radius:18px;padding:20px}
+    .modal h3{margin:0 0 12px;font-size:24px}
+    .row{display:grid;gap:14px}
+    .pref{display:flex;align-items:flex-start;gap:14px;padding:14px 0;border-top:1px solid #222b36}
+    .pref:first-child{border-top:none}
+    .pref-meta{color:#9aa6b2}
+    .btn-primary{background:#19c37d;color:#05261b;font-weight:800;border:none;border-radius:12px;padding:12px 16px}
+    .footer-actions{display:flex;justify-content:flex-end;margin-top:16px}
+    /* Toggle */
+    .switch{position:relative;width:48px;height:28px}
+    .switch input{position:absolute;opacity:0;inset:0}
+    .track{position:absolute;inset:0;border-radius:999px;background:#2a3541;transition:.2s}
+    .thumb{position:absolute;top:3px;left:4px;width:22px;height:22px;border-radius:50%;background:#c0cad6;transition:.2s}
+    .switch input:checked ~ .track{background:#19c37d}
+    .switch input:checked ~ .thumb{left:22px;background:#0a3}
+    .switch input:disabled ~ .track{opacity:.7}
+    .switch input:disabled ~ .thumb{opacity:.7}
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index-en.html" class="brand" aria-label="HOXOH MUSIC">
+        <img src="assets/logo/hoxoh-music-header-239x62.png"
+             srcset="assets/logo/hoxoh-music-header-239x62.png 1x, assets/logo/hoxoh-music-header-478x124.png 2x"
+             alt="HOXOH MUSIC" width="239" height="62">
+      </a>
+
+      <nav class="main-nav" aria-label="Main navigation">
+        <a class="nav-link" href="index-en.html">Home</a>
+        <a class="nav-link" href="albums-en.html">Albums</a>
+        <a class="nav-link" href="kontakt-en.html">Contact</a>
+      </nav>
+
+      <div class="lang" id="lang">
+        <button class="lang-btn" type="button" aria-haspopup="listbox" aria-expanded="false">EN ▾</button>
+        <ul class="lang-menu" role="listbox" aria-label="Languages">
+          <li><a href="datenschutz.html" hreflang="es">ES</a></li>
+          <li><a class="active-lang" href="datenschutz-en.html" hreflang="en">EN</a></li>
+          <li><a href="datenschutz-de.html" hreflang="de">DE</a></li>
+        </ul>
+      </div>
+    </div>
+  </header>
+
+  <main class="container-narrow">
+    <article class="card prose">
+      <h1>Privacy Policy</h1>
+
+      <h2>1. Data Controller</h2>
+      <p>HOXOH MUSIC — Carlos Torres (see Legal Notice). Email: hoxohmusic@gmail.com</p>
+
+      <h2>2. Basic Principles</h2>
+      <p>We process personal data only to the extent necessary to provide this website,
+         for communication, or to fulfill legal obligations. Data is not shared with third parties
+         without legal basis.</p>
+
+      <h2>3. Hosting & Server Logs</h2>
+      <p>When accessing the pages, servers may automatically store data (e.g. IP address,
+         date/time, browser, operating system, referrer). The legal basis is Art. 6 para. 1 lit. f GDPR
+         (legitimate interest in stable, secure provision). Log data is deleted after a short time,
+         unless retention is required for security reasons.</p>
+
+      <h2>4. Contact</h2>
+      <p>When you contact us by email or through the contact form, we process the information
+         to handle your inquiry (Art. 6 para. 1 lit. b and f GDPR). Data is deleted after
+         completing the conversation or according to legal timeframes.</p>
+
+      <h2>5. Cookies & Consent</h2>
+      <p>This website only uses technically necessary cookies, unless optional
+         functions are activated. You can adjust your preferences here:</p>
+      <p><button id="openPrefs" class="btn-outline" type="button" aria-haspopup="dialog">
+        ⚙️ Settings</button></p>
+
+      <h2>6. Retention Period</h2>
+      <p>When no more specific timeframe is specified, we delete personal data as soon as
+         the processing purpose no longer applies or there are no legal retention obligations.</p>
+
+      <h2>7. Your Rights</h2>
+      <ul>
+        <li>Access, rectification, deletion, restriction (Art. 15-18 GDPR)</li>
+        <li>Data portability (Art. 20 GDPR)</li>
+        <li>Objection to processing based on legitimate interests (Art. 21 GDPR)</li>
+        <li>Complaint to a supervisory authority (Art. 77 GDPR)</li>
+      </ul>
+
+      <h2>8. SSL/TLS Encryption</h2>
+      <p>To protect your data, we use —when available— an encrypted connection
+         (recognizable by "https://" or the lock symbol in the browser).</p>
+
+      <p style="margin-top:22px;color:#9aa6b2">Updated: 2025</p>
+    </article>
+  </main>
+
+  <!-- Footer with legal links -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div>© HOXOH MUSIC 2025</div>
+      <div class="legal">
+       <a class="chip" href="impressum-en.html">Imprint</a>
+       <a class="chip" href="datenschutz-en.html">Privacy</a>
+       <a class="chip" href="cookies-en.html">Cookies</a>
+       <a class="chip" href="explizit-en.html">Explicit Content</a>
+       <a class="chip" href="agb-en.html">Terms</a>
+
+      </div>
+    </div>
+  </footer>
+
+  <!-- Cookie/Consent Modal -->
+  <div class="modal-backdrop" id="backdrop"></div>
+  <div class="modal" id="consentModal" role="dialog" aria-modal="true" aria-labelledby="consentTitle">
+    <div class="modal-card">
+      <h3 id="consentTitle">Privacy Settings</h3>
+
+      <div class="pref">
+        <label class="switch" aria-label="Essential">
+          <input type="checkbox" id="c-necessary" checked disabled>
+          <span class="track" aria-hidden="true"></span>
+          <span class="thumb" aria-hidden="true"></span>
+        </label>
+        <div>
+          <strong>Essential</strong>
+          <div class="pref-meta">Required for basic functions (e.g. language/usability). Deactivation not possible.</div>
+        </div>
+      </div>
+
+      <div class="pref">
+        <label class="switch" aria-label="Functional">
+          <input type="checkbox" id="c-functional">
+          <span class="track" aria-hidden="true"></span>
+          <span class="thumb" aria-hidden="true"></span>
+        </label>
+        <div>
+          <strong>Functional</strong>
+          <div class="pref-meta">Optional features (analytics, convenience). Currently not in use on this website.</div>
+        </div>
+      </div>
+
+      <div class="pref">
+        <label class="switch" aria-label="Marketing">
+          <input type="checkbox" id="c-marketing">
+          <span class="track" aria-hidden="true"></span>
+          <span class="thumb" aria-hidden="true"></span>
+        </label>
+        <div>
+          <strong>Marketing</strong>
+          <div class="pref-meta">Advertising/tracking cookies. Currently not in use on this website.</div>
+        </div>
+      </div>
+
+      <div class="footer-actions">
+        <button id="savePrefs" class="btn-primary" type="button">Save settings</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    /* Language menu (like on other pages) */
+    (function(){
+      const lang = document.getElementById('lang');
+      if(!lang) return;
+      const btn = lang.querySelector('.lang-btn');
+      btn.addEventListener('click', ()=>{
+        lang.classList.toggle('open');
+        btn.setAttribute('aria-expanded', lang.classList.contains('open'));
+      });
+      document.addEventListener('click', e=>{
+        if(!lang.contains(e.target)){ lang.classList.remove('open'); btn.setAttribute('aria-expanded','false'); }
+      });
+    })();
+
+    /* Consent Modal */
+    const openBtn = document.getElementById('openPrefs');
+    const modal = document.getElementById('consentModal');
+    const backdrop = document.getElementById('backdrop');
+    const saveBtn = document.getElementById('savePrefs');
+    const functional = document.getElementById('c-functional');
+    const marketing  = document.getElementById('c-marketing');
+
+    function openModal(){ modal.classList.add('open'); backdrop.classList.add('open'); }
+    function closeModal(){ modal.classList.remove('open'); backdrop.classList.remove('open'); }
+
+    openBtn.addEventListener('click', openModal);
+    backdrop.addEventListener('click', closeModal);
+    document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeModal(); });
+
+    // Load/Save in localStorage (offline functional)
+    const KEY='hoxoh_consent_v1';
+    try{
+      const saved = JSON.parse(localStorage.getItem(KEY)||'{}');
+      if(typeof saved.functional === 'boolean') functional.checked = saved.functional;
+      if(typeof saved.marketing  === 'boolean') marketing.checked  = saved.marketing;
+    }catch(e){}
+
+    saveBtn.addEventListener('click', ()=>{
+      const data = { functional: functional.checked, marketing: marketing.checked, ts: Date.now() };
+      try{ localStorage.setItem(KEY, JSON.stringify(data)); }catch(e){}
+      closeModal();
+    });
+  </script>
+</body>
+</html>
+
+
+
+
+
+
+

@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>RITUAL – EL RITMO ES SAGRADO – HOXOH MUSIC</title>
+<meta content="Album RITUAL – EL RITMO ES SAGRADO by HOXOH." name="description"/>
+<meta content="RITUAL – EL RITMO ES SAGRADO – HOXOH MUSIC" property="og:title"/>
+<meta content="Album RITUAL – EL RITMO ES SAGRADO by HOXOH." property="og:description"/>
+<meta content="website" property="og:type"/>
+<meta content="assets/covers/album-ritual-el-ritmo-es-sagrado-cover.jpg" property="og:image"/>
+<meta content="#0b0b0b" name="theme-color"/>
+<!-- Favicons -->
+<link href="assets/favicon/favicon-16x16.png" rel="icon" sizes="16x16" type="image/png"/>
+<link href="assets/favicon/favicon-32x32.png" rel="icon" sizes="32x32" type="image/png"/>
+<link href="assets/favicon/apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180"/>
+<link href="assets/favicon/site.webmanifest" rel="manifest"/>
+<link href="assets/favicon/favicon.ico" rel="icon" type="image/x-icon"/>
+<!-- Global site styles -->
+<link href="style.css" rel="stylesheet"/>
+<!-- Page-local styles (same layout as ES/DE) -->
+<style>
+    .album-detail{
+      display:grid;
+      grid-template-columns: 520px 1fr;
+      gap:36px;
+      align-items:start;
+      margin:28px auto 34px;
+      max-width:1200px;
+      padding:0 22px;
+    }
+    .album-detail .left-col .cover{
+      width:100%; height:auto; display:block;
+      border-radius:14px; box-shadow:var(--shadow);
+    }
+    .album-detail .left-col .streaming-grid{
+      width:100%; margin-top:18px;
+      display:grid; grid-template-columns:repeat(5, 1fr); gap:12px;
+    }
+    .album-detail .provider-tile{
+      background:#1c2026; border:1px solid rgba(255,255,255,.08);
+      border-radius:12px; aspect-ratio:1/1;
+      display:grid; place-items:center; text-decoration:none;
+      box-shadow:inset 0 0 0 1px rgba(255,255,255,.03);
+    }
+    .album-detail .provider-tile img{ 
+      width:95% !important; 
+      height:auto !important; 
+      display:block !important; 
+      max-width:95% !important;
+    }
+    .album-detail .left-col .intro{ margin-top:16px; color:#cdd6dd; line-height:1.55; }
+
+    .album-detail h1{ margin:0 0 12px; font-size:32px; font-weight:900; letter-spacing:.02em; }
+    .album-detail .meta-row{ display:flex; align-items:center; gap:10px; margin:0 0 12px; }
+    .album-detail .pill{
+      background:#20242a; color:#a6b0b8;
+      height:32px; padding:0 14px; border-radius:999px;
+      display:inline-flex; align-items:center; font-size:14px; white-space:nowrap;
+    }
+    .album-detail .pill.explicit{ font-weight:800; letter-spacing:.06em; }
+
+    .album-detail .tracklist{ list-style:none; margin:0; padding:0; display:grid; gap:12px; }
+    .album-detail .track{
+      background:#1a1e23; border:1px solid #262c34; color:#e6edf3;
+      border-radius:14px; padding:12px 12px 12px 16px;
+      display:grid; grid-template-columns: 2fr 1fr; gap:12px; align-items:center;
+    }
+    .album-detail .t-left{ display:flex; align-items:center; gap:10px; min-width:0; }
+    .album-detail .t-left .no{ flex:0 0 auto; font-weight:800; color:#dce6ee; width:40px; text-align:left; }
+    .album-detail .t-left .name{
+      min-width:0; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; letter-spacing:.01em;
+    }
+    .album-detail .t-left .explicit-chip{
+      margin-left:8px;
+      width:20px; height:20px;
+      display:inline-flex; align-items:center; justify-content:center;
+      flex-shrink:0;
+    }
+    .album-detail .t-left .explicit-chip img{
+      width:100%; height:100%; display:block;
+    }
+    .album-detail .t-audio audio{ width:100%; display:block; }
+    .album-detail .back{ display:inline-block; margin-top:18px; background:#19c37d; color:#05261b; font-weight:800; padding:10px 16px; border-radius:12px; text-decoration:none; }
+
+    .site-header .brand img{ height:42px; width:auto; display:block; }
+
+    @media (max-width: 900px){ .album-detail{ grid-template-columns:1fr; } }
+    @media (max-width: 760px){ .album-detail .track{ grid-template-columns:1fr; } .album-detail .t-left .no{ width:auto; } }
+    @media (max-width: 620px){ .album-detail .left-col .streaming-grid{ grid-template-columns:repeat(3,1fr); } }
+  </style>
+<style>
+/* Minimal language menu rules to ensure visibility when #lang.open is toggled */
+#lang{position:relative}
+#lang .lang-menu{display:none; position:absolute; right:0; top:calc(100% + 6px); z-index:9999}
+#lang.open .lang-menu{display:block}
+</style></head>
+<body>
+<!-- Header -->
+<header class="site-header">
+<div class="container header-inner">
+<a aria-label="HOXOH MUSIC" class="brand" href="index-en.html">
+<img alt="HOXOH MUSIC" height="62" src="assets/logo/hoxoh-music-header-239x62.png" srcset="assets/logo/hoxoh-music-header-239x62.png 1x,
+                  assets/logo/hoxoh-music-header-478x124.png 2x" width="239"/>
+</a>
+<nav aria-label="Main navigation" class="main-nav">
+<a class="nav-link" href="index-en.html">Home</a>
+<a class="nav-link active" href="albums-en.html">Albums</a>
+<a class="nav-link" href="kontakt-en.html">Contact</a>
+</nav>
+<div class="lang" id="lang">
+<button aria-expanded="false" aria-haspopup="listbox" class="lang-btn" type="button">EN ▾</button>
+<ul aria-label="Languages" class="lang-menu" role="listbox">
+<li><a href="album-ritual-el-ritmo-es-sagrado.html" hreflang="es">ES</a></li>
+<li><a class="active-lang" href="album-ritual-el-ritmo-es-sagrado-en.html" hreflang="en">EN</a></li>
+<li><a href="album-ritual-el-ritmo-es-sagrado-de.html" hreflang="de">DE</a></li>
+</ul>
+</div>
+</div>
+</header>
+<main>
+<article class="album-detail">
+<div class="left-col">
+<img alt="RITUAL – EL RITMO ES SAGRADO cover" class="cover" loading="lazy" src="assets/covers/album-ritual-el-ritmo-es-sagrado-cover.jpg"/>
+<div aria-label="Streaming platforms" class="streaming-grid">
+<a aria-label="Spotify" class="provider-tile" href="#" target="_blank" rel="noopener">
+<img alt="" src="assets/provider_icons/spotify-icon.png">
+</img></a>
+<a aria-label="Apple Music" class="provider-tile" href="#" target="_blank" rel="noopener">
+<img alt="" src="assets/provider_icons/apple-music-icon.png"/>
+</a>
+<a aria-label="YouTube Music" class="provider-tile" href="#" target="_blank" rel="noopener">
+<img alt="" src="assets/provider_icons/youtube-music-icon.png"/>
+</a>
+<a aria-label="TIDAL" class="provider-tile" href="#" target="_blank" rel="noopener">
+<img alt="" src="assets/provider_icons/tidal-icon.png"/>
+</a>
+<a aria-label="Amazon Music" class="provider-tile" href="#" target="_blank">
+<img alt="" src="assets/provider_icons/amazon-music-icon1.png"/>
+</a>
+</div>
+<p class="intro">
+<p style="text-align:justify;">
+<b>TIEMPO TROPICAL</b> is a concept album that catapults great classical composers into the world of modern Latin music. It fuses the genius of masters like <b>Beethoven</b> and <b>Mozart</b> with the energetic rhythms of <b>reggaeton</b>, <b>salsa</b>, <b>cumbia</b>, and <b>bachata</b>. Each track takes a famous work and transforms it into a modern, danceable hit.
+</p>
+<p style="text-align:justify;">
+The musical journey turns Beethoven's 5th Symphony into a reggaeton hit, while Bach's fugues become a salsa party. Mozart's melodies merge with cumbia, Haydn's "Surprise Symphony" transforms into a techno-salsa mix, and Vivaldi's "Four Seasons" becomes a dancehall track.
+</p>
+<p style="text-align:justify;">
+The album is a <b>celebration of music</b>, showing that the genius of the past lives on in modern rhythms and can go <b>viral again</b>.
+</p>
+</p></div>
+<div class="right-col">
+<h1>RITUAL – EL RITMO ES SAGRADO</h1>
+<div class="meta-row" id="meta-row">
+<span class="pill" id="year-pill">31.10.2025</span>
+<span class="pill" id="genre-pill">Genre: <strong style="font-weight:700;margin-left:6px;">Dark Tribal / Ritual Electronica</strong></span>
+</div>
+<ol class="tracklist" id="tracklist">
+  <li class="track">
+    <div class="t-left"><span class="no">01.</span><span class="name">INVOCACIÓN</span></div>
+    <div class="t-audio">
+      <audio crossorigin="anonymous" controls preload="none">
+        <source src="https://pub-00345912548b4ae4ac0e4c0047e289f0.r2.dev/previews/ritual_el_ritmo_es_sagrado/01._invocacion_abre_el_ritual_con_susurros_oscuros_preview.mp3" type="audio/mpeg">
+      </audio>
+    </div>
+  </li>
+  <li class="track">
+    <div class="t-left"><span class="no">02.</span><span class="name">FURIA SANTA</span></div>
+    <div class="t-audio">
+      <audio crossorigin="anonymous" controls preload="none">
+        <source src="https://pub-00345912548b4ae4ac0e4c0047e289f0.r2.dev/previews/ritual_el_ritmo_es_sagrado/02._furia_santa_cuando_el_deseo_se_vuelve_fe_preview.mp3" type="audio/mpeg">
+      </audio>
+    </div>
+  </li>
+  <li class="track">
+    <div class="t-left"><span class="no">03.</span><span class="name">BOCA DE SANGRE</span></div>
+    <div class="t-audio">
+      <audio crossorigin="anonymous" controls preload="none">
+        <source src="https://pub-00345912548b4ae4ac0e4c0047e289f0.r2.dev/previews/ritual_el_ritmo_es_sagrado/03._boca_de_sangre_ella_besa_con_cuchillas_preview.mp3" type="audio/mpeg">
+      </audio>
+    </div>
+  </li>
+  <li class="track">
+    <div class="t-left"><span class="no">04.</span><span class="name">NO HAY CIELO</span></div>
+    <div class="t-audio">
+      <audio crossorigin="anonymous" controls preload="none">
+        <source src="https://pub-00345912548b4ae4ac0e4c0047e289f0.r2.dev/previews/ritual_el_ritmo_es_sagrado/04._no_hay_cielo_el_cayo_y_no_pidio_perdon_preview.mp3" type="audio/mpeg">
+      </audio>
+    </div>
+  </li>
+  <li class="track">
+    <div class="t-left"><span class="no">05.</span><span class="name">SANGRE Y MIEL</span></div>
+    <div class="t-audio">
+      <audio crossorigin="anonymous" controls preload="none">
+        <source src="https://pub-00345912548b4ae4ac0e4c0047e289f0.r2.dev/previews/ritual_el_ritmo_es_sagrado/05._sangre_y_miel_dulce_hasta_envenenar_preview.mp3" type="audio/mpeg">
+      </audio>
+    </div>
+  </li>
+  <li class="track">
+    <div class="t-left"><span class="no">06.</span><span class="name">ÁNGEL SIN NOMBRE</span></div>
+    <div class="t-audio">
+      <audio crossorigin="anonymous" controls preload="none">
+        <source src="https://pub-00345912548b4ae4ac0e4c0047e289f0.r2.dev/previews/ritual_el_ritmo_es_sagrado/06._angel_sin_nombre_poseida_por_su_propia_luz_preview.mp3" type="audio/mpeg">
+      </audio>
+    </div>
+  </li>
+  <li class="track">
+    <div class="t-left"><span class="no">07.</span><span class="name">LENGUAS DE FUEGO</span></div>
+    <div class="t-audio">
+      <audio crossorigin="anonymous" controls preload="none">
+        <source src="https://pub-00345912548b4ae4ac0e4c0047e289f0.r2.dev/previews/ritual_el_ritmo_es_sagrado/07._lenguas_de_fuego_la_pista_se_convierte_en_altar_preview.mp3" type="audio/mpeg">
+      </audio>
+    </div>
+  </li>
+  <li class="track">
+    <div class="t-left"><span class="no">08.</span><span class="name">SILENCIO SAGRADO</span></div>
+    <div class="t-audio">
+      <audio crossorigin="anonymous" controls preload="none">
+        <source src="https://pub-00345912548b4ae4ac0e4c0047e289f0.r2.dev/previews/ritual_el_ritmo_es_sagrado/08._silencio_sagrado_ella_no_grita_ella_vibra_preview.mp3" type="audio/mpeg">
+      </audio>
+    </div>
+  </li>
+  <li class="track">
+    <div class="t-left"><span class="no">09.</span><span class="name">BESTIA INTERIOR</span></div>
+    <div class="t-audio">
+      <audio crossorigin="anonymous" controls preload="none">
+        <source src="https://pub-00345912548b4ae4ac0e4c0047e289f0.r2.dev/previews/ritual_el_ritmo_es_sagrado/09._bestia_interior_el_baila_para_no_matar_preview.mp3" type="audio/mpeg">
+      </audio>
+    </div>
+  </li>
+  <li class="track">
+    <div class="t-left"><span class="no">10.</span><span class="name">DESGARRO FINAL</span></div>
+    <div class="t-audio">
+      <audio crossorigin="anonymous" controls preload="none">
+        <source src="https://pub-00345912548b4ae4ac0e4c0047e289f0.r2.dev/previews/ritual_el_ritmo_es_sagrado/10._desgarro_final_cuando_el_amor_se_rompe_lento_preview.mp3" type="audio/mpeg">
+      </audio>
+    </div>
+  </li>
+</ol>
+<p><a class="back" href="albums-en.html">← Back to all albums</a></p>
+</div>
+</article>
+</main>
+<footer class="site-footer">
+<div class="container footer-inner">
+<div>© HOXOH MUSIC 2025</div>
+<div class="legal">
+<a class="chip" href="impressum-en.html">Imprint</a>
+<a class="chip" href="datenschutz-en.html">Privacy</a>
+<a class="chip" href="cookies-en.html">Cookies</a>
+<a class="chip" href="explizit-en.html">Explicit Content</a>
+<a class="chip" href="agb-en.html">Terms</a>
+</div>
+</div>
+</footer>
+<!-- Language menu -->
+<script>
+    (function(){
+      const lang = document.getElementById('lang');
+      if(!lang) return;
+      const btn = lang.querySelector('.lang-btn');
+      const menu = lang.querySelector('.lang-menu');
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        lang.classList.toggle('open');
+        btn.setAttribute('aria-expanded', lang.classList.contains('open'));
+        if(menu){ menu.style.display = lang.classList.contains('open') ? 'block' : 'none'; }
+      });
+      document.addEventListener('click', (e) => {
+        if(!lang.contains(e.target)){
+          lang.classList.remove('open');
+          btn.setAttribute('aria-expanded','false');
+        if(menu){ menu.style.display = 'none'; }
+        }
+      });
+    })();
+  </script>
+<!-- Album-level explicit detection -->
+<script>
+    (function () {
+      const cover   = document.querySelector('.album-detail .left-col .cover');
+      const metaRow = document.getElementById('meta-row');
+      const genreEl = document.getElementById('genre-pill');
+      if (!cover || !metaRow || !genreEl) return;
+
+      const srcAttr = cover.getAttribute('src') || '';
+      const file    = srcAttr.split('/').pop().split('?')[0].split('#')[0];
+      const testURL = 'assets/explizit/' + file + '?v=' + Date.now();
+
+      function insertExplicit() {
+        if (metaRow.querySelector('.pill.explicit')) return;
+        const pill = document.createElement('span');
+        pill.className = 'pill explicit';
+        pill.textContent = 'EXPLICIT';
+        metaRow.insertBefore(pill, genreEl);
+      }
+
+      const probe = new Image();
+      probe.onload  = () => (probe.naturalWidth > 0 ? insertExplicit() : 0);
+      probe.onerror = () => {};
+      probe.src = testURL;
+    })();
+  </script>
+
+<!-- Unified audio footer: path-encoding + single-player + stall-protection -->
+<script>
+  (function(){
+    if (window.__hoxohAudioPatched) return;
+    window.__hoxohAudioPatched = true;
+
+    // Pfade mit Sonderzeichen encodieren (INVOCACIÓN, ÁNGEL, etc.)
+    document.querySelectorAll('.t-audio audio').forEach(a => {
+      const s = a.querySelector('source');
+      if (!s) return;
+      const src = s.getAttribute('src') || '';
+      const enc = encodeURI(src);
+      if (src !== enc) { s.setAttribute('src', enc); a.load(); }
+    });
+
+    const audios = Array.from(document.querySelectorAll('audio'));
+    let current = null;
+
+    // 1) Kein Preload am Anfang
+    audios.forEach(a => a.preload = 'none');
+
+    // 2) Preload erst nach erster User-Interaktion
+    let activated = false;
+    function activatePreloadOnce(){
+      if (activated) return;
+      activated = true;
+      audios.forEach(a => a.preload = 'auto');
+    }
+    document.addEventListener('pointerdown', activatePreloadOnce, { once:true, capture:true });
+
+    // 3) Andere Player stoppen
+    function pauseOthers(except){
+      for (const a of audios){
+        if (a !== except){
+          a.pause();
+          a.currentTime = 0;
+        }
+      }
+    }
+
+    // 4) Früh-Stall-Schutz
+    function addStallProtection(a){
+      let retried = false;
+      const earlyWindowSec = 5;
+      function tryRecover(){
+        if (retried) return;
+        retried = true;
+        const wasMuted = a.muted;
+        a.load();
+        a.muted = wasMuted;
+        a.play().catch(()=>{});
+      }
+      a.addEventListener('stalled', () => { if (a.currentTime < earlyWindowSec) tryRecover(); });
+      a.addEventListener('suspend', () => { if (a.currentTime < earlyWindowSec && a.networkState !== a.NETWORK_IDLE) tryRecover(); });
+      a.addEventListener('error',   () => { if (a.currentTime < earlyWindowSec) tryRecover(); });
+
+      let lastT = 0, stuckCnt = 0;
+      a.addEventListener('timeupdate', () => {
+        if (a.currentTime === lastT) {
+          stuckCnt++;
+          if (stuckCnt >= 3 && a.currentTime < earlyWindowSec) tryRecover();
+        } else {
+          stuckCnt = 0;
+          lastT = a.currentTime;
+        }
+      });
+    }
+
+    audios.forEach(a => {
+      addStallProtection(a);
+      a.addEventListener('play', () => {
+        if (current !== a) { pauseOthers(a); current = a; }
+      });
+      a.addEventListener('ended', () => { if (current === a) current = null; });
+    });
+  })();
+  </script>
+<script>
+  (function () {
+    const cover   = document.querySelector('.album-detail .left-col .cover');
+    const metaRow = document.getElementById('meta-row');
+    const genreEl = document.getElementById('genre-pill');
+    if (!cover || !metaRow || !genreEl) return;
+
+    const srcAttr = cover.getAttribute('src') || '';
+    const file    = srcAttr.split('/').pop().split('?')[0].split('#')[0];
+    const testURL = 'assets/explizit/' + file + '?v=' + Date.now();
+
+    function insertExplicit() {
+      if (metaRow.querySelector('.pill.explicit')) return;
+      const pill = document.createElement('span');
+      pill.className = 'pill explicit';
+      pill.textContent = 'EXPLICIT';
+      metaRow.insertBefore(pill, genreEl);
+    }
+
+    const probe = new Image();
+    probe.onload  = () => (probe.naturalWidth > 0 ? insertExplicit() : 0);
+    probe.onerror = () => {};
+    probe.src = testURL;
+  })();
+</script>
+<!-- Unified audio footer: path-encoding + single-player + stall-protection -->
+<!-- Simple explicit detection for known tracks -->
+<script>
+(function(){
+  // Only check tracks that we KNOW are explicit
+  const explicitTracks = [2, 3, 5, 9]; // Track numbers that are explicit
+  
+  const list = document.getElementById('tracklist');
+  if (!list) return;
+  
+  function insertChip(li){
+    if(li.querySelector('.explicit-chip')) return;
+    const nameNode = li.querySelector('.t-left .name');
+    if(!nameNode) return;
+    const chip = document.createElement('span');
+    chip.className = 'explicit-chip';
+    const img = document.createElement('img');
+    img.src = 'assets/logo/explitzit.ico';
+    img.alt = 'Explicit';
+    chip.appendChild(img);
+    nameNode.after(chip);
+  }
+  
+  // Only add chips to known explicit tracks
+  const tracks = Array.from(list.querySelectorAll('li.track'));
+  tracks.forEach((li, index) => {
+    const trackNum = index + 1;
+    if (explicitTracks.includes(trackNum)) {
+      insertChip(li);
+    }
+  });
+})();
+</script>
+
+<script>
+(function(){
+  if (window.__hoxohAudioPatched) return;
+  window.__hoxohAudioPatched = true;
+
+  document.querySelectorAll('.t-audio audio').forEach(a => {
+    const s = a.querySelector('source');
+    if (!s) return;
+    const src = s.getAttribute('src') || '';
+    const enc = encodeURI(src);
+    if (src !== enc) { s.setAttribute('src', enc); a.load(); }
+  });
+
+  const audios = Array.from(document.querySelectorAll('audio'));
+  let current = null;
+  audios.forEach(a => a.preload = 'none');
+
+  let activated = false;
+  function activatePreloadOnce(){
+    if (activated) return;
+    activated = true;
+    audios.forEach(a => a.preload = 'auto');
+  }
+  document.addEventListener('pointerdown', activatePreloadOnce, { once:true, capture:true });
+
+  function pauseOthers(except){
+    for (const a of audios){
+      if (a !== except){
+        a.pause();
+        a.currentTime = 0;
+      }
+    }
+  }
+  function addStallProtection(a){
+    let retried = false;
+    const earlyWindowSec = 5;
+    function tryRecover(){
+      if (retried) return;
+      retried = true;
+      const wasMuted = a.muted;
+      a.load();
+      a.muted = wasMuted;
+      a.play().catch(()=>{});
+    }
+    a.addEventListener('stalled', () => { if (a.currentTime < earlyWindowSec) tryRecover(); });
+    a.addEventListener('suspend', () => { if (a.currentTime < earlyWindowSec && a.networkState !== a.NETWORK_IDLE) tryRecover(); });
+    a.addEventListener('error',   () => { if (a.currentTime < earlyWindowSec) tryRecover(); });
+
+    let lastT = 0, stuckCnt = 0;
+    a.addEventListener('timeupdate', () => {
+      if (a.currentTime === lastT) {
+        stuckCnt++;
+        if (stuckCnt >= 3 && a.currentTime < earlyWindowSec) tryRecover();
+      } else {
+        stuckCnt = 0;
+        lastT = a.currentTime;
+      }
+    });
+  }
+
+  audios.forEach(a => {
+    addStallProtection(a);
+    a.addEventListener('play', () => {
+      if (current !== a) { pauseOthers(a); current = a; }
+    });
+    a.addEventListener('ended', () => { if (current === a) current = null; });
+  });
+})();
+</script>
+<script>window.TRACK_COVER_DIR = "https://pub-00345912548b4ae4ac0e4c0047e289f0.r2.dev/covers_tracks/03_ritual_-_el_ritmo_es_sagrado/";</script>
+<script>
+(function(){
+  const coverImg = document.querySelector('.album-detail .left-col .cover');
+  const trackItems = Array.from(document.querySelectorAll('#tracklist li.track'));
+  if (!coverImg || !trackItems.length) return;
+
+  const albumCoverSrc = coverImg.getAttribute('src') || '';
+  const baseDir = (window.TRACK_COVER_DIR || '');
+  let manifest = null;
+
+  function loadManifest(){
+    if (!baseDir) return Promise.resolve(null);
+    const url = baseDir.replace(/\/+$/, '') + '/covers.json?v=' + Date.now();
+    return fetch(url, {cache:'no-store'}).then(r => r.ok ? r.json() : null).catch(() => null);
+  }
+
+  function swapCover(newSrc){
+    if (!newSrc) return;
+    const test = new Image();
+    test.onload = () => {
+      coverImg.classList.add('is-swapping');
+      setTimeout(() => {
+        coverImg.src = newSrc + (newSrc.includes('?') ? '&' : '?') + 'v=' + Date.now();
+        coverImg.onload = () => coverImg.classList.remove('is-swapping');
+      }, 120);
+    };
+    test.onerror = () => {};
+    /* FIXED LINE BELOW */
+    test.src = newSrc + (newSrc.includes('?') ? '&' : '?') + 'v=' + Date.now();
+  }
+
+  function joinPath(dir, f){
+    if (!f) return '';
+    if (/^https?:\/\//i.test(f) || f.startsWith('/')) return f;
+    return (dir.replace(/\/+$/, '') + '/' + f.replace(/^\/+/, ''));
+  }
+
+  function manifestCandidates(idx){
+    if (!manifest) return [];
+    const key = String(idx);
+    const val = manifest[key];
+    if (!val) return [];
+    const abs = joinPath(baseDir, val);
+    return [abs];
+  }
+
+  function dataCoverCandidate(li){
+    const v = li.getAttribute('data-cover');
+    return v ? [joinPath(baseDir, v)] : [];
+  }
+
+  function numberCandidates(noTxt){
+    const m = (noTxt || '').match(/\d+/);
+    if (!m) return [];
+    const nn = ('0' + m[0]).slice(-2);
+    return [baseDir + nn + '.jpg', baseDir + nn + '.png', baseDir + nn + '.webp'];
+  }
+
+  function filenameCandidates(srcUrl){
+    if(!srcUrl) return [];
+    const file = (srcUrl.split('/').pop() || '').replace(/\.(mp3|wav|ogg|m4a)$/i, '');
+    if(!file) return [];
+    return [baseDir + file + '.jpg', baseDir + file + '.png', baseDir + file + '.webp'];
+  }
+
+  function trySwap(li, idx){
+    const noTxt = (li.querySelector('.no')?.textContent || '').trim();
+    const srcEl = li.querySelector('source');
+    const srcUrl = srcEl?.getAttribute('src') || '';
+
+    const cands = []
+      .concat(manifestCandidates(idx))
+      .concat(dataCoverCandidate(li))
+      .concat(numberCandidates(noTxt))
+      .concat(filenameCandidates(srcUrl));
+
+    let i = 0;
+    (function next(){
+      if (i >= cands.length) return;
+      const url = cands[i] + '?v=' + Date.now();
+      const probe = new Image();
+      probe.onload = () => swapCover(cands[i]);
+      probe.onerror = () => { i++; next(); };
+      probe.src = url;
+    })();
+  }
+
+  const audios = Array.from(document.querySelectorAll('#tracklist li.track audio'));
+  let current = null;
+
+  function pauseOthers(except){
+    for (const a of audios){
+      if (a !== except){
+        a.pause();
+        a.currentTime = 0;
+      }
+    }
+  }
+  function restoreIfNonePlaying(){
+    const playing = audios.some(a => !a.paused && !a.ended);
+    if (!playing) swapCover(albumCoverSrc);
+  }
+
+  loadManifest().then(m => { manifest = m || null; }).finally(() => {
+    audios.forEach((audio, i) => {
+      const idx = i + 1;
+      const li  = trackItems[i];
+      audio.addEventListener('playing', () => {
+        if (current !== audio){ pauseOthers(audio); current = audio; }
+        trySwap(li, idx);
+      });
+      audio.addEventListener('pause', restoreIfNonePlaying);
+      audio.addEventListener('ended', () => { if (current === audio) current = null; restoreIfNonePlaying(); });
+    });
+  });
+})();
+</script>
+<script>
+(function(){
+</script>
+</body>
+</html>

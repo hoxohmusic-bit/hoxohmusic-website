@@ -1,0 +1,1417 @@
+<script type="text/javascript">
+        var gk_isXlsx = false;
+        var gk_xlsxFileLookup = {};
+        var gk_fileData = {};
+        function filledCell(cell) {
+          return cell !== '' && cell != null;
+        }
+        function loadFileData(filename) {
+        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
+            try {
+                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
+                var firstSheetName = workbook.SheetNames[0];
+                var worksheet = workbook.Sheets[firstSheetName];
+
+                // Convert sheet to JSON to filter blank rows
+                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
+                // Filter out blank rows (rows where all cells are empty, null, or undefined)
+                var filteredData = jsonData.filter(row => row.some(filledCell));
+
+                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
+                var headerRowIndex = filteredData.findIndex((row, index) =>
+                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
+                );
+                // Fallback
+                if (headerRowIndex === -1 || headerRowIndex > 25) {
+                  headerRowIndex = 0;
+                }
+
+                // Convert filtered JSON back to CSV
+                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
+                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
+                return csv;
+            } catch (e) {
+                console.error(e);
+                return "";
+            }
+        }
+        return gk_fileData[filename] || "";
+        }
+        </script><!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Musikproduktions-Service – HOXOH MUSIC</title>
+  <meta name="description" content="Professionelle Musikproduktion von HOXOH. Verwirklichen Sie Ihren Sound zum unschlagbaren Preis.">
+  
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon/favicon-16x16.png">
+  <link rel="icon" href="assets/favicon/favicon.ico?v=3" sizes="any"> 
+  <link rel="stylesheet" href="style.css" /> 
+  
+  <style>
+    :root {
+      --bg: #0a0d10;
+      --panel: #121416;
+      --panel-2: #181b1f;
+      --line: #232830;
+      --text: #eef3f6;
+      --muted: #a7b0b8;
+      --accent: #19c37d;
+      --shadow: 0 16px 46px rgba(0,0,0,.55);
+      --radius: 20px;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; }
+    body {
+      background: #0a0a0a;
+      color: var(--text);
+      font: 16px/1.6 system-ui, -apple-system, Segoe UI, Inter, Arial, sans-serif;
+      position: relative;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+    body::before {
+      content:'';
+      position: fixed;
+      inset: 0;
+      background-image: url('assets/logo/hoxoh-backround-logo.webp');
+      background-size: cover;
+      background-position: right center;
+      background-repeat: no-repeat;
+      opacity: 1;
+      pointer-events: none;
+      z-index: 0;
+    }
+    #smokeCanvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+      opacity: 0.5;
+    }
+    #musicNotesCanvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 2;
+      opacity: 0.6;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+    .container { max-width: 1000px; margin: 0 auto; padding: 0 22px; position: relative; z-index: 3; }
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(0,0,0,.85);
+      border-bottom: 1px solid rgba(255,255,255,.08);
+      backdrop-filter: blur(12px);
+    }
+    .header-inner {
+      min-height: 70px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+    .brand { display: inline-flex; align-items: center; }
+    .brand img { height: 44px; width: auto; }
+    .main-nav { display: flex; gap: 20px; justify-content: center; flex: 1; }
+    .nav-link {
+      padding: 10px 14px;
+      border-radius: 12px;
+      color: #cfd6dc;
+      transition: all 0.3s;
+    }
+    .nav-link.active, .nav-link:hover { background: var(--panel-2); color: #fff; }
+    .lang { position: relative; display: inline-block; }
+    .lang-btn {
+      background: #0b0b0b;
+      color: #e9eef2;
+      border: 1px solid #2a2f36;
+      padding: 8px 14px;
+      border-radius: 14px;
+      cursor: pointer;
+      min-width: 64px;
+    }
+    .lang-menu {
+      position: absolute;
+      top: calc(100% + 8px);
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 30;
+      list-style: none;
+      margin: 0;
+      padding: 6px;
+      background: #000;
+      border: 1px solid #2a2f36;
+      border-radius: 16px;
+      box-shadow: var(--shadow);
+      display: none;
+      min-width: 100%;
+    }
+    .lang.open .lang-menu { display: block; }
+    .lang-menu a {
+      display: block;
+      text-align: center;
+      padding: 10px 14px;
+      border-radius: 10px;
+      color: #cfd6dc;
+      transition: all 0.3s;
+    }
+    .lang-menu a:hover { background: #0f1216; color: #fff; }
+    .lang-menu a.active-lang { font-weight: 800; color: #fff; }
+    .hero { 
+      padding: 80px 0 40px; 
+      position: relative;
+      z-index: 3;
+    }
+    .hero-content {
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .hero-content h1 {
+      font-size: 48px;
+      font-weight: 900;
+      margin: 0 0 20px;
+      line-height: 1.1;
+      color: #fff;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.3), 0 4px 8px rgba(0,0,0,0.2);
+    }
+    .hero-subtitle {
+      font-size: 20px;
+      color: rgba(255,255,255,0.85);
+      margin: 0 0 30px;
+      line-height: 1.6;
+    }
+    /* KORRIGIERTE BLÖCKE FÜR VOLLSTÄNDIGE DECKKRAFT */
+    .service-box {
+      background: rgba(18, 20, 22, 1.0); /* JETZT VOLLSTÄNDIG DECKEND */
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 24px;
+      padding: 40px;
+      margin: 40px auto;
+      max-width: 900px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    }
+    .service-box h2 {
+      font-size: 32px;
+      font-weight: 900;
+      margin: 0 0 24px;
+      color: var(--accent);
+    }
+    .service-box p {
+      font-size: 18px;
+      line-height: 1.8;
+      color: rgba(255,255,255,0.85);
+      margin-bottom: 20px;
+    }
+    .features-list {
+      list-style: none;
+      padding: 0;
+      margin: 30px 0;
+    }
+    .features-list li {
+      padding: 16px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      font-size: 18px;
+      color: rgba(255,255,255,0.9);
+    }
+    .features-list li:last-child { border-bottom: none; }
+    .features-list strong {
+      color: var(--accent);
+      font-weight: 800;
+    }
+    .form-section {
+      background: rgba(18, 20, 22, 1.0); /* JETZT VOLLSTÄNDIG DECKEND */
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 24px;
+      padding: 40px;
+      margin: 40px auto 80px;
+      max-width: 900px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    }
+    /* ENDE DER KORRIGIERTEN BLÖCKE */
+    .form-section h2 {
+      font-size: 32px;
+      font-weight: 900;
+      margin: 0 0 30px;
+      color: #fff;
+      text-align: center;
+    }
+    .step-indicator {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 40px;
+    }
+    .progress-bar-container {
+      width: 100%;
+      height: 8px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 10px;
+      margin-bottom: 30px;
+      overflow: hidden;
+    }
+    .progress-bar {
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent) 0%, #15a068 100%);
+      width: 33.33%;
+      transition: width 0.4s ease;
+      border-radius: 10px;
+    }
+    .progress-text {
+      text-align: center;
+      margin-top: 10px;
+      font-size: 14px;
+      color: rgba(255,255,255,0.7);
+    }
+    .step {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.1);
+      border: 2px solid rgba(255,255,255,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 20px;
+      color: rgba(255,255,255,0.5);
+      transition: all 0.3s;
+    }
+    .step.active {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #042419;
+      transform: scale(1.1);
+    }
+    .step.completed {
+      background: rgba(25, 195, 125, 0.3);
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+    .form-step { display: none; }
+    .form-step.active { display: block; animation: fadeIn 0.4s; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    .step-title {
+      font-size: 26px;
+      font-weight: 900;
+      margin: 0 0 30px;
+      color: var(--accent);
+      text-align: center;
+    }
+    .form-group { margin-bottom: 24px; }
+    .form-group label { display: block; margin-bottom: 8px; font-weight: 600; color: rgba(255,255,255,0.9); }
+    .form-group label .required { color: #ff6b6b; }
+    .form-group input, .form-group select, .form-group textarea {
+      width: 100%;
+      padding: 14px 16px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 12px;
+      color: #fff;
+      font-size: 16px;
+      font-family: inherit;
+      transition: all 0.3s;
+    }
+    .form-group input[list] {
+      appearance: none;
+      -webkit-appearance: none;
+    }
+    .form-group select { 
+      cursor: pointer; 
+      appearance: none; 
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23fff' d='M6 9L1 4h10z'/%3E%3C/svg%3E"); 
+      background-repeat: no-repeat; 
+      background-position: right 16px center; 
+      padding-right: 40px; 
+    }
+    .form-group select option { background: #1a1d20; color: #fff; padding: 12px; }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus { 
+      outline: none; 
+      border-color: var(--accent); 
+      background: rgba(255,255,255,0.08); 
+    }
+    .form-group textarea { min-height: 120px; resize: vertical; }
+    .form-group small { display: block; margin-top: 6px; color: rgba(255,255,255,0.6); font-size: 14px; }
+    .checkbox-group { display: flex; align-items: flex-start; gap: 12px; }
+    .checkbox-group input[type="checkbox"] { width: auto; margin-top: 4px; cursor: pointer; }
+    .checkbox-group label { margin: 0; cursor: pointer; font-weight: 400; }
+    .two-column { display: grid; gap: 16px; }
+    @media (min-width: 768px) { .two-column { grid-template-columns: 1fr 1fr; } }
+    .choice-grid { display: grid; gap: 16px; margin: 24px 0; }
+    @media (min-width: 768px) { .choice-grid { grid-template-columns: repeat(3, 1fr); } }
+    .choice-card { 
+      background: rgba(255,255,255,0.05); 
+      border: 2px solid rgba(255,255,255,0.1); 
+      border-radius: 16px; 
+      padding: 32px 24px; 
+      text-align: center; 
+      cursor: pointer; 
+      transition: all 0.3s; 
+    }
+    .choice-card:hover { 
+      border-color: var(--accent); 
+      background: rgba(25, 195, 125, 0.1); 
+      transform: translateY(-4px); 
+    }
+    .choice-card.selected { 
+      border-color: var(--accent); 
+      background: rgba(25, 195, 125, 0.15); 
+      box-shadow: 0 0 20px rgba(25, 195, 125, 0.3); 
+    }
+    .choice-card h4 { margin: 0 0 8px; font-size: 24px; color: #fff; }
+    .choice-card .price { font-size: 18px; font-weight: 700; color: var(--accent); margin: 8px 0; }
+    .choice-card p { margin: 0; font-size: 14px; color: rgba(255,255,255,0.6); }
+    .track-field { 
+      background: rgba(25, 195, 125, 0.05); 
+      border: 1px solid rgba(25, 195, 125, 0.2); 
+      border-radius: 16px; 
+      padding: 24px; 
+      margin: 20px 0; 
+    }
+    .track-field h4 { margin: 0 0 20px; color: var(--accent); font-size: 20px; }
+    .radio-group { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 8px; }
+    .radio-option { display: flex; align-items: center; gap: 8px; }
+    .radio-option input[type="radio"] { width: auto; margin-top: 4px; cursor: pointer; }
+    .radio-option label { margin: 0; cursor: pointer; font-weight: 400; }
+    .btn-submit { 
+      width: 100%; 
+      padding: 18px 32px; 
+      background: linear-gradient(135deg, var(--accent) 0%, #15a068 100%); 
+      color: #042419; 
+      border: none; 
+      border-radius: 14px; 
+      font-weight: 800; 
+      font-size: 18px; 
+      cursor: pointer; 
+      transition: all 0.3s; 
+      box-shadow: 0 8px 24px rgba(25, 195, 125, 0.3); 
+    }
+    .btn-submit:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(25, 195, 125, 0.5); }
+    .btn-submit:disabled { opacity: 0.5; cursor: not-allowed; }
+    .btn-group { display: flex; gap: 12px; margin-top: 30px; }
+    .btn-back { 
+      flex: 1; 
+      padding: 18px 32px; 
+      background: rgba(255,255,255,0.1); 
+      color: #fff; 
+      border: 1px solid rgba(255,255,255,0.2); 
+      border-radius: 14px; 
+      font-weight: 800; 
+      font-size: 18px; 
+      cursor: pointer; 
+      transition: all 0.3s; 
+    }
+    .btn-back:hover { background: rgba(255,255,255,0.15); border-color: rgba(255,255,255,0.3); }
+    .btn-next { 
+      flex: 2; 
+      padding: 18px 32px; 
+      background: linear-gradient(135deg, var(--accent) 0%, #15a068 100%); 
+      color: #042419; 
+      border: none; 
+      border-radius: 14px; 
+      font-weight: 800; 
+      font-size: 18px; 
+      cursor: pointer; 
+      transition: all 0.3s; 
+      box-shadow: 0 8px 24px rgba(25, 195, 125, 0.3); 
+    }
+    .btn-next:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(25, 195, 125, 0.5); }
+    .site-footer { 
+      border-top: 1px solid rgba(255,255,255,.08); 
+      padding: 24px 0; 
+      position: relative; 
+      z-index: 3; 
+      background: rgba(0,0,0,0.3); 
+      backdrop-filter: blur(10px); 
+    }
+    .footer-inner { 
+      display: flex; 
+      align-items: center;
+      justify-content: space-between; 
+      gap: 16px; 
+      flex-wrap: wrap; 
+    }
+    .legal { display: flex; gap: 10px; flex-wrap: wrap; }
+    .chip { 
+      background: rgba(17, 21, 24, 0.8); 
+      border: 1px solid rgba(255,255,255,0.1); 
+      color: #cfd6dc; 
+      padding: 8px 12px; 
+      border-radius: 12px; 
+      font-size: 14px; 
+      transition: all 0.3s; 
+    }
+    .chip:hover { color: #fff; border-color: rgba(255,255,255,0.2); }
+    @media (max-width: 768px) {
+      .hero-content h1 { font-size: 32px; }
+      .hero-subtitle { font-size: 18px; }
+      .service-box, .form-section { padding: 24px; }
+      .btn-group { flex-direction: column; }
+      .btn-back, .btn-next { flex: 1; }
+    }
+  </style>
+<!-- Transparency tweak: slightly lighter dark backgrounds (DE) -->
+  <style id="clarity-tweak">
+    /* No blur, alpha tuned to 0.85 for maximum contrast while keeping depth */
+    .site-header { background: rgba(0,0,0,.80) !important; backdrop-filter: none !important; }
+    .service-box, .form-section { background: rgba(18,20,22,0.85) !important; backdrop-filter: none !important; }
+    .site-footer { background: rgba(0,0,0,.30) !important; backdrop-filter: none !important; }
+    .lang-menu { background: rgba(0,0,0,.90) !important; }
+
+    .form-group input, .form-group select, .form-group textarea {
+      background: rgba(255,255,255,0.05) !important;
+      border: 1px solid rgba(255,255,255,0.3) !important;
+      box-shadow: 0 1px 0 rgba(0,0,0,0.4) inset !important;
+    }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+      border-color: rgba(25,195,125,1) !important;
+      box-shadow: 0 0 0 2px rgba(25,195,125,0.4) !important;
+    }
+
+    .track-field {
+      background: rgba(25,195,125,0.08) !important;
+      border: 1px solid rgba(25,195,125,0.3) !important;
+    }
+
+    #smokeCanvas { opacity: 0.5 !important; }
+    #musicNotesCanvas { opacity: 0.6 !important; }
+  </style>
+
+</head>
+<body>
+  <canvas id="smokeCanvas"></canvas>
+  <canvas id="musicNotesCanvas"></canvas>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="index-de.html" aria-label="HOXOH MUSIC">
+        <img src="assets/logo/hoxoh-music-header-239x62.png" alt="HOXOH MUSIC" width="239" height="62">
+      </a>
+      <nav class="main-nav">
+        <a class="nav-link" href="index-de.html">Start</a>
+        <a class="nav-link" href="albums-de.html">Alben</a>
+        <a class="nav-link" href="kontakt-de.html">Kontakt</a>
+      </nav>
+      <div class="lang">
+        <button class="lang-btn" aria-haspopup="true" aria-expanded="false">DE ▾</button>
+        <ul class="lang-menu" role="menu">
+          <li><a href="musikproduktion-service.html">ES</a></li>
+          <li><a class="active-lang" href="musikproduktion-service-de.html">DE</a></li>
+          <li><a href="musikproduktion-service-en.html">EN</a></li>
+        </ul>
+      </div>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <h1>Verwirkliche deinen Sound.<br>Starte dein Musikprojekt heute.</h1>
+        <p class="hero-subtitle">
+          Du hast die Vision; wir haben das Studio und das Know-how.<br>
+          Gemeinsam bringen wir deinen Track zum Leben.
+        </p>
+      </div>
+    </section>
+
+  <div class="container">
+    <div class="service-box">
+      <h2>Unser Musikproduktions-Service</h2>
+      <p>Wir begleiten dich vom ersten Entwurf bis zum finalen Mastering, stream-ready für Spotify und alle Plattformen.</p>
+      <p>Der perfekte Song für jeden Anlass: Geburtstag, Hochzeit, Jubiläum oder dein großes Projekt. Ob Radiohit, Soundtrack oder professionelle Beats für deine Karriere – wir liefern Qualität, die sich sehen und hören lässt.</p>
+      
+      <p style="text-align: center; margin: 30px 0 20px; font-weight: 700; color: #fff; font-size: 20px;">
+        Wir sind stolz, **einen der niedrigsten Preise weltweit** für professionelle Musikproduktion inklusive Full-Buyout zu bieten.
+      </p>
+
+      <h3 style="margin: 30px 0 20px; color: var(--accent); font-size: 24px;">Paketpreise auf einen Blick:</h3>
+      <ul style="list-style: none; padding: 0; margin-bottom: 40px;">
+          <li style="padding: 8px 0; font-size: 18px;"><strong>🎵 Starter-Single (1 Song):</strong> Nur $99</li>
+          <li style="padding: 8px 0; font-size: 18px;"><strong>💿 EP-Paket (5 Songs):</strong> $396 (nur $79.20 pro Track)</li>
+          <li style="padding: 8px 0; font-size: 18px;"><strong>📀 Album-Deal (10 Songs):</strong> $750 (nur $75 pro Track)</li>
+      </ul>
+
+      <h3 style="margin: 30px 0 20px; color: var(--accent); font-size: 24px;">Was wir bieten:</h3>
+      <ul class="features-list">
+        <li><strong>Vollständige Produktion:</strong> Komposition, Arrangements und professionelles Mixing.</li>
+        <li><strong>Full-Buyout:</strong> Alle Rechte gehen exklusiv an dich über.</li>
+        <li><strong>Spotify-Ready Mastering:</strong> Erfüllt die Standards digitaler Plattformen.</li>
+        <li><strong>Cover-Design inklusive:</strong> Haupt-Cover für Single; pro-Track-Covers für EP/Album.</li>
+        <li><strong>Schnelle Lieferung:</strong> Dank moderner Methoden produzieren wir schnell ohne Qualitätsverlust.</li>
+      </ul>
+    </div>
+    <div class="form-section" id="order-form">
+      <h2>📝 Bestelle deine Musikproduktion</h2>
+      <div class="progress-bar-container">
+        <div class="progress-bar" id="progressBar" style="width: 33.33%;"></div>
+      </div>
+      <p class="progress-text" id="progressText">Schritt 1 von 3: Persönliche Daten</p>
+      <div class="step-indicator">
+        <div class="step active" id="stepInd1">1</div>
+        <div class="step" id="stepInd2">2</div>
+        <div class="step" id="stepInd3">3</div>
+      </div>
+      <form id="musicForm" novalidate>
+        <div class="form-step active" id="step1">
+          <h3 class="step-title">🙋 Persönliche Daten</h3>
+          <div class="two-column">
+            <div class="form-group">
+              <label for="firstName">Vorname <span class="required">*</span></label>
+              <input type="text" name="first_name" id="firstName" required placeholder="Vorname">
+            </div>
+            <div class="form-group">
+              <label for="lastName">Nachname <span class="required">*</span></label>
+              <input type="text" name="last_name" id="lastName" required placeholder="Nachname">
+            </div>
+          </div>
+          <div class="two-column">
+            <div class="form-group">
+              <label for="artistName">Künstlername <span class="required">*</span></label>
+              <input type="text" name="artist_name" id="artistName" required placeholder="z.B. Dein Künstlername oder echter Name">
+            </div>
+            <div class="form-group">
+              <label for="labelName">Label (Optional)</label>
+              <input type="text" name="label_name" id="labelName" placeholder="z.B. Dein Label">
+            </div>
+          </div>
+          <div class="checkbox-group">
+            <input type="checkbox" id="syncWithArtistName" name="sync_with_artist_name">
+            <label for="syncWithArtistName">Vor- und Nachname identisch mit Künstlername</label>
+          </div>
+          <div class="two-column">
+            <div class="form-group">
+              <label for="country">Land <span class="required">*</span></label>
+              <input type="text" name="country" id="country" list="country_list" required placeholder="z.B. Deutschland, Schweiz, Österreich...">
+              <datalist id="country_list">
+                <option value="Deutschland">
+                <option value="Schweiz">
+                <option value="Österreich">
+                <option value="USA">
+                <option value="UK">
+                <option value="Frankreich">
+                <option value="Italien">
+                <option value="Spanien">
+                <option value="Niederlande">
+                <option value="Belgien">
+                <option value="Russland">
+                <option value="Schweden">
+                <option value="Norwegen">
+                <option value="Dänemark">
+                <option value="Polen">
+                <option value="Türkei">
+                <option value="Arabische Emirate">
+              </datalist>
+            </div>
+            <div class="form-group">
+              <label for="birthYear">Geburtsjahr <span class="required">*</span></label>
+              <input type="number" name="birth_year" id="birthYear" required min="1920" max="2010" placeholder="z.B. 1990">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="email">E-Mail <span class="required">*</span></label>
+            <input type="email" name="email" id="email" required placeholder="deine@email.com">
+          </div>
+          <div class="checkbox-group">
+            <input type="checkbox" id="terms" required>
+            <label for="terms">Ich habe die <a href="agb-de.html" target="_blank">Allgemeinen Geschäftsbedingungen</a> gelesen und akzeptiere sie.</label>
+          </div>
+          <div class="btn-group">
+            <button type="button" class="btn-next" id="nextStep1">Nächster Schritt →</button>
+          </div>
+        </div>
+        <div class="form-step" id="step2">
+          <h3 class="step-title">💿 Wähle dein Paket</h3>
+          <div class="choice-grid">
+            <div class="choice-card" data-package="1" data-price="99">
+              <h4>Single</h4>
+              <div class="price">$99</div>
+              <p>1 professioneller Track</p>
+            </div>
+            <div class="choice-card" data-package="5" data-price="396">
+              <h4>EP</h4>
+              <div class="price">$396</div>
+              <p>5 Tracks ($79.20 pro)</p>
+            </div>
+            <div class="choice-card" data-package="10" data-price="750">
+              <h4>Album</h4>
+              <div class="price">$750</div>
+              <p>10 Tracks ($75 pro)</p>
+            </div>
+          </div>
+          <input type="hidden" name="track_package" id="trackPackage">
+          <input type="hidden" name="base_amount" id="baseAmount">
+          <div class="btn-group">
+            <button type="button" class="btn-back" id="backStep2">← Zurück</button>
+            <button type="button" class="btn-next" id="nextStep2" disabled>Nächster Schritt →</button>
+          </div>
+        </div>
+        <div class="form-step" id="step3">
+          <h3 class="step-title">🎶 Track-Details</h3>
+          <div id="trackFieldsContainer"></div>
+          <div class="btn-group">
+            <button type="button" class="btn-back" id="backStep3">← Zurück</button>
+            <button type="submit" class="btn-submit">Zur Zahlung →</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <span>© 2025 HOXOH MUSIC. Alle Rechte vorbehalten.</span>
+      <div class="legal">
+        <a class="chip" href="impressum-de.html">Impressum</a>
+        <a class="chip" href="datenschutz-de.html">Datenschutz</a>
+        <a class="chip" href="cookies-de.html">Cookies</a>
+        <a class="chip" href="explizit-de.html">Expliziter Inhalt</a>
+        <a class="chip" href="agb-de.html">AGB</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // ==========================================================
+    // JS for Smoke Effect (Background)
+    // ==========================================================
+
+    const smokeCanvas = document.getElementById('smokeCanvas');
+    const smokeCtx = smokeCanvas.getContext('2d');
+    let W_s = smokeCanvas.width = window.innerWidth;
+    let H_s = smokeCanvas.height = window.innerHeight;
+
+    class Particle {
+      constructor() {
+        this.x = Math.random() * W_s;
+        this.y = Math.random() * H_s;
+        this.size = Math.random() * 50 + 20;
+        this.speedX = Math.random() * 0.2 - 0.1;
+        this.speedY = Math.random() * 0.2 - 0.1;
+        this.opacity = Math.random() * 0.5 + 0.1;
+        this.hue = Math.random() * 360;
+      }
+      update() {
+        this.x += this.speedX;
+        this.y += this.speedY;
+        if (this.x > W_s || this.x < 0) this.speedX = -this.speedX;
+        if (this.y > H_s || this.y < 0) this.speedY = -this.speedY;
+      }
+      draw() {
+        smokeCtx.beginPath();
+        smokeCtx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        smokeCtx.fillStyle = `hsla(${this.hue}, 70%, 50%, ${this.opacity})`;
+        smokeCtx.fill();
+      }
+    }
+
+    const particles = [];
+    for (let i = 0; i < 80; i++) {
+      particles.push(new Particle());
+    }
+
+    function animateSmoke() {
+      smokeCtx.clearRect(0, 0, W_s, H_s);
+      smokeCtx.globalCompositeOperation = 'lighter';
+      for (const particle of particles) {
+        particle.update();
+        particle.draw();
+      }
+      requestAnimationFrame(animateSmoke);
+    }
+
+    animateSmoke();
+
+    window.addEventListener('resize', () => {
+      W_s = smokeCanvas.width = window.innerWidth;
+      H_s = smokeCanvas.height = window.innerHeight;
+    });
+
+    // ==========================================================
+    // JS for Music Notes Animation
+    // ==========================================================
+
+    const notesCanvas = document.getElementById('musicNotesCanvas');
+    const notesCtx = notesCanvas.getContext('2d');
+    let W_n = notesCanvas.width = window.innerWidth;
+    let H_n = notesCanvas.height = window.innerHeight;
+
+    const symbols = ['♩', '♪', '♫', '♬'];
+
+    class MusicNote {
+      constructor() {
+        this.reset();
+      }
+      reset() {
+        this.x = Math.random() * W_n;
+        this.y = H_n + 50;
+        this.size = Math.random() * 30 + 20; // Increased size range
+        this.targetSize = Math.random() * 40 + 20; // Increased target size
+        this.speed = Math.random() * 1.5 + 0.5;
+        this.opacity = Math.random() * 0.5 + 0.4; // Increased minimum opacity for bolder appearance
+        this.rotation = Math.random() * 360;
+        this.symbol = symbols[Math.floor(Math.random() * symbols.length)];
+        this.hue = Math.random() * 360;
+      }
+      update() {
+        this.y -= this.speed;
+        this.size = Math.min(this.size + 0.1, this.targetSize);
+        this.opacity = Math.max(this.opacity - 0.001, 0.2); // Minimum opacity increased
+        this.rotation += 0.5;
+        if (this.y < -50) this.reset();
+      }
+      draw() {
+        notesCtx.save();
+        notesCtx.translate(this.x, this.y);
+        notesCtx.rotate(this.rotation * Math.PI / 180);
+        notesCtx.font = `bold ${this.size}px Arial`; // Added bold font
+        notesCtx.fillStyle = `hsla(${this.hue}, 80%, 50%, ${this.opacity})`; // Increased saturation
+        notesCtx.textAlign = 'center';
+        notesCtx.textBaseline = 'middle';
+        notesCtx.fillText(this.symbol, 0, 0);
+        notesCtx.restore();
+      }
+    }
+
+    const musicNotes = [];
+    for (let i = 0; i < 200; i++) { // Increased from 100 to 200
+      musicNotes.push(new MusicNote());
+    }
+
+    function animateNotes() {
+      notesCtx.clearRect(0, 0, W_n, H_n);
+      for (const note of musicNotes) {
+        note.update();
+        note.draw();
+      }
+      requestAnimationFrame(animateNotes);
+    }
+
+    animateNotes();
+
+    window.addEventListener('resize', () => {
+      W_n = notesCanvas.width = window.innerWidth;
+      H_n = notesCanvas.height = window.innerHeight;
+      musicNotes.forEach(note => note.reset());
+    });
+
+    // ==========================================================
+    // JS for Forms and Redirection (Form Logic)
+    // ==========================================================
+
+    const form = document.getElementById('musicForm');
+    const steps = document.querySelectorAll('.form-step');
+    const stepIndicators = document.querySelectorAll('.step');
+    const progressBar = document.getElementById('progressBar');
+    const progressText = document.getElementById('progressText');
+    const nextStep1Btn = document.getElementById('nextStep1');
+    const nextStep2Btn = document.getElementById('nextStep2');
+    const backStep2Btn = document.getElementById('backStep2');
+    const backStep3Btn = document.getElementById('backStep3');
+    const choiceCards = document.querySelectorAll('.choice-card');
+    const trackFieldsContainer = document.getElementById('trackFieldsContainer');
+    const trackPackageInput = document.getElementById('trackPackage');
+    const baseAmountInput = document.getElementById('baseAmount');
+    const syncCheckbox = document.getElementById('syncWithArtistName');
+    const firstNameInput = document.getElementById('firstName');
+    const lastNameInput = document.getElementById('lastName');
+    const artistNameInput = document.getElementById('artistName');
+
+    let currentStep = 1;
+    let selectedPackage = null;
+    let trackCount = 0;
+    const TRACK_PACKAGES = {
+      '1': 1,
+      '5': 5,
+      '10': 10
+    };
+    
+    function displayValidationError(input, message) {
+        alert(`❌ Fehler im Feld: ${input.name || input.id || input.tagName}\n\n${message}`);
+        
+        input.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        
+        if (input.tagName === 'INPUT' || input.tagName === 'SELECT' || input.tagName === 'TEXTAREA') {
+            input.style.borderColor = '#ff6b6b';
+            input.style.borderWidth = '2px';
+            setTimeout(() => {
+                input.style.borderColor = '';
+                input.style.borderWidth = '';
+            }, 3000);
+            input.focus();
+        } 
+        else if (input.classList && input.classList.contains('radio-group')) {
+            input.style.outline = '2px solid #ff6b6b';
+            input.style.borderRadius = '8px';
+            setTimeout(() => {
+                input.style.outline = '';
+                input.style.borderRadius = '';
+            }, 3000);
+            const firstRadio = input.querySelector('input[type="radio"]');
+            if (firstRadio) firstRadio.focus();
+        }
+    }
+
+    function updateStepUI() {
+      steps.forEach((step, index) => {
+        step.classList.toggle('active', index === currentStep - 1);
+      });
+
+      stepIndicators.forEach((indicator, index) => {
+        if (index < currentStep) {
+          indicator.classList.add('completed');
+        } else {
+          indicator.classList.remove('completed');
+        }
+        indicator.classList.toggle('active', index === currentStep - 1);
+      });
+
+      const progress = (currentStep - 1) / (steps.length - 1) * 100;
+      progressBar.style.width = `${progress}%`;
+
+      const stepNames = ["Persönliche Daten", "Wähle dein Paket", "Track-Details"];
+      progressText.textContent = `Schritt ${currentStep} von ${steps.length}: ${stepNames[currentStep - 1]}`;
+
+      document.getElementById('order-form').scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+      if (currentStep === 2) {
+        checkStep2Validity();
+      }
+    }
+
+    function checkStep2Validity() {
+      nextStep2Btn.disabled = !selectedPackage;
+    }
+
+    function validateStep3() {
+        const trackFields = trackFieldsContainer.querySelectorAll('.track-field');
+        let isValid = true;
+        
+        if (trackCount > 1) {
+            const albumNameInput = document.getElementById('albumName');
+            if (!albumNameInput || !albumNameInput.value.trim()) {
+                displayValidationError(albumNameInput, 'Name der EP/Album ist erforderlich.');
+                isValid = false;
+                return isValid;
+            }
+        }
+        
+        trackFields.forEach((field, index) => {
+            if (!isValid) return;
+
+            const requiredInputs = field.querySelectorAll('input[required]:not([type="radio"]), textarea[required], select[required]');
+            requiredInputs.forEach(input => {
+                if (!isValid) return;
+
+                if (!input.value.trim() || input.value === "") {
+                    displayValidationError(input, 'Dieses Feld ist erforderlich.');
+                    isValid = false;
+                    return;
+                }
+
+                if (input.tagName === 'TEXTAREA' && input.getAttribute('minlength')) {
+                    const minLength = parseInt(input.getAttribute('minlength'));
+                    if (input.value.length < minLength) {
+                        displayValidationError(input, `Die Beschreibung muss mindestens ${minLength} Zeichen haben. Aktuell hat sie ${input.value.length}.`);
+                        isValid = false;
+                        return;
+                    }
+                }
+            });
+
+            if (!isValid) return; 
+
+            const vocalsSelected = field.querySelector(`input[name="track_vocals_${index + 1}"]:checked`);
+            if (!vocalsSelected) {
+                const radioGroups = field.querySelectorAll('.radio-group');
+                const vocalsRadioGroup = radioGroups[0];
+                displayValidationError(vocalsRadioGroup, 'Du musst die Art des Gesangs auswählen.');
+                isValid = false;
+                return;
+            }
+            
+            const explicitSelected = field.querySelector(`input[name="track_explicit_${index + 1}"]:checked`);
+            if (!explicitSelected) {
+                const radioGroups = field.querySelectorAll('.radio-group');
+                const explicitRadioGroup = radioGroups[1];
+                displayValidationError(explicitRadioGroup, 'Du musst angeben, ob der Inhalt explizit ist.');
+                isValid = false;
+                return;
+            }
+        });
+        
+        return isValid;
+    }
+
+    function goToNextStep() {
+      if (currentStep === 1) {
+        const requiredInputs = document.querySelectorAll('#step1 input[required]:not(#terms):not(#syncWithArtistName), #step1 input[type="email"], #step1 input[type="number"]');
+        let allFieldsValid = true;
+        let firstInvalidInput = null;
+
+        requiredInputs.forEach(input => {
+          if (!input.value.trim() || !input.checkValidity()) {
+            allFieldsValid = false;
+            if (!firstInvalidInput) {
+                firstInvalidInput = input;
+            }
+          }
+        });
+        const termsAccepted = document.getElementById('terms').checked;
+
+        if (!allFieldsValid) {
+          displayValidationError(firstInvalidInput, 'Bitte stelle sicher, dass alle erforderlichen Felder ausgefüllt sind und das Format korrekt ist (E-Mail, Geburtsjahr usw.).');
+          return;
+        }
+        if (!termsAccepted) {
+          alert('Du musst die Allgemeinen Geschäftsbedingungen lesen und akzeptieren, um fortzufahren.');
+          return;
+        }
+      }
+
+      if (currentStep === 2 && !selectedPackage) {
+        alert('Wähle ein Musikproduktions-Paket aus, um fortzufahren.');
+        return;
+      }
+      
+      if (currentStep < steps.length) {
+        currentStep++;
+        updateStepUI();
+      }
+    }
+
+    function goToPreviousStep() {
+      if (currentStep > 1) {
+        currentStep--;
+        updateStepUI();
+      }
+    }
+
+    nextStep1Btn.addEventListener('click', goToNextStep);
+
+    choiceCards.forEach(card => {
+      card.addEventListener('click', function() {
+        choiceCards.forEach(c => c.classList.remove('selected'));
+        this.classList.add('selected');
+
+        selectedPackage = this.dataset.package;
+        trackCount = TRACK_PACKAGES[selectedPackage];
+        const basePrice = this.dataset.price;
+
+        trackPackageInput.value = selectedPackage;
+        baseAmountInput.value = basePrice;
+        
+        checkStep2Validity();
+      });
+    });
+
+    backStep2Btn.addEventListener('click', goToPreviousStep);
+
+    nextStep2Btn.addEventListener('click', () => {
+      if (selectedPackage) {
+        generateTrackFields(trackCount);
+        goToNextStep();
+      }
+    });
+    
+    const genreDatalist = `
+        <datalist id="genre_list">
+          <option value="Pop">
+          <option value="Rock">
+          <option value="Hip-Hop / Rap">
+          <option value="R&B">
+          <option value="EDM">
+          <option value="Techno">
+          <option value="House">
+          <option value="Trance">
+          <option value="Jazz">
+          <option value="Klassik">
+          <option value="Reggaeton">
+          <option value="Latin Pop">
+          <option value="Latin Trap">
+          <option value="Salsa">
+          <option value="Cumbia">
+          <option value="Tango">
+          <option value="Samba">
+          <option value="Bachata">
+          <option value="Merengue">
+          <option value="Mariachi / Ranchera">
+          <option value="Bossa Nova">
+          <option value="World Music">
+          <option value="Country">
+          <option value="Ballade">
+          <option value="Latin Techno">
+          <option value="Schlager">
+          <option value="Alternative Rock">
+          <option value="Heavy Metal">
+          <option value="Afrobeat">
+          <option value="Drill">
+        </datalist>
+    `;
+
+    const vibeDatalist = `
+        <datalist id="vibe_list">
+          <option value="Fröhlich / Energiegeladen">
+          <option value="Melancholisch / Traurig">
+          <option value="Romantisch / Liebevoll">
+          <option value="Aggressiv / Mächtig">
+          <option value="Entspannt / Chill">
+          <option value="Motivierend / Inspirierend">
+          <option value="Dunkel / Mysteriös">
+          <option value="Party / Festlich">
+          <option value="Nostalgisch / Sentimental">
+          <option value="Episch / Dramatisch">
+        </datalist>
+    `;
+
+    const tempoDatalist = `
+        <datalist id="tempo_list">
+          <option value="Sehr langsam (40-60 BPM)">
+          <option value="Langsam (60-90 BPM)">
+          <option value="Mittel (90-120 BPM)">
+          <option value="Schnell (120-140 BPM)">
+          <option value="Sehr schnell (140-180 BPM)">
+          <option value="Extrem (180+ BPM)">
+        </datalist>
+    `;
+    
+    const languageDatalist = `
+        <datalist id="language_list">
+          <option value="Spanisch">
+          <option value="Englisch">
+          <option value="Deutsch">
+          <option value="Französisch">
+          <option value="Italienisch">
+          <option value="Portugiesisch">
+          <option value="Türkisch">
+          <option value="Arabisch">
+          <option value="Russisch">
+          <option value="Polnisch">
+          <option value="Instrumental (keine Sprache)">
+          <option value="Chinesisch">
+          <option value="Japanisch">
+          <option value="Hindi">
+        </datalist>
+    `;
+
+    function generateTrackFields(count) {
+      trackFieldsContainer.innerHTML = '';
+      
+      if (count > 1) {
+        const albumField = document.createElement('div');
+        albumField.classList.add('form-group');
+        albumField.innerHTML = `
+          <label for="albumName">Name der EP/Album <span class="required">*</span></label>
+          <input type="text" name="album_name" id="albumName" required placeholder="z.B. Mein Erstes Album">
+        `;
+        trackFieldsContainer.appendChild(albumField);
+      }
+      
+      trackFieldsContainer.innerHTML += genreDatalist;
+      trackFieldsContainer.innerHTML += vibeDatalist;
+      trackFieldsContainer.innerHTML += tempoDatalist;
+      trackFieldsContainer.innerHTML += languageDatalist;
+
+      for (let i = 1; i <= count; i++) {
+        const field = document.createElement('div');
+        field.classList.add('track-field');
+        field.innerHTML = `
+          <h4>Track ${i}</h4>
+          
+          <div class="form-group">
+            <label for="trackTitle${i}">Vorläufiger Track-Titel <span class="required">*</span></label>
+            <input type="text" name="track_title_${i}" id="trackTitle${i}" required placeholder="Mein cooler Song">
+          </div>
+
+          <div class="two-column">
+            <div class="form-group">
+              <label for="trackGenre1${i}">Hauptgenre <span class="required">*</span></label>
+              <input type="text" name="track_genre1_${i}" id="trackGenre1${i}" list="genre_list" required placeholder="z.B. Hip Hop, EDM, Pop">
+              <small>Tippen Sie zur Autovervollständigung oder geben Sie ein beliebiges Genre ein.</small>
+            </div>
+            <div class="form-group">
+              <label for="trackGenre2${i}">Sekundärgenre (Optional)</label>
+              <input type="text" name="track_genre2_${i}" id="trackGenre2${i}" list="genre_list" placeholder="z.B. Trap, Synthwave">
+              <small>Zusätzliches Genre oder Subgenre.</small>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="trackVibe${i}">Track-Vibe / Stimmung <span class="required">*</span></label>
+             <input type="text" name="track_vibe_${i}" id="trackVibe${i}" list="vibe_list" required placeholder="z.B. Melancholisch, Energetisch, Episch">
+            <small>Tippen Sie zur Autovervollständigung oder geben Sie eine beliebige Stimmung ein.</small>
+          </div>
+          
+          <div class="two-column">
+             <div class="form-group">
+              <label for="trackTempo${i}">Tempo (BPM) <span class="required">*</span></label>
+              <input type="text" name="track_tempo_${i}" id="trackTempo${i}" list="tempo_list" required placeholder="z.B. Mittel (90-120 BPM) oder eine exakte Zahl">
+              <small>Wählen oder geben Sie eine exakte Zahl ein.</small>
+            </div>
+            <div class="form-group">
+              <label for="trackDuration${i}">Ungefähre Dauer</label>
+              <input type="text" name="track_duration_${i}" id="trackDuration${i}" placeholder="z.B. 3:30">
+              <small>Optional.</small>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Art des Gesangs <span class="required">*</span></label>
+            <div class="radio-group">
+              <div class="radio-option">
+                <input type="radio" id="vocalsMale${i}" name="track_vocals_${i}" value="Männlich" required>
+                <label for="vocalsMale${i}">Männlich</label>
+              </div>
+              <div class="radio-option">
+                <input type="radio" id="vocalsFemale${i}" name="track_vocals_${i}" value="Weiblich" required>
+                <label for="vocalsFemale${i}">Weiblich</label>
+              </div>
+              <div class="radio-option">
+                <input type="radio" id="vocalsBoth${i}" name="track_vocals_${i}" value="Beides" required>
+                <label for="vocalsBoth${i}">Beides</label>
+              </div>
+              <div class="radio-option">
+                <input type="radio" id="vocalsNone${i}" name="track_vocals_${i}" value="Instrumental" required>
+                <label for="vocalsNone${i}">Instrumental</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="two-column">
+            <div class="form-group">
+              <label for="languageMain${i}">Hauptsprache des Gesangs <span class="required">*</span></label>
+              <input type="text" name="track_language_main_${i}" id="languageMain${i}" list="language_list" required placeholder="z.B. Spanisch">
+            </div>
+            <div class="form-group">
+              <label for="languageSecond${i}">Zweitsprache (Optional)</label>
+              <input type="text" name="track_language_second_${i}" id="languageSecond${i}" list="language_list" placeholder="z.B. Englisch">
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label>Expliziter Inhalt <span class="required">*</span></label>
+            <div class="radio-group">
+              <div class="radio-option">
+                <input type="radio" id="explicitYes${i}" name="track_explicit_${i}" value="Ja" required>
+                <label for="explicitYes${i}">Ja (Parental Advisory)</label>
+              </div>
+              <div class="radio-option">
+                <input type="radio" id="explicitNo${i}" name="track_explicit_${i}" value="Nein" required>
+                <label for="explicitNo${i}">Nein</label>
+              </div>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label for="trackOccasion${i}">Anlass / Zweck des Tracks <span class="required">*</span></label>
+            <select name="track_occasion_${i}" id="trackOccasion${i}" required>
+              <option value="">-- Auswählen --</option>
+              <option value="Geburtstag">Geburtstag</option>
+              <option value="Hochzeit">Hochzeit</option>
+              <option value="Jubiläum">Jubiläum</option>
+              <option value="Eigenes Projekt">Eigenes Projekt</option>
+              <option value="Kommerziell">Kommerziell</option>
+              <option value="Musik-Karriere">Musik-Karriere</option>
+              <option value="Geschenk">Geschenk</option>
+              <option value="Sonstiges">Sonstiges</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="trackInstrumentsWanted${i}">Gewünschte Instrumente oder Sounds (Optional)</label>
+            <input type="text" name="track_instruments_wanted_${i}" id="trackInstrumentsWanted${i}" placeholder="z.B. Saxophon, Epische Streicher, Tiefer Bass">
+          </div>
+          
+          <div class="form-group">
+            <label for="trackInstrumentsUnwanted${i}">Zu vermeidende Instrumente oder Sounds (Optional)</label>
+            <input type="text" name="track_instruments_unwanted_${i}" id="trackInstrumentsUnwanted${i}" placeholder="z.B. E-Gitarre, Glockenklang">
+          </div>
+          
+          <div class="form-group">
+            <label for="trackDescription${i}">Beschreibung der Idee / Story (Min. 250 Zeichen) <span class="required">*</span></label>
+            <textarea name="track_description_${i}" id="trackDescription${i}" required minlength="250" placeholder="Beschreiben Sie Ihre Vision, die Geschichte hinter dem Song oder alle wichtigen Details. Eine detaillierte Beschreibung (mindestens 250 Zeichen) hilft HOXOH, Ihre Vision perfekt umzusetzen."></textarea>
+          </div>
+          
+          <div class="form-group">
+            <label for="trackReference${i}">Musik-Referenz-Link (Optional)</label>
+            <input type="url" name="track_reference_${i}" id="trackReference${i}" placeholder="z.B. Link zu YouTube oder Spotify eines Songs mit ähnlichem Sound.">
+            <small>Dies hilft HOXOH, Ihren gewünschten Stil zu verstehen.</small>
+          </div>
+        `;
+        trackFieldsContainer.appendChild(field);
+      }
+    }
+
+    backStep3Btn.addEventListener('click', goToPreviousStep);
+
+    syncCheckbox.addEventListener('change', function() {
+      if (this.checked) {
+        if (artistNameInput.value.trim() !== '') {
+          const parts = artistNameInput.value.trim().split(' ');
+          firstNameInput.value = parts[0];
+          lastNameInput.value = parts.slice(1).join(' ');
+        } else {
+          alert('Bitte geben Sie zunächst den Künstlernamen ein.');
+          this.checked = false;
+        }
+      }
+    });
+
+    // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+    // ÜBERARBEITETER SUBMIT-HANDLER: E-Mail senden -> Weiterleiten
+    // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+    form.addEventListener('submit', async function(e) {
+      e.preventDefault();
+
+      if (!validateStep3()) {
+        return;
+      }
+
+      const currentYear = new Date().getFullYear();
+      const randomID = Math.floor(1000 + Math.random() * 9000); 
+      const orderNumber = `HOXOH-${currentYear}-${randomID}`;
+      
+      const formData = new FormData(form);
+      const data = {};
+      
+      data.personal = {
+        firstName: formData.get('first_name'),
+        lastName: formData.get('last_name'),
+        country: formData.get('country'),
+        birthYear: formData.get('birth_year'),
+        email: formData.get('email'),
+        artistName: formData.get('artist_name'),
+        labelName: formData.get('label_name')
+      };
+
+      data.package = {
+        id: formData.get('track_package'),
+        amount: formData.get('base_amount'),
+        trackCount: trackCount,
+        album_name: (trackCount > 1) ? formData.get('album_name') : undefined
+      };
+
+      data.tracks = [];
+      for (let i = 1; i <= trackCount; i++) {
+        data.tracks.push({
+          title: formData.get(`track_title_${i}`),
+          genre1: formData.get(`track_genre1_${i}`),
+          genre2: formData.get(`track_genre2_${i}`),
+          vibe: formData.get(`track_vibe_${i}`),
+          tempo: formData.get(`track_tempo_${i}`),
+          duration: formData.get(`track_duration_${i}`),
+          vocals: formData.get(`track_vocals_${i}`), 
+          languageMain: formData.get(`track_language_main_${i}`),
+          languageSecond: formData.get(`track_language_second_${i}`),
+          explicit: formData.get(`track_explicit_${i}`), 
+          occasion: formData.get(`track_occasion_${i}`),
+          instrumentsWanted: formData.get(`track_instruments_wanted_${i}`),
+          instrumentsUnwanted: formData.get(`track_instruments_unwanted_${i}`),
+          description: formData.get(`track_description_${i}`),
+          reference: formData.get(`track_reference_${i}`),
+        });
+      }
+
+      // (1) E-Mail an dich auslösen (Netlify Function)
+      try {
+        const res = await fetch('/.netlify/functions/contact', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            orderNumber,
+            personal: data.personal,
+            package: data.package,
+            tracks: data.tracks
+          })
+        });
+        if (!res.ok) {
+          console.warn('contact failed', await res.text());
+          alert('Hinweis: E-Mail konnte nicht gesendet werden. Die Zahlung kann fortgesetzt werden.');
+        }
+      } catch (err) {
+        console.warn('contact error', err);
+        alert('Hinweis: E-Mail konnte nicht gesendet werden. Die Zahlung kann fortgesetzt werden.');
+      }
+
+      // (2) Danach wie gehabt weiterleiten
+      const encodedData = encodeURIComponent(JSON.stringify(data));
+      const redirectUrl = `payip-de.html?amount=${data.package.amount}&package=${data.package.id}&order=${orderNumber}&data=${encodedData}`;
+      
+      console.log('Weiterleitung zu:', redirectUrl);
+      window.location.href = redirectUrl;
+    });
+    
+    // ==========================================================
+    // JS für Sprachmenü (Dropdown)
+    // ==========================================================
+    const langBtn = document.querySelector('.lang-btn');
+    const langContainer = document.querySelector('.lang');
+
+    langBtn.addEventListener('click', function(e) {
+      langContainer.classList.toggle('open');
+      
+      const isExpanded = langContainer.classList.contains('open');
+      this.setAttribute('aria-expanded', isExpanded);
+    });
+
+    document.addEventListener('click', function(e) {
+      if (!langContainer.contains(e.target) && langContainer.classList.contains('open')) {
+        langContainer.classList.remove('open');
+        langBtn.setAttribute('aria-expanded', 'false');
+      }
+    });
+
+    updateStepUI();
+  </script>
+
+<script>
+(function(){
+  function qs(s){return document.querySelector(s);}
+  var cb = qs('#syncWithArtistName');
+  var fn = qs('#firstName');
+  var ln = qs('#lastName');
+  var an = qs('#artistName');
+  if(!cb || !an || !fn || !ln){
+    // Retry binding if elements render later
+    var tries = 0;
+    var iv = setInterval(function(){
+      cb = qs('#syncWithArtistName');
+      fn = qs('#firstName');
+      ln = qs('#lastName');
+      an = qs('#artistName');
+      if(cb && an && fn && ln){
+        clearInterval(iv); bind();
+      }else if(++tries>30){ clearInterval(iv); }
+    }, 150);
+  } else {
+    bind();
+  }
+  function bind(){
+    function combine(){
+      var a = (fn.value||'').trim();
+      var b = (ln.value||'').trim();
+      var v = a && b ? (a + ' ' + b) : (a || b);
+      if(cb.checked) an.value = v;
+    }
+    ['change','click'].forEach(ev=>cb.addEventListener(ev, combine));
+    ['input','change'].forEach(ev=>fn.addEventListener(ev, ()=>{ if(cb.checked) combine(); }));
+    ['input','change'].forEach(ev=>ln.addEventListener(ev, ()=>{ if(cb.checked) combine(); }));
+    if(cb.checked) { combine(); setTimeout(combine, 400); }
+  }
+})();
+</script>
+
+</body>
+</html>

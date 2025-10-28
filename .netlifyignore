@@ -1,0 +1,25 @@
+﻿# --- NIE deployen ---
+# Archive / große Pakete
+*.zip
+*.7z
+*.rar
+
+# Lokale Skripte / Diagnosen
+*.ps1
+*.bat
+diagnostics.html
+diagnose.ps1
+
+# Caches/Repos
+.git/
+.netlify/           # lokale CLI-Daten
+node_modules/
+
+# Backups / temporär
+*.bak
+*.tmp
+*_backup/
+_archive/
+
+# rein lokal genutzte Datei
+HOXOH_Make_Payhip_to_Gmail.json

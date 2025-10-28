@@ -1,0 +1,1227 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PayIP - Pagos Seguros | HOXOH MUSIC</title>
+    <meta name="description" content="Pagos rápidos y seguros por PayPal a HOXOH MUSIC">
+    
+    <!-- FAVICONS -->
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon/favicon-16x16.png">
+    <link rel="icon" href="assets/favicon/favicon.ico?v=3" sizes="any"> 
+    
+    <style>
+        :root {
+            --accent: #4F46E5;
+            --dark-text: #1F2937;
+            --muted-dark: #6B7280;
+            --light-text: white;
+            --muted-light: rgba(255, 255, 255, 0.7);
+            --sand-color: #F8F4DF;
+            --transparent-sand: rgba(248, 244, 223, 0.95);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            color: var(--light-text);
+            min-height: 100vh;
+            padding: 20px;
+            position: relative; 
+            overflow-x: hidden;
+        }
+
+        /* FONDO (IMAGEN) */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-image: url('assets/logo/hoxoh-background-color.webp');
+            background-size: cover;
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            opacity: 1;
+            pointer-events: none;
+            z-index: -3; 
+        }
+        
+        /* LIENZO DE HUMO */
+        #smokeCanvas {
+            position: fixed; top: 0; left: 0;
+            width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: -2; 
+            opacity: 0.5;
+        }
+
+        /* LIENZO DE NOTAS MUSICALES */
+        #musicNotesCanvas {
+            position: fixed; top: 0; left: 0;
+            width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: -1; 
+            opacity: 1.0; 
+        }
+
+        .container { max-width: 1200px; margin: 0 auto; position: relative; z-index: 10; }
+
+        .header { text-align: center; margin-bottom: 50px; }
+        .header h1 { font-size: 3rem; color: var(--sand-color); margin-bottom: 10px; } 
+        .header h1 span { color: var(--accent); }
+        .header p { font-size: 1.25rem; color: var(--muted-light); }
+
+        .order-badge {
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            color: var(--light-text);
+            padding: 12px 24px;
+            border-radius: 12px;
+            display: inline-block;
+            margin: 20px 0;
+            font-weight: 600;
+        }
+
+        .payment-card {
+            background: var(--transparent-sand);
+            backdrop-filter: blur(10px); 
+            border-radius: 24px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4); 
+            overflow: hidden;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0;
+            color: var(--dark-text);
+        }
+
+        @media (max-width: 768px) {
+            .payment-card { grid-template-columns: 1fr; }
+            .header h1 { font-size: 2rem; }
+        }
+
+        .info-section {
+            background: linear-gradient(135deg, #4F46E5 0%, #7C3AED 100%);
+            color: white;
+            padding: 50px;
+        }
+
+        .security-badge { display: flex; align-items: center; gap: 8px; margin-bottom: 30px; font-weight: 600; }
+        .info-section h2 { font-size: 2rem; margin-bottom: 30px; }
+
+        .service-description {
+            margin-bottom: 30px;
+            line-height: 1.6;
+            border-left: 3px solid white;
+            padding-left: 15px;
+        }
+        .service-description p { margin-bottom: 15px; font-size: 0.95rem; color: #C7D2FE; text-align: justify; }
+        .service-description p:last-child { margin-bottom: 0; }
+
+        .feature { display: flex; align-items: flex-start; gap: 15px; margin-bottom: 25px; }
+        .feature-icon {
+            width: 40px; height: 40px; background: rgba(255,255,255,0.2);
+            border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+        }
+        .feature h3 { font-size: 1.125rem; margin-bottom: 5px; }
+        .feature p { color: #C7D2FE; font-size: 0.95rem; }
+
+        .payment-methods { margin-top: 50px; padding-top: 30px; border-top: 1px solid rgba(255, 255, 255, 0.2); }
+        .payment-methods p { font-size: 0.875rem; color: #C7D2FE; margin-bottom: 12px; }
+
+        .method-badges { display: flex; flex-wrap: wrap; gap: 10px; }
+        .badge { padding: 8px 16px; border-radius: 8px; font-size: 0.875rem; font-weight: 600; }
+        .badge-primary { background: #3B82F6; }
+        .badge-secondary { background: rgba(255, 255, 255, 0.2); }
+
+        .form-section { padding: 50px; }
+        .form-section h2 { font-size: 1.5rem; color: var(--dark-text); margin-bottom: 30px; }
+
+        .form-group { margin-bottom: 30px; }
+        .form-group label { display: block; font-size: 0.875rem; font-weight: 600; color: var(--dark-text); margin-bottom: 8px; }
+
+        .input-wrapper { position: relative; }
+        .currency-symbol {
+            position: absolute; left: 16px; top: 50%; transform: translateY(-50%);
+            font-size: 1.25rem; font-weight: 600; color: var(--muted-dark);
+        }
+        input[type="number"] {
+            width: 100%; padding: 16px 16px 16px 48px; font-size: 1.25rem; font-weight: 600;
+            border: 2px solid #E5E7EB; border-radius: 12px; outline: none; transition: border-color 0.3s;
+        }
+        input[type="number"]:focus { border-color: var(--accent); }
+        input[type="number"]:disabled { background: #F3F4F6; cursor: not-allowed; }
+
+        .help-text { font-size: 0.875rem; color: var(--muted-dark); margin-top: 8px; }
+
+        .locked-badge {
+            display: inline-flex; align-items: center; gap: 6px;
+            background: #EFF6FF; border: 1px solid #BFDBFE; color: #1E40AF;
+            padding: 4px 12px; border-radius: 8px; font-size: 0.75rem; font-weight: 600; margin-top: 8px;
+        }
+
+        .addon-box {
+            background: #FEF3C7; border: 2px solid #FCD34D; border-radius: 12px;
+            padding: 24px; margin-bottom: 30px; color: var(--dark-text);
+        }
+        .addon-box h3 { font-size: 1.125rem; font-weight: 700; color: #92400E; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+
+        .checkbox-wrapper { display: flex; align-items: flex-start; gap: 12px; cursor: pointer; }
+        .checkbox-wrapper input[type="checkbox"] { width: 24px; height: 24px; cursor: pointer; margin-top: 2px; }
+        .checkbox-label { flex: 1; }
+        .checkbox-label strong { display: block; font-size: 1rem; color: var(--dark-text); margin-bottom: 4px; }
+        .checkbox-label p { font-size: 0.875rem; color: var(--muted-dark); line-height: 1.6; }
+
+        .addon-price { font-size: 1.25rem; font-weight: 700; color: #19c37d; margin-top: 8px; }
+
+        .checkbox-wrapper .price-info {
+            font-size: 1rem; font-weight: 700; color: #3B82F6; flex-shrink: 0; margin-top: 0; align-self: center;
+        }
+
+        .info-box { background: #EFF6FF; border: 2px solid #BFDBFE; border-radius: 12px; padding: 24px; margin-bottom: 30px; color: var(--dark-text); }
+        .info-box h3 { font-size: 0.875rem; font-weight: 600; color: var(--dark-text); margin-bottom: 12px; }
+        .info-box ol { font-size: 0.875rem; color: #374151; line-height: 1.8; padding-left: 20px; }
+
+        .total-box { background: linear-gradient(135deg, #19c37d 0%, #15a068 100%); color: white; border-radius: 12px; padding: 24px; margin-bottom: 24px; }
+        .total-box h3 { font-size: 0.875rem; font-weight: 600; margin-bottom: 8px; opacity: 0.9; }
+        .total-box .amount { font-size: 2.5rem; font-weight: 900; display: flex; align-items: center; gap: 8px; }
+
+        .agb-acceptance-box { margin-bottom: 24px; padding: 10px 0; }
+
+        .warning-box {
+            background: #FEF3C7; border: 2px solid #FCD34D; border-radius: 12px;
+            padding: 16px; margin-bottom: 24px; display: none; color: #92400E;
+        }
+        .warning-box.show { display: flex; align-items: center; gap: 12px; }
+        .warning-box p { font-size: 0.875rem; color: #92400E; font-weight: 500; }
+
+        .pay-button {
+            width: 100%;
+            background: linear-gradient(135deg, #3B82F6 0%, #2563EB 100%);
+            color: white; border: none; padding: 18px 24px; font-size: 1.125rem; font-weight: 600;
+            border-radius: 12px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px;
+            transition: all 0.3s; box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+        }
+        .pay-button:hover { background: linear-gradient(135deg, #2563EB 0%, #1D4ED8 100%); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4); }
+        .pay-button:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+        .disclaimer { text-align: center; font-size: 0.75rem; color: var(--muted-dark); margin-top: 16px; margin-bottom: 30px; }
+
+        .note { margin-top: 24px; padding-top: 24px; border-top: 1px solid #E5E7EB; text-align: center; }
+        .note p { font-size: 0.75rem; color: var(--muted-dark); }
+
+        .footer { text-align: center; margin-top: 30px; color: var(--muted-light); }
+        .footer p { font-size: 0.875rem; color: inherit; margin: 5px 0; }
+        .footer strong { color: var(--light-text); }
+
+        .icon { width: 20px; height: 20px; fill: currentColor; }
+    </style>
+</head>
+<body>
+  <!-- HOXOH SendGrid hook (non-intrusive) -->
+  <input type="text" name="hp" id="hoxoh-hp" autocomplete="off" tabindex="-1" style="position:absolute;left:-9999px;opacity:0;width:0;height:0;">
+
+    <!-- Netlify Forms: formulario oculto (ES) -->
+    <form name="bestellung-es" netlify-honeypot="bot-field" hidden action="thanks-es.html" method="post">
+    <!-- Netlify Forms essentials -->
+    <input type="hidden" name="form-name" value="Pedido">
+    <input type="hidden" name="submission-id" value="d43f6b68-06f7-499e-b108-ae3f7535ed5c">
+    <input type="hidden" name="page-path" value="{window?.location?.pathname}">
+    <input type="hidden" name="user-agent" value="">
+    <input type="hidden" name="language" value="es">
+    <!-- Captured totals/options (filled on submit) -->
+    <input type="hidden" name="calculated_total_usd" id="nl_total_hidden" value="">
+    <input type="hidden" name="selected_package" id="nl_pkg_hidden" value="">
+    <input type="hidden" name="selected_addons" id="nl_addons_hidden" value="">
+    <input type="hidden" name="agb_accepted" id="nl_agb_hidden" value="">
+    <!-- Honeypot -->
+    <div style="position:absolute;left:-5000px;opacity:0;">
+      <label>Don’t fill this out if you’re human: <input name="bot-field" /></label>
+    </div>
+    <!-- reCAPTCHA -->
+    <div data-netlify-recaptcha="true"></div>
+    
+        <input type="hidden" name="form-name" value="bestellung-es" />
+        <input type="hidden" name="bot-field" />
+        <input type="hidden" name="order_details" />
+    
+        <div class="netlify-summary" style="margin-top:1rem;font-weight:600;">
+          <span id="nl_total_label">Importe total (USD):</span>
+          <span id="nl_total_display"></span>
+        </div>
+        
+<fieldset class="nl-customer" style="margin-top:1.25rem;padding:1rem;border:1px solid rgba(255,255,255,.2);border-radius:14px;">
+  <legend style="padding:0 .5rem;font-weight:700;opacity:.95;">Datos del cliente</legend>
+  <div class="nl-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:.75rem;">
+    <label><span>Nombre*</span><input type="text" name="customer_name" required></label>
+    <label><span>Correo*</span><input type="email" name="customer_email" required></label>
+    <label><span>Teléfono / WhatsApp</span><input type="tel" name="customer_phone" ></label>
+    <label><span>Artista / Empresa</span><input type="text" name="customer_artist" ></label>
+    <label><span>País / Zona horaria</span><input type="text" name="customer_country" ></label>
+    <label><span>Idioma preferido</span>
+      <select name="customer_language">
+        <option value="Alemán">Alemán</option>
+<option value="Inglés">Inglés</option>
+<option value="Español">Español</option>
+      </select>
+    </label>
+    <label style="grid-column:1/-1;"><span>Brief del proyecto* (estilo, referencias, objetivos)</span><textarea name="project_brief" required rows="5"></textarea></label>
+    <label style="grid-column:1/-1;"><span>Enlaces (Spotify, YouTube, Drive …)</span><input type="url" name="project_links" placeholder="https://"></label>
+    <label><span>Fecha límite deseada</span><input type="date" name="project_deadline"></label>
+    <label><span>Rango de presupuesto</span>
+      <select name="project_budget">
+        <option value="<$100"><$100</option>
+<option value="$100–$300">$100–$300</option>
+<option value="$300–$750">$300–$750</option>
+<option value="$750–$1500">$750–$1500</option>
+<option value="$1500+">$1500+</option>
+      </select>
+    </label>
+    <div style="grid-column:1/-1;">
+      <label><span>Subir archivo (máx. 25 MB)</span><input type="file" name="attachment" /></label>
+      <small style="opacity:.7;display:block;">Tip: ZIP/PDF/MP3, máximo 25 MB (Netlify).</small>
+    </div>
+    <label style="grid-column:1/-1;display:flex;align-items:flex-start;gap:.5rem;">
+      <input type="checkbox" name="privacy_consent" required>
+      <span>Acepto el tratamiento de mis datos según la política de privacidad.*</span>
+    </label>
+    <label style="grid-column:1/-1;display:flex;align-items:flex-start;gap:.5rem;">
+      <input type="checkbox" name="marketing_optin">
+      <span>Quiero recibir novedades/ofertas por email.</span>
+    </label>
+  </div>
+</fieldset>
+
+</form>
+
+    <canvas id="smokeCanvas"></canvas>
+    <canvas id="musicNotesCanvas"></canvas>
+
+    <div class="container">
+        <div class="header">
+            <h1>Pay<span>IP</span></h1>
+            <p>Pagos rápidos y seguros con PayPal</p>
+            <div class="order-badge" id="orderBadge" style="display: none;">
+                📋 Pedido: <span id="orderNumber"></span>
+            </div>
+        </div>
+
+        <div class="payment-card">
+            <div class="info-section">
+                <div class="security-badge">
+                    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                    </svg>
+                    <span>Protección al Comprador de PayPal</span>
+                </div>
+
+                <h2>Pago a HOXOH MUSIC</h2>
+
+                <div class="service-description">
+                    <p>
+                        Este pago cubre el servicio integral de <strong>Composición y Producción Musical</strong> de HOXOH MUSIC.
+                    </p>
+                    <p>
+                        Actuamos como tu <strong>compositor</strong> y <strong>productor</strong> principal: desde la idea hasta el máster final.
+                    </p>
+                    <p>
+                        Incluye concepción, composición, arreglos, mezcla profesional y masterización final. El resultado es un <strong>Single Inicial (1 pista)</strong>, un <strong>Paquete EP (5 pistas)</strong> o un <strong>Álbum (10 pistas)</strong> listo para Spotify, Apple Music y más.
+                    </p>
+                    <p>
+                        Todos los paquetes incluyen la transferencia completa de derechos (<strong>Full Buyout</strong>): posees el 100% de la obra sin regalías adicionales.
+                    </p>
+                    <p>
+                        Calidad de estudio y un servicio llave en mano para convertir tu visión en sonido profesional.
+                    </p>
+                </div>
+                
+                <div class="feature">
+                    <div class="feature-icon">
+                        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="2" y="5" width="20" height="14" rx="2"/>
+                            <path d="M2 10h20"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <h3>Paga con PayPal</h3>
+                        <p>Serás redirigido a PayPal para completar el pago de forma segura</p>
+                    </div>
+                </div>
+
+                <div class="feature">
+                    <div class="feature-icon">
+                        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                            <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <h3>Máxima seguridad</h3>
+                        <p>Tus datos de pago están protegidos por PayPal</p>
+                    </div>
+                </div>
+
+                <div class="feature">
+                    <div class="feature-icon">
+                        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <h3>Muy rápido</h3>
+                        <p>Pago completado en segundos</p>
+                    </div>
+                </div>
+
+                <div class="feature">
+                    <div class="feature-icon">
+                        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                            <polyline points="22 4 12 14.01 9 11.01"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <h3>Métodos de pago flexibles</h3>
+                        <p>Saldo PayPal, Tarjeta de Crédito o Débito, o Cuenta bancaria</p>
+                    </div>
+                </div>
+
+                <div class="payment-methods">
+                    <p>Puedes pagar con PayPal usando:</p>
+                    <div class="method-badges">
+                        <div class="badge badge-primary">PayPal</div>
+                        <div class="badge badge-secondary">Visa</div>
+                        <div class="badge badge-secondary">Mastercard</div>
+                        <div class="badge badge-secondary">Débito</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h2>Importe de pago</h2>
+
+                <div class="form-group">
+                    <label for="amount">Importe base</label>
+                    <div class="input-wrapper">
+                        <span class="currency-symbol">$</span>
+                        <input type="number" id="amount" disabled placeholder="0.00" step="0.01" min="0.01">
+                    </div>
+                    <span class="locked-badge">
+                        <svg class="icon" style="width: 12px; height: 12px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                            <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                        </svg>
+                        Importe de tu pedido
+                    </span>
+                    <p class="help-text" id="packageInfo"></p>
+                </div>
+
+                <!-- EXPRESS -->
+                <div class="addon-box">
+                    <h3>⚡ Mastering exprés en 24 horas</h3>
+                    <div class="checkbox-wrapper">
+                        <input type="checkbox" id="expressAddon" onchange="updateTotal()">
+                        <label for="expressAddon" class="checkbox-label">
+                            <strong>Cuando cada hora cuenta.</strong>
+                            <p>Tu canción se procesa con prioridad y estará lista en un máximo de 24 horas — perfecto para lanzamientos o eventos urgentes.</p>
+                            <p style="font-size: 0.8rem; margin-top: 5px; color: var(--muted-dark);">(Producción estándar: 4–7 días)</p>
+                            <span class="addon-price" id="addonPrice">+ $25 por pista</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- REVISIONES -->
+                <div class="addon-box" id="revisionAddonBox" style="background:#EAF7E9; border:2px solid #6EE7B7; color:#065F46;">
+                    <h3 style="color:#065F46;">➕ Rondas de revisión opcionales</h3>
+                    <div class="form-group" style="margin-bottom:0;">
+                        <label for="revisions" style="font-weight:normal; color:#065F46; margin-bottom:12px; display:block;">
+                            Reserva revisiones si quieres ajustes tras la entrega final:
+                        </label>
+                        
+                        <div class="radio-option" style="margin-bottom:10px; display:flex; justify-content:space-between; align-items:center;">
+                            <label style="display:flex; align-items:center; cursor:pointer; font-weight:normal;">
+                                <input type="radio" id="revisionNone" name="revisions" value="0" checked onchange="updateTotal()" style="margin-right:10px; width:18px; height:18px;">
+                                Sin revisiones
+                            </label>
+                            <span style="font-weight:600; color:var(--dark-text);">$0.00</span>
+                        </div>
+
+                        <div class="radio-option" style="margin-bottom:10px; display:flex; justify-content:space-between; align-items:center;">
+                            <label style="display:flex; align-items:center; cursor:pointer; font-weight:normal;">
+                                <input type="radio" id="revisionOne" name="revisions" value="25" onchange="updateTotal()" style="margin-right:10px; width:18px; height:18px;">
+                                Una ronda de revisión
+                            </label>
+                            <span style="font-weight:600; color:var(--dark-text);">+ $<span id="revisionOneTotal">25.00</span></span>
+                        </div>
+
+                        <div class="radio-option" style="display:flex; justify-content:space-between; align-items:center;">
+                            <label style="display:flex; align-items:center; cursor:pointer; font-weight:normal;">
+                                <input type="radio" id="revisionTwo" name="revisions" value="40" onchange="updateTotal()" style="margin-right:10px; width:18px; height:18px;">
+                                Dos rondas de revisión
+                            </label>
+                            <span style="font-weight:600; color:var(--dark-text);">+ $<span id="revisionTwoTotal">40.00</span></span>
+                        </div>
+
+                        <p class="help-text" style="margin-top:15px; color:#065F46;">*Importante: los precios se calculan según la cantidad de pistas.</p>
+                    </div>
+                </div>
+                
+                <!-- WATERMARK/COPYRIGHT -->
+                <div class="addon-box" id="copyrightAddonBox" style="background:#EFF6FF; border:2px solid #BFDBFE; color:#1E40AF;">
+                    <h3 style="color:#1E40AF;">© Marca de agua invisible (codificación digital)</h3>
+                    <p style="font-size:0.875rem; color:#1E40AF; margin-bottom:20px;">Protege tu música con una marca de agua digital invisible incrustada en las portadas. Detecta copias no autorizadas y rastrea filtraciones.</p>
+                    <div id="mainCoverOption" class="checkbox-wrapper" style="margin-bottom:15px;">
+                        <input type="checkbox" id="mainCoverCopyright" onchange="updateTotal()">
+                        <label for="mainCoverCopyright" class="checkbox-label">
+                            <strong>Portada principal del álbum/EP</strong>
+                            <p id="mainCoverDescription">La portada principal recibe la codificación digital para rastreo y protección.</p>
+                            <span class="addon-price" id="mainCoverPrice">+ $2.50</span>
+                        </label>
+                    </div>
+                    <div id="trackCoverOption" class="checkbox-wrapper">
+                        <input type="checkbox" id="trackCoverCopyright" onchange="updateTotal()">
+                        <label for="trackCoverCopyright" class="checkbox-label">
+                            <strong>Portadas individuales de pistas</strong>
+                            <p>Cada portada de pista recibe su propia codificación única para máxima protección.</p>
+                            <span class="addon-price" id="trackCoverPrice">+ $2.50 por pista</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="total-box">
+                    <h3>Importe total</h3>
+                    <div class="amount">
+                        <span class="currency-symbol">$</span>
+                        <span id="totalAmount">0.00</span>
+                    </div>
+                </div>
+
+                <div class="agb-acceptance-box">
+                    <label class="checkbox-wrapper">
+                        <input type="checkbox" id="agbAcceptance" onchange="togglePayButton()">
+                        <span class="checkbox-label">
+                            <strong>Acepto los Términos y Condiciones</strong>
+                            <p>Al marcar esta casilla, aceptas nuestros <a href="/agb" target="_blank" style="color: #3B82F6; text-decoration: underline;">Términos y Condiciones</a> y la <a href="/privacy" target="_blank" style="color: #3B82F6; text-decoration: underline;">Política de Privacidad</a>.</p>
+                        </span>
+                    </label>
+                </div>
+
+                <div class="warning-box" id="warningBox">
+                    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 20px; height: 20px;">
+                        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                    </svg>
+                    <p></p>
+                </div>
+
+                <button class="pay-button" id="payButton" disabled>
+                    Pagar ahora con PayPal
+                    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                </button>
+
+                <p class="disclaimer">
+                    Serás redirigido a PayPal.me. El pago se procesa mediante PayPal.
+                </p>
+
+                <div class="info-box">
+                    <h3>Cómo funciona:</h3>
+                    <ol>
+                        <li>Verifica el importe y las opciones (Exprés/Revisiones/Marca de agua)</li>
+                        <li>Acepta los Términos y Condiciones (arriba)</li>
+                        <li>Haz clic en “Pagar ahora con PayPal”</li>
+                        <li>Serás redirigido a PayPal</li>
+                        <li>Inicia sesión y confirma el pago</li>
+                    </ol>
+                </div>
+
+                <div class="note">
+                    <p><strong>Nota:</strong> También puedes pagar con tarjeta de crédito o débito sin cuenta de PayPal.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>Pago a: <strong>HOXOH MUSIC</strong></p>
+            <p style="font-size:0.75rem;">© 2025 PayIP. Todos los derechos reservados.</p>
+        </div>
+    </div>
+
+    <script>
+        // =======================
+        // Animaciones (Humo/Notas)
+        // =======================
+        const smokeCanvas = document.getElementById('smokeCanvas');
+        const smokeCtx = smokeCanvas.getContext('2d');
+        let W_s = smokeCanvas.width = window.innerWidth;
+        let H_s = smokeCanvas.height = window.innerHeight;
+
+        class SmokeParticle {
+            constructor() {
+                this.x = W_s / 2;
+                this.y = H_s + 10;
+                this.size = Math.random() * 50 + 20;
+                this.speedX = (Math.random() - 0.5) * 0.5;
+                this.speedY = -Math.random() * 0.5 - 0.1;
+                this.opacity = 0;
+                this.life = 0;
+                this.maxLife = Math.random() * 800 + 400;
+                this.color = Math.floor(Math.random() * 256) + ',' + Math.floor(Math.random() * 256) + ',' + Math.floor(Math.random() * 256);
+                this.targetOpacity = Math.random() * 0.1 + 0.05;
+            }
+            update() {
+                this.life++;
+                if (this.life < 100) this.opacity += (this.targetOpacity - this.opacity) * 0.05;
+                if (this.life > this.maxLife * 0.8) this.opacity *= 0.98;
+                this.x += this.speedX + Math.sin(this.life * 0.005) * 0.1;
+                this.y += this.speedY;
+                this.size += 0.1;
+                if (this.life > this.maxLife || this.opacity < 0.005) this.reset();
+            }
+            reset() {
+                this.x = W_s / 2 + (Math.random() - 0.5) * 50;
+                this.y = H_s + 10;
+                this.size = Math.random() * 50 + 20;
+                this.speedX = (Math.random() - 0.5) * 0.5;
+                this.speedY = -Math.random() * 0.5 - 0.1;
+                this.opacity = 0;
+                this.life = 0;
+                this.maxLife = Math.random() * 800 + 400;
+                this.color = Math.floor(Math.random() * 256) + ',' + Math.floor(Math.random() * 256) + ',' + Math.floor(Math.random() * 256);
+                this.targetOpacity = Math.random() * 0.1 + 0.05;
+            }
+            draw() {
+                smokeCtx.beginPath();
+                smokeCtx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                smokeCtx.fillStyle = `rgba(${this.color}, ${this.opacity})`;
+                smokeCtx.fill();
+            }
+        }
+        const smokeParticles = [];
+        for (let i = 0; i < 120; i++) smokeParticles.push(new SmokeParticle());
+        function animateSmoke() {
+            smokeCtx.clearRect(0, 0, W_s, H_s);
+            for (let i = 0; i < smokeParticles.length; i++) { smokeParticles[i].update(); smokeParticles[i].draw(); }
+            requestAnimationFrame(animateSmoke);
+        }
+
+        const notesCanvas = document.getElementById('musicNotesCanvas');
+        const notesCtx = notesCanvas.getContext('2d');
+        let W_n = notesCanvas.width = window.innerWidth;
+        let H_n = notesCanvas.height = window.innerHeight;
+
+        class MusicNote {
+            constructor() { this.reset(); }
+            reset() {
+                const symbols = ['♪', '♫', '♬', '♩', '𝄞', '𝄢', '𝄽', '𝄾', '♭', '♯', '♮', '𝄞', '𝅘𝅥𝅮'];
+                this.symbol = symbols[Math.floor(Math.random() * symbols.length)];
+                this.x = Math.random() * W_n;
+                this.y = H_n + Math.random() * 100;
+                this.size = Math.random() * 20 + 30;
+                this.speedY = -(Math.random() * 0.8 + 0.2);
+                this.speedX = (Math.random() - 0.5) * 0.5;
+                this.opacity = 0;
+                this.targetOpacity = Math.random() * 0.1 + 0.1;
+                this.rotation = Math.random() * 2 * Math.PI;
+                this.rotationSpeed = (Math.random() - 0.5) * 0.005;
+                this.life = 0;
+                this.maxLife = Math.random() * 600 + 300;
+                this.color = Math.floor(Math.random() * 256) + ',' + Math.floor(Math.random() * 256) + ',' + Math.floor(Math.random() * 256);
+            }
+            update() {
+                this.life++;
+                if (this.life < 30) this.opacity += (this.targetOpacity - this.opacity) * 0.1;
+                if (this.life > this.maxLife - 50) this.opacity *= 0.95;
+                this.y += this.speedY;
+                this.x += this.speedX + Math.sin(this.life * 0.05) * 0.5;
+                this.rotation += this.rotationSpeed;
+                this.targetSize = this.size + Math.sin(this.life * 0.1) * 5;
+                if (this.life > this.maxLife || this.y < -100 || this.opacity < 0.01) this.reset();
+            }
+            draw() {
+                notesCtx.save();
+                notesCtx.translate(this.x, this.y);
+                notesCtx.rotate(this.rotation);
+                notesCtx.font = `${this.targetSize}px Arial`;
+                notesCtx.fillStyle = `rgba(${this.color}, ${this.opacity})`;
+                notesCtx.textAlign = 'center';
+                notesCtx.textBaseline = 'middle';
+                notesCtx.fillText(this.symbol, 0, 0);
+                notesCtx.restore();
+            }
+        }
+        const musicNotes = [];
+        for (let i = 0; i < 60; i++) { const n = new MusicNote(); n.y = Math.random() * notesCanvas.height; musicNotes.push(n); }
+        function animateNotes() {
+            notesCtx.clearRect(0, 0, W_n, H_n);
+            for (let i = 0; i < musicNotes.length; i++) { musicNotes[i].update(); musicNotes[i].draw(); }
+            requestAnimationFrame(animateNotes);
+        }
+
+        window.addEventListener('resize', () => {
+            W_s = smokeCanvas.width = window.innerWidth;
+            H_s = smokeCanvas.height = window.innerHeight;
+            W_n = notesCanvas.width = window.innerWidth;
+            H_n = notesCanvas.height = window.innerHeight;
+        });
+
+        animateSmoke();
+        animateNotes();
+
+        // =======================
+        // Lógica de Pago
+        // =======================
+        const PAYPAL_ME_USERNAME = 'hoxohmusic';
+        const COVER_PRICE_PER_UNIT = 2.50;
+
+        const amountInput = document.getElementById('amount');
+        const payButton = document.getElementById('payButton');
+        const warningBox = document.getElementById('warningBox');
+        const totalAmountEl = document.getElementById('totalAmount');
+        const expressAddon = document.getElementById('expressAddon');
+        const addonPrice = document.getElementById('addonPrice');
+        const packageInfo = document.getElementById('packageInfo');
+        const orderBadge = document.getElementById('orderBadge');
+        const orderNumber = document.getElementById('orderNumber');
+        const agbAcceptance = document.getElementById('agbAcceptance');
+
+        const mainCoverCopyright = document.getElementById('mainCoverCopyright');
+        const trackCoverCopyright = document.getElementById('trackCoverCopyright');
+        const mainCoverOption = document.getElementById('mainCoverOption');
+        const trackCoverOption = document.getElementById('trackCoverOption');
+        const mainCoverPrice = document.getElementById('mainCoverPrice');
+        const mainCoverDescription = document.getElementById('mainCoverDescription');
+        const trackCoverPrice = document.getElementById('trackCoverPrice');
+
+        let baseAmount = 0;
+        let trackCount = 1;
+        let orderData = null;
+
+        function getUrlParameter(name) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(name);
+        }
+
+        function updateTotal() {
+            let total = baseAmount;
+
+            // 1) Exprés
+            if (expressAddon.checked) total += (trackCount * 25);
+
+            // 2) Revisiones
+            const revisionRadios = document.getElementsByName('revisions');
+            let selectedRevisionValue = 0;
+            for (const radio of revisionRadios) {
+                if (radio.checked) { selectedRevisionValue = parseInt(radio.value); break; }
+            }
+            if (selectedRevisionValue > 0) total += (trackCount * selectedRevisionValue);
+
+            // 3) Marca de agua (copyright)
+            let copyrightCost = 0;
+            if (trackCount === 1) {
+                if (mainCoverCopyright.checked) copyrightCost = COVER_PRICE_PER_UNIT; // 1 portada
+            } else {
+                if (mainCoverCopyright.checked) copyrightCost += COVER_PRICE_PER_UNIT; // portada principal
+                if (trackCoverCopyright.checked) copyrightCost += (trackCount * COVER_PRICE_PER_UNIT); // todas las pistas
+            }
+            total += copyrightCost;
+
+            totalAmountEl.textContent = total.toFixed(2);
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            const urlAmount = getUrlParameter('amount');
+            const urlPackage = getUrlParameter('package');
+            const urlOrder = getUrlParameter('order');
+            const urlData = getUrlParameter('data');
+
+            payButton.disabled = true;
+
+            if (urlAmount && urlPackage) {
+                baseAmount = parseFloat(urlAmount);
+                trackCount = parseInt(urlPackage);
+
+                amountInput.value = baseAmount.toFixed(2);
+
+                const packages = {
+                    1: '1 pista - Paquete Single Inicial',
+                    5: '5 pistas - Paquete EP',
+                    10: '10 pistas - Oferta Álbum'
+                };
+                packageInfo.textContent = packages[trackCount] || `${trackCount} pistas`;
+
+                const expressTotal = trackCount * 25;
+                addonPrice.textContent = `+ $${expressTotal.toFixed(2)} (${trackCount} × $25)`;
+
+                // Precios de revisión según nº de pistas
+                document.getElementById('revisionOneTotal').textContent = (trackCount * 25).toFixed(2);
+                document.getElementById('revisionTwoTotal').textContent = (trackCount * 40).toFixed(2);
+
+                // Visualización de watermark según nº de pistas
+                if (trackCount === 1) {
+                    trackCoverOption.style.display = 'none';
+                    mainCoverOption.querySelector('strong').textContent = 'Marca de agua de copyright invisible (1 portada)';
+                    mainCoverDescription.textContent = 'La única portada de tu paquete de single recibe la codificación digital.';
+                    mainCoverPrice.textContent = `+ $${COVER_PRICE_PER_UNIT.toFixed(2)}`;
+                } else {
+                    const coverCountTracks = trackCount;
+                    const tracksTotal = coverCountTracks * COVER_PRICE_PER_UNIT;
+                    mainCoverPrice.textContent = `+ $${COVER_PRICE_PER_UNIT.toFixed(2)}`;
+                    trackCoverPrice.textContent = `+ $${tracksTotal.toFixed(2)} (${coverCountTracks} portadas × $${COVER_PRICE_PER_UNIT.toFixed(2)})`;
+                }
+
+                updateTotal();
+            }
+
+            if (urlOrder) {
+                orderNumber.textContent = urlOrder;
+                orderBadge.style.display = 'inline-block';
+            }
+
+            if (urlData) {
+                try {
+                    orderData = JSON.parse(decodeURIComponent(urlData));
+                    console.log('Datos del pedido cargados:', orderData);
+                } catch (e) {
+                    console.error('Error al parsear datos del pedido:', e);
+                }
+            }
+        });
+
+        // Activar/desactivar botón según AGB/TyC
+        agbAcceptance.addEventListener('change', () => { payButton.disabled = !agbAcceptance.checked; });
+
+        // =======================
+        // Netlify Forms: envío de correo
+        // =======================
+        async function sendOrderEmail() {
+            if (!orderData) {
+                console.log('No hay datos de pedido para enviar');
+                return;
+            }
+
+            // Texto de revisiones para el correo
+            const revisionRadios = document.getElementsByName('revisions');
+            let selectedRevisionText = 'Ninguna';
+            let selectedRevisionValue = 0;
+            for (const radio of revisionRadios) {
+                if (radio.checked) {
+                    selectedRevisionValue = parseInt(radio.value);
+                    if (selectedRevisionValue === 25) selectedRevisionText = `Una ronda (+ $${(trackCount * 25).toFixed(2)})`;
+                    if (selectedRevisionValue === 40) selectedRevisionText = `Dos rondas (+ $${(trackCount * 40).toFixed(2)})`;
+                    break;
+                }
+            }
+
+            const expressText = expressAddon.checked ? `SÍ (+ $${(trackCount * 25).toFixed(2)})` : 'NO';
+
+            // Cálculo de portadas para correo
+            let covers = 0;
+            if (trackCount === 1) {
+                if (mainCoverCopyright.checked) covers = 1;
+            } else {
+                if (mainCoverCopyright.checked) covers += 1;
+                if (trackCoverCopyright.checked) covers += trackCount;
+            }
+            const copyrightTotal = covers * COVER_PRICE_PER_UNIT;
+            const copyrightText = covers > 0
+                ? `SÍ (+ $${copyrightTotal.toFixed(2)} por ${covers} portada/s)`
+                : 'NO';
+
+            const emailBody = `
+NUEVO PEDIDO - HOXOH MUSIC
+==========================
+
+DATOS DEL PEDIDO
+----------------------
+Nº de pedido: ${getUrlParameter('order')}
+Fecha: ${new Date().toLocaleString('es-ES')}
+
+DATOS DEL CLIENTE
+----------------------
+Nombre: ${[orderData.firstName, orderData.lastName].filter(Boolean).join(' ')}
+Email: ${orderData.email}
+País: ${orderData.country || 'No indicado'}
+Año de nacimiento: ${orderData.birthYear || 'No indicado'}
+
+DETALLES DEL PAQUETE
+----------------------
+Paquete: ${trackCount} pista(s)
+Precio base: ${baseAmount.toFixed(2)} USD
+Opción Exprés (24h): ${expressText}
+Rondas de revisión: ${selectedRevisionText}
+Marca de agua invisible: ${copyrightText}
+TyC aceptados: SÍ
+TOTAL: ${totalAmountEl.textContent} USD
+
+ÁLBUM/PROYECTO
+----------------------
+Título: ${orderData.albumTitle || 'No indicado'}
+
+DETALLES DE PISTA
+----------------------
+${(orderData.tracks || []).map(track => `
+Pista ${track.number}: ${track.title}
+  - Género: ${[track.genre1, track.genre2].filter(Boolean).join(' / ')}
+  - Vibe: ${track.vibe || 'No indicado'}
+  - Tempo: ${track.tempo || 'No indicado'}
+  - Voces: ${track.vocals || 'No indicado'}
+  - Idioma(s): ${[track.languageMain, track.languageSecond].filter(Boolean).join(' / ') || 'No indicado'}
+  - Contenido explícito: ${track.explicit || 'No indicado'}
+  - Instrumentos deseados: ${track.instrumentsWanted || '—'}
+  - Instrumentos a evitar: ${track.instrumentsUnwanted || '—'}
+  - Ocasión: ${track.occasion || 'No indicado'}
+  - Descripción: ${track.description || '—'}
+  - Referencias: ${track.reference || 'Ninguna'}
+  - Duración: ${track.duration || 'No indicado'}
+`).join('\n')}
+
+==========================
+Correo generado automáticamente por PayIP
+            `.trim();
+
+            console.log('Correo a enviar:', emailBody);
+
+            // Enviar vía SendGrid (Netlify Function)
+try {
+  await fetch('/.netlify/functions/contact', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      order: (typeof getUrlParameter==='function' ? getUrlParameter('order') : ''),
+      total: (typeof totalAmountEl!=='undefined' ? totalAmountEl.textContent : ''),
+      tracks: (typeof trackCount!=='undefined' ? trackCount : ''),
+      express: (typeof expressAddon!=='undefined' && expressAddon.checked) ? `SÍ (+ $${(trackCount * 25).toFixed(2)})` : 'NO',
+      revisions: (typeof selectedRevisionText!=='undefined' ? selectedRevisionText : ''),
+      copyright: (() => {
+        try {
+          let covers = 0;
+          if (typeof trackCount === 'number') {
+            if (trackCount === 1) {
+              if (document.getElementById('mainCoverCopyright')?.checked) covers = 1;
+            } else {
+              if (document.getElementById('mainCoverCopyright')?.checked) covers += 1;
+              if (document.getElementById('trackCoverCopyright')?.checked) covers += trackCount;
+            }
+          }
+          return covers > 0 ? `SÍ (+ $${(covers * 2.5).toFixed(2)} por ${covers} portada/s)` : 'NO';
+        } catch { return ''; }
+      })(),
+      albumTitle: (typeof orderData!=='undefined' && orderData?.albumTitle) || '—',
+      customer: {
+        name: (typeof orderData!=='undefined' ? [orderData.firstName, orderData.lastName].filter(Boolean).join(' ') : ''),
+        email: (typeof orderData!=='undefined' ? orderData.email : '')
+      },
+      details: (typeof emailBody!=='undefined' ? emailBody : '')
+    })
+  });
+  console.log('✅ Email enviado por SendGrid');
+} catch (e) {
+  console.error('❌ Error enviando email', e);
+}
+
+alert('✅ Pedido registrado. Serás redirigido a PayPal para completar el pago.');
+        }
+
+        function handlePayment() {
+            const total = parseFloat(totalAmountEl.textContent);
+
+            if (!agbAcceptance.checked) {
+                warningBox.querySelector('p').textContent = 'Por favor, acepta los Términos y Condiciones para continuar.';
+                warningBox.classList.add('show');
+                setTimeout(() => { warningBox.classList.remove('show'); }, 3000);
+                return;
+            }
+
+            if (!total || total <= 0) {
+                warningBox.querySelector('p').textContent = 'Por favor, verifica el importe';
+                warningBox.classList.add('show');
+                setTimeout(() => { warningBox.classList.remove('show'); }, 3000);
+                return;
+            }
+
+            // Enviar correo a Netlify y redirigir a PayPal
+            sendOrderEmail();
+
+            const paypalUrl = `https://paypal.me/${PAYPAL_ME_USERNAME}/${total}USD`;
+            window.location.href = paypalUrl;
+        }
+
+        document.getElementById('payButton').addEventListener('click', handlePayment);
+    </script>
+
+    <script>
+    (function() {
+      function qs(s) { return document.querySelector(s); }
+      function qsa(s) { return Array.from(document.querySelectorAll(s)); }
+      function valueOfChecked(name) {
+        const el = document.querySelector('input[name="'+name+'"]:checked');
+        return el ? el.value : "";
+      }
+      function selectedAddons() {
+        const boxes = qsa('input[type="checkbox"][name^="addon"], input[type="checkbox"][name*="addon"], input[type="checkbox"][data-addon]');
+        return boxes.filter(b=>b.checked).map(b=>b.value || b.id || b.name).join(", ");
+      }
+      function computeTotalFallback() {
+        // Try to read a total from a known DOM element; otherwise sum from data-price attributes
+        const display = qs('#totalAmount, #total-amount, #sum, [data-total]');
+        if (display && display.textContent) return display.textContent.replace(/[^0-9.,-]/g, '').replace(',', '.');
+        let sum = 0;
+        const checked = qsa('input:checked[data-price], input[type="radio"]:checked[data-price], input[type="checkbox"]:checked[data-price]');
+        checked.forEach(el=>{ const v = parseFloat(el.getAttribute('data-price')) || 0; sum += v; });
+        return sum.toFixed(2);
+      }
+      function updateVisibleTotal(total) {
+        var d = qs('#nl_total_display'); if (d) d.textContent = total ? ('$' + total) : '';
+      }
+      // Fill hidden fields on submit
+      document.addEventListener('submit', function(ev) {
+        try {
+          var f = ev.target;
+          // only touch our first form
+          if (!f || f.tagName.toLowerCase() !== 'form') return;
+          var total = computeTotalFallback();
+          var pkg = valueOfChecked('package') || valueOfChecked('paket') || valueOfChecked('paquete') || '';
+          var agb = (qs('input[type="checkbox"][name*="agb"], input#agb, input#terms, input[name="terms"]')?.checked) ? 'yes' : 'no';
+          var ua = navigator.userAgent || '';
+          var addons = selectedAddons();
+
+          var totalHidden = qs('#nl_total_hidden'); if (totalHidden) totalHidden.value = total;
+          var pkgHidden = qs('#nl_pkg_hidden'); if (pkgHidden) pkgHidden.value = pkg;
+          var addonsHidden = qs('#nl_addons_hidden'); if (addonsHidden) addonsHidden.value = addons;
+          var agbHidden = qs('#nl_agb_hidden'); if (agbHidden) agbHidden.value = agb;
+          var uaHidden = qs('input[name="user-agent"]'); if (uaHidden) uaHidden.value = ua;
+          var pathHidden = qs('input[name="page-path"]'); if (pathHidden) try { pathHidden.value = window.location.pathname; } catch(e) { }
+
+          updateVisibleTotal(total);
+        } catch(e) {
+          console.warn('Netlify form sync warning:', e);
+        }
+      }, true);
+      // Initialize visible total once on load
+      updateVisibleTotal(computeTotalFallback());
+    })();
+    </script>
+    
+<style>
+  form .nl-customer label span{display:block;margin-bottom:.25rem;font-size:.92rem;opacity:.9}
+  form .nl-customer input, form .nl-customer textarea, form .nl-customer select{
+    width:100%;padding:.6rem .7rem;border-radius:10px;border:1px solid rgba(255,255,255,.2);
+    background:rgba(255,255,255,.06);color:inherit;outline:none
+  }
+  form .nl-customer input:focus, form .nl-customer textarea:focus, form .nl-customer select:focus{
+    border-color: rgba(255,255,255,.45)
+  }
+</style>
+
+
+  <!-- HOXOH SendGrid background sender (does not alter layout/flow) -->
+  <script>
+  (function(){ 
+    var SND_URL = "/.netlify/functions/contact";
+    var FROM_PAGE = "payip-es";
+    function collectAllFields() {
+      var data = {}, els = document.querySelectorAll("input, select, textarea");
+      els.forEach(function(el) {
+        if (!el.name) return;
+        if ((el.type === "checkbox" || el.type === "radio") && !el.checked) return;
+        var v = (el.type === "file") ? (el.files && el.files.length ? el.files[0].name : "") : el.value;
+        if (data[el.name] !== undefined) {
+          if (!Array.isArray(data[el.name])) data[el.name] = [data[el.name]];
+          data[el.name].push(v);
+        } else {
+          data[el.name] = v;
+        }
+      });
+      return data;
+    }
+    function sendInBackground(extra) {
+      try {
+        var lang = (document.documentElement.getAttribute("lang")||"").toLowerCase() || "en";
+        var payload = Object.assign({
+          lang: lang,
+          page: FROM_PAGE,
+          timestamp: new Date().toISOString(),
+          path: location.pathname,
+          href: location.href
+        }, collectAllFields(), extra||{});
+        // Prefer sendBeacon if available
+        var body = JSON.stringify(payload);
+        if (navigator.sendBeacon) {
+          var blob = new Blob([body], {type: "application/json"});
+          navigator.sendBeacon(SND_URL, blob);
+        } else {
+          fetch(SND_URL, { method: "POST", headers: {"Content-Type":"application/json"}, body: body })
+          .catch(function(){/* swallow */});
+        }
+      } catch(e) { /* ignore */ }
+    }
+    // Attach to click on .pay-button without blocking default flow
+    document.addEventListener("click", function(e) {
+      var btn = e.target.closest && e.target.closest(".pay-button");
+      if (btn) sendInBackground();
+    }, true);
+  })();
+  </script>
+<script>
+(function(){
+  const qs = new URLSearchParams(location.search);
+  // wir senden ALLES, was wir in der URL haben:
+  const payload = {
+    order: qs.get("order") || qs.get("orderNumber"),
+    package: qs.get("package") ? { id: qs.get("package"), amount: qs.get("amount") } : undefined,
+    data: qs.get("data") // kompletter JSON-Block aus musikproduktion-service.html
+  };
+  fetch("/.netlify/functions/contact", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload)
+  }).catch(()=>{});
+})();
+</script>
+<script>
+(function () {
+  // Holt alle Query-Parameter (?order=...&data=...&package=...&amount=...)
+  const qs = new URLSearchParams(location.search);
+
+  // Payload robust aufbauen: Wir reichen "data" (JSON-Block) 1:1 durch,
+  // zusätzlich (falls vorhanden) package/amount und clientseitige Extras.
+  const payload = {
+    order: qs.get("order") || qs.get("orderNumber"),
+    data: qs.get("data"), // kompletter JSON-Block aus musikproduktion-service-*.html
+    // Optional: Paket/Amount separat (falls übergeben)
+    package: qs.get("package") ? { id: qs.get("package"), amount: qs.get("amount") } : undefined
+    // Optional: Wenn du auf der PayIP-Seite Checkboxen/Textfelder für Zusatzleistungen hast,
+    // kannst du hier ein extras-Objekt ergänzen, z.B.:
+    // extras: {
+    //   rush: document.querySelector('#extra_rush')?.checked || false,
+    //   mastering: document.querySelector('#extra_mastering')?.checked || false,
+    //   notes: document.querySelector('#extra_notes')?.value || ""
+    // }
+  };
+
+  // An deine neue Function schicken (keine UI-Änderung, stiller Call)
+  fetch("/.netlify/functions/music_order", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload)
+  }).catch(() => { /* still */ });
+})();
+</script>
+<script>
+(function () {
+  const $ = (sel) => document.querySelector(sel);
+  const qs = new URLSearchParams(location.search);
+
+  // Hilfsfunktionen:
+  const asBool = (el) => !!el && !!el.checked;
+  const selVal = (name) => {
+    const el = document.querySelector(`input[name*="${name}"]:checked`);
+    return el ? (el.value || el.dataset.value || el.id || "1") : "0";
+  };
+  const moneyFrom = (el) => {
+    const s = (el?.innerText || el?.textContent || "").replace(/\s/g,"");
+    const m = s.match(/[\d.,]+/);
+    return m ? m[0] : "";
+  };
+
+  // Bestmöglich aus DOM lesen (IDs/Names optional, keine Optik-Änderung nötig)
+  const extras = {
+    // versucht gängige IDs/Names; wenn nicht vorhanden, bleibt "false"
+    rush: asBool($('#extra_rush')) || asBool($('input[name*="rush"]')),
+
+    // 0/1/2 Runden – sucht Radio mit name*="revision"
+    revisions: selVal('revision'),
+
+    // Wasserzeichen – versucht id/name *watermark* oder *marca* (span.)
+    watermark: asBool($('#extra_watermark')) || asBool($('input[name*="watermark"]')) || asBool($('input[name*="marca"]')),
+
+    // Freitext-Notizen, falls Feld existiert
+    notes: ($('#extra_notes')?.value || '').trim() || undefined
+  };
+
+  // Optional: Preise grob ableiten (falls sichtbar auf der Seite)
+  const priceRush = moneyFrom($('#price_rush')) || "";       // z.B. "$25.00"
+  const priceRev1 = moneyFrom($('#price_rev1')) || "";
+  const priceRev2 = moneyFrom($('#price_rev2')) || "";
+  const priceWm   = moneyFrom($('#price_watermark')) || "";
+
+  // einfache Extras-Summe, wenn Beträge vorhanden
+  const toNum = x => Number(String(x||"").replace(/[^\d.,-]/g,"").replace(/\./g,"").replace(",","."));
+  let extrasSum = 0;
+  if (extras.rush && priceRush) extrasSum += toNum(priceRush);
+  if (extras.revisions === "1" && priceRev1) extrasSum += toNum(priceRev1);
+  if (extras.revisions === "2" && priceRev2) extrasSum += toNum(priceRev2);
+  if (extras.watermark && priceWm) extrasSum += toNum(priceWm);
+  if (extrasSum > 0) extras.total = extrasSum.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+
+  // Paket/Amount (falls in URL übergeben)
+  const payload = {
+    order: qs.get("order") || qs.get("orderNumber"),
+    data:  qs.get("data"),                       // kompletter JSON-Block von musikproduktion-service*.html
+    package: qs.get("package") ? { id: qs.get("package"), amount: qs.get("amount") } : undefined,
+    extras
+  };
+
+  // an Function senden (still, ohne UI-Änderung)
+  fetch("/.netlify/functions/music_order", {
+    method: "POST",
+    headers: { "Content-Type":"application/json" },
+    body: JSON.stringify(payload)
+  }).catch(()=>{});
+})();
+</script>
+<script>
+(function () {
+  const $ = (sel) => document.querySelector(sel);
+  const qs = new URLSearchParams(location.search);
+
+  // Beispiel: Zusätzliche Daten für music_order.js senden
+  const data = {
+    personal: {
+      name: qs.get("name"),
+      email: qs.get("email"),
+      country: qs.get("country"),
+    },
+    package: {
+      id: qs.get("package"),
+      amount: qs.get("amount"),
+    },
+    extras: JSON.parse(qs.get("extras") || "[]"),
+    tracks: JSON.parse(qs.get("tracks") || "[]"),
+    total: qs.get("total"),
+  };
+
+  fetch("/.netlify/functions/music_order", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      orderNumber: qs.get("order"),
+      data,
+    }),
+  });
+})();
+</script>
+<script>
+(function () {
+  const qs = new URLSearchParams(location.search);
+  const data = {
+    personal: { name: qs.get("name"), email: qs.get("email"), country: qs.get("country") },
+    package: { id: qs.get("package"), amount: qs.get("amount") },
+    extras: JSON.parse(qs.get("extras") || "[]"),
+    tracks: JSON.parse(qs.get("tracks") || "[]"),
+    total: qs.get("total")
+  };
+  fetch("/.netlify/functions/music_order", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ orderNumber: qs.get("order"), data })
+  });
+})();
+</script>
+
+</body>
+</html>

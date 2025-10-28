@@ -1,0 +1,28 @@
+# Startseiten
+/en      /index-en.html 301
+/en/     /index-en.html 301
+/de      /index-de.html 301
+/de/     /index-de.html 301
+/en/index-en.html   /index-en.html 301
+/de/index-de.html   /index-de.html 301
+
+# Albums-Übersichtsseiten (fix für den Google-Link)
+/en/albums   /albums-en.html 301
+/de/albums   /albums-de.html 301
+
+# Album-Detail-Seiten
+/en/album-el-laberinto-de-los-suenos   /album-el-laberinto-de-los-suenos-en.html 301
+/de/album-el-laberinto-de-los-suenos   /album-el-laberinto-de-los-suenos-de.html 301
+
+# Kontakt-Seiten
+/en/contact   /kontakt-en.html 301
+/de/contact   /kontakt-de.html 301
+/en/kontakt   /kontakt-en.html 301
+/de/kontakt   /kontakt-de.html 301
+
+# Falls du weitere Album-Detail-Seiten hast, füge sie hier hinzu:
+# /en/album-los-diez-mandamientos   /album-los-diez-mandamientos-en.html 301
+# /de/album-los-diez-mandamientos   /album-los-diez-mandamientos-de.html 301
+
+# Standard (optional): Root bleibt spanische Startseite (internes Rewrite)
+/    /index.html 200

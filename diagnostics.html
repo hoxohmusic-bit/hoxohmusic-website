@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>HOXOH – Mail Diagnostics</title>
+<style>
+  body{font:16px/1.6 system-ui,-apple-system,Segoe UI,Inter,Arial;color:#e8eef4;background:#0b0f13;padding:20px}
+  .card{max-width:900px;margin:0 auto;background:#12161b;border:1px solid #263040;border-radius:14px;box-shadow:0 8px 30px rgba(0,0,0,.4);padding:20px}
+  h1{margin:0 0 8px;font-size:24px}
+  .muted{color:#9bb0c3}
+  .row{display:grid;grid-template-columns:220px 1fr;gap:12px;align-items:center;margin:6px 0}
+  .ok{color:#19c37d;font-weight:800}
+  .bad{color:#ff6b6b;font-weight:800}
+  pre{background:#0e1216;border:1px solid #223042;padding:12px;border-radius:10px;overflow:auto}
+  button{background:#19c37d;color:#042419;border:0;border-radius:10px;padding:10px 14px;font-weight:800;cursor:pointer}
+  .grid{display:grid;gap:10px;grid-template-columns:1fr auto}
+  input,textarea{width:100%;background:#0e1216;border:1px solid #223042;color:#e8eef4;border-radius:10px;padding:10px}
+  textarea{min-height:90px}
+</style>
+</head>
+<body>
+<div class="card">
+  <h1>HOXOH – Mail Diagnostics</h1>
+  <p class="muted">Schnelltest für Netlify Function <code>/.netlify/functions/contact</code></p>
+
+  <h2>1) Healthcheck</h2>
+  <div id="health"></div>
+  <p><button id="btnHealth">Healthcheck starten</button></p>
+
+  <h2>2) Test-POST</h2>
+  <div class="grid">
+    <div>
+      <label>Name*<br><input id="tName" value="Test Nutzer"></label><br>
+      <label>E-Mail<br><input id="tEmail" value="hoxohmusic@gmail.com"></label><br>
+      <label>Betreff<br><input id="tSubject" value="Diagnose-Test"></label><br>
+      <label>Nachricht*<br><textarea id="tMsg">Hallo, dies ist ein Test von diagnostics.html</textarea></label><br>
+      <input type="hidden" id="tLang" value="de">
+    </div>
+    <div style="align-self:end"><button id="btnSend">Test senden</button></div>
+  </div>
+  <h3>Antwort</h3>
+  <pre id="out">{ }</pre>
+</div>
+
+<script>
+const FN = "/.netlify/functions/contact";
+function badge(ok, text){return `<span class="${ok?'ok':'bad'}">${ok?'✅':'❌'} ${text}</span>`}
+
+document.getElementById("btnHealth").onclick = async () => {
+  const r = await fetch(FN + "?health=1").catch(err => ({ok:false, statusText:String(err)}));
+  let html = "";
+  if (!r.ok) {
+    html = `<div class="row"><div>Status</div><div class="bad">HTTP ${r.status} ${r.statusText||''}</div></div>`;
+  } else {
+    const j = await r.json().catch(()=>({}));
+    html += `<div class="row"><div>Function</div><div>${badge(j.ok, j.service||'contact')}</div></div>`;
+    const c = j.checks||{};
+    html += `<div class="row"><div>SENDGRID_API_KEY</div><div>${badge(c.SENDGRID_API_KEY==='present',''+c.SENDGRID_API_KEY)}</div></div>`;
+    html += `<div class="row"><div>SENDGRID_FROM</div><div>${badge(String(c.SENDGRID_FROM||'').startsWith('present'),' '+(c.SENDGRID_FROM||''))}</div></div>`;
+    html += `<div class="row"><div>SENDGRID_TO</div><div>${badge(String(c.SENDGRID_TO||'').startsWith('present'),' '+(c.SENDGRID_TO||''))}</div></div>`;
+    html += `<div class="row"><div>SITE_ORIGIN</div><div>${c.SITE_ORIGIN||'(none)'}</div></div>`;
+    if (j.hint) html += `<div class="row"><div>Hinweis</div><div>${j.hint}</div></div>`;
+  }
+  document.getElementById("health").innerHTML = html;
+};
+
+document.getElementById("btnSend").onclick = async () => {
+  const payload = {
+    name: document.getElementById("tName").value,
+    email: document.getElementById("tEmail").value,
+    subject: document.getElementById("tSubject").value,
+    message: document.getElementById("tMsg").value,
+    lang: document.getElementById("tLang").value
+  };
+  const r = await fetch(FN, { method:"POST", headers:{ "Content-Type":"application/json" }, body: JSON.stringify(payload) });
+  const j = await r.json().catch(()=>({}));
+  document.getElementById("out").textContent = JSON.stringify({ status:r.status, ...j }, null, 2);
+};
+</script>
+</body>
+</html>
