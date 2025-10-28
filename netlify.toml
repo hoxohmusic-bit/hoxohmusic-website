@@ -1,4 +1,4 @@
-﻿[build]
+[build]
   command = "echo 'Static site - no build needed'"
   publish = "."
   functions = "netlify/functions"
