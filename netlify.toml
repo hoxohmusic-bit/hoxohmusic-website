@@ -1,11 +1,18 @@
-[build]
+﻿[build]
+  command = "echo 'Static site - no build needed'"
   publish = "."
-  command = ""
+  functions = "netlify/functions"
 
-[functions]
-  directory = "netlify/functions"
+[build.environment]
+  NODE_VERSION = "18"
+
+[dev]
+  port = 8888
+  publish = "."
+  framework = "#static"
 
 [[headers]]
-  for = "/*.html"
+  for = "/*"
   [headers.values]
-  Content-Type = "text/html; charset=utf-8"
+    X-Frame-Options = "DENY"
+    X-XSS-Protection = "1; mode=block"
