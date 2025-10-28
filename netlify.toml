@@ -1,13 +1,11 @@
 [build]
-  # kein Build nötig, es ist eine statische Seite
+  publish = "."
   command = ""
-  publish = "site"
-  functions = "netlify/functions"
 
 [functions]
-  included_files = ["netlify/functions/assets/**"]
+  directory = "netlify/functions"
 
 [[headers]]
   for = "/*.html"
   [headers.values]
-  Cache-Control = "no-store, must-revalidate"
+  Content-Type = "text/html; charset=utf-8"
